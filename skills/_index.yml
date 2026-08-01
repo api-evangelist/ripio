@@ -1,0 +1,12 @@
+generated: '2026-07-21'
+method: generated
+api: openapi/ripio-trade-openapi.yml
+skills:
+  - file: ripio-place-and-manage-order.md
+    name: Place and manage a Ripio Trade order
+    api: openapi/ripio-trade-openapi.yml
+    operations: [GetPairs, EstimatePrice, ListBalances, CreateOrder, GetUserOpenOrders, GetOrderByExternalId, CancelOrderByExternalId]
+  - file: ripio-crypto-withdrawal.md
+    name: Withdraw cryptocurrency from Ripio Trade
+    api: openapi/ripio-trade-openapi.yml
+    operations: [GetUserWallets, GetUserWalletAndCreateIfNotExists, GetWithdrawalFee, CreateWithdrawal, GetUserWithdrawals]

@@ -1,0 +1,312 @@
+{
+  "info": {
+    "_postman_id": "19aea1f4-127e-4ec9-a7dd-be90c0bb3371",
+    "name": "Ripio Trade - API Documentation Book Wallets API",
+    "description": "Welcome to the Ripio Trade API documentation.\n\n### Version\nThis API is currently in the version 4.\n\nIf there is need for any big change, a new version will be launched and this version will be maintained for at least 3 months.\n\nIf you're still using the version 3, [access the old documentation](../v3) and check the [migration guide](#tag/V3-Endpoint-Migrations).\n\n### Important\nUse the `Market` endpoints for all trading operations. The `Public` endpoints have a delay (cache) of up to 30 seconds.\n\nAll successful requests will result in a 200 HTTP Status.\n\nAll requests returns data in JSON format (application/json) and have a default body:\n\n\n### Success\n```\n{\n  \"error_code\": null,\n  \"message\": null,\n  \"data\": { }\n}\n```\n\n### Error\n```\n{\n  \"error_code\": [Error code],\n  \"message\": \"Error description\",\n  \"data\": null\n}\n```\n\n\nEndpoints that have a date filter will return data for the last 6 months if no value is sent in the `start_date` parameter.\n\n### URL structure\nThe endpoints URL follow this pattern:\n\n`https://api.ripiotrade.co/{version}/{method}[/{parameter}][?parameter=value...]`\n\n `https://api.ripiotrade.co/v4/tickers/BTC_BRL`\n\n### Limits\n\nThe request limits are based on the user's operational limits.\n\nThere are two types of limit, one of requests per second and another of daily requests. Both of them should be taken in consideration and the requests should be balanced so the daily limit isn't reached.\n\nUsers **without approved documentation** have 1 request per second or 86.400 daily requests.\n\nUsers **with approved documentation** have 3.5 requests per second or 302.400 daily requests.\n\nThese limits can be increased, and the support team should be contacted for that.\n\nWhen the requests per second limit is reached, the response HTTP Status returned is 429 and the response body is:\n```\n{\n  \"message\": \"Too many requests\"\n}\n```\n\nWhen the daily requests limit is reached, the response HTTP Status returned is 429 and the response body is:\n```\n{\n  \"message\": \"Limit Exceeded\"\n}\n```\n\nContact Support:\n Name: Jorn Filho",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:47:59.000Z",
+    "updatedAt": "2026-07-28T02:47:59.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-19aea1f4-127e-4ec9-a7dd-be90c0bb3371"
+  },
+  "item": [
+    {
+      "name": "wallets",
+      "item": [
+        {
+          "name": "is-internal",
+          "item": [
+            {
+              "name": "Is internal",
+              "id": "10025e5d-cdc8-4a3d-a42e-17f27367510d",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/wallets/is-internal?address=<string>&currency_code=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "wallets",
+                    "is-internal"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) ",
+                      "key": "address",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Currency code",
+                      "key": "currency_code",
+                      "value": "<string>"
+                    }
+                  ]
+                },
+                "description": "Indicates if a given wallet belongs to Ripio Trade."
+              },
+              "response": [
+                {
+                  "id": "36700033-bce3-4451-89dd-83f2e6dd15ae",
+                  "name": "Ok",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/wallets/is-internal?address=<string>&currency_code=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "wallets",
+                        "is-internal"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) ",
+                          "key": "address",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Currency code",
+                          "key": "currency_code",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": {\n    \"is_internal\": \"<boolean>\"\n  },\n  \"error_code\": null,\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T02:48:00.000Z",
+                  "updatedAt": "2026-07-28T02:48:00.000Z",
+                  "uid": "35240-36700033-bce3-4451-89dd-83f2e6dd15ae"
+                }
+              ],
+              "createdAt": "2026-07-28T02:48:00.000Z",
+              "updatedAt": "2026-07-28T02:48:00.000Z",
+              "uid": "35240-10025e5d-cdc8-4a3d-a42e-17f27367510d"
+            }
+          ],
+          "id": "5d53e07d-ae89-4c71-b5de-62025d1d6a58",
+          "createdAt": "2026-07-28T02:48:00.000Z",
+          "updatedAt": "2026-07-28T02:48:00.000Z",
+          "uid": "35240-5d53e07d-ae89-4c71-b5de-62025d1d6a58"
+        },
+        {
+          "name": "{currency_code}",
+          "item": [
+            {
+              "name": "{network}",
+              "item": [
+                {
+                  "name": "Get User Wallet",
+                  "id": "b91384e3-9638-43b9-afb9-c8e886bc1665",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/wallets/:currency_code/:network",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "wallets",
+                        ":currency_code",
+                        ":network"
+                      ],
+                      "variable": [
+                        {
+                          "id": "246417a8-07ef-4915-bab0-16632e80ceb9",
+                          "key": "currency_code",
+                          "value": "<string>",
+                          "description": "(Required) Currency code"
+                        },
+                        {
+                          "id": "bf369ff2-6dc7-46a0-9f78-551eefcafe6f",
+                          "key": "network",
+                          "value": "<string>",
+                          "description": "(Required) Network"
+                        }
+                      ]
+                    },
+                    "description": "Get user network's currency address"
+                  },
+                  "response": [
+                    {
+                      "id": "aac872d4-f430-46f9-890d-e7a6e7ff9f97",
+                      "name": "Ok",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/wallets/:currency_code/:network",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "wallets",
+                            ":currency_code",
+                            ":network"
+                          ],
+                          "variable": [
+                            {
+                              "key": "currency_code"
+                            },
+                            {
+                              "key": "network"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"address\": \"<string>\",\n    \"currency_code\": \"<string>\",\n    \"tag\": \"<string>\",\n    \"memo\": \"<string>\",\n    \"network\": \"<string>\"\n  },\n  \"error_code\": null,\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T02:48:00.000Z",
+                      "updatedAt": "2026-07-28T02:48:00.000Z",
+                      "uid": "35240-aac872d4-f430-46f9-890d-e7a6e7ff9f97"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:48:00.000Z",
+                  "updatedAt": "2026-07-28T02:48:00.000Z",
+                  "uid": "35240-b91384e3-9638-43b9-afb9-c8e886bc1665"
+                }
+              ],
+              "id": "19e3d87f-e54c-407d-bfb8-444949595fc3",
+              "createdAt": "2026-07-28T02:48:00.000Z",
+              "updatedAt": "2026-07-28T02:48:00.000Z",
+              "uid": "35240-19e3d87f-e54c-407d-bfb8-444949595fc3"
+            }
+          ],
+          "id": "0449428b-1452-457c-a661-d29607adcbd8",
+          "createdAt": "2026-07-28T02:48:00.000Z",
+          "updatedAt": "2026-07-28T02:48:00.000Z",
+          "uid": "35240-0449428b-1452-457c-a661-d29607adcbd8"
+        },
+        {
+          "name": "Wallets",
+          "id": "4c781cc6-b730-4011-af0d-7c6821c6c3f5",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/wallets",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "wallets"
+              ]
+            },
+            "description": "Lists the user's wallets."
+          },
+          "response": [
+            {
+              "id": "39e3b67e-d11f-4ab1-8486-5b0cca304ee7",
+              "name": "Ok",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/wallets",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "wallets"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"data\": [\n    {\n      \"address\": \"<string>\",\n      \"currency_code\": \"<string>\",\n      \"memo\": \"<string>\",\n      \"network\": \"<string>\",\n      \"tag\": \"<string>\"\n    },\n    {\n      \"address\": \"<string>\",\n      \"currency_code\": \"<string>\",\n      \"memo\": \"<string>\",\n      \"network\": \"<string>\",\n      \"tag\": \"<string>\"\n    }\n  ],\n  \"error_code\": null,\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T02:48:00.000Z",
+              "updatedAt": "2026-07-28T02:48:00.000Z",
+              "uid": "35240-39e3b67e-d11f-4ab1-8486-5b0cca304ee7"
+            }
+          ],
+          "createdAt": "2026-07-28T02:48:00.000Z",
+          "updatedAt": "2026-07-28T02:48:00.000Z",
+          "uid": "35240-4c781cc6-b730-4011-af0d-7c6821c6c3f5"
+        }
+      ],
+      "id": "7dd72b28-5e78-42e6-b571-48cb6d636966",
+      "createdAt": "2026-07-28T02:48:00.000Z",
+      "updatedAt": "2026-07-28T02:48:00.000Z",
+      "uid": "35240-7dd72b28-5e78-42e6-b571-48cb6d636966"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.ripiotrade.co/v4/"
+    }
+  ]
+}

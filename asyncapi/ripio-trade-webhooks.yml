@@ -1,0 +1,45 @@
+generated: '2026-07-21'
+method: searched
+source: https://apidocs.ripiotrade.co/ (x-webhooks + x-websocket-api in the OpenAPI)
+spec_type: Webhooks
+surface: WebSocket
+transports:
+  websocket_stream:
+    description: Real-time market-data and user event stream (subscribe to topics).
+    auth: WebSocket ticket obtained via POST /ticket (GetWebSocketTicket), API Token/Secret/Timestamp.
+  websocket_api:
+    endpoint: wss://ws-api.ripio.com
+    description: >-
+      Trading operations (create, cancel, update orders) over WebSocket. Same
+      API Token + Secret + Timestamp auth as REST. 60s idle disconnect; ping/pong
+      keepalive; 10s request timeout.
+events:
+  - name: trade
+    kind: market-data
+  - name: orderbook/level_3
+    kind: market-data
+  - name: orderbook/level_2
+    kind: market-data
+  - name: orderbook/level_2_delta
+    kind: market-data
+  - name: orderbook/level_2_with_users
+    kind: market-data
+  - name: ticker
+    kind: market-data
+  - name: order_status
+    kind: user
+  - name: balance
+    kind: user
+  - name: user_trades
+    kind: user
+  - name: deposit
+    kind: user
+  - name: withdrawal
+    kind: user
+websocket_api_methods:
+  - name: order.create
+    method: post
+  - name: order.cancel
+    method: delete
+  - name: order.update
+    method: put

@@ -1,0 +1,274 @@
+{
+  "info": {
+    "_postman_id": "f587adc7-5401-411c-950d-7dfd51f5a110",
+    "name": "Ripio Trade - API Documentation Book Cryptocurrency Deposits API",
+    "description": "Welcome to the Ripio Trade API documentation.\n\n### Version\nThis API is currently in the version 4.\n\nIf there is need for any big change, a new version will be launched and this version will be maintained for at least 3 months.\n\nIf you're still using the version 3, [access the old documentation](../v3) and check the [migration guide](#tag/V3-Endpoint-Migrations).\n\n### Important\nUse the `Market` endpoints for all trading operations. The `Public` endpoints have a delay (cache) of up to 30 seconds.\n\nAll successful requests will result in a 200 HTTP Status.\n\nAll requests returns data in JSON format (application/json) and have a default body:\n\n\n### Success\n```\n{\n  \"error_code\": null,\n  \"message\": null,\n  \"data\": { }\n}\n```\n\n### Error\n```\n{\n  \"error_code\": [Error code],\n  \"message\": \"Error description\",\n  \"data\": null\n}\n```\n\n\nEndpoints that have a date filter will return data for the last 6 months if no value is sent in the `start_date` parameter.\n\n### URL structure\nThe endpoints URL follow this pattern:\n\n`https://api.ripiotrade.co/{version}/{method}[/{parameter}][?parameter=value...]`\n\n `https://api.ripiotrade.co/v4/tickers/BTC_BRL`\n\n### Limits\n\nThe request limits are based on the user's operational limits.\n\nThere are two types of limit, one of requests per second and another of daily requests. Both of them should be taken in consideration and the requests should be balanced so the daily limit isn't reached.\n\nUsers **without approved documentation** have 1 request per second or 86.400 daily requests.\n\nUsers **with approved documentation** have 3.5 requests per second or 302.400 daily requests.\n\nThese limits can be increased, and the support team should be contacted for that.\n\nWhen the requests per second limit is reached, the response HTTP Status returned is 429 and the response body is:\n```\n{\n  \"message\": \"Too many requests\"\n}\n```\n\nWhen the daily requests limit is reached, the response HTTP Status returned is 429 and the response body is:\n```\n{\n  \"message\": \"Limit Exceeded\"\n}\n```\n\nContact Support:\n Name: Jorn Filho",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:47:49.000Z",
+    "updatedAt": "2026-07-28T02:47:49.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-f587adc7-5401-411c-950d-7dfd51f5a110"
+  },
+  "item": [
+    {
+      "name": "deposits",
+      "item": [
+        {
+          "name": "deposit",
+          "item": [
+            {
+              "name": "Get Cryptocurrency Deposit",
+              "id": "7cb4a0b3-aaa0-43f7-8e6a-28d8026426c6",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/deposits/deposit?id=<string>&hash=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "deposits",
+                    "deposit"
+                  ],
+                  "query": [
+                    {
+                      "description": "Deposit identifier",
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Transaction hash",
+                      "key": "hash",
+                      "value": "<string>"
+                    }
+                  ]
+                },
+                "description": "Gets a cryptocurrency deposit."
+              },
+              "response": [
+                {
+                  "id": "0cd838b7-bdde-43ea-af11-8c0f1e0522d5",
+                  "name": "Ok",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/deposits/deposit?id=<string>&hash=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "deposits",
+                        "deposit"
+                      ],
+                      "query": [
+                        {
+                          "description": "Deposit identifier",
+                          "key": "id",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Transaction hash",
+                          "key": "hash",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": {\n    \"id\": \"<string>\",\n    \"currency_code\": \"<string>\",\n    \"hash\": \"<string>\",\n    \"amount\": \"<double>\",\n    \"status\": \"canceled\",\n    \"create_date\": \"<string>\",\n    \"confirmation_date\": \"<string>\",\n    \"is_internal\": \"<boolean>\",\n    \"tag\": \"<string>\",\n    \"memo\": \"<string>\",\n    \"network\": \"<string>\"\n  },\n  \"error_code\": null,\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T02:47:49.000Z",
+                  "updatedAt": "2026-07-28T02:47:49.000Z",
+                  "uid": "35240-0cd838b7-bdde-43ea-af11-8c0f1e0522d5"
+                }
+              ],
+              "createdAt": "2026-07-28T02:47:49.000Z",
+              "updatedAt": "2026-07-28T02:47:49.000Z",
+              "uid": "35240-7cb4a0b3-aaa0-43f7-8e6a-28d8026426c6"
+            }
+          ],
+          "id": "1dd6fa75-bc7f-4f48-81b1-060e1fb75956",
+          "createdAt": "2026-07-28T02:47:49.000Z",
+          "updatedAt": "2026-07-28T02:47:49.000Z",
+          "uid": "35240-1dd6fa75-bc7f-4f48-81b1-060e1fb75956"
+        },
+        {
+          "name": "List Cryptocurrency Deposits",
+          "id": "e16a702b-9e4c-4319-bfd2-8a960c0b2074",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/deposits?currency_code=<string>&status=confirmed&start_date=[6 months ago]&end_date=[Current date]&page_size=200&current_page=1&network=<string>&c=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "deposits"
+              ],
+              "query": [
+                {
+                  "description": "Currency code",
+                  "key": "currency_code",
+                  "value": "<string>"
+                },
+                {
+                  "key": "status",
+                  "value": "confirmed"
+                },
+                {
+                  "key": "start_date",
+                  "value": "[6 months ago]"
+                },
+                {
+                  "key": "end_date",
+                  "value": "[Current date]"
+                },
+                {
+                  "key": "page_size",
+                  "value": "200"
+                },
+                {
+                  "key": "current_page",
+                  "value": "1"
+                },
+                {
+                  "description": "Network",
+                  "key": "network",
+                  "value": "<string>"
+                },
+                {
+                  "description": "The `c` parameter is the cursor you should use to fetch the next page of results",
+                  "key": "c",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Lists the user's cryptocurrency deposits.\n\n**Attention:** Due to performance concerns, this endpoint now uses cursor-based pagination. The pagination object currently included in the response is now a placeholder and will be entirely removed as of 2026-06-01. The parameter current_page is also a placeholder and will be removed at the same time. Please update your integration accordingly and refer to the documentation for the correct pagination handling."
+          },
+          "response": [
+            {
+              "id": "58467589-4af0-4e5b-b1c0-bb573db98b10",
+              "name": "Ok",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/deposits?currency_code=<string>&status=confirmed&start_date=[6 months ago]&end_date=[Current date]&page_size=200&current_page=1&network=<string>&c=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "deposits"
+                  ],
+                  "query": [
+                    {
+                      "description": "Currency code",
+                      "key": "currency_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "confirmed"
+                    },
+                    {
+                      "key": "start_date",
+                      "value": "[6 months ago]"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "[Current date]"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "200"
+                    },
+                    {
+                      "key": "current_page",
+                      "value": "1"
+                    },
+                    {
+                      "description": "Network",
+                      "key": "network",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The `c` parameter is the cursor you should use to fetch the next page of results",
+                      "key": "c",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"data\": {\n    \"deposits\": [\n      {\n        \"id\": \"<string>\",\n        \"currency_code\": \"<string>\",\n        \"hash\": \"<string>\",\n        \"amount\": \"<double>\",\n        \"status\": \"confirmation_pending\",\n        \"create_date\": \"<string>\",\n        \"confirmation_date\": \"<string>\",\n        \"is_internal\": \"<boolean>\",\n        \"tag\": \"<string>\",\n        \"memo\": \"<string>\",\n        \"network\": \"<string>\"\n      },\n      {\n        \"id\": \"<string>\",\n        \"currency_code\": \"<string>\",\n        \"hash\": \"<string>\",\n        \"amount\": \"<double>\",\n        \"status\": \"confirmed\",\n        \"create_date\": \"<string>\",\n        \"confirmation_date\": \"<string>\",\n        \"is_internal\": \"<boolean>\",\n        \"tag\": \"<string>\",\n        \"memo\": \"<string>\",\n        \"network\": \"<string>\"\n      }\n    ],\n    \"pagination\": {\n      \"current_page\": \"<double>\",\n      \"page_size\": \"<double>\",\n      \"registers_count\": \"<double>\",\n      \"total_pages\": \"<double>\"\n    },\n    \"nc\": \"<string>\",\n    \"pc\": \"<string>\"\n  },\n  \"error_code\": null,\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T02:47:49.000Z",
+              "updatedAt": "2026-07-28T02:47:49.000Z",
+              "uid": "35240-58467589-4af0-4e5b-b1c0-bb573db98b10"
+            }
+          ],
+          "createdAt": "2026-07-28T02:47:49.000Z",
+          "updatedAt": "2026-07-28T02:47:49.000Z",
+          "uid": "35240-e16a702b-9e4c-4319-bfd2-8a960c0b2074"
+        }
+      ],
+      "id": "20d58a11-5b7f-4577-801b-1d6760366c8b",
+      "createdAt": "2026-07-28T02:47:49.000Z",
+      "updatedAt": "2026-07-28T02:47:49.000Z",
+      "uid": "35240-20d58a11-5b7f-4577-801b-1d6760366c8b"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.ripiotrade.co/v4/"
+    }
+  ]
+}

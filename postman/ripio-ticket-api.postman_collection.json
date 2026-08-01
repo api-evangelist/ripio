@@ -1,0 +1,97 @@
+{
+  "info": {
+    "_postman_id": "55c82900-3b4c-4883-8aed-3922d466a5bd",
+    "name": "Ripio Trade - API Documentation Book Ticket API",
+    "description": "Welcome to the Ripio Trade API documentation.\n\n### Version\nThis API is currently in the version 4.\n\nIf there is need for any big change, a new version will be launched and this version will be maintained for at least 3 months.\n\nIf you're still using the version 3, [access the old documentation](../v3) and check the [migration guide](#tag/V3-Endpoint-Migrations).\n\n### Important\nUse the `Market` endpoints for all trading operations. The `Public` endpoints have a delay (cache) of up to 30 seconds.\n\nAll successful requests will result in a 200 HTTP Status.\n\nAll requests returns data in JSON format (application/json) and have a default body:\n\n\n### Success\n```\n{\n  \"error_code\": null,\n  \"message\": null,\n  \"data\": { }\n}\n```\n\n### Error\n```\n{\n  \"error_code\": [Error code],\n  \"message\": \"Error description\",\n  \"data\": null\n}\n```\n\n\nEndpoints that have a date filter will return data for the last 6 months if no value is sent in the `start_date` parameter.\n\n### URL structure\nThe endpoints URL follow this pattern:\n\n`https://api.ripiotrade.co/{version}/{method}[/{parameter}][?parameter=value...]`\n\n `https://api.ripiotrade.co/v4/tickers/BTC_BRL`\n\n### Limits\n\nThe request limits are based on the user's operational limits.\n\nThere are two types of limit, one of requests per second and another of daily requests. Both of them should be taken in consideration and the requests should be balanced so the daily limit isn't reached.\n\nUsers **without approved documentation** have 1 request per second or 86.400 daily requests.\n\nUsers **with approved documentation** have 3.5 requests per second or 302.400 daily requests.\n\nThese limits can be increased, and the support team should be contacted for that.\n\nWhen the requests per second limit is reached, the response HTTP Status returned is 429 and the response body is:\n```\n{\n  \"message\": \"Too many requests\"\n}\n```\n\nWhen the daily requests limit is reached, the response HTTP Status returned is 429 and the response body is:\n```\n{\n  \"message\": \"Limit Exceeded\"\n}\n```\n\nContact Support:\n Name: Jorn Filho",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:47:56.000Z",
+    "updatedAt": "2026-07-28T02:47:56.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-55c82900-3b4c-4883-8aed-3922d466a5bd"
+  },
+  "item": [
+    {
+      "name": "ticket",
+      "item": [
+        {
+          "name": "WebSocket ticket",
+          "id": "412f8230-4b73-4dec-9cdf-c69d8b2a6452",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/ticket",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "ticket"
+              ]
+            },
+            "description": "Creates a new websocket ticket. Should be sent in the body property called `ticket` to subscribe to the websocket private topics."
+          },
+          "response": [
+            {
+              "id": "14a6a3bc-a4f9-460b-8404-9c6001e85a88",
+              "name": "Ok",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/ticket",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "ticket"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"data\": {\n    \"ticket\": \"<string>\"\n  },\n  \"error_code\": null,\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T02:47:56.000Z",
+              "updatedAt": "2026-07-28T02:47:56.000Z",
+              "uid": "35240-14a6a3bc-a4f9-460b-8404-9c6001e85a88"
+            }
+          ],
+          "createdAt": "2026-07-28T02:47:56.000Z",
+          "updatedAt": "2026-07-28T02:47:56.000Z",
+          "uid": "35240-412f8230-4b73-4dec-9cdf-c69d8b2a6452"
+        }
+      ],
+      "id": "d4acff1a-000e-4a98-8fd1-f6963addc08e",
+      "createdAt": "2026-07-28T02:47:56.000Z",
+      "updatedAt": "2026-07-28T02:47:56.000Z",
+      "uid": "35240-d4acff1a-000e-4a98-8fd1-f6963addc08e"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.ripiotrade.co/v4/"
+    }
+  ]
+}

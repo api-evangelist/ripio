@@ -1,0 +1,20 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Ripio Trade
+  version: 1.0.0
+extends: openapi/ripio-trade-openapi.yml
+actions:
+  - target: $.info
+    update:
+      x-apievangelist-enriched: '2026-07-21'
+      x-apievangelist-artifacts:
+        - authentication/ripio-authentication.yml
+        - conventions/ripio-conventions.yml
+        - errors/ripio-error-codes.yml
+        - rate-limits/ripio-rate-limits.yml
+        - lifecycle/ripio-lifecycle.yml
+        - asyncapi/ripio-trade-webhooks.yml
+        - data-model/ripio-data-model.yml
+  - target: $.info
+    update:
+      x-agentic-access: agentic-access/ripio-agentic-access.yml

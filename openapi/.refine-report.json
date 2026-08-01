@@ -1,0 +1,34 @@
+{
+  "provider": "ripio",
+  "sources": [
+    "ripio-book-api-openapi.yml",
+    "ripio-cryptocurrency-deposits-api-openapi.yml",
+    "ripio-cryptocurrency-withdrawals-api-openapi.yml",
+    "ripio-general-endpoints-api-openapi.yml",
+    "ripio-orders-api-openapi.yml",
+    "ripio-public-api-openapi.yml",
+    "ripio-ticker-api-openapi.yml",
+    "ripio-ticket-api-openapi.yml",
+    "ripio-transactions-api-openapi.yml",
+    "ripio-user-api-openapi.yml",
+    "ripio-wallets-api-openapi.yml"
+  ],
+  "outputs": [
+    "ripio-book-api-openapi.yml",
+    "ripio-cryptocurrency-deposits-api-openapi.yml",
+    "ripio-cryptocurrency-withdrawals-api-openapi.yml",
+    "ripio-general-endpoints-api-openapi.yml",
+    "ripio-orders-api-openapi.yml",
+    "ripio-public-api-openapi.yml",
+    "ripio-ticker-api-openapi.yml",
+    "ripio-ticket-api-openapi.yml",
+    "ripio-transactions-api-openapi.yml",
+    "ripio-user-api-openapi.yml",
+    "ripio-wallets-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

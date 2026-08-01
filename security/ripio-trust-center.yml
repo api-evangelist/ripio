@@ -1,0 +1,20 @@
+generated: '2026-07-21'
+method: searched
+probe: true
+url: https://www.ripio.com/es/seguridad
+certifications:
+  - SOC 2 Type II
+audits:
+  - EY
+  - KPMG
+  - Hacken
+detail: >-
+  Ripio's B2B platform is SOC 2 Type II certified (security, availability,
+  confidentiality). Security practices and standards are published on the Ripio
+  security page; a public security team repository and HackerOne bug bounty back
+  responsible disclosure.
+evidence:
+  - source: https://www.ripio.com/es/seguridad
+    keywords: [soc 2, security, certification]
+  - source: https://github.com/ripio/security
+    keywords: [soc 2, compliance, bug bounty]

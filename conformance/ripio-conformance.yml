@@ -1,0 +1,33 @@
+generated: '2026-07-21'
+method: searched
+source: openapi/ripio-trade-openapi.yml + https://www.ripio.com/es/seguridad + https://github.com/ripio/security
+standards:
+  - id: oauth2
+    conforms: false
+    evidence: Auth is API Token + HMAC-SHA256 signing (apiToken scheme), not OAuth2.
+  - id: oidc
+    conforms: false
+  - id: rfc9457-problem-details
+    conforms: false
+    evidence: Uses a custom {error_code,message,data} envelope, not application/problem+json.
+  - id: hmac-request-signing
+    conforms: true
+    evidence: Private requests signed with Base64 SHA-256 HMAC over Timestamp + payload.
+  - id: openapi-3.0
+    conforms: true
+    evidence: Published OpenAPI 3.0.0 document (openapi/ripio-trade-openapi.yml).
+  - id: websocket-streaming
+    conforms: true
+    evidence: x-websocket-api + WebSocket Stream topics documented.
+  - id: cursor-pagination
+    conforms: true
+    evidence: CursorTradesResponse schemas.
+compliance:
+  soc2_type_ii:
+    published: true
+    detail: Ripio's B2B platform is SOC 2 Type II certified (security, availability, confidentiality).
+    source: https://www.ripio.com/es/seguridad
+  audits:
+    - EY
+    - KPMG
+    - Hacken

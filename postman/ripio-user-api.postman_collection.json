@@ -1,0 +1,709 @@
+{
+  "info": {
+    "_postman_id": "0dcc7ec5-3a7f-4b97-bd41-f5adccda2651",
+    "name": "Ripio Trade - API Documentation Book User API",
+    "description": "Welcome to the Ripio Trade API documentation.\n\n### Version\nThis API is currently in the version 4.\n\nIf there is need for any big change, a new version will be launched and this version will be maintained for at least 3 months.\n\nIf you're still using the version 3, [access the old documentation](../v3) and check the [migration guide](#tag/V3-Endpoint-Migrations).\n\n### Important\nUse the `Market` endpoints for all trading operations. The `Public` endpoints have a delay (cache) of up to 30 seconds.\n\nAll successful requests will result in a 200 HTTP Status.\n\nAll requests returns data in JSON format (application/json) and have a default body:\n\n\n### Success\n```\n{\n  \"error_code\": null,\n  \"message\": null,\n  \"data\": { }\n}\n```\n\n### Error\n```\n{\n  \"error_code\": [Error code],\n  \"message\": \"Error description\",\n  \"data\": null\n}\n```\n\n\nEndpoints that have a date filter will return data for the last 6 months if no value is sent in the `start_date` parameter.\n\n### URL structure\nThe endpoints URL follow this pattern:\n\n`https://api.ripiotrade.co/{version}/{method}[/{parameter}][?parameter=value...]`\n\n `https://api.ripiotrade.co/v4/tickers/BTC_BRL`\n\n### Limits\n\nThe request limits are based on the user's operational limits.\n\nThere are two types of limit, one of requests per second and another of daily requests. Both of them should be taken in consideration and the requests should be balanced so the daily limit isn't reached.\n\nUsers **without approved documentation** have 1 request per second or 86.400 daily requests.\n\nUsers **with approved documentation** have 3.5 requests per second or 302.400 daily requests.\n\nThese limits can be increased, and the support team should be contacted for that.\n\nWhen the requests per second limit is reached, the response HTTP Status returned is 429 and the response body is:\n```\n{\n  \"message\": \"Too many requests\"\n}\n```\n\nWhen the daily requests limit is reached, the response HTTP Status returned is 429 and the response body is:\n```\n{\n  \"message\": \"Limit Exceeded\"\n}\n```\n\nContact Support:\n Name: Jorn Filho",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:47:58.000Z",
+    "updatedAt": "2026-07-28T02:47:58.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-0dcc7ec5-3a7f-4b97-bd41-f5adccda2651"
+  },
+  "item": [
+    {
+      "name": "user",
+      "item": [
+        {
+          "name": "balances",
+          "item": [
+            {
+              "name": "{date}",
+              "item": [
+                {
+                  "name": "Balance On Date",
+                  "id": "372dbb7a-52ab-4682-9dab-14f1bed8b810",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/user/balances/:date",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "user",
+                        "balances",
+                        ":date"
+                      ],
+                      "variable": [
+                        {
+                          "id": "0e4db247-202c-4978-8033-d58422dc92d4",
+                          "key": "date",
+                          "value": "<date>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "Lists the user's balances in the given date."
+                  },
+                  "response": [
+                    {
+                      "id": "6165e437-a195-4311-b23e-6479741fa9fd",
+                      "name": "Ok",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/user/balances/:date",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "user",
+                            "balances",
+                            ":date"
+                          ],
+                          "variable": [
+                            {
+                              "key": "date"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": [\n    {\n      \"currency_code\": \"<string>\",\n      \"available_amount\": \"<float>\",\n      \"last_update\": \"<string>\"\n    },\n    {\n      \"currency_code\": \"<string>\",\n      \"available_amount\": \"<float>\",\n      \"last_update\": \"<string>\"\n    }\n  ],\n  \"error_code\": null,\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T02:47:59.000Z",
+                      "updatedAt": "2026-07-28T02:47:59.000Z",
+                      "uid": "35240-6165e437-a195-4311-b23e-6479741fa9fd"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:47:59.000Z",
+                  "updatedAt": "2026-07-28T02:47:59.000Z",
+                  "uid": "35240-372dbb7a-52ab-4682-9dab-14f1bed8b810"
+                }
+              ],
+              "id": "2b24945f-4552-49d9-aef3-3a158e56cfd9",
+              "createdAt": "2026-07-28T02:47:59.000Z",
+              "updatedAt": "2026-07-28T02:47:59.000Z",
+              "uid": "35240-2b24945f-4552-49d9-aef3-3a158e56cfd9"
+            },
+            {
+              "name": "Balances",
+              "id": "a64032cd-b0fd-40ac-9506-e8d06983f398",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/user/balances?currency_code=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "user",
+                    "balances"
+                  ],
+                  "query": [
+                    {
+                      "description": "Currency code (one or many, use \",\" to separate)",
+                      "key": "currency_code",
+                      "value": "<string>"
+                    }
+                  ]
+                },
+                "description": "Lists the user's balances"
+              },
+              "response": [
+                {
+                  "id": "d5c1f2b6-ab59-499a-bcc8-6e2f5657b7f5",
+                  "name": "Ok",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/user/balances?currency_code=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "user",
+                        "balances"
+                      ],
+                      "query": [
+                        {
+                          "description": "Currency code (one or many, use \",\" to separate)",
+                          "key": "currency_code",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": [\n    {\n      \"currency_code\": \"<string>\",\n      \"available_amount\": \"<float>\",\n      \"last_update\": \"<string>\",\n      \"locked_amount\": \"<float>\"\n    },\n    {\n      \"currency_code\": \"<string>\",\n      \"available_amount\": \"<float>\",\n      \"last_update\": \"<string>\",\n      \"locked_amount\": \"<float>\"\n    }\n  ],\n  \"error_code\": null,\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T02:47:59.000Z",
+                  "updatedAt": "2026-07-28T02:47:59.000Z",
+                  "uid": "35240-d5c1f2b6-ab59-499a-bcc8-6e2f5657b7f5"
+                }
+              ],
+              "createdAt": "2026-07-28T02:47:59.000Z",
+              "updatedAt": "2026-07-28T02:47:59.000Z",
+              "uid": "35240-a64032cd-b0fd-40ac-9506-e8d06983f398"
+            }
+          ],
+          "id": "49ffa456-f1e8-4518-9ce5-f9911ec632a1",
+          "createdAt": "2026-07-28T02:47:59.000Z",
+          "updatedAt": "2026-07-28T02:47:59.000Z",
+          "uid": "35240-49ffa456-f1e8-4518-9ce5-f9911ec632a1"
+        },
+        {
+          "name": "trading-fees",
+          "item": [
+            {
+              "name": "Trading Fees",
+              "id": "99f1e3a2-f2ce-40f1-9d82-98da38f2cf25",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/user/trading-fees?pair=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "user",
+                    "trading-fees"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Pair code",
+                      "key": "pair",
+                      "value": "<string>"
+                    }
+                  ]
+                },
+                "description": "Get the user trading fees"
+              },
+              "response": [
+                {
+                  "id": "813cc4be-0a09-4554-b446-8dbd3e8c1317",
+                  "name": "Ok",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/user/trading-fees?pair=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "user",
+                        "trading-fees"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Pair code",
+                          "key": "pair",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": [\n    {\n      \"taker\": \"<double>\",\n      \"maker\": \"<double>\",\n      \"side\": \"<string>\"\n    },\n    {\n      \"taker\": \"<double>\",\n      \"maker\": \"<double>\",\n      \"side\": \"<string>\"\n    }\n  ],\n  \"error_code\": null,\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T02:47:59.000Z",
+                  "updatedAt": "2026-07-28T02:47:59.000Z",
+                  "uid": "35240-813cc4be-0a09-4554-b446-8dbd3e8c1317"
+                }
+              ],
+              "createdAt": "2026-07-28T02:47:59.000Z",
+              "updatedAt": "2026-07-28T02:47:59.000Z",
+              "uid": "35240-99f1e3a2-f2ce-40f1-9d82-98da38f2cf25"
+            }
+          ],
+          "id": "456b3bd9-8501-4e6c-a1c5-f05abd81d6bb",
+          "createdAt": "2026-07-28T02:47:59.000Z",
+          "updatedAt": "2026-07-28T02:47:59.000Z",
+          "uid": "35240-456b3bd9-8501-4e6c-a1c5-f05abd81d6bb"
+        },
+        {
+          "name": "statement",
+          "item": [
+            {
+              "name": "{currency_code}",
+              "item": [
+                {
+                  "name": "Statement by Currency",
+                  "id": "11ada954-68c4-44b0-98b4-291f25c3e503",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/user/statement/:currency_code?start_time=[6 months ago]&end_time=[Current datetime]&page_size=200&current_page=1",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "user",
+                        "statement",
+                        ":currency_code"
+                      ],
+                      "query": [
+                        {
+                          "key": "start_time",
+                          "value": "[6 months ago]"
+                        },
+                        {
+                          "key": "end_time",
+                          "value": "[Current datetime]"
+                        },
+                        {
+                          "key": "page_size",
+                          "value": "200"
+                        },
+                        {
+                          "key": "current_page",
+                          "value": "1"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "cc36393c-c33f-4d44-b7a0-8fd3b36a331c",
+                          "key": "currency_code",
+                          "value": "<string>",
+                          "description": "(Required) Currency code"
+                        }
+                      ]
+                    },
+                    "description": "Lists the user's statement by currency."
+                  },
+                  "response": [
+                    {
+                      "id": "996409ce-d44f-4897-ad2b-d3cb2e8bded3",
+                      "name": "Ok",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/user/statement/:currency_code?start_time=[6 months ago]&end_time=[Current datetime]&page_size=200&current_page=1",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "user",
+                            "statement",
+                            ":currency_code"
+                          ],
+                          "query": [
+                            {
+                              "key": "start_time",
+                              "value": "[6 months ago]"
+                            },
+                            {
+                              "key": "end_time",
+                              "value": "[Current datetime]"
+                            },
+                            {
+                              "key": "page_size",
+                              "value": "200"
+                            },
+                            {
+                              "key": "current_page",
+                              "value": "1"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "currency_code"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"statement\": [\n      {\n        \"amount\": \"<float>\",\n        \"after_balance\": \"<float>\",\n        \"currency\": \"<string>\",\n        \"date\": \"<string>\",\n        \"operation\": \"<string>\"\n      },\n      {\n        \"amount\": \"<float>\",\n        \"after_balance\": \"<float>\",\n        \"currency\": \"<string>\",\n        \"date\": \"<string>\",\n        \"operation\": \"<string>\"\n      }\n    ],\n    \"pagination\": {\n      \"current_page\": \"<double>\",\n      \"page_size\": \"<double>\",\n      \"registers_count\": \"<double>\",\n      \"total_pages\": \"<double>\"\n    }\n  },\n  \"error_code\": null,\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T02:47:59.000Z",
+                      "updatedAt": "2026-07-28T02:47:59.000Z",
+                      "uid": "35240-996409ce-d44f-4897-ad2b-d3cb2e8bded3"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:47:59.000Z",
+                  "updatedAt": "2026-07-28T02:47:59.000Z",
+                  "uid": "35240-11ada954-68c4-44b0-98b4-291f25c3e503"
+                }
+              ],
+              "id": "529666de-e985-460b-88f7-7e6a584e89b6",
+              "createdAt": "2026-07-28T02:47:59.000Z",
+              "updatedAt": "2026-07-28T02:47:59.000Z",
+              "uid": "35240-529666de-e985-460b-88f7-7e6a584e89b6"
+            },
+            {
+              "name": "Statement",
+              "id": "4f249092-4af1-44a9-a3b8-a7a6fd618379",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/user/statement?start_time=[6 months ago]&end_time=[Current datetime]&page_size=200&current_page=1",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "user",
+                    "statement"
+                  ],
+                  "query": [
+                    {
+                      "key": "start_time",
+                      "value": "[6 months ago]"
+                    },
+                    {
+                      "key": "end_time",
+                      "value": "[Current datetime]"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "200"
+                    },
+                    {
+                      "key": "current_page",
+                      "value": "1"
+                    }
+                  ]
+                },
+                "description": "Lists the user's statement."
+              },
+              "response": [
+                {
+                  "id": "4a8ca7eb-2b13-4725-b64b-78d1c5efd089",
+                  "name": "Ok",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/user/statement?start_time=[6 months ago]&end_time=[Current datetime]&page_size=200&current_page=1",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "user",
+                        "statement"
+                      ],
+                      "query": [
+                        {
+                          "key": "start_time",
+                          "value": "[6 months ago]"
+                        },
+                        {
+                          "key": "end_time",
+                          "value": "[Current datetime]"
+                        },
+                        {
+                          "key": "page_size",
+                          "value": "200"
+                        },
+                        {
+                          "key": "current_page",
+                          "value": "1"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": {\n    \"statement\": [\n      {\n        \"amount\": \"<float>\",\n        \"after_balance\": \"<float>\",\n        \"currency\": \"<string>\",\n        \"date\": \"<string>\",\n        \"operation\": \"<string>\"\n      },\n      {\n        \"amount\": \"<float>\",\n        \"after_balance\": \"<float>\",\n        \"currency\": \"<string>\",\n        \"date\": \"<string>\",\n        \"operation\": \"<string>\"\n      }\n    ],\n    \"pagination\": {\n      \"current_page\": \"<double>\",\n      \"page_size\": \"<double>\",\n      \"registers_count\": \"<double>\",\n      \"total_pages\": \"<double>\"\n    }\n  },\n  \"error_code\": null,\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T02:47:59.000Z",
+                  "updatedAt": "2026-07-28T02:47:59.000Z",
+                  "uid": "35240-4a8ca7eb-2b13-4725-b64b-78d1c5efd089"
+                }
+              ],
+              "createdAt": "2026-07-28T02:47:59.000Z",
+              "updatedAt": "2026-07-28T02:47:59.000Z",
+              "uid": "35240-4f249092-4af1-44a9-a3b8-a7a6fd618379"
+            }
+          ],
+          "id": "db5e5cd1-c725-4240-a879-fc74e1c9958a",
+          "createdAt": "2026-07-28T02:47:59.000Z",
+          "updatedAt": "2026-07-28T02:47:59.000Z",
+          "uid": "35240-db5e5cd1-c725-4240-a879-fc74e1c9958a"
+        },
+        {
+          "name": "trades",
+          "item": [
+            {
+              "name": "Get User Trades",
+              "id": "62fd994b-3694-42e0-a906-47f2c70414ca",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/user/trades?pair=<string>&start_date=[10 days ago]&end_date=[Current date]&page_size=200&current_page=1&order_id=<string>&external_id=<string>&c=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "user",
+                    "trades"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Currency pair code",
+                      "key": "pair",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start_date",
+                      "value": "[10 days ago]"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "[Current date]"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "200"
+                    },
+                    {
+                      "key": "current_page",
+                      "value": "1"
+                    },
+                    {
+                      "description": "Order id",
+                      "key": "order_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "External id",
+                      "key": "external_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The `c` parameter is the cursor you should use to fetch the next page of results",
+                      "key": "c",
+                      "value": "<string>"
+                    }
+                  ]
+                },
+                "description": "Lists the user's trades.\n\n**Attention:** Due to performance concerns, this endpoint now uses cursor-based pagination. The pagination object currently included in the response is now a placeholder and will be entirely removed as of 2026-06-01. The parameter current_page is also a placeholder and will be removed at the same time. Please update your integration accordingly and refer to the documentation for the correct pagination handling."
+              },
+              "response": [
+                {
+                  "id": "1b9b75b1-3ce6-45c2-9f10-d952815ec192",
+                  "name": "Ok",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/user/trades?pair=<string>&start_date=[10 days ago]&end_date=[Current date]&page_size=200&current_page=1&order_id=<string>&external_id=<string>&c=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "user",
+                        "trades"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Currency pair code",
+                          "key": "pair",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "start_date",
+                          "value": "[10 days ago]"
+                        },
+                        {
+                          "key": "end_date",
+                          "value": "[Current date]"
+                        },
+                        {
+                          "key": "page_size",
+                          "value": "200"
+                        },
+                        {
+                          "key": "current_page",
+                          "value": "1"
+                        },
+                        {
+                          "description": "Order id",
+                          "key": "order_id",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "External id",
+                          "key": "external_id",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "The `c` parameter is the cursor you should use to fetch the next page of results",
+                          "key": "c",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": {\n    \"trades\": [\n      {\n        \"amount\": \"<float>\",\n        \"id\": \"<string>\",\n        \"price\": \"<float>\",\n        \"timestamp\": \"<double>\",\n        \"total_value\": \"<float>\",\n        \"date\": \"<string>\",\n        \"side\": \"<string>\",\n        \"type\": \"<string>\",\n        \"fee\": \"<float>\",\n        \"fee_currency\": \"<string>\",\n        \"pair_code\": \"<string>\",\n        \"taker_or_maker\": \"<string>\",\n        \"maker_order_id\": \"<string>\",\n        \"taker_order_id\": \"<string>\"\n      },\n      {\n        \"amount\": \"<float>\",\n        \"id\": \"<string>\",\n        \"price\": \"<float>\",\n        \"timestamp\": \"<double>\",\n        \"total_value\": \"<float>\",\n        \"date\": \"<string>\",\n        \"side\": \"<string>\",\n        \"type\": \"<string>\",\n        \"fee\": \"<float>\",\n        \"fee_currency\": \"<string>\",\n        \"pair_code\": \"<string>\",\n        \"taker_or_maker\": \"<string>\",\n        \"maker_order_id\": \"<string>\",\n        \"taker_order_id\": \"<string>\"\n      }\n    ],\n    \"pagination\": {\n      \"current_page\": \"<double>\",\n      \"page_size\": \"<double>\",\n      \"registers_count\": \"<double>\",\n      \"total_pages\": \"<double>\"\n    },\n    \"nc\": \"<string>\",\n    \"pc\": \"<string>\"\n  },\n  \"error_code\": null,\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T02:47:59.000Z",
+                  "updatedAt": "2026-07-28T02:47:59.000Z",
+                  "uid": "35240-1b9b75b1-3ce6-45c2-9f10-d952815ec192"
+                }
+              ],
+              "createdAt": "2026-07-28T02:47:59.000Z",
+              "updatedAt": "2026-07-28T02:47:59.000Z",
+              "uid": "35240-62fd994b-3694-42e0-a906-47f2c70414ca"
+            }
+          ],
+          "id": "437536c3-bac9-4304-be01-d9531206e706",
+          "createdAt": "2026-07-28T02:47:59.000Z",
+          "updatedAt": "2026-07-28T02:47:59.000Z",
+          "uid": "35240-437536c3-bac9-4304-be01-d9531206e706"
+        }
+      ],
+      "id": "dc2da534-25f6-4e7c-954a-bcd0e8ad4a3a",
+      "createdAt": "2026-07-28T02:47:59.000Z",
+      "updatedAt": "2026-07-28T02:47:59.000Z",
+      "uid": "35240-dc2da534-25f6-4e7c-954a-bcd0e8ad4a3a"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.ripiotrade.co/v4/"
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+generated: '2026-07-21'
+method: searched
+source: https://apidocs.ripiotrade.co/
+api: openapi/ripio-trade-openapi.yml
+authentication:
+  style: API Token + HMAC-SHA256 request signing
+  headers: [Authorization, Timestamp, Signature, Timestamp-tolerance]
+  detail: >-
+    Private routes require the API Token in Authorization, a millisecond Timestamp,
+    and a Base64 SHA-256 HMAC Signature computed with the Secret Key. Access types
+    per credential: Read, Buy/Sell, Cryptocurrency withdrawals.
+  see: authentication/ripio-authentication.yml
+idempotency:
+  supported: true
+  mechanism: client-supplied external_id (client order id)
+  detail: >-
+    Orders can carry an external_id supplied by the client. Orders can then be read
+    (GetOrderByExternalId) and canceled (CancelOrderByExternalId /
+    CancelOrderByExternalIdByPost) by that external id, giving callers a stable
+    client-side reference to avoid acting on duplicates. Withdrawals additionally
+    enforce server-side duplicate prevention (error_code 40032, "Prevention against
+    duplicated withdrawal. Try again after ten minutes.").
+  operations: [CreateOrder, GetOrderByExternalId, CancelOrderByExternalId, CancelOrderByExternalIdByPost]
+pagination:
+  style: cursor
+  detail: >-
+    Trade/history endpoints return cursor-based paged data (see CursorTradesResponse
+    schemas). Date-filtered endpoints default to the last 6 months when no start_date
+    is supplied.
+error_envelope:
+  shape: '{ error_code, message, data }'
+  field: error_code
+  see: errors/ripio-error-codes.yml
+versioning:
+  scheme: uri-path
+  current: v4
+  detail: >-
+    URL pattern https://api.ripiotrade.co/{version}/{method}. On a big change a new
+    version launches and the prior version is maintained for at least 3 months.
+  see: lifecycle/ripio-lifecycle.yml
+rate_limit_signal:
+  http_status: 429
+  see: rate-limits/ripio-rate-limits.yml
+caching:
+  detail: Public endpoints have a cache delay of up to 30 seconds; use Market/authenticated endpoints for trading.
+data_format: application/json
+timestamps: milliseconds, UTC
+realtime:
+  websocket_stream: wss (market-data topics) — see asyncapi/ripio-trade-webhooks.yml
+  websocket_api: wss://ws-api.ripio.com (order create/cancel/update)

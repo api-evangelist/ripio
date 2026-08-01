@@ -1,0 +1,244 @@
+{
+  "info": {
+    "_postman_id": "b9f95998-d93b-40b0-8d80-d71b7ac22023",
+    "name": "Ripio Trade - API Documentation Book API",
+    "description": "Welcome to the Ripio Trade API documentation.\n\n### Version\nThis API is currently in the version 4.\n\nIf there is need for any big change, a new version will be launched and this version will be maintained for at least 3 months.\n\nIf you're still using the version 3, [access the old documentation](../v3) and check the [migration guide](#tag/V3-Endpoint-Migrations).\n\n### Important\nUse the `Market` endpoints for all trading operations. The `Public` endpoints have a delay (cache) of up to 30 seconds.\n\nAll successful requests will result in a 200 HTTP Status.\n\nAll requests returns data in JSON format (application/json) and have a default body:\n\n\n### Success\n```\n{\n  \"error_code\": null,\n  \"message\": null,\n  \"data\": { }\n}\n```\n\n### Error\n```\n{\n  \"error_code\": [Error code],\n  \"message\": \"Error description\",\n  \"data\": null\n}\n```\n\n\nEndpoints that have a date filter will return data for the last 6 months if no value is sent in the `start_date` parameter.\n\n### URL structure\nThe endpoints URL follow this pattern:\n\n`https://api.ripiotrade.co/{version}/{method}[/{parameter}][?parameter=value...]`\n\n `https://api.ripiotrade.co/v4/tickers/BTC_BRL`\n\n### Limits\n\nThe request limits are based on the user's operational limits.\n\nThere are two types of limit, one of requests per second and another of daily requests. Both of them should be taken in consideration and the requests should be balanced so the daily limit isn't reached.\n\nUsers **without approved documentation** have 1 request per second or 86.400 daily requests.\n\nUsers **with approved documentation** have 3.5 requests per second or 302.400 daily requests.\n\nThese limits can be increased, and the support team should be contacted for that.\n\nWhen the requests per second limit is reached, the response HTTP Status returned is 429 and the response body is:\n```\n{\n  \"message\": \"Too many requests\"\n}\n```\n\nWhen the daily requests limit is reached, the response HTTP Status returned is 429 and the response body is:\n```\n{\n  \"message\": \"Limit Exceeded\"\n}\n```\n\nContact Support:\n Name: Jorn Filho",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:47:48.000Z",
+    "updatedAt": "2026-07-28T02:47:48.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-b9f95998-d93b-40b0-8d80-d71b7ac22023"
+  },
+  "item": [
+    {
+      "name": "book",
+      "item": [
+        {
+          "name": "orders",
+          "item": [
+            {
+              "name": "level-3",
+              "item": [
+                {
+                  "name": "Orderbook Level 3",
+                  "id": "1e0abe8a-05be-4453-afcd-a366a1eff106",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/book/orders/level-3?pair=<string>&limit=100",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "book",
+                        "orders",
+                        "level-3"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Currency pair code",
+                          "key": "pair",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "limit",
+                          "value": "100"
+                        }
+                      ]
+                    },
+                    "description": "Returns the level 3 orderbook."
+                  },
+                  "response": [
+                    {
+                      "id": "bb3ab815-732c-4d8a-859a-0f16263cf44a",
+                      "name": "Ok",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/book/orders/level-3?pair=<string>&limit=100",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "book",
+                            "orders",
+                            "level-3"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Currency pair code",
+                              "key": "pair",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "limit",
+                              "value": "100"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"timestamp\": \"<double>\",\n    \"asks\": [\n      {\n        \"amount\": \"<float>\",\n        \"id\": \"<string>\",\n        \"price\": \"<number>\"\n      },\n      {\n        \"amount\": \"<float>\",\n        \"id\": \"<string>\",\n        \"price\": \"<number>\"\n      }\n    ],\n    \"bids\": [\n      {\n        \"amount\": \"<float>\",\n        \"id\": \"<string>\",\n        \"price\": \"<number>\"\n      },\n      {\n        \"amount\": \"<float>\",\n        \"id\": \"<string>\",\n        \"price\": \"<number>\"\n      }\n    ],\n    \"hash\": \"<string>\"\n  },\n  \"error_code\": null,\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T02:47:48.000Z",
+                      "updatedAt": "2026-07-28T02:47:48.000Z",
+                      "uid": "35240-bb3ab815-732c-4d8a-859a-0f16263cf44a"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:47:48.000Z",
+                  "updatedAt": "2026-07-28T02:47:48.000Z",
+                  "uid": "35240-1e0abe8a-05be-4453-afcd-a366a1eff106"
+                }
+              ],
+              "id": "0304d848-f91a-4833-8e89-6ce11b287c43",
+              "createdAt": "2026-07-28T02:47:48.000Z",
+              "updatedAt": "2026-07-28T02:47:48.000Z",
+              "uid": "35240-0304d848-f91a-4833-8e89-6ce11b287c43"
+            },
+            {
+              "name": "level-2",
+              "item": [
+                {
+                  "name": "Orderbook Level 2",
+                  "id": "b4ceba84-0f79-4630-92c9-bf8c81c3bc09",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/book/orders/level-2?pair=<string>&limit=100",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "book",
+                        "orders",
+                        "level-2"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Currency pair code",
+                          "key": "pair",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "limit",
+                          "value": "100"
+                        }
+                      ]
+                    },
+                    "description": "Returns the level 2 orderbook."
+                  },
+                  "response": [
+                    {
+                      "id": "dd1741ba-fab6-4880-bdd2-9d457177f5e0",
+                      "name": "Ok",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/book/orders/level-2?pair=<string>&limit=100",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "book",
+                            "orders",
+                            "level-2"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Currency pair code",
+                              "key": "pair",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "limit",
+                              "value": "100"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"timestamp\": \"<double>\",\n    \"asks\": [\n      {\n        \"amount\": \"<float>\",\n        \"price\": \"<number>\"\n      },\n      {\n        \"amount\": \"<float>\",\n        \"price\": \"<number>\"\n      }\n    ],\n    \"bids\": [\n      {\n        \"amount\": \"<float>\",\n        \"price\": \"<number>\"\n      },\n      {\n        \"amount\": \"<float>\",\n        \"price\": \"<number>\"\n      }\n    ]\n  },\n  \"error_code\": null,\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T02:47:48.000Z",
+                      "updatedAt": "2026-07-28T02:47:48.000Z",
+                      "uid": "35240-dd1741ba-fab6-4880-bdd2-9d457177f5e0"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:47:48.000Z",
+                  "updatedAt": "2026-07-28T02:47:48.000Z",
+                  "uid": "35240-b4ceba84-0f79-4630-92c9-bf8c81c3bc09"
+                }
+              ],
+              "id": "e157ed9e-d0f8-4f96-97d0-bfd32b08be1b",
+              "createdAt": "2026-07-28T02:47:48.000Z",
+              "updatedAt": "2026-07-28T02:47:48.000Z",
+              "uid": "35240-e157ed9e-d0f8-4f96-97d0-bfd32b08be1b"
+            }
+          ],
+          "id": "27150352-b1bd-464a-82c1-ea040ea12bfc",
+          "createdAt": "2026-07-28T02:47:48.000Z",
+          "updatedAt": "2026-07-28T02:47:48.000Z",
+          "uid": "35240-27150352-b1bd-464a-82c1-ea040ea12bfc"
+        }
+      ],
+      "id": "c6607c48-8b2c-41b6-b804-fd0791e23356",
+      "createdAt": "2026-07-28T02:47:48.000Z",
+      "updatedAt": "2026-07-28T02:47:48.000Z",
+      "uid": "35240-c6607c48-8b2c-41b6-b804-fd0791e23356"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.ripiotrade.co/v4/"
+    }
+  ]
+}

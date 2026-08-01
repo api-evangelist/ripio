@@ -1,0 +1,18 @@
+generated: '2026-07-21'
+method: searched
+source: https://apidocs.ripiotrade.co/
+api: openapi/ripio-trade-openapi.yml
+versioning:
+  scheme: uri-path
+  current: v4
+  previous: v3
+  docs: https://apidocs.ripiotrade.co/
+deprecation:
+  policy: >-
+    When a big change is needed a new version is launched and the previous version
+    is maintained for at least 3 months. A migration guide is published (v3 -> v4
+    "V3 Endpoint Migrations").
+  min_support_window: 3 months
+  migration_guide: https://apidocs.ripiotrade.co/#tag/V3-Endpoint-Migrations
+status_page: https://status.ripio.com/
+deprecated_operations: []

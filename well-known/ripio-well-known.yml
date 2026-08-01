@@ -1,0 +1,24 @@
+generated: '2026-07-21'
+method: searched
+note: >-
+  All probed /.well-known/ paths were blocked by edge protection (403) or not
+  present (404). No 200 documents were captured; no raw files saved.
+probes:
+  - host: https://api.ripiotrade.co
+    path: /.well-known/security.txt
+    status: 403
+  - host: https://www.ripio.com
+    path: /.well-known/security.txt
+    status: 404
+  - host: https://trade.ripio.com
+    path: /.well-known/security.txt
+    status: 403
+  - host: https://api.ripiotrade.co
+    path: /.well-known/openid-configuration
+    status: 403
+  - host: https://www.ripio.com
+    path: /.well-known/openid-configuration
+    status: 404
+  - host: https://auth.ripio.com
+    path: /.well-known/openid-configuration
+    status: 403

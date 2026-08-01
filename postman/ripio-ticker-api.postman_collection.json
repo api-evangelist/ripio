@@ -1,0 +1,189 @@
+{
+  "info": {
+    "_postman_id": "a24a58b3-5991-4856-b759-5a55f024f64d",
+    "name": "Ripio Trade - API Documentation Book Ticker API",
+    "description": "Welcome to the Ripio Trade API documentation.\n\n### Version\nThis API is currently in the version 4.\n\nIf there is need for any big change, a new version will be launched and this version will be maintained for at least 3 months.\n\nIf you're still using the version 3, [access the old documentation](../v3) and check the [migration guide](#tag/V3-Endpoint-Migrations).\n\n### Important\nUse the `Market` endpoints for all trading operations. The `Public` endpoints have a delay (cache) of up to 30 seconds.\n\nAll successful requests will result in a 200 HTTP Status.\n\nAll requests returns data in JSON format (application/json) and have a default body:\n\n\n### Success\n```\n{\n  \"error_code\": null,\n  \"message\": null,\n  \"data\": { }\n}\n```\n\n### Error\n```\n{\n  \"error_code\": [Error code],\n  \"message\": \"Error description\",\n  \"data\": null\n}\n```\n\n\nEndpoints that have a date filter will return data for the last 6 months if no value is sent in the `start_date` parameter.\n\n### URL structure\nThe endpoints URL follow this pattern:\n\n`https://api.ripiotrade.co/{version}/{method}[/{parameter}][?parameter=value...]`\n\n `https://api.ripiotrade.co/v4/tickers/BTC_BRL`\n\n### Limits\n\nThe request limits are based on the user's operational limits.\n\nThere are two types of limit, one of requests per second and another of daily requests. Both of them should be taken in consideration and the requests should be balanced so the daily limit isn't reached.\n\nUsers **without approved documentation** have 1 request per second or 86.400 daily requests.\n\nUsers **with approved documentation** have 3.5 requests per second or 302.400 daily requests.\n\nThese limits can be increased, and the support team should be contacted for that.\n\nWhen the requests per second limit is reached, the response HTTP Status returned is 429 and the response body is:\n```\n{\n  \"message\": \"Too many requests\"\n}\n```\n\nWhen the daily requests limit is reached, the response HTTP Status returned is 429 and the response body is:\n```\n{\n  \"message\": \"Limit Exceeded\"\n}\n```\n\nContact Support:\n Name: Jorn Filho",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:47:55.000Z",
+    "updatedAt": "2026-07-28T02:47:55.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-a24a58b3-5991-4856-b759-5a55f024f64d"
+  },
+  "item": [
+    {
+      "name": "ticker",
+      "item": [
+        {
+          "name": "{pair}",
+          "item": [
+            {
+              "name": "Ticker By Pair",
+              "id": "7d0780dc-601d-4530-acee-46abf885c6e1",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/ticker/:pair",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "ticker",
+                    ":pair"
+                  ],
+                  "variable": [
+                    {
+                      "id": "ac3059d0-2582-4d8f-bc0f-544114ff4f87",
+                      "key": "pair",
+                      "value": "<string>",
+                      "description": "(Required) Currency pair code"
+                    }
+                  ]
+                },
+                "description": "Returns a 24 hour window statistics for a given pair."
+              },
+              "response": [
+                {
+                  "id": "bfdb41af-3c98-4477-87e2-505201722f73",
+                  "name": "Ok",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/ticker/:pair",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "ticker",
+                        ":pair"
+                      ],
+                      "variable": [
+                        {
+                          "key": "pair"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": {\n    \"high\": \"<float>\",\n    \"low\": \"<float>\",\n    \"volume\": \"<float>\",\n    \"trades_quantity\": \"<number>\",\n    \"last\": \"<float>\",\n    \"bid\": \"<float>\",\n    \"ask\": \"<float>\",\n    \"date\": \"<string>\",\n    \"first\": \"<float>\",\n    \"is_frozen\": \"<boolean>\",\n    \"base_code\": \"<string>\",\n    \"base_id\": \"<string>\",\n    \"quote_id\": \"<string>\",\n    \"quote_code\": \"<string>\",\n    \"quote_volume\": \"<double>\",\n    \"price_change_percent_24h\": \"<string>\"\n  },\n  \"error_code\": null,\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T02:47:55.000Z",
+                  "updatedAt": "2026-07-28T02:47:55.000Z",
+                  "uid": "35240-bfdb41af-3c98-4477-87e2-505201722f73"
+                }
+              ],
+              "createdAt": "2026-07-28T02:47:55.000Z",
+              "updatedAt": "2026-07-28T02:47:55.000Z",
+              "uid": "35240-7d0780dc-601d-4530-acee-46abf885c6e1"
+            }
+          ],
+          "id": "8425c570-5649-4107-b121-0baacbeb01c4",
+          "createdAt": "2026-07-28T02:47:55.000Z",
+          "updatedAt": "2026-07-28T02:47:55.000Z",
+          "uid": "35240-8425c570-5649-4107-b121-0baacbeb01c4"
+        },
+        {
+          "name": "Tickers",
+          "id": "7a40cd7f-512d-4b95-b60a-f5c55129e596",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/ticker",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "ticker"
+              ]
+            },
+            "description": "Returns a 24 hour window statistics for all pairs."
+          },
+          "response": [
+            {
+              "id": "699cb3f2-90e5-4c98-917f-1a2be7087c1d",
+              "name": "Ok",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/ticker",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "ticker"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"data\": [\n    {\n      \"pair\": \"<string>\",\n      \"price_change_percent_24h\": \"<string>\",\n      \"high\": \"<float>\",\n      \"low\": \"<float>\",\n      \"volume\": \"<float>\",\n      \"trades_quantity\": \"<number>\",\n      \"last\": \"<float>\",\n      \"bid\": \"<float>\",\n      \"ask\": \"<float>\",\n      \"date\": \"<string>\",\n      \"first\": \"<float>\",\n      \"is_frozen\": \"<boolean>\",\n      \"base_code\": \"<string>\",\n      \"base_id\": \"<string>\",\n      \"quote_id\": \"<string>\",\n      \"quote_code\": \"<string>\",\n      \"quote_volume\": \"<double>\"\n    },\n    {\n      \"pair\": \"<string>\",\n      \"price_change_percent_24h\": \"<string>\",\n      \"high\": \"<float>\",\n      \"low\": \"<float>\",\n      \"volume\": \"<float>\",\n      \"trades_quantity\": \"<number>\",\n      \"last\": \"<float>\",\n      \"bid\": \"<float>\",\n      \"ask\": \"<float>\",\n      \"date\": \"<string>\",\n      \"first\": \"<float>\",\n      \"is_frozen\": \"<boolean>\",\n      \"base_code\": \"<string>\",\n      \"base_id\": \"<string>\",\n      \"quote_id\": \"<string>\",\n      \"quote_code\": \"<string>\",\n      \"quote_volume\": \"<double>\"\n    }\n  ],\n  \"error_code\": null,\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T02:47:55.000Z",
+              "updatedAt": "2026-07-28T02:47:55.000Z",
+              "uid": "35240-699cb3f2-90e5-4c98-917f-1a2be7087c1d"
+            }
+          ],
+          "createdAt": "2026-07-28T02:47:55.000Z",
+          "updatedAt": "2026-07-28T02:47:55.000Z",
+          "uid": "35240-7a40cd7f-512d-4b95-b60a-f5c55129e596"
+        }
+      ],
+      "id": "ac035848-321b-4c88-b64b-58bd7f91bc1a",
+      "createdAt": "2026-07-28T02:47:55.000Z",
+      "updatedAt": "2026-07-28T02:47:55.000Z",
+      "uid": "35240-ac035848-321b-4c88-b64b-58bd7f91bc1a"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.ripiotrade.co/v4/"
+    }
+  ]
+}

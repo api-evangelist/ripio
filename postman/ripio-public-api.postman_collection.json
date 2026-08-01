@@ -1,0 +1,912 @@
+{
+  "info": {
+    "_postman_id": "f064b0b2-0f84-419e-9e90-64206db73da7",
+    "name": "Ripio Trade - API Documentation Book Public API",
+    "description": "Welcome to the Ripio Trade API documentation.\n\n### Version\nThis API is currently in the version 4.\n\nIf there is need for any big change, a new version will be launched and this version will be maintained for at least 3 months.\n\nIf you're still using the version 3, [access the old documentation](../v3) and check the [migration guide](#tag/V3-Endpoint-Migrations).\n\n### Important\nUse the `Market` endpoints for all trading operations. The `Public` endpoints have a delay (cache) of up to 30 seconds.\n\nAll successful requests will result in a 200 HTTP Status.\n\nAll requests returns data in JSON format (application/json) and have a default body:\n\n\n### Success\n```\n{\n  \"error_code\": null,\n  \"message\": null,\n  \"data\": { }\n}\n```\n\n### Error\n```\n{\n  \"error_code\": [Error code],\n  \"message\": \"Error description\",\n  \"data\": null\n}\n```\n\n\nEndpoints that have a date filter will return data for the last 6 months if no value is sent in the `start_date` parameter.\n\n### URL structure\nThe endpoints URL follow this pattern:\n\n`https://api.ripiotrade.co/{version}/{method}[/{parameter}][?parameter=value...]`\n\n `https://api.ripiotrade.co/v4/tickers/BTC_BRL`\n\n### Limits\n\nThe request limits are based on the user's operational limits.\n\nThere are two types of limit, one of requests per second and another of daily requests. Both of them should be taken in consideration and the requests should be balanced so the daily limit isn't reached.\n\nUsers **without approved documentation** have 1 request per second or 86.400 daily requests.\n\nUsers **with approved documentation** have 3.5 requests per second or 302.400 daily requests.\n\nThese limits can be increased, and the support team should be contacted for that.\n\nWhen the requests per second limit is reached, the response HTTP Status returned is 429 and the response body is:\n```\n{\n  \"message\": \"Too many requests\"\n}\n```\n\nWhen the daily requests limit is reached, the response HTTP Status returned is 429 and the response body is:\n```\n{\n  \"message\": \"Limit Exceeded\"\n}\n```\n\nContact Support:\n Name: Jorn Filho",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:47:54.000Z",
+    "updatedAt": "2026-07-28T02:47:54.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-f064b0b2-0f84-419e-9e90-64206db73da7"
+  },
+  "item": [
+    {
+      "name": "public",
+      "item": [
+        {
+          "name": "tickers",
+          "item": [
+            {
+              "name": "{pair}",
+              "item": [
+                {
+                  "name": "Ticker By Pair",
+                  "id": "d5bae62a-d4a6-44ad-a275-1ce62f8010c7",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/public/tickers/:pair",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "public",
+                        "tickers",
+                        ":pair"
+                      ],
+                      "variable": [
+                        {
+                          "id": "9ae56aac-2d04-4b40-83a7-addbe1844a6c",
+                          "key": "pair",
+                          "value": "<string>",
+                          "description": "(Required) Currency pair code"
+                        }
+                      ]
+                    },
+                    "description": "Returns a 24 hour window statistics for a given pair."
+                  },
+                  "response": [
+                    {
+                      "id": "b95b868b-e28c-44ef-9b08-32417e5e4a80",
+                      "name": "Ok",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/public/tickers/:pair",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "public",
+                            "tickers",
+                            ":pair"
+                          ],
+                          "variable": [
+                            {
+                              "key": "pair"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"high\": \"<float>\",\n    \"low\": \"<float>\",\n    \"volume\": \"<float>\",\n    \"trades_quantity\": \"<number>\",\n    \"last\": \"<float>\",\n    \"bid\": \"<float>\",\n    \"ask\": \"<float>\",\n    \"date\": \"<string>\",\n    \"first\": \"<float>\",\n    \"is_frozen\": \"<boolean>\",\n    \"base_code\": \"<string>\",\n    \"base_id\": \"<string>\",\n    \"quote_id\": \"<string>\",\n    \"quote_code\": \"<string>\",\n    \"quote_volume\": \"<double>\",\n    \"price_change_percent_24h\": \"<string>\"\n  },\n  \"error_code\": null,\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T02:47:54.000Z",
+                      "updatedAt": "2026-07-28T02:47:54.000Z",
+                      "uid": "35240-b95b868b-e28c-44ef-9b08-32417e5e4a80"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:47:54.000Z",
+                  "updatedAt": "2026-07-28T02:47:54.000Z",
+                  "uid": "35240-d5bae62a-d4a6-44ad-a275-1ce62f8010c7"
+                }
+              ],
+              "id": "13aa2ece-4d85-4b24-893a-d4ac81f62386",
+              "createdAt": "2026-07-28T02:47:54.000Z",
+              "updatedAt": "2026-07-28T02:47:54.000Z",
+              "uid": "35240-13aa2ece-4d85-4b24-893a-d4ac81f62386"
+            },
+            {
+              "name": "Tickers",
+              "id": "a2d4d1ac-70dc-4cdf-abd4-dfb96d48e9bf",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/public/tickers",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "public",
+                    "tickers"
+                  ]
+                },
+                "description": "Returns a 24 hour window statistics for all pairs."
+              },
+              "response": [
+                {
+                  "id": "03b7012a-a6fa-476b-9608-41dde228ec73",
+                  "name": "Ok",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/public/tickers",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "public",
+                        "tickers"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": [\n    {\n      \"pair\": \"<string>\",\n      \"price_change_percent_24h\": \"<string>\",\n      \"high\": \"<float>\",\n      \"low\": \"<float>\",\n      \"volume\": \"<float>\",\n      \"trades_quantity\": \"<number>\",\n      \"last\": \"<float>\",\n      \"bid\": \"<float>\",\n      \"ask\": \"<float>\",\n      \"date\": \"<string>\",\n      \"first\": \"<float>\",\n      \"is_frozen\": \"<boolean>\",\n      \"base_code\": \"<string>\",\n      \"base_id\": \"<string>\",\n      \"quote_id\": \"<string>\",\n      \"quote_code\": \"<string>\",\n      \"quote_volume\": \"<double>\"\n    },\n    {\n      \"pair\": \"<string>\",\n      \"price_change_percent_24h\": \"<string>\",\n      \"high\": \"<float>\",\n      \"low\": \"<float>\",\n      \"volume\": \"<float>\",\n      \"trades_quantity\": \"<number>\",\n      \"last\": \"<float>\",\n      \"bid\": \"<float>\",\n      \"ask\": \"<float>\",\n      \"date\": \"<string>\",\n      \"first\": \"<float>\",\n      \"is_frozen\": \"<boolean>\",\n      \"base_code\": \"<string>\",\n      \"base_id\": \"<string>\",\n      \"quote_id\": \"<string>\",\n      \"quote_code\": \"<string>\",\n      \"quote_volume\": \"<double>\"\n    }\n  ],\n  \"error_code\": null,\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T02:47:54.000Z",
+                  "updatedAt": "2026-07-28T02:47:54.000Z",
+                  "uid": "35240-03b7012a-a6fa-476b-9608-41dde228ec73"
+                }
+              ],
+              "createdAt": "2026-07-28T02:47:54.000Z",
+              "updatedAt": "2026-07-28T02:47:54.000Z",
+              "uid": "35240-a2d4d1ac-70dc-4cdf-abd4-dfb96d48e9bf"
+            }
+          ],
+          "id": "e9f6dda2-18c4-4958-a9a0-b8970a21b77e",
+          "createdAt": "2026-07-28T02:47:54.000Z",
+          "updatedAt": "2026-07-28T02:47:54.000Z",
+          "uid": "35240-e9f6dda2-18c4-4958-a9a0-b8970a21b77e"
+        },
+        {
+          "name": "orders",
+          "item": [
+            {
+              "name": "level-3",
+              "item": [
+                {
+                  "name": "Orderbook Level 3",
+                  "id": "6de2378f-db82-4036-9bda-681a6ac341af",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/public/orders/level-3?pair=<string>&limit=100",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "public",
+                        "orders",
+                        "level-3"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Currency pair code",
+                          "key": "pair",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "limit",
+                          "value": "100"
+                        }
+                      ]
+                    },
+                    "description": "Returns the level 3 orderbook."
+                  },
+                  "response": [
+                    {
+                      "id": "65e07fce-38d4-4d48-90fb-c3d8ef4d8e80",
+                      "name": "Ok",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/public/orders/level-3?pair=<string>&limit=100",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "public",
+                            "orders",
+                            "level-3"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Currency pair code",
+                              "key": "pair",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "limit",
+                              "value": "100"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"timestamp\": \"<double>\",\n    \"asks\": [\n      {\n        \"amount\": \"<float>\",\n        \"id\": \"<string>\",\n        \"price\": \"<float>\"\n      },\n      {\n        \"amount\": \"<float>\",\n        \"id\": \"<string>\",\n        \"price\": \"<float>\"\n      }\n    ],\n    \"bids\": [\n      {\n        \"amount\": \"<float>\",\n        \"id\": \"<string>\",\n        \"price\": \"<float>\"\n      },\n      {\n        \"amount\": \"<float>\",\n        \"id\": \"<string>\",\n        \"price\": \"<float>\"\n      }\n    ],\n    \"hash\": \"<string>\"\n  },\n  \"error_code\": null,\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T02:47:54.000Z",
+                      "updatedAt": "2026-07-28T02:47:54.000Z",
+                      "uid": "35240-65e07fce-38d4-4d48-90fb-c3d8ef4d8e80"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:47:54.000Z",
+                  "updatedAt": "2026-07-28T02:47:54.000Z",
+                  "uid": "35240-6de2378f-db82-4036-9bda-681a6ac341af"
+                }
+              ],
+              "id": "ee3fbd54-341e-49df-9e6f-d7e12ba5bdc0",
+              "createdAt": "2026-07-28T02:47:54.000Z",
+              "updatedAt": "2026-07-28T02:47:54.000Z",
+              "uid": "35240-ee3fbd54-341e-49df-9e6f-d7e12ba5bdc0"
+            },
+            {
+              "name": "level-2",
+              "item": [
+                {
+                  "name": "Orderbook Level 2",
+                  "id": "6b4cf0f9-5c2e-424a-8bf2-2128816acaac",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/public/orders/level-2?pair=<string>&limit=100",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "public",
+                        "orders",
+                        "level-2"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Currency pair code",
+                          "key": "pair",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "limit",
+                          "value": "100"
+                        }
+                      ]
+                    },
+                    "description": "Returns the level 2 orderbook."
+                  },
+                  "response": [
+                    {
+                      "id": "3b2de3a9-4683-43aa-98c4-91dd232c6596",
+                      "name": "Ok",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/public/orders/level-2?pair=<string>&limit=100",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "public",
+                            "orders",
+                            "level-2"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Currency pair code",
+                              "key": "pair",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "limit",
+                              "value": "100"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": {\n    \"timestamp\": \"<double>\",\n    \"asks\": [\n      {\n        \"amount\": \"<float>\",\n        \"price\": \"<float>\"\n      },\n      {\n        \"amount\": \"<float>\",\n        \"price\": \"<float>\"\n      }\n    ],\n    \"bids\": [\n      {\n        \"amount\": \"<float>\",\n        \"price\": \"<float>\"\n      },\n      {\n        \"amount\": \"<float>\",\n        \"price\": \"<float>\"\n      }\n    ],\n    \"hash\": \"<string>\"\n  },\n  \"error_code\": null,\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T02:47:54.000Z",
+                      "updatedAt": "2026-07-28T02:47:54.000Z",
+                      "uid": "35240-3b2de3a9-4683-43aa-98c4-91dd232c6596"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:47:54.000Z",
+                  "updatedAt": "2026-07-28T02:47:54.000Z",
+                  "uid": "35240-6b4cf0f9-5c2e-424a-8bf2-2128816acaac"
+                }
+              ],
+              "id": "c2187c27-5ad9-44b3-ba85-f0a7a7c505f8",
+              "createdAt": "2026-07-28T02:47:54.000Z",
+              "updatedAt": "2026-07-28T02:47:54.000Z",
+              "uid": "35240-c2187c27-5ad9-44b3-ba85-f0a7a7c505f8"
+            }
+          ],
+          "id": "c740e737-83cc-4860-8a17-c66090aaf3c1",
+          "createdAt": "2026-07-28T02:47:54.000Z",
+          "updatedAt": "2026-07-28T02:47:54.000Z",
+          "uid": "35240-c740e737-83cc-4860-8a17-c66090aaf3c1"
+        },
+        {
+          "name": "trades",
+          "item": [
+            {
+              "name": "Trades",
+              "id": "9f529474-e911-404d-a813-4eadb43ffd55",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/public/trades?pair=<string>&start_time=[6 months ago]&end_time=[Current datetime]&page_size=200&current_page=1&c=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "public",
+                    "trades"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Currency pair code",
+                      "key": "pair",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start_time",
+                      "value": "[6 months ago]"
+                    },
+                    {
+                      "key": "end_time",
+                      "value": "[Current datetime]"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "200"
+                    },
+                    {
+                      "key": "current_page",
+                      "value": "1"
+                    },
+                    {
+                      "description": "The `c` parameter is the cursor you should use to fetch the next page of results",
+                      "key": "c",
+                      "value": "<string>"
+                    }
+                  ]
+                },
+                "description": "Lists the trades history based on the filtering criteria.\n\n**Attention:** Due to performance concerns, this endpoint now uses cursor-based pagination. The pagination object currently included in the response is now a placeholder and will be entirely removed as of 2026-06-01. The parameter current_page is also a placeholder and will be removed at the same time. Please update your integration accordingly and refer to the documentation for the correct pagination handling."
+              },
+              "response": [
+                {
+                  "id": "252f4d47-d093-479a-8bcf-c2e99008590f",
+                  "name": "Ok",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/public/trades?pair=<string>&start_time=[6 months ago]&end_time=[Current datetime]&page_size=200&current_page=1&c=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "public",
+                        "trades"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Currency pair code",
+                          "key": "pair",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "start_time",
+                          "value": "[6 months ago]"
+                        },
+                        {
+                          "key": "end_time",
+                          "value": "[Current datetime]"
+                        },
+                        {
+                          "key": "page_size",
+                          "value": "200"
+                        },
+                        {
+                          "key": "current_page",
+                          "value": "1"
+                        },
+                        {
+                          "description": "The `c` parameter is the cursor you should use to fetch the next page of results",
+                          "key": "c",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": {\n    \"trades\": [\n      {\n        \"amount\": \"<double>\",\n        \"date\": \"<string>\",\n        \"id\": \"<string>\",\n        \"maker_order_id\": \"<string>\",\n        \"maker_side\": \"<string>\",\n        \"maker_type\": \"<string>\",\n        \"price\": \"<double>\",\n        \"pair\": \"<string>\",\n        \"taker_order_id\": \"<string>\",\n        \"taker_side\": \"<string>\",\n        \"taker_type\": \"<string>\",\n        \"timestamp\": \"<double>\",\n        \"total_value\": \"<float>\"\n      },\n      {\n        \"amount\": \"<double>\",\n        \"date\": \"<string>\",\n        \"id\": \"<string>\",\n        \"maker_order_id\": \"<string>\",\n        \"maker_side\": \"<string>\",\n        \"maker_type\": \"<string>\",\n        \"price\": \"<double>\",\n        \"pair\": \"<string>\",\n        \"taker_order_id\": \"<string>\",\n        \"taker_side\": \"<string>\",\n        \"taker_type\": \"<string>\",\n        \"timestamp\": \"<double>\",\n        \"total_value\": \"<float>\"\n      }\n    ],\n    \"pagination\": {\n      \"current_page\": \"<double>\",\n      \"page_size\": \"<double>\",\n      \"registers_count\": \"<double>\",\n      \"total_pages\": \"<double>\"\n    },\n    \"nc\": \"<string>\",\n    \"pc\": \"<string>\"\n  },\n  \"error_code\": null,\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T02:47:54.000Z",
+                  "updatedAt": "2026-07-28T02:47:54.000Z",
+                  "uid": "35240-252f4d47-d093-479a-8bcf-c2e99008590f"
+                }
+              ],
+              "createdAt": "2026-07-28T02:47:54.000Z",
+              "updatedAt": "2026-07-28T02:47:54.000Z",
+              "uid": "35240-9f529474-e911-404d-a813-4eadb43ffd55"
+            }
+          ],
+          "id": "d335f054-5678-42d2-8b12-6308968cf3c1",
+          "createdAt": "2026-07-28T02:47:54.000Z",
+          "updatedAt": "2026-07-28T02:47:54.000Z",
+          "uid": "35240-d335f054-5678-42d2-8b12-6308968cf3c1"
+        },
+        {
+          "name": "currencies",
+          "item": [
+            {
+              "name": "Currencies",
+              "id": "812aa432-d961-4b51-8624-868712b36b3c",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/public/currencies?currency_code=<string>&countries=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "public",
+                    "currencies"
+                  ],
+                  "query": [
+                    {
+                      "description": "Currency code",
+                      "key": "currency_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "countries",
+                      "value": "<string>"
+                    }
+                  ]
+                },
+                "description": "Lists the active currencies available in the platform."
+              },
+              "response": [
+                {
+                  "id": "812dfb78-2531-467b-b5fc-e4db2bc7ae97",
+                  "name": "Ok",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/public/currencies?currency_code=<string>&countries=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "public",
+                        "currencies"
+                      ],
+                      "query": [
+                        {
+                          "description": "Currency code",
+                          "key": "currency_code",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "countries",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": [\n    {\n      \"active\": \"<boolean>\",\n      \"can_deposit\": \"<boolean>\",\n      \"can_withdraw\": \"<boolean>\",\n      \"code\": \"<string>\",\n      \"id\": \"<string>\",\n      \"min_withdraw_amount\": \"<float>\",\n      \"name\": \"<string>\",\n      \"needs_block_id_for_tx_sync\": \"<boolean>\",\n      \"precision\": \"<number>\",\n      \"logo\": {\n        \"svg\": \"<string>\"\n      },\n      \"countries\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"networks\": [\n        {\n          \"code\": \"<string>\",\n          \"memo\": {\n            \"deposit\": \"<boolean>\",\n            \"withdrawal\": \"<boolean>\"\n          },\n          \"tag\": {\n            \"deposit\": \"<boolean>\",\n            \"withdrawal\": \"<boolean>\"\n          }\n        },\n        {\n          \"code\": \"<string>\",\n          \"memo\": {\n            \"deposit\": \"<boolean>\",\n            \"withdrawal\": \"<boolean>\"\n          },\n          \"tag\": {\n            \"deposit\": \"<boolean>\",\n            \"withdrawal\": \"<boolean>\"\n          }\n        }\n      ]\n    },\n    {\n      \"active\": \"<boolean>\",\n      \"can_deposit\": \"<boolean>\",\n      \"can_withdraw\": \"<boolean>\",\n      \"code\": \"<string>\",\n      \"id\": \"<string>\",\n      \"min_withdraw_amount\": \"<float>\",\n      \"name\": \"<string>\",\n      \"needs_block_id_for_tx_sync\": \"<boolean>\",\n      \"precision\": \"<number>\",\n      \"logo\": {\n        \"svg\": \"<string>\"\n      },\n      \"countries\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"networks\": [\n        {\n          \"code\": \"<string>\",\n          \"memo\": {\n            \"deposit\": \"<boolean>\",\n            \"withdrawal\": \"<boolean>\"\n          },\n          \"tag\": {\n            \"deposit\": \"<boolean>\",\n            \"withdrawal\": \"<boolean>\"\n          }\n        },\n        {\n          \"code\": \"<string>\",\n          \"memo\": {\n            \"deposit\": \"<boolean>\",\n            \"withdrawal\": \"<boolean>\"\n          },\n          \"tag\": {\n            \"deposit\": \"<boolean>\",\n            \"withdrawal\": \"<boolean>\"\n          }\n        }\n      ]\n    }\n  ],\n  \"error_code\": null,\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T02:47:54.000Z",
+                  "updatedAt": "2026-07-28T02:47:54.000Z",
+                  "uid": "35240-812dfb78-2531-467b-b5fc-e4db2bc7ae97"
+                }
+              ],
+              "createdAt": "2026-07-28T02:47:54.000Z",
+              "updatedAt": "2026-07-28T02:47:54.000Z",
+              "uid": "35240-812aa432-d961-4b51-8624-868712b36b3c"
+            }
+          ],
+          "id": "473292d5-e809-48a8-9599-97ad66adc103",
+          "createdAt": "2026-07-28T02:47:54.000Z",
+          "updatedAt": "2026-07-28T02:47:54.000Z",
+          "uid": "35240-473292d5-e809-48a8-9599-97ad66adc103"
+        },
+        {
+          "name": "pairs",
+          "item": [
+            {
+              "name": "Pairs",
+              "id": "d99c0f71-5d7a-4666-89d2-1b2e7cc6c552",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/public/pairs?pair=<string>&countries=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "public",
+                    "pairs"
+                  ],
+                  "query": [
+                    {
+                      "description": "Currency pair code",
+                      "key": "pair",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "countries",
+                      "value": "<string>"
+                    }
+                  ]
+                },
+                "description": "Lists the active currency pairs available in the platform."
+              },
+              "response": [
+                {
+                  "id": "67c46df2-27e2-4052-a96a-ccaed2fa53c1",
+                  "name": "Ok",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/public/pairs?pair=<string>&countries=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "public",
+                        "pairs"
+                      ],
+                      "query": [
+                        {
+                          "description": "Currency pair code",
+                          "key": "pair",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "countries",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": [\n    {\n      \"amount_tick\": \"<float>\",\n      \"base\": \"<string>\",\n      \"base_name\": \"<string>\",\n      \"quote\": \"<string>\",\n      \"quote_name\": \"<string>\",\n      \"symbol\": \"<string>\",\n      \"enabled\": \"<boolean>\",\n      \"min_amount\": \"<float>\",\n      \"price_tick\": \"<float>\",\n      \"min_value\": \"<float>\",\n      \"countries\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"max_price_variation\": \"<number>\"\n    },\n    {\n      \"amount_tick\": \"<float>\",\n      \"base\": \"<string>\",\n      \"base_name\": \"<string>\",\n      \"quote\": \"<string>\",\n      \"quote_name\": \"<string>\",\n      \"symbol\": \"<string>\",\n      \"enabled\": \"<boolean>\",\n      \"min_amount\": \"<float>\",\n      \"price_tick\": \"<float>\",\n      \"min_value\": \"<float>\",\n      \"countries\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"max_price_variation\": \"<number>\"\n    }\n  ],\n  \"error_code\": null,\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T02:47:54.000Z",
+                  "updatedAt": "2026-07-28T02:47:54.000Z",
+                  "uid": "35240-67c46df2-27e2-4052-a96a-ccaed2fa53c1"
+                }
+              ],
+              "createdAt": "2026-07-28T02:47:54.000Z",
+              "updatedAt": "2026-07-28T02:47:54.000Z",
+              "uid": "35240-d99c0f71-5d7a-4666-89d2-1b2e7cc6c552"
+            }
+          ],
+          "id": "aaa91656-2851-46c0-8873-0c3302ac7b77",
+          "createdAt": "2026-07-28T02:47:54.000Z",
+          "updatedAt": "2026-07-28T02:47:54.000Z",
+          "uid": "35240-aaa91656-2851-46c0-8873-0c3302ac7b77"
+        },
+        {
+          "name": "countries",
+          "item": [
+            {
+              "name": "Countries",
+              "id": "f473b9ae-f77e-4f0b-be2c-b37ed58d8601",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/public/countries",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "public",
+                    "countries"
+                  ]
+                },
+                "description": "Lists the active countries available in the platform."
+              },
+              "response": [
+                {
+                  "id": "1774accd-8cac-4258-abbe-e599b5a59fc0",
+                  "name": "Ok",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/public/countries",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "public",
+                        "countries"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": [\n    {\n      \"name\": \"<string>\",\n      \"code\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"code\": \"<string>\"\n    }\n  ],\n  \"error_code\": null,\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T02:47:54.000Z",
+                  "updatedAt": "2026-07-28T02:47:54.000Z",
+                  "uid": "35240-1774accd-8cac-4258-abbe-e599b5a59fc0"
+                }
+              ],
+              "createdAt": "2026-07-28T02:47:54.000Z",
+              "updatedAt": "2026-07-28T02:47:54.000Z",
+              "uid": "35240-f473b9ae-f77e-4f0b-be2c-b37ed58d8601"
+            }
+          ],
+          "id": "fc2cdbea-baf2-4b1c-a160-47d4430500d7",
+          "createdAt": "2026-07-28T02:47:54.000Z",
+          "updatedAt": "2026-07-28T02:47:54.000Z",
+          "uid": "35240-fc2cdbea-baf2-4b1c-a160-47d4430500d7"
+        },
+        {
+          "name": "server-time",
+          "item": [
+            {
+              "name": "Server Time",
+              "id": "59ddf7f6-4310-447e-a55a-ed90d7ede4d3",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/public/server-time",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "public",
+                    "server-time"
+                  ]
+                },
+                "description": "Returns the server time in miliseconds."
+              },
+              "response": [
+                {
+                  "id": "20204d6d-2502-47e2-8ed3-de13d63ba660",
+                  "name": "Ok",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/public/server-time",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "public",
+                        "server-time"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\",\n  \"data\": {\n    \"timestamp\": \"<double>\"\n  }\n}",
+                  "createdAt": "2026-07-28T02:47:54.000Z",
+                  "updatedAt": "2026-07-28T02:47:54.000Z",
+                  "uid": "35240-20204d6d-2502-47e2-8ed3-de13d63ba660"
+                }
+              ],
+              "createdAt": "2026-07-28T02:47:54.000Z",
+              "updatedAt": "2026-07-28T02:47:54.000Z",
+              "uid": "35240-59ddf7f6-4310-447e-a55a-ed90d7ede4d3"
+            }
+          ],
+          "id": "6e6b2b17-77df-4cef-8789-8d8ee7222f87",
+          "createdAt": "2026-07-28T02:47:54.000Z",
+          "updatedAt": "2026-07-28T02:47:54.000Z",
+          "uid": "35240-6e6b2b17-77df-4cef-8789-8d8ee7222f87"
+        }
+      ],
+      "id": "3fffa934-0dca-4600-b702-5df6654b5709",
+      "createdAt": "2026-07-28T02:47:54.000Z",
+      "updatedAt": "2026-07-28T02:47:54.000Z",
+      "uid": "35240-3fffa934-0dca-4600-b702-5df6654b5709"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.ripiotrade.co/v4/"
+    }
+  ]
+}

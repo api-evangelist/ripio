@@ -1,0 +1,32 @@
+generated: '2026-07-21'
+method: searched
+source: https://apidocs.ripiotrade.co/ (Limits section)
+scope: per-user (based on the user's operational limits)
+signal:
+  http_status: 429
+  responses:
+    - condition: per-second limit exceeded
+      body: '{"message": "Too many requests"}'
+    - condition: daily limit exceeded
+      body: '{"message": "Limit Exceeded"}'
+  error_code: 42900
+tiers:
+  - name: Unapproved users
+    per_second: 1
+    per_day: 86400
+  - name: Approved users
+    per_second: 3.5
+    per_day: 302400
+rate_limits:
+  - name: Unapproved requests-per-second
+    limit_count: 1
+    interval: second
+  - name: Unapproved requests-per-day
+    limit_count: 86400
+    interval: day
+  - name: Approved requests-per-second
+    limit_count: 3.5
+    interval: second
+  - name: Approved requests-per-day
+    limit_count: 302400
+    interval: day

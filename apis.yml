@@ -1,27 +1,284 @@
 aid: ripio
+accessModel:
+  pricing: unknown
+  onboarding: unknown
+  trial: false
+  try_now: false
+  public: false
+  label: Unknown
+  confidence: low
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/ripio.png
 name: Ripio
-description: 'Ripio is a company surfaced as a portfolio company of pantera-capital and added to the API
-  Evangelist network as a stub for enrichment. Sector: crypto. This profile is a lead awaiting the enrichment
-  pipeline.'
+description: >-
+  Ripio is a Latin American cryptocurrency exchange founded in 2013, offering crypto
+  trading, stablecoins, DeFi products, a Visa crypto card, and B2B infrastructure and
+  liquidity across Brazil, Argentina, Chile, Uruguay, Colombia, Mexico, Peru and Spain.
+  Its developer-facing product is the Ripio Trade API (v4) — a REST and WebSocket
+  trading API covering market data, order management, balances, statements, cryptocurrency
+  deposits and withdrawals, and real-time streaming. Authentication uses an API Token plus
+  HMAC-SHA256 request signing. The platform is SOC 2 Type II certified with a HackerOne bug
+  bounty. Backed by Pantera Capital.
 url: https://raw.githubusercontent.com/api-evangelist/ripio/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
 x-backed-by:
 - pantera-capital
-x-tier: stub
-x-tier-reason: portfolio-lead
+x-tier: profiled
+x-tier-reason: enriched-from-published-api
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-21'
 tags:
 - Company
 - Crypto
-apis: []
+- Cryptocurrency
+- Exchange
+- Trading
+- Blockchain
+- Latin America
+- Bitcoin
+- Stablecoins
+- API
+apis:
+- aid: ripio:ripio-book-api
+  name: Ripio Book API
+  description: The Book API from Ripio — 2 operation(s) for book.
+  humanURL: https://apidocs.ripiotrade.co/
+  baseURL: https://api.ripiotrade.co/v4/
+  tags:
+  - Book
+  properties:
+  - type: OpenAPI
+    url: openapi/ripio-book-api-openapi.yml
+  - type: Documentation
+    url: https://apidocs.ripiotrade.co/
+  - type: APIReference
+    url: https://apidocs.ripiotrade.co/
+- aid: ripio:ripio-cryptocurrency-deposits-api
+  name: Ripio Cryptocurrency Deposits API
+  description: The Cryptocurrency Deposits API from Ripio — 2 operation(s) for cryptocurrency deposits.
+  humanURL: https://apidocs.ripiotrade.co/
+  baseURL: https://api.ripiotrade.co/v4/
+  tags:
+  - Cryptocurrency Deposits
+  properties:
+  - type: OpenAPI
+    url: openapi/ripio-cryptocurrency-deposits-api-openapi.yml
+  - type: Documentation
+    url: https://apidocs.ripiotrade.co/
+  - type: APIReference
+    url: https://apidocs.ripiotrade.co/
+- aid: ripio:ripio-cryptocurrency-withdrawals-api
+  name: Ripio Cryptocurrency Withdrawals API
+  description: >-
+    The Cryptocurrency Withdrawals API from Ripio — 3 operation(s) for cryptocurrency withdrawals.
+  humanURL: https://apidocs.ripiotrade.co/
+  baseURL: https://api.ripiotrade.co/v4/
+  tags:
+  - Cryptocurrency Withdrawals
+  properties:
+  - type: OpenAPI
+    url: openapi/ripio-cryptocurrency-withdrawals-api-openapi.yml
+  - type: Documentation
+    url: https://apidocs.ripiotrade.co/
+  - type: APIReference
+    url: https://apidocs.ripiotrade.co/
+- aid: ripio:ripio-general-endpoints-api
+  name: Ripio General endpoints API
+  description: The General endpoints API from Ripio — 3 operation(s) for general endpoints.
+  humanURL: https://apidocs.ripiotrade.co/
+  baseURL: https://api.ripiotrade.co/v4/
+  tags:
+  - General endpoints
+  properties:
+  - type: OpenAPI
+    url: openapi/ripio-general-endpoints-api-openapi.yml
+  - type: Documentation
+    url: https://apidocs.ripiotrade.co/
+  - type: APIReference
+    url: https://apidocs.ripiotrade.co/
+- aid: ripio:ripio-orders-api
+  name: Ripio Orders API
+  description: The Orders API from Ripio — 11 operation(s) for orders.
+  humanURL: https://apidocs.ripiotrade.co/
+  baseURL: https://api.ripiotrade.co/v4/
+  tags:
+  - Orders
+  properties:
+  - type: OpenAPI
+    url: openapi/ripio-orders-api-openapi.yml
+  - type: Documentation
+    url: https://apidocs.ripiotrade.co/
+  - type: APIReference
+    url: https://apidocs.ripiotrade.co/
+- aid: ripio:ripio-public-api
+  name: Ripio Public API
+  description: >-
+    The public endpoints have a reduced requests limit and a 30 seconds cache.
+
+
+    For increased limits, use the private endpoints.
+  humanURL: https://apidocs.ripiotrade.co/
+  baseURL: https://api.ripiotrade.co/v4/
+  tags:
+  - Public
+  properties:
+  - type: OpenAPI
+    url: openapi/ripio-public-api-openapi.yml
+  - type: Documentation
+    url: https://apidocs.ripiotrade.co/
+  - type: APIReference
+    url: https://apidocs.ripiotrade.co/
+- aid: ripio:ripio-ticker-api
+  name: Ripio Ticker API
+  description: The Ticker API from Ripio — 2 operation(s) for ticker.
+  humanURL: https://apidocs.ripiotrade.co/
+  baseURL: https://api.ripiotrade.co/v4/
+  tags:
+  - Ticker
+  properties:
+  - type: OpenAPI
+    url: openapi/ripio-ticker-api-openapi.yml
+  - type: Documentation
+    url: https://apidocs.ripiotrade.co/
+  - type: APIReference
+    url: https://apidocs.ripiotrade.co/
+- aid: ripio:ripio-ticket-api
+  name: Ripio Ticket API
+  description: The Ticket API from Ripio — 1 operation(s) for ticket.
+  humanURL: https://apidocs.ripiotrade.co/
+  baseURL: https://api.ripiotrade.co/v4/
+  tags:
+  - Ticket
+  properties:
+  - type: OpenAPI
+    url: openapi/ripio-ticket-api-openapi.yml
+  - type: Documentation
+    url: https://apidocs.ripiotrade.co/
+  - type: APIReference
+    url: https://apidocs.ripiotrade.co/
+- aid: ripio:ripio-transactions-api
+  name: Ripio Transactions API
+  description: The Transactions API from Ripio — 1 operation(s) for transactions.
+  humanURL: https://apidocs.ripiotrade.co/
+  baseURL: https://api.ripiotrade.co/v4/
+  tags:
+  - Transactions
+  properties:
+  - type: OpenAPI
+    url: openapi/ripio-transactions-api-openapi.yml
+  - type: Documentation
+    url: https://apidocs.ripiotrade.co/
+  - type: APIReference
+    url: https://apidocs.ripiotrade.co/
+- aid: ripio:ripio-user-api
+  name: Ripio User API
+  description: The User API from Ripio — 6 operation(s) for user.
+  humanURL: https://apidocs.ripiotrade.co/
+  baseURL: https://api.ripiotrade.co/v4/
+  tags:
+  - User
+  properties:
+  - type: OpenAPI
+    url: openapi/ripio-user-api-openapi.yml
+  - type: Documentation
+    url: https://apidocs.ripiotrade.co/
+  - type: APIReference
+    url: https://apidocs.ripiotrade.co/
+- aid: ripio:ripio-wallets-api
+  name: Ripio Wallets API
+  description: API to check addresses of wallets.
+  humanURL: https://apidocs.ripiotrade.co/
+  baseURL: https://api.ripiotrade.co/v4/
+  tags:
+  - Wallets
+  properties:
+  - type: OpenAPI
+    url: openapi/ripio-wallets-api-openapi.yml
+  - type: Documentation
+    url: https://apidocs.ripiotrade.co/
+  - type: APIReference
+    url: https://apidocs.ripiotrade.co/
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: PostmanWorkspace
+  url: https://www.postman.com/kinlaneapi/ripio/overview
 - type: Website
   url: https://www.ripio.com/ar/
+- type: DeveloperPortal
+  url: https://apidocs.ripiotrade.co/
+- type: Documentation
+  url: https://apidocs.ripiotrade.co/
+- type: APIReference
+  url: https://apidocs.ripiotrade.co/
+- type: GettingStarted
+  url: https://trade.ripio.com/market/api/token
+- type: Support
+  url: https://help-ar.ripio.com/
+- type: GitHubOrganization
+  url: https://github.com/ripio
+- type: StatusPage
+  url: https://status.ripio.com/
+- type: SignUp
+  url: https://auth.ripio.com/#/register
+- type: TermsOfService
+  url: https://terms.ripio.com/
+- type: PrivacyPolicy
+  url: https://terms.ripio.com/
+- type: Authentication
+  url: authentication/ripio-authentication.yml
+- type: DomainSecurity
+  url: security/ripio-domain-security.yml
+- type: AgenticAccess
+  url: agentic-access/ripio-agentic-access.yml
+- type: Lifecycle
+  url: lifecycle/ripio-lifecycle.yml
+- type: Deprecation
+  url: https://apidocs.ripiotrade.co/#tag/V3-Endpoint-Migrations
+- type: Conventions
+  url: conventions/ripio-conventions.yml
+- type: Idempotency
+  url: conventions/ripio-conventions.yml
+- type: ErrorCatalog
+  url: errors/ripio-error-codes.yml
+- type: RateLimits
+  url: rate-limits/ripio-rate-limits.yml
+- type: Webhooks
+  url: asyncapi/ripio-trade-webhooks.yml
+- type: DataModel
+  url: data-model/ripio-data-model.yml
+- type: MCPServer
+  url: mcp/ripio-mcp.yml
+- type: Packages
+  url: packages/ripio-packages.yml
+- type: SDKs
+  url: packages/ripio-packages.yml
+- type: Conformance
+  url: conformance/ripio-conformance.yml
+- type: Compliance
+  url: https://www.ripio.com/es/seguridad
+- type: VulnerabilityDisclosure
+  url: security/ripio-vulnerability-disclosure.yml
+- type: Security
+  url: https://github.com/ripio/security
+- type: TrustCenter
+  url: security/ripio-trust-center.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: LLMsTxt
+  url: llms/ripio-llms.txt
+- type: Overlay
+  url: overlays/ripio-trade-overlay.yaml
+x-enrichment:
+  date: '2026-07-21'
+  status: enriched
+  artifacts_added: 19
+  pass: local-v1

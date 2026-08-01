@@ -1,0 +1,30 @@
+generated: '2026-07-21'
+method: searched
+source: https://github.com/ripio
+packages:
+  - language: python
+    registry: github
+    name: ripio-client-python
+    url: https://github.com/ripio/ripio-client-python
+    install: pip install git+https://github.com/ripio/ripio-client-python
+    official: true
+    note: First-party Python client (pyproject.toml, `ripio` package). Not published to PyPI.
+  - language: javascript
+    registry: github
+    name: sdkjs
+    url: https://github.com/ripio/sdkjs
+    install: (GitHub source)
+    official: true
+    archived: true
+    note: First-party TypeScript SDK (archived).
+  - language: cpp
+    registry: github
+    name: trade (examples)
+    url: https://github.com/ripio/trade
+    official: true
+    note: First-party C++ examples for the Ripio Trade API (homepage apidocs.ripiotrade.co).
+third_party:
+  - language: multi
+    name: CCXT
+    url: https://github.com/ccxt/ccxt
+    note: Ripio is a supported exchange in the community CCXT library.

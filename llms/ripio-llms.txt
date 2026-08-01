@@ -1,0 +1,27 @@
+# Ripio Trade
+
+> Ripio is a Latin American cryptocurrency exchange (since 2013) offering crypto trading, stablecoins, DeFi products, a Visa card, and B2B infrastructure across Brazil, Argentina, Chile, Uruguay, Colombia, Mexico, Peru and Spain. The Ripio Trade API (v4) is a REST + WebSocket trading API for market data, orders, balances, deposits and cryptocurrency withdrawals.
+
+## APIs
+- [Ripio Trade API v4 docs](https://apidocs.ripiotrade.co/): REST + WebSocket trading API. Base URL https://api.ripiotrade.co/v4/.
+- [Create API credentials](https://trade.ripio.com/market/api/token): API Token + Secret Key for HMAC-SHA256 signing.
+
+## Specs
+- [OpenAPI 3.0.0 (harvested)](openapi/ripio-trade-openapi.yml): 46 operations, 204 schemas, apiToken header auth.
+- [Webhooks / WebSocket surface](asyncapi/ripio-trade-webhooks.yml): market-data + user event stream and wss://ws-api.ripio.com order API.
+
+## Artifacts
+- [Authentication](authentication/ripio-authentication.yml): API Token + HMAC-SHA256 request signing.
+- [Conventions](conventions/ripio-conventions.yml): idempotency via external_id, cursor pagination, error envelope, uri-path versioning.
+- [Error codes](errors/ripio-error-codes.yml): numeric error_code registry (40000–50003, 503).
+- [Rate limits](rate-limits/ripio-rate-limits.yml): 1 req/s (86,400/day) unapproved; 3.5 req/s (302,400/day) approved.
+- [Lifecycle](lifecycle/ripio-lifecycle.yml): v4 current, v3 maintained ≥3 months, status.ripio.com.
+- [Data model](data-model/ripio-data-model.yml): Pair, Order, Trade, Balance, Deposit, Withdrawal, Wallet.
+- [Conformance & compliance](conformance/ripio-conformance.yml): SOC 2 Type II (B2B).
+
+## Docs
+- [Developer docs](https://apidocs.ripiotrade.co/)
+- [Status page](https://status.ripio.com/)
+- [Help center](https://help.ripio.com/)
+- [Security](https://www.ripio.com/es/seguridad): SOC 2 Type II, HackerOne bug bounty.
+- [GitHub org](https://github.com/ripio)

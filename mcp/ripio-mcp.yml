@@ -1,0 +1,50 @@
+generated: '2026-07-21'
+method: derived
+status: candidate
+source: openapi/ripio-trade-openapi.yml
+note: >-
+  No official hosted MCP server found for Ripio Trade. Candidate tool list derived
+  from the published OpenAPI operations (one tool per operationId); status candidate.
+server:
+  name: ripio-trade
+  transport: http
+tools:
+  - name: get_pairs
+    description: List enabled trading pairs.
+    source_operation: openapi/ripio-trade-openapi.yml#GetPairs
+  - name: get_ticker
+    description: Get ticker for all pairs.
+    source_operation: openapi/ripio-trade-openapi.yml#GetTicker
+  - name: get_ticker_by_pair
+    description: Get ticker for a specific pair.
+    source_operation: openapi/ripio-trade-openapi.yml#GetTickerByPair
+  - name: get_book_level_2
+    description: Get level-2 order book for a pair.
+    source_operation: openapi/ripio-trade-openapi.yml#GetBookOrdersLevel2
+  - name: estimate_price
+    description: Estimate execution price for a pair.
+    source_operation: openapi/ripio-trade-openapi.yml#EstimatePrice
+  - name: list_balances
+    description: List authenticated user balances.
+    source_operation: openapi/ripio-trade-openapi.yml#ListBalances
+  - name: create_order
+    description: Create a buy/sell order.
+    source_operation: openapi/ripio-trade-openapi.yml#CreateOrder
+  - name: cancel_order
+    description: Cancel an order.
+    source_operation: openapi/ripio-trade-openapi.yml#CancelOrder
+  - name: get_order_by_external_id
+    description: Fetch an order by client-supplied external id.
+    source_operation: openapi/ripio-trade-openapi.yml#GetOrderByExternalId
+  - name: get_user_open_orders
+    description: List the user's open orders.
+    source_operation: openapi/ripio-trade-openapi.yml#GetUserOpenOrders
+  - name: create_withdrawal
+    description: Create a cryptocurrency withdrawal.
+    source_operation: openapi/ripio-trade-openapi.yml#CreateWithdrawal
+  - name: estimate_withdrawal_fee
+    description: Estimate withdrawal fee for a currency.
+    source_operation: openapi/ripio-trade-openapi.yml#GetWithdrawalFee
+  - name: get_user_wallets
+    description: List the user's crypto wallets.
+    source_operation: openapi/ripio-trade-openapi.yml#GetUserWallets

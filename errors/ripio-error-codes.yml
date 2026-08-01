@@ -1,0 +1,91 @@
+generated: '2026-07-21'
+method: searched
+source: https://apidocs.ripiotrade.co/ (Errors reference)
+format: custom-envelope
+envelope:
+  success: '{ "error_code": null, "message": null, "data": { } }'
+  error: '{ "error_code": <code>, "message": "<description>", "data": null }'
+  field: error_code
+notes: >-
+  Ripio Trade v4 does not use RFC 9457 problem+json. Every response carries a
+  uniform envelope; on failure the numeric error is in error_code (documented as
+  the `code` property) with a human message in `message`.
+errors:
+  - code: 40000
+    http: 400
+    title: Invalid parameters
+    remediation: Adjust the request to match the documentation or the error message.
+  - code: 40010
+    http: 400
+    title: Order amount below minimum
+  - code: 40011
+    http: 400
+    title: Insufficient funds
+  - code: 40020
+    http: 400
+    title: Order already canceled
+  - code: 40021
+    http: 400
+    title: Order executed completely / No orders to cancel
+  - code: 40030
+    http: 400
+    title: Withdrawal limit exceeded
+  - code: 40031
+    http: 400
+    title: Withdrawal amount below minimum
+  - code: 40032
+    http: 400
+    title: Prevention against duplicated withdrawal
+    remediation: Try again after ten minutes.
+  - code: 40033
+    http: 400
+    title: Destination wallet not authorized
+  - code: 40034
+    http: 400
+    title: Non existent destination account
+  - code: 40035
+    http: 400
+    title: Minimum amount to create non existent wallet not reached
+  - code: 40040
+    http: 400
+    title: Withdrawals temporarily blocked
+  - code: 40041
+    http: 400
+    title: Withdrawals blocked due to TFA recovery request
+  - code: 40050
+    http: 400
+    title: TFA not enabled
+  - code: 40090
+    http: 400
+    title: Unsupported operation
+  - code: 40100
+    http: 401
+    title: Not authorized / Blocked token
+    remediation: Authenticate; if the token is blocked, contact support to recover access.
+  - code: 40300
+    http: 403
+    title: Forbidden Access
+  - code: 40400
+    http: 404
+    title: Not found
+    remediation: Check the request URL.
+  - code: 42900
+    http: 429
+    title: Requests limit reached
+    remediation: Wait and try again (see rate-limits/ripio-rate-limits.yml).
+  - code: 50000
+    http: 500
+    title: Internal server error
+  - code: 50001
+    http: 500
+    title: Error to get data
+  - code: 50002
+    http: 500
+    title: External communication error
+  - code: 50003
+    http: 500
+    title: Internal communication error
+  - code: 503
+    http: 503
+    title: Maintenance in course
+    remediation: Wait and try again.

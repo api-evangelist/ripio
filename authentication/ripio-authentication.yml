@@ -1,0 +1,17 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/ripio-trade-openapi.yml
+summary:
+  types:
+  - apiToken
+schemes:
+- name: API Credentials
+  type: apiToken
+  description: |-
+    You can create API Credentials on: <https://trade.ripio.com/market/api/token>.
+
+     After creating the **API Credentials**, you'll need to save in a safe place two pieces of information, an **API Token** and a **Secret Key**. The credentials are required respectively to **Authenticate** and **Sign** all Private REST Requests.
+
+     **Attention**: The Secret Key can only be viewed once and cannot be retri
+  sources:
+  - openapi/ripio-trade-openapi.yml

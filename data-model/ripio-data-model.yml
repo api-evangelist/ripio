@@ -1,0 +1,66 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/ripio-trade-openapi.yml
+entities:
+  - name: Pair
+    key: symbol (e.g. BTC_BRL)
+    fields: [base, quote, enabled, min_amount, price_tick, country]
+  - name: Currency
+    key: code
+  - name: Ticker
+    belongs_to: Pair (via pair)
+  - name: Order
+    key: id
+    alt_key: external_id (client-supplied)
+    fields: [pair, side, type, amount, price, status]
+    belongs_to: Pair (via pair)
+    has_many: [Trade]
+  - name: Trade
+    key: id
+    belongs_to: [Order (via order id), Pair (via pair)]
+  - name: Balance
+    belongs_to: Currency (via currency_code)
+  - name: Statement
+    belongs_to: Currency (via currency_code)
+  - name: Deposit
+    key: id
+    belongs_to: Currency (via currency_code)
+  - name: Withdrawal
+    key: id
+    belongs_to: [Currency (via currency_code), Wallet (via destination)]
+  - name: Wallet
+    key: currency_code + network
+    belongs_to: Currency (via currency_code)
+relationships:
+  - from: Order
+    to: Pair
+    type: belongs_to
+    via: pair
+  - from: Order
+    to: Trade
+    type: has_many
+    via: order id
+  - from: Trade
+    to: Pair
+    type: belongs_to
+    via: pair
+  - from: Balance
+    to: Currency
+    type: belongs_to
+    via: currency_code
+  - from: Deposit
+    to: Currency
+    type: belongs_to
+    via: currency_code
+  - from: Withdrawal
+    to: Currency
+    type: belongs_to
+    via: currency_code
+  - from: Withdrawal
+    to: Wallet
+    type: belongs_to
+    via: destination wallet
+  - from: Wallet
+    to: Currency
+    type: belongs_to
+    via: currency_code
