@@ -1,0 +1,330 @@
+{
+  "item": [
+    {
+      "id": "0fcbcfd1-f505-4a65-9f89-73f6d48797dd",
+      "name": "General endpoints",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "02435c9f-03b1-45d2-8255-e4de9eac94ab",
+          "name": "Pairs",
+          "request": {
+            "name": "Pairs",
+            "description": {
+              "content": "Lists the active currency pairs available in the platform.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "pairs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "pair",
+                  "value": "<string>",
+                  "description": "Currency pair code"
+                },
+                {
+                  "disabled": false,
+                  "key": "countries",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "86d11d50-6ba4-4222-bd5a-1d857abdba67",
+              "name": "Ok",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pairs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pair",
+                      "value": "BTC_BRL"
+                    },
+                    {
+                      "key": "countries",
+                      "value": "BR,AR"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"amount_tick\": 0.0001,\n      \"base\": \"BTC\",\n      \"base_name\": \"Bitcoin\",\n      \"enabled\": true,\n      \"min_amount\": 0.0005,\n      \"min_value\": 10,\n      \"price_tick\": 1,\n      \"quote\": \"BRL\",\n      \"quote_name\": \"Brazilian real\",\n      \"symbol\": \"BTC_BRL\",\n      \"countries\": [\n        \"BR\"\n      ],\n      \"max_price_variation\": 10\n    },\n    {\n      \"amount_tick\": 0.0001,\n      \"base\": \"BTC\",\n      \"base_name\": \"Bitcoin\",\n      \"enabled\": true,\n      \"min_amount\": 0.0005,\n      \"min_value\": 10,\n      \"price_tick\": 1,\n      \"quote\": \"BRL\",\n      \"quote_name\": \"Brazilian real\",\n      \"symbol\": \"BTC_BRL\",\n      \"countries\": [\n        \"BR\"\n      ],\n      \"max_price_variation\": 10\n    }\n  ],\n  \"error_code\": null,\n  \"message\": null\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "88a3f2ea-dcc3-4639-be1f-3b5c25f107bf",
+          "name": "Trades",
+          "request": {
+            "name": "Trades",
+            "description": {
+              "content": "Lists the trades history based on the filtering criteria.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "trades"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "pair",
+                  "value": "<string>",
+                  "description": "(Required) Currency pair code"
+                },
+                {
+                  "disabled": false,
+                  "key": "start_time",
+                  "value": "[6 months ago]"
+                },
+                {
+                  "disabled": false,
+                  "key": "end_time",
+                  "value": "[Current datetime]"
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "200"
+                },
+                {
+                  "disabled": false,
+                  "key": "c",
+                  "value": "<string>",
+                  "description": "The `c` parameter is the cursor you should use to fetch the next page of results"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "a08e58d9-170c-4c0b-bed0-b698ec7b60ed",
+              "name": "Ok",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trades"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pair",
+                      "value": "BTC_BRL"
+                    },
+                    {
+                      "key": "start_time",
+                      "value": "2020-01-01T00:00:00-03:00"
+                    },
+                    {
+                      "key": "end_time",
+                      "value": "2020-01-02T23:59:59-03:00"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "100"
+                    },
+                    {
+                      "key": "c",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"trades\": [\n      {\n        \"amount\": 6856.109164668259,\n        \"date\": \"string\",\n        \"id\": \"string\",\n        \"maker_order_id\": \"string\",\n        \"maker_side\": \"string\",\n        \"maker_type\": \"string\",\n        \"price\": 3306.557255187823,\n        \"pair\": \"BTC_BRL\",\n        \"taker_order_id\": \"string\",\n        \"taker_side\": \"string\",\n        \"taker_type\": \"string\",\n        \"timestamp\": 1675708481219,\n        \"total_value\": 1615.0169256149393\n      },\n      {\n        \"amount\": 6790.11117100586,\n        \"date\": \"string\",\n        \"id\": \"string\",\n        \"maker_order_id\": \"string\",\n        \"maker_side\": \"string\",\n        \"maker_type\": \"string\",\n        \"price\": 4633.254728721326,\n        \"pair\": \"BTC_BRL\",\n        \"taker_order_id\": \"string\",\n        \"taker_side\": \"string\",\n        \"taker_type\": \"string\",\n        \"timestamp\": 1675708481219,\n        \"total_value\": 6956.89434023457\n      }\n    ],\n    \"nc\": \"string\",\n    \"pc\": \"string\"\n  },\n  \"error_code\": null,\n  \"message\": null\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "64fde615-f348-46ca-b0a3-f107bc676ed3",
+          "name": "Currencies",
+          "request": {
+            "name": "Currencies",
+            "description": {
+              "content": "Lists the active currencies available in the platform.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "currencies"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "currency_code",
+                  "value": "<string>",
+                  "description": "Currency code"
+                },
+                {
+                  "disabled": false,
+                  "key": "countries",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "3a0371c3-02ca-4051-9fb2-6f0efd22a584",
+              "name": "Ok",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "currencies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "currency_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "countries",
+                      "value": "BR,AR"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"active\": false,\n      \"can_deposit\": true,\n      \"can_withdraw\": false,\n      \"code\": \"BTC\",\n      \"id\": \"string\",\n      \"min_withdraw_amount\": 2686.9630271472965,\n      \"name\": \"string\",\n      \"needs_block_id_for_tx_sync\": true,\n      \"precision\": 4346.178724861477,\n      \"logo\": {\n        \"svg\": \"string\"\n      },\n      \"countries\": [\n        \"string\",\n        \"string\"\n      ],\n      \"networks\": [\n        {\n          \"code\": \"string\",\n          \"memo\": {\n            \"deposit\": false,\n            \"withdrawal\": true\n          },\n          \"tag\": {\n            \"deposit\": true,\n            \"withdrawal\": true\n          }\n        },\n        {\n          \"code\": \"string\",\n          \"memo\": {\n            \"deposit\": true,\n            \"withdrawal\": false\n          },\n          \"tag\": {\n            \"deposit\": true,\n            \"withdrawal\": true\n          }\n        }\n      ]\n    },\n    {\n      \"active\": false,\n      \"can_deposit\": false,\n      \"can_withdraw\": false,\n      \"code\": \"BTC\",\n      \"id\": \"string\",\n      \"min_withdraw_amount\": 1412.6309053310592,\n      \"name\": \"string\",\n      \"needs_block_id_for_tx_sync\": false,\n      \"precision\": 4943.935557957415,\n      \"logo\": {\n        \"svg\": \"string\"\n      },\n      \"countries\": [\n        \"string\",\n        \"string\"\n      ],\n      \"networks\": [\n        {\n          \"code\": \"string\",\n          \"memo\": {\n            \"deposit\": true,\n            \"withdrawal\": true\n          },\n          \"tag\": {\n            \"deposit\": true,\n            \"withdrawal\": true\n          }\n        },\n        {\n          \"code\": \"string\",\n          \"memo\": {\n            \"deposit\": false,\n            \"withdrawal\": true\n          },\n          \"tag\": {\n            \"deposit\": false,\n            \"withdrawal\": true\n          }\n        }\n      ]\n    }\n  ],\n  \"error_code\": null,\n  \"message\": null\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.ripiotrade.co/v4/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "9cdf4811-e23d-4c36-9759-cdf63b3576f4",
+    "name": "Ripio Trade - API Documentation Book General endpoints API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Welcome to the Ripio Trade API documentation.\n\n### Version\nThis API is currently in the version 4.\n\nIf there is need for any big change, a new version will be launched and this version will be maintained for at least 3 months.\n\nIf you're still using the version 3, [access the old documentation](../v3) and check the [migration guide](#tag/V3-Endpoint-Migrations).\n\n### Important\nUse the `Market` endpoints for all trading operations. The `Public` endpoints have a delay (cache) of up to 30 seconds.\n\nAll successful requests will result in a 200 HTTP Status.\n\nAll requests returns data in JSON format (application/json) and have a default body:\n\n\n### Success\n```\n{\n  \"error_code\": null,\n  \"message\": null,\n  \"data\": { }\n}\n```\n\n### Error\n```\n{\n  \"error_code\": [Error code],\n  \"message\": \"Error description\",\n  \"data\": null\n}\n```\n\n\nEndpoints that have a date filter will return data for the last 6 months if no value is sent in the `start_date` parameter.\n\n### URL structure\nThe endpoints URL follow this pattern:\n\n`https://api.ripiotrade.co/{version}/{method}[/{parameter}][?parameter=value...]`\n\n `https://api.ripiotrade.co/v4/tickers/BTC_BRL`\n\n### Limits\n\nThe request limits are based on the user's operational limits.\n\nThere are two types of limit, one of requests per second and another of daily requests. Both of them should be taken in consideration and the requests should be balanced so the daily limit isn't reached.\n\nUsers **without approved documentation** have 1 request per second or 86.400 daily requests.\n\nUsers **with approved documentation** have 3.5 requests per second or 302.400 daily requests.\n\nThese limits can be increased, and the support team should be contacted for that.\n\nWhen the requests per second limit is reached, the response HTTP Status returned is 429 and the response body is:\n```\n{\n  \"message\": \"Too many requests\"\n}\n```\n\nWhen the daily requests limit is reached, the response HTTP Status returned is 429 and the response body is:\n```\n{\n  \"message\": \"Limit Exceeded\"\n}\n```\n\nContact Support:\n Name: Jorn Filho",
+      "type": "text/plain"
+    }
+  }
+}

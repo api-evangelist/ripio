@@ -1,0 +1,145 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Ripio Trade - API Documentation Book Cryptocurrency Withdrawals API",
+    "version": "v4.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Cryptocurrency Withdrawals",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Cryptocurrency Withdrawals",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ripiotrade.co/v4/withdrawals",
+            "params": [
+              {
+                "name": "currency_code",
+                "value": "BTC",
+                "type": "query",
+                "description": "Currency code"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "current_page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "network",
+                "value": "bitcoin",
+                "type": "query",
+                "description": "Network"
+              },
+              {
+                "name": "c",
+                "value": "BTC",
+                "type": "query",
+                "description": "The `c` parameter is the cursor you should use to fetch the next page of results"
+              }
+            ]
+          },
+          "docs": "Lists the user's cryptocurrency withdrawals.\n\n**Attention:** Due to performance concerns, this endpoint now uses cursor-based pagination. The pagination object currently included in the response is now a placeholder and will be entirely removed as of 2026-06-01. The parameter current_page is also a placeholder and will be removed at the same time. Please update your integration accordingly and refer to the documentation for the correct pagination handling."
+        },
+        {
+          "info": {
+            "name": "Create Cryptocurrency Withdrawal",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ripiotrade.co/v4/withdrawals",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a cryptocurrency withdrawal."
+        },
+        {
+          "info": {
+            "name": "Estimate Withdrawal Fee",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ripiotrade.co/v4/withdrawals/estimate-fee/:currency_code",
+            "params": [
+              {
+                "name": "currency_code",
+                "value": "BTC",
+                "type": "path",
+                "description": "Currency code"
+              },
+              {
+                "name": "network",
+                "value": "bitcoin",
+                "type": "query",
+                "description": "Network"
+              },
+              {
+                "name": "amount",
+                "value": "",
+                "type": "query",
+                "description": "Amount"
+              }
+            ]
+          },
+          "docs": "Estimates the miner fee for a cryptocurrency withdrawal."
+        },
+        {
+          "info": {
+            "name": "Get Cryptocurrency Withdrawal",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ripiotrade.co/v4/withdrawals/withdrawal",
+            "params": [
+              {
+                "name": "id",
+                "value": "000A650D-F8A5-419A-A4C4-194452345981",
+                "type": "query",
+                "description": "Withdrawal identifier"
+              },
+              {
+                "name": "external_id",
+                "value": "000A650D-F8A5-419A-A4C4-194452345981",
+                "type": "query",
+                "description": "Withdrawal external identifier"
+              }
+            ]
+          },
+          "docs": "Gets a cryptocurrency withdrawal."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

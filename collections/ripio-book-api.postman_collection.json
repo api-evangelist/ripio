@@ -1,0 +1,220 @@
+{
+  "item": [
+    {
+      "id": "ae09bfe9-06c5-412c-97f7-ae55e370013e",
+      "name": "Book",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9355cf4a-beae-4f80-9ba8-ae0b9558bd85",
+          "name": "Orderbook Level 3",
+          "request": {
+            "name": "Orderbook Level 3",
+            "description": {
+              "content": "Returns the level 3 orderbook.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "book",
+                "orders",
+                "level-3"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "pair",
+                  "value": "<string>",
+                  "description": "(Required) Currency pair code"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "100"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "0d13b919-9e36-4b23-825a-34aa8c77d78b",
+              "name": "Ok",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "book",
+                    "orders",
+                    "level-3"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pair",
+                      "value": "BTC_BRL"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "25"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"timestamp\": 1675708481219,\n    \"asks\": [\n      {\n        \"amount\": 3215.8348073818943,\n        \"id\": \"string\",\n        \"price\": 7680.1557299880005\n      },\n      {\n        \"amount\": 1641.305073062017,\n        \"id\": \"string\",\n        \"price\": 4552.112415606001\n      }\n    ],\n    \"bids\": [\n      {\n        \"amount\": 7706.183570795415,\n        \"id\": \"string\",\n        \"price\": 8910.820768010777\n      },\n      {\n        \"amount\": 116.96500843392687,\n        \"id\": \"string\",\n        \"price\": 7910.777176730338\n      }\n    ],\n    \"hash\": \"16757084812196786445\"\n  },\n  \"error_code\": null,\n  \"message\": null\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "65dd08c8-df2b-4821-bcf3-781ba49ee38a",
+          "name": "Orderbook Level 2",
+          "request": {
+            "name": "Orderbook Level 2",
+            "description": {
+              "content": "Returns the level 2 orderbook.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "book",
+                "orders",
+                "level-2"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "pair",
+                  "value": "<string>",
+                  "description": "(Required) Currency pair code"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "100"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "df49dc5d-de4d-4723-9a4a-483b76e3377b",
+              "name": "Ok",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "book",
+                    "orders",
+                    "level-2"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pair",
+                      "value": "BTC_BRL"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"timestamp\": 1675708481219,\n    \"asks\": [\n      {\n        \"amount\": 0.1283746,\n        \"price\": 1923847\n      }\n    ],\n    \"bids\": [\n      {\n        \"amount\": 0.1283746,\n        \"price\": 1923847\n      }\n    ]\n  },\n  \"error_code\": null,\n  \"message\": null\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.ripiotrade.co/v4/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "9957efff-3658-4205-8c36-e9425798a0d8",
+    "name": "Ripio Trade - API Documentation Book API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Welcome to the Ripio Trade API documentation.\n\n### Version\nThis API is currently in the version 4.\n\nIf there is need for any big change, a new version will be launched and this version will be maintained for at least 3 months.\n\nIf you're still using the version 3, [access the old documentation](../v3) and check the [migration guide](#tag/V3-Endpoint-Migrations).\n\n### Important\nUse the `Market` endpoints for all trading operations. The `Public` endpoints have a delay (cache) of up to 30 seconds.\n\nAll successful requests will result in a 200 HTTP Status.\n\nAll requests returns data in JSON format (application/json) and have a default body:\n\n\n### Success\n```\n{\n  \"error_code\": null,\n  \"message\": null,\n  \"data\": { }\n}\n```\n\n### Error\n```\n{\n  \"error_code\": [Error code],\n  \"message\": \"Error description\",\n  \"data\": null\n}\n```\n\n\nEndpoints that have a date filter will return data for the last 6 months if no value is sent in the `start_date` parameter.\n\n### URL structure\nThe endpoints URL follow this pattern:\n\n`https://api.ripiotrade.co/{version}/{method}[/{parameter}][?parameter=value...]`\n\n `https://api.ripiotrade.co/v4/tickers/BTC_BRL`\n\n### Limits\n\nThe request limits are based on the user's operational limits.\n\nThere are two types of limit, one of requests per second and another of daily requests. Both of them should be taken in consideration and the requests should be balanced so the daily limit isn't reached.\n\nUsers **without approved documentation** have 1 request per second or 86.400 daily requests.\n\nUsers **with approved documentation** have 3.5 requests per second or 302.400 daily requests.\n\nThese limits can be increased, and the support team should be contacted for that.\n\nWhen the requests per second limit is reached, the response HTTP Status returned is 429 and the response body is:\n```\n{\n  \"message\": \"Too many requests\"\n}\n```\n\nWhen the daily requests limit is reached, the response HTTP Status returned is 429 and the response body is:\n```\n{\n  \"message\": \"Limit Exceeded\"\n}\n```\n\nContact Support:\n Name: Jorn Filho",
+      "type": "text/plain"
+    }
+  }
+}

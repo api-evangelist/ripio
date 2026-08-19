@@ -1,0 +1,29 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Ripio Trade - API Documentation Book Ticket API",
+    "version": "v4.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Ticket",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "WebSocket ticket",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ripiotrade.co/v4/ticket"
+          },
+          "docs": "Creates a new websocket ticket. Should be sent in the body property called `ticket` to subscribe to the websocket private topics."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

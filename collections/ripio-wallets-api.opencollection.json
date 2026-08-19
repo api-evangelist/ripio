@@ -1,0 +1,78 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Ripio Trade - API Documentation Book Wallets API",
+    "version": "v4.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Wallets",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Is internal",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ripiotrade.co/v4/wallets/is-internal",
+            "params": [
+              {
+                "name": "address",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "currency_code",
+                "value": "BTC",
+                "type": "query",
+                "description": "Currency code"
+              }
+            ]
+          },
+          "docs": "Indicates if a given wallet belongs to Ripio Trade."
+        },
+        {
+          "info": {
+            "name": "Wallets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ripiotrade.co/v4/wallets"
+          },
+          "docs": "Lists the user's wallets."
+        },
+        {
+          "info": {
+            "name": "Get User Wallet",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ripiotrade.co/v4/wallets/:currency_code/:network",
+            "params": [
+              {
+                "name": "currency_code",
+                "value": "BTC",
+                "type": "path",
+                "description": "Currency code"
+              },
+              {
+                "name": "network",
+                "value": "bitcoin",
+                "type": "path",
+                "description": "Network"
+              }
+            ]
+          },
+          "docs": "Get user network's currency address"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

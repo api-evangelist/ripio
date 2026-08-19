@@ -1,0 +1,364 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Ripio Trade - API Documentation Book Orders API",
+    "version": "v4.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Orders",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Trades",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ripiotrade.co/v4/trades",
+            "params": [
+              {
+                "name": "pair",
+                "value": "BTC_BRL",
+                "type": "query",
+                "description": "Currency pair code"
+              },
+              {
+                "name": "start_time",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "end_time",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "c",
+                "value": "",
+                "type": "query",
+                "description": "The `c` parameter is the cursor you should use to fetch the next page of results"
+              }
+            ]
+          },
+          "docs": "Lists the trades history based on the filtering criteria."
+        },
+        {
+          "info": {
+            "name": "User Orders",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ripiotrade.co/v4/orders",
+            "params": [
+              {
+                "name": "pair",
+                "value": "BTC_BRL",
+                "type": "query",
+                "description": "Currency pair code"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "side",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "ids",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "current_page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "c",
+                "value": "",
+                "type": "query",
+                "description": "The `c` parameter is the cursor you should use to fetch the next page of results"
+              }
+            ]
+          },
+          "docs": "Lists the user's orders."
+        },
+        {
+          "info": {
+            "name": "Create Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ripiotrade.co/v4/orders",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new order.\n\nPublishes updates in the following websocket topics: [`trade`](#operation/trade) (if there is a trade), [`orderbook`](#operation/orderbook), [`balance`](#operation/balance) and [`order_status`](#operation/order_status)."
+        },
+        {
+          "info": {
+            "name": "Update the amount and/or price of an order",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.ripiotrade.co/v4/orders",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Allows update the amount and/or price of an order, it is not possible to change a canceled or fully executed order.\n\nPublishes updates in the following websocket topics: [`orderbook`](#operation/orderbook), and [`balance`](#operation/balance)."
+        },
+        {
+          "info": {
+            "name": "Cancel Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.ripiotrade.co/v4/orders",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Cancels an active order by its `id`.\n\nPublishes updates in the following websocket topics: [`orderbook`](#operation/orderbook), [`balance`](#operation/balance) and [`order_status`](#operation/order_status)."
+        },
+        {
+          "info": {
+            "name": "Get User Open Orders",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ripiotrade.co/v4/orders/open",
+            "params": [
+              {
+                "name": "pair",
+                "value": "BTC_BRL",
+                "type": "query",
+                "description": "Currency pair code"
+              },
+              {
+                "name": "side",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "current_page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "c",
+                "value": "",
+                "type": "query",
+                "description": "The `c` parameter is the cursor you should use to fetch the next page of results"
+              }
+            ]
+          },
+          "docs": "Lists the user's open orders."
+        },
+        {
+          "info": {
+            "name": "Get Trades based on a order id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ripiotrade.co/v4/orders/trades",
+            "params": [
+              {
+                "name": "order_id",
+                "value": "",
+                "type": "query",
+                "description": "Order id from a valid order"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "c",
+                "value": "",
+                "type": "query",
+                "description": "The `c` parameter is the cursor you should use to fetch the next page of results"
+              }
+            ]
+          },
+          "docs": "Get the trades from an order.\n\n**Attention:** Due to performance concerns, this endpoint now uses cursor-based pagination. The pagination object currently included in the response is now a placeholder and will be entirely removed as of 2026-06-01. The parameter current_page is also a placeholder and will be removed at the same time. Please update your integration accordingly and refer to the documentation for the correct pagination handling."
+        },
+        {
+          "info": {
+            "name": "User Order by Id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ripiotrade.co/v4/orders/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the details of an order belonging to the user (by id)."
+        },
+        {
+          "info": {
+            "name": "User Order by External Id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ripiotrade.co/v4/orders/by-external-id/:external_id",
+            "params": [
+              {
+                "name": "external_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the details of a order belonging to the user (by external id)."
+        },
+        {
+          "info": {
+            "name": "Cancel Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ripiotrade.co/v4/orders/cancel",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Cancels an active order by its `id` using POST.\n\nPublishes updates in the following websocket topics: [`orderbook`](#operation/orderbook), [`balance`](#operation/balance) and [`order_status`](#operation/order_status)."
+        },
+        {
+          "info": {
+            "name": "Cancel Order By External Id",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.ripiotrade.co/v4/orders/by-external-id",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Cancels an active order by its `external_id`.\n\nPublishes updates in the following websocket topics: [`orderbook`](#operation/orderbook), [`balance`](#operation/balance) and [`order_status`](#operation/order_status)."
+        },
+        {
+          "info": {
+            "name": "Cancel Order By External Id",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ripiotrade.co/v4/orders/cancel-by-external-id",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Cancels an active order by its `external_id` using POST.\n\nPublishes updates in the following websocket topics: [`orderbook`](#operation/orderbook), [`balance`](#operation/balance) and [`order_status`](#operation/order_status)."
+        },
+        {
+          "info": {
+            "name": "Cancel All Orders",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.ripiotrade.co/v4/orders/all",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Cancels all the user's active orders.\n\nPublishes updates in the following websocket topics: [`orderbook`](#operation/orderbook), [`balance`](#operation/balance) and [`order_status`](#operation/order_status)."
+        },
+        {
+          "info": {
+            "name": "Estimate Price",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ripiotrade.co/v4/orders/estimate-price/:pair",
+            "params": [
+              {
+                "name": "pair",
+                "value": "BTC_BRL",
+                "type": "path",
+                "description": "Currency pair code"
+              },
+              {
+                "name": "amount",
+                "value": "",
+                "type": "query",
+                "description": "Amount to be used in the estimative."
+              },
+              {
+                "name": "side",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Estimates the market unit price for a specific amount of a given currency pair."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

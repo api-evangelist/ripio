@@ -1,0 +1,66 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Ripio Trade - API Documentation Book API",
+    "version": "v4.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Book",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Orderbook Level 3",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ripiotrade.co/v4/book/orders/level-3",
+            "params": [
+              {
+                "name": "pair",
+                "value": "BTC_BRL",
+                "type": "query",
+                "description": "Currency pair code"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns the level 3 orderbook."
+        },
+        {
+          "info": {
+            "name": "Orderbook Level 2",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ripiotrade.co/v4/book/orders/level-2",
+            "params": [
+              {
+                "name": "pair",
+                "value": "BTC_BRL",
+                "type": "query",
+                "description": "Currency pair code"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns the level 2 orderbook."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

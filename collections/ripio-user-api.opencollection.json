@@ -1,0 +1,203 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Ripio Trade - API Documentation Book User API",
+    "version": "v4.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "User",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Balances",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ripiotrade.co/v4/user/balances",
+            "params": [
+              {
+                "name": "currency_code",
+                "value": "",
+                "type": "query",
+                "description": "Currency code (one or many, use \",\" to separate)"
+              }
+            ]
+          },
+          "docs": "Lists the user's balances"
+        },
+        {
+          "info": {
+            "name": "Balance On Date",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ripiotrade.co/v4/user/balances/:date",
+            "params": [
+              {
+                "name": "date",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Lists the user's balances in the given date."
+        },
+        {
+          "info": {
+            "name": "Trading Fees",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ripiotrade.co/v4/user/trading-fees",
+            "params": [
+              {
+                "name": "pair",
+                "value": "",
+                "type": "query",
+                "description": "Pair code"
+              }
+            ]
+          },
+          "docs": "Get the user trading fees"
+        },
+        {
+          "info": {
+            "name": "Statement",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ripiotrade.co/v4/user/statement",
+            "params": [
+              {
+                "name": "start_time",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "end_time",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "current_page",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Lists the user's statement."
+        },
+        {
+          "info": {
+            "name": "Statement by Currency",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ripiotrade.co/v4/user/statement/:currency_code",
+            "params": [
+              {
+                "name": "currency_code",
+                "value": "BTC",
+                "type": "path",
+                "description": "Currency code"
+              },
+              {
+                "name": "start_time",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "end_time",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "current_page",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Lists the user's statement by currency."
+        },
+        {
+          "info": {
+            "name": "Get User Trades",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ripiotrade.co/v4/user/trades",
+            "params": [
+              {
+                "name": "pair",
+                "value": "BTC_BRL",
+                "type": "query",
+                "description": "Currency pair code"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "current_page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "order_id",
+                "value": "F49F5BD8-3F5B-4364-BCEE-F36F62DB966A",
+                "type": "query",
+                "description": "Order id"
+              },
+              {
+                "name": "external_id",
+                "value": "90FcPa1Zm75",
+                "type": "query",
+                "description": "External id"
+              },
+              {
+                "name": "c",
+                "value": "",
+                "type": "query",
+                "description": "The `c` parameter is the cursor you should use to fetch the next page of results"
+              }
+            ]
+          },
+          "docs": "Lists the user's trades.\n\n**Attention:** Due to performance concerns, this endpoint now uses cursor-based pagination. The pagination object currently included in the response is now a placeholder and will be entirely removed as of 2026-06-01. The parameter current_page is also a placeholder and will be removed at the same time. Please update your integration accordingly and refer to the documentation for the correct pagination handling."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

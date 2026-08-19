@@ -1,0 +1,99 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Ripio Trade - API Documentation Book Cryptocurrency Deposits API",
+    "version": "v4.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Cryptocurrency Deposits",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Cryptocurrency Deposits",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ripiotrade.co/v4/deposits",
+            "params": [
+              {
+                "name": "currency_code",
+                "value": "BTC",
+                "type": "query",
+                "description": "Currency code"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "current_page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "network",
+                "value": "bitcoin",
+                "type": "query",
+                "description": "Network"
+              },
+              {
+                "name": "c",
+                "value": "BTC",
+                "type": "query",
+                "description": "The `c` parameter is the cursor you should use to fetch the next page of results"
+              }
+            ]
+          },
+          "docs": "Lists the user's cryptocurrency deposits.\n\n**Attention:** Due to performance concerns, this endpoint now uses cursor-based pagination. The pagination object currently included in the response is now a placeholder and will be entirely removed as of 2026-06-01. The parameter current_page is also a placeholder and will be removed at the same time. Please update your integration accordingly and refer to the documentation for the correct pagination handling."
+        },
+        {
+          "info": {
+            "name": "Get Cryptocurrency Deposit",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ripiotrade.co/v4/deposits/deposit",
+            "params": [
+              {
+                "name": "id",
+                "value": "000A650D-F8A5-419A-A4C4-194452345981",
+                "type": "query",
+                "description": "Deposit identifier"
+              },
+              {
+                "name": "hash",
+                "value": "000A650D-F8A5-419A-A4C4-194452345981",
+                "type": "query",
+                "description": "Transaction hash"
+              }
+            ]
+          },
+          "docs": "Gets a cryptocurrency deposit."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

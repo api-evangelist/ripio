@@ -1,0 +1,472 @@
+{
+  "item": [
+    {
+      "id": "31324c8c-dafd-498d-afde-d3cef12f93b0",
+      "name": "Cryptocurrency Withdrawals",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3443eb85-04da-4558-96fa-98d41cc66049",
+          "name": "List Cryptocurrency Withdrawals",
+          "request": {
+            "name": "List Cryptocurrency Withdrawals",
+            "description": {
+              "content": "Lists the user's cryptocurrency withdrawals.\n\n**Attention:** Due to performance concerns, this endpoint now uses cursor-based pagination. The pagination object currently included in the response is now a placeholder and will be entirely removed as of 2026-06-01. The parameter current_page is also a placeholder and will be removed at the same time. Please update your integration accordingly and refer to the documentation for the correct pagination handling.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "withdrawals"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "currency_code",
+                  "value": "<string>",
+                  "description": "Currency code"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "start_date",
+                  "value": "[6 months ago]"
+                },
+                {
+                  "disabled": false,
+                  "key": "end_date",
+                  "value": "[Current date]"
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "200"
+                },
+                {
+                  "disabled": false,
+                  "key": "current_page",
+                  "value": "1"
+                },
+                {
+                  "disabled": false,
+                  "key": "network",
+                  "value": "<string>",
+                  "description": "Network"
+                },
+                {
+                  "disabled": false,
+                  "key": "c",
+                  "value": "<string>",
+                  "description": "The `c` parameter is the cursor you should use to fetch the next page of results"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "b7cc5707-0a58-42dd-ab2a-1ec4daae6df5",
+              "name": "Ok",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "withdrawals"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "currency_code",
+                      "value": "BTC"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start_date",
+                      "value": "[6 months ago]"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "[Current date]"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "100"
+                    },
+                    {
+                      "key": "current_page",
+                      "value": "3"
+                    },
+                    {
+                      "key": "network",
+                      "value": "bitcoin"
+                    },
+                    {
+                      "key": "c",
+                      "value": "BTC"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"withdrawals\": [\n      {\n        \"amount\": 0.1,\n        \"create_date\": \"2019-01-25T16:37:15.443Z\",\n        \"currency_code\": \"BTC\",\n        \"destination_address\": \"rw9nf3WgsagJiZnkAeZzXZuqeCQ6LHm2h1\",\n        \"link\": null,\n        \"miner_fee\": 0,\n        \"miner_fee_type\": \"string\",\n        \"status\": \"pending\",\n        \"transaction_id\": null,\n        \"update_date\": \"2019-01-25T16:37:15.443Z\",\n        \"id\": \"A1DCD3B6-1CBD-4F17-ADA0-230ADEC04173\",\n        \"fee\": 0,\n        \"hash\": null,\n        \"external_id\": \"rtd-9012-lkju-908\",\n        \"is_internal\": false,\n        \"network\": \"bitcoin\",\n        \"memo\": \"string\",\n        \"tag\": \"string\"\n      },\n      {\n        \"amount\": 0.1,\n        \"create_date\": \"2019-01-25T16:37:15.443Z\",\n        \"currency_code\": \"BTC\",\n        \"destination_address\": \"rw9nf3WgsagJiZnkAeZzXZuqeCQ6LHm2h1\",\n        \"link\": null,\n        \"miner_fee\": 0,\n        \"miner_fee_type\": \"string\",\n        \"status\": \"pending\",\n        \"transaction_id\": null,\n        \"update_date\": \"2019-01-25T16:37:15.443Z\",\n        \"id\": \"A1DCD3B6-1CBD-4F17-ADA0-230ADEC04173\",\n        \"fee\": 0,\n        \"hash\": null,\n        \"external_id\": \"rtd-9012-lkju-908\",\n        \"is_internal\": false,\n        \"network\": \"bitcoin\",\n        \"memo\": \"string\",\n        \"tag\": \"string\"\n      }\n    ],\n    \"pagination\": {\n      \"current_page\": 1,\n      \"registers_count\": 21,\n      \"total_pages\": 1,\n      \"page_size\": 100\n    },\n    \"nc\": \"string\",\n    \"pc\": \"string\"\n  },\n  \"error_code\": null,\n  \"message\": null\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3065ff17-3fc4-49a2-9505-1b29d924855b",
+          "name": "Create Cryptocurrency Withdrawal",
+          "request": {
+            "name": "Create Cryptocurrency Withdrawal",
+            "description": {
+              "content": "Creates a cryptocurrency withdrawal.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "withdrawals"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"amount\": \"<float>\",\n  \"destination\": \"<string>\",\n  \"currency_code\": \"<string>\",\n  \"fee_included\": \"<boolean>\",\n  \"external_id\": \"<string>\",\n  \"tag\": \"<string>\",\n  \"network\": \"<string>\",\n  \"memo\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1793458d-7f7d-4477-9ac0-39db59249f9e",
+              "name": "Ok",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "withdrawals"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": 7.77,\n  \"destination\": \"1AU4BoYaxSunkEWikEMYXJ41c9bvQG6Wa2\",\n  \"currency_code\": \"<string>\",\n  \"fee_included\": true,\n  \"external_id\": \"2352b104-3f8c-47da-b817-46c942350c95\",\n  \"tag\": \"<string>\",\n  \"network\": \"bitcoin\",\n  \"memo\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"A1DCD3B6-1CBD-4F17-ADA0-230ADEC04173\",\n    \"amount\": 0.1,\n    \"create_date\": \"2019-01-25T16:37:15.443Z\",\n    \"currency_code\": \"BTC\",\n    \"destination_address\": \"rw9nf3WgsagJiZnkAeZzXZuqeCQ6LHm2h1\",\n    \"link\": \"string\",\n    \"miner_fee\": 0,\n    \"status\": \"pending\",\n    \"transaction_id\": \"string\",\n    \"update_date\": \"2019-01-25T16:37:15.443Z\",\n    \"fee\": 0,\n    \"hash\": \"string\",\n    \"external_id\": \"rtd-9012-lkju-908\",\n    \"network\": \"bitcoin\",\n    \"memo\": \"string\",\n    \"tag\": \"string\"\n  },\n  \"error_code\": null,\n  \"message\": null\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6105b100-54ea-406f-86bc-cde89793405b",
+          "name": "Estimate Withdrawal Fee",
+          "request": {
+            "name": "Estimate Withdrawal Fee",
+            "description": {
+              "content": "Estimates the miner fee for a cryptocurrency withdrawal.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "withdrawals",
+                "estimate-fee",
+                ":currency_code"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "network",
+                  "value": "<string>",
+                  "description": "Network"
+                },
+                {
+                  "disabled": false,
+                  "key": "amount",
+                  "value": "<double>",
+                  "description": "Amount"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "currency_code",
+                  "description": "(Required) Currency code"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "409fb076-6583-444a-9958-8034be5dcfd3",
+              "name": "Ok",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "withdrawals",
+                    "estimate-fee",
+                    ":currency_code"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "network",
+                      "value": "bitcoin"
+                    },
+                    {
+                      "key": "amount",
+                      "value": "<double>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "currency_code",
+                      "description": "(Required) Currency code"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"amount\": 0.000012,\n    \"network\": \"bitcoin\"\n  },\n  \"error_code\": null,\n  \"message\": null\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "11f0dc75-15f5-4dcc-9aed-227a9064a484",
+          "name": "Get Cryptocurrency Withdrawal",
+          "request": {
+            "name": "Get Cryptocurrency Withdrawal",
+            "description": {
+              "content": "Gets a cryptocurrency withdrawal.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "withdrawals",
+                "withdrawal"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "id",
+                  "value": "<string>",
+                  "description": "Withdrawal identifier"
+                },
+                {
+                  "disabled": false,
+                  "key": "external_id",
+                  "value": "<string>",
+                  "description": "Withdrawal external identifier"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "e420aa1c-a802-4ae4-8de1-895e56dfe966",
+              "name": "Ok",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "withdrawals",
+                    "withdrawal"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "000A650D-F8A5-419A-A4C4-194452345981"
+                    },
+                    {
+                      "key": "external_id",
+                      "value": "000A650D-F8A5-419A-A4C4-194452345981"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"amount\": 0.1,\n    \"create_date\": \"2019-01-25T16:37:15.443Z\",\n    \"currency_code\": \"BTC\",\n    \"destination_address\": \"rw9nf3WgsagJiZnkAeZzXZuqeCQ6LHm2h1\",\n    \"link\": null,\n    \"miner_fee\": 0,\n    \"miner_fee_type\": \"string\",\n    \"status\": \"pending\",\n    \"transaction_id\": null,\n    \"update_date\": \"2019-01-25T16:37:15.443Z\",\n    \"id\": \"A1DCD3B6-1CBD-4F17-ADA0-230ADEC04173\",\n    \"fee\": 0,\n    \"hash\": null,\n    \"external_id\": \"rtd-9012-lkju-908\",\n    \"is_internal\": false,\n    \"network\": \"bitcoin\",\n    \"memo\": \"string\",\n    \"tag\": \"string\"\n  },\n  \"error_code\": null,\n  \"message\": null\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.ripiotrade.co/v4/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "c48a458c-b8a6-408d-b870-89b36d8d35ce",
+    "name": "Ripio Trade - API Documentation Book Cryptocurrency Withdrawals API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Welcome to the Ripio Trade API documentation.\n\n### Version\nThis API is currently in the version 4.\n\nIf there is need for any big change, a new version will be launched and this version will be maintained for at least 3 months.\n\nIf you're still using the version 3, [access the old documentation](../v3) and check the [migration guide](#tag/V3-Endpoint-Migrations).\n\n### Important\nUse the `Market` endpoints for all trading operations. The `Public` endpoints have a delay (cache) of up to 30 seconds.\n\nAll successful requests will result in a 200 HTTP Status.\n\nAll requests returns data in JSON format (application/json) and have a default body:\n\n\n### Success\n```\n{\n  \"error_code\": null,\n  \"message\": null,\n  \"data\": { }\n}\n```\n\n### Error\n```\n{\n  \"error_code\": [Error code],\n  \"message\": \"Error description\",\n  \"data\": null\n}\n```\n\n\nEndpoints that have a date filter will return data for the last 6 months if no value is sent in the `start_date` parameter.\n\n### URL structure\nThe endpoints URL follow this pattern:\n\n`https://api.ripiotrade.co/{version}/{method}[/{parameter}][?parameter=value...]`\n\n `https://api.ripiotrade.co/v4/tickers/BTC_BRL`\n\n### Limits\n\nThe request limits are based on the user's operational limits.\n\nThere are two types of limit, one of requests per second and another of daily requests. Both of them should be taken in consideration and the requests should be balanced so the daily limit isn't reached.\n\nUsers **without approved documentation** have 1 request per second or 86.400 daily requests.\n\nUsers **with approved documentation** have 3.5 requests per second or 302.400 daily requests.\n\nThese limits can be increased, and the support team should be contacted for that.\n\nWhen the requests per second limit is reached, the response HTTP Status returned is 429 and the response body is:\n```\n{\n  \"message\": \"Too many requests\"\n}\n```\n\nWhen the daily requests limit is reached, the response HTTP Status returned is 429 and the response body is:\n```\n{\n  \"message\": \"Limit Exceeded\"\n}\n```\n\nContact Support:\n Name: Jorn Filho",
+      "type": "text/plain"
+    }
+  }
+}

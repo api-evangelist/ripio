@@ -1,0 +1,1469 @@
+{
+  "item": [
+    {
+      "id": "939aae20-6297-4a1c-8d58-9e2a58ad9174",
+      "name": "Orders",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ff30acfc-eb2b-4014-b329-1817f7355299",
+          "name": "Trades",
+          "request": {
+            "name": "Trades",
+            "description": {
+              "content": "Lists the trades history based on the filtering criteria.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "trades"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "pair",
+                  "value": "<string>",
+                  "description": "(Required) Currency pair code"
+                },
+                {
+                  "disabled": false,
+                  "key": "start_time",
+                  "value": "[6 months ago]"
+                },
+                {
+                  "disabled": false,
+                  "key": "end_time",
+                  "value": "[Current datetime]"
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "200"
+                },
+                {
+                  "disabled": false,
+                  "key": "c",
+                  "value": "<string>",
+                  "description": "The `c` parameter is the cursor you should use to fetch the next page of results"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "b133fdb6-62a1-4549-a7d8-cb3abcde2ef4",
+              "name": "Ok",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trades"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pair",
+                      "value": "BTC_BRL"
+                    },
+                    {
+                      "key": "start_time",
+                      "value": "2020-01-01T00:00:00-03:00"
+                    },
+                    {
+                      "key": "end_time",
+                      "value": "2020-01-02T23:59:59-03:00"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "100"
+                    },
+                    {
+                      "key": "c",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"trades\": [\n      {\n        \"amount\": 3660.053258815169,\n        \"date\": \"string\",\n        \"id\": \"string\",\n        \"maker_order_id\": \"string\",\n        \"maker_side\": \"string\",\n        \"maker_type\": \"string\",\n        \"price\": 3651.388054086805,\n        \"pair\": \"BTC_BRL\",\n        \"taker_order_id\": \"string\",\n        \"taker_side\": \"string\",\n        \"taker_type\": \"string\",\n        \"timestamp\": 1675708481219,\n        \"total_value\": 4855.85135951282\n      },\n      {\n        \"amount\": 2840.925032433046,\n        \"date\": \"string\",\n        \"id\": \"string\",\n        \"maker_order_id\": \"string\",\n        \"maker_side\": \"string\",\n        \"maker_type\": \"string\",\n        \"price\": 8241.828466812758,\n        \"pair\": \"BTC_BRL\",\n        \"taker_order_id\": \"string\",\n        \"taker_side\": \"string\",\n        \"taker_type\": \"string\",\n        \"timestamp\": 1675708481219,\n        \"total_value\": 2227.0941980589687\n      }\n    ],\n    \"nc\": \"string\",\n    \"pc\": \"string\"\n  },\n  \"error_code\": null,\n  \"message\": null\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d81171f7-4647-483c-a081-eb55c5be1359",
+          "name": "User Orders",
+          "request": {
+            "name": "User Orders",
+            "description": {
+              "content": "Lists the user's orders.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "orders"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "pair",
+                  "value": "<string>",
+                  "description": "(Required) Currency pair code"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "executed_partially"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "executed_partially"
+                },
+                {
+                  "disabled": false,
+                  "key": "side",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "ids",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "start_date",
+                  "value": "[10 days ago]"
+                },
+                {
+                  "disabled": false,
+                  "key": "end_date",
+                  "value": "[Current date]"
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "200"
+                },
+                {
+                  "disabled": false,
+                  "key": "current_page",
+                  "value": "1"
+                },
+                {
+                  "disabled": false,
+                  "key": "c",
+                  "value": "<string>",
+                  "description": "The `c` parameter is the cursor you should use to fetch the next page of results"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "a185c539-1714-480b-b676-6d200332166d",
+              "name": "Ok",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pair",
+                      "value": "BTC_BRL"
+                    },
+                    {
+                      "key": "status",
+                      "value": "executed_partially"
+                    },
+                    {
+                      "key": "status",
+                      "value": "executed_partially"
+                    },
+                    {
+                      "key": "side",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ids",
+                      "value": "a6f7f8b3-e531-4522-810c-4f726f796b10,1594d0af-9239-466b-805b-a4f5df5f16d9"
+                    },
+                    {
+                      "key": "start_date",
+                      "value": "[10 days ago]"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "[Current date]"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "100"
+                    },
+                    {
+                      "key": "current_page",
+                      "value": "3"
+                    },
+                    {
+                      "key": "c",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"orders\": [\n      {\n        \"id\": \"string\",\n        \"create_date\": \"string\",\n        \"executed_amount\": 4881.531055724277,\n        \"pair\": \"BTC_BRL\",\n        \"remaining_amount\": 1281.4863066512517,\n        \"remaining_value\": 844.405230520926,\n        \"requested_amount\": 458.9032810013549,\n        \"status\": \"string\",\n        \"type\": \"string\",\n        \"total_value\": 1658.1849264957837,\n        \"side\": \"string\",\n        \"price\": 5969.478680299535,\n        \"update_date\": \"string\",\n        \"fee\": 9849.848224457506,\n        \"fill_or_kill\": false,\n        \"external_id\": \"string\",\n        \"requested_value\": 5889.596938066484\n      },\n      {\n        \"id\": \"string\",\n        \"create_date\": \"string\",\n        \"executed_amount\": 5121.880093246355,\n        \"pair\": \"BTC_BRL\",\n        \"remaining_amount\": 1710.4328976727656,\n        \"remaining_value\": 2874.1435331734465,\n        \"requested_amount\": 9049.36602377311,\n        \"status\": \"string\",\n        \"type\": \"string\",\n        \"total_value\": 6642.026717297776,\n        \"side\": \"string\",\n        \"price\": 1896.044900254209,\n        \"update_date\": \"string\",\n        \"fee\": 5679.81603064366,\n        \"fill_or_kill\": true,\n        \"external_id\": \"string\",\n        \"requested_value\": 1202.8830155393855\n      }\n    ],\n    \"pagination\": {\n      \"current_page\": 1,\n      \"registers_count\": 21,\n      \"total_pages\": 1,\n      \"page_size\": 100\n    },\n    \"nc\": \"string\",\n    \"pc\": \"string\"\n  },\n  \"error_code\": null,\n  \"message\": null\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6e579f2c-1ab7-400f-8e95-28a493f84c07",
+          "name": "Create Order",
+          "request": {
+            "name": "Create Order",
+            "description": {
+              "content": "Creates a new order.\n\nPublishes updates in the following websocket topics: [`trade`](#operation/trade) (if there is a trade), [`orderbook`](#operation/orderbook), [`balance`](#operation/balance) and [`order_status`](#operation/order_status).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "orders"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"pair\": \"<string>\",\n  \"side\": \"<string>\",\n  \"type\": \"<string>\",\n  \"amount\": \"<double>\",\n  \"price\": \"<double>\",\n  \"external_id\": \"<string>\",\n  \"post_only\": \"<boolean>\",\n  \"expiration\": \"<double>\",\n  \"immediate_or_cancel\": \"<boolean>\",\n  \"fill_or_kill\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "88ce7bcd-e057-4570-803b-945e9c40e8bd",
+              "name": "Ok",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": 0.1,\n  \"pair\": \"BTC_BRL\",\n  \"price\": 700000,\n  \"side\": \"buy\",\n  \"type\": \"limit\",\n  \"post_only\": false,\n  \"expiration\": 1723073682,\n  \"immediate_or_cancel\": false,\n  \"fill_or_kill\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"string\",\n    \"status\": \"string\",\n    \"create_date\": \"string\",\n    \"pair\": \"BTC_BRL\",\n    \"side\": \"string\",\n    \"executed_amount\": 8850.884890589112,\n    \"remaining_amount\": 3651.1160432117385,\n    \"remaining_value\": 6351.635828996459,\n    \"requested_amount\": 5307.557454465772,\n    \"external_id\": \"BEAB10B1-45B0-4999-9B2F-D2ED048D6C42\",\n    \"requested_value\": 9596.071743664632\n  },\n  \"error_code\": null,\n  \"message\": null\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c4e350c1-eb9e-4c70-8639-b2abd9d65340",
+          "name": "Cancel Order",
+          "request": {
+            "name": "Cancel Order",
+            "description": {
+              "content": "Cancels an active order by its `id`.\n\nPublishes updates in the following websocket topics: [`orderbook`](#operation/orderbook), [`balance`](#operation/balance) and [`order_status`](#operation/order_status).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "orders"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "089663cf-f1c7-4c52-9a52-5ec67059b643",
+              "name": "Ok",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"7155ED34-9EC4-4733-8B32-1E4319CB662F\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"string\",\n    \"create_date\": \"string\",\n    \"executed_amount\": 3247.149046207507,\n    \"remaining_amount\": 6204.663387306223,\n    \"remaining_value\": 1740.7029632670967,\n    \"requested_amount\": 6119.406442898574,\n    \"status\": \"string\",\n    \"total_value\": 1751.6751345831506,\n    \"price\": 3544.6834209908316,\n    \"update_date\": \"string\",\n    \"pair\": \"BTC_BRL\",\n    \"side\": \"string\",\n    \"type\": \"string\",\n    \"external_id\": \"BEAB10B1-45B0-4999-9B2F-D2ED048D6C42\"\n  },\n  \"error_code\": null,\n  \"message\": null\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2b293ae6-8d9c-44fb-9d1b-3226c6b909d3",
+          "name": "Update the amount and/or price of an order",
+          "request": {
+            "name": "Update the amount and/or price of an order",
+            "description": {
+              "content": "Allows update the amount and/or price of an order, it is not possible to change a canceled or fully executed order.\n\nPublishes updates in the following websocket topics: [`orderbook`](#operation/orderbook), and [`balance`](#operation/balance).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "orders"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"order_id\": \"<string>\",\n  \"unit_price\": \"<string>\",\n  \"amount\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "467b3e3e-41d5-4447-b8fc-a5e59397d8db",
+              "name": "Ok",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"order_id\": \"00CE34E9-0168-4050-9D58-10C705A1AC81\",\n  \"unit_price\": \"10\",\n  \"amount\": \"100\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": null,\n  \"error_code\": null,\n  \"message\": null\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8abb6b5b-e4a3-4446-a24e-c3d6bc4a12ce",
+          "name": "Get User Open Orders",
+          "request": {
+            "name": "Get User Open Orders",
+            "description": {
+              "content": "Lists the user's open orders.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "orders",
+                "open"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "pair",
+                  "value": "<string>",
+                  "description": "Currency pair code"
+                },
+                {
+                  "disabled": false,
+                  "key": "side",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "200"
+                },
+                {
+                  "disabled": false,
+                  "key": "current_page",
+                  "value": "1"
+                },
+                {
+                  "disabled": false,
+                  "key": "c",
+                  "value": "<string>",
+                  "description": "The `c` parameter is the cursor you should use to fetch the next page of results"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "0f315d12-0457-4070-8adf-2a85008ce24b",
+              "name": "Ok",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders",
+                    "open"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pair",
+                      "value": "BTC_BRL"
+                    },
+                    {
+                      "key": "side",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "100"
+                    },
+                    {
+                      "key": "current_page",
+                      "value": "3"
+                    },
+                    {
+                      "key": "c",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"orders\": [\n      {\n        \"id\": \"string\",\n        \"create_date\": \"string\",\n        \"executed_amount\": 3905.8158124349084,\n        \"pair\": \"BTC_BRL\",\n        \"remaining_amount\": 7741.601822549227,\n        \"remaining_value\": 56.75115644466766,\n        \"requested_amount\": 7857.685963749466,\n        \"status\": \"string\",\n        \"type\": \"string\",\n        \"total_value\": 6804.7113903904865,\n        \"side\": \"string\",\n        \"price\": 6607.277768522172,\n        \"update_date\": \"string\",\n        \"fee\": 111.51098915719638,\n        \"fill_or_kill\": true,\n        \"external_id\": \"string\",\n        \"requested_value\": 3967.5625813949355\n      },\n      {\n        \"id\": \"string\",\n        \"create_date\": \"string\",\n        \"executed_amount\": 6006.027230465074,\n        \"pair\": \"BTC_BRL\",\n        \"remaining_amount\": 9280.806512975665,\n        \"remaining_value\": 9512.624794465875,\n        \"requested_amount\": 1816.5503777216475,\n        \"status\": \"string\",\n        \"type\": \"string\",\n        \"total_value\": 4621.616979773588,\n        \"side\": \"string\",\n        \"price\": 9797.888902719451,\n        \"update_date\": \"string\",\n        \"fee\": 7206.670494327181,\n        \"fill_or_kill\": false,\n        \"external_id\": \"string\",\n        \"requested_value\": 4825.993147421503\n      }\n    ],\n    \"pagination\": {\n      \"current_page\": 1,\n      \"registers_count\": 21,\n      \"total_pages\": 1,\n      \"page_size\": 100\n    },\n    \"nc\": \"string\",\n    \"pc\": \"string\"\n  },\n  \"error_code\": null,\n  \"message\": null\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "221fdd8c-b768-4bbc-9609-563e0077b3f7",
+          "name": "Get Trades based on a order id",
+          "request": {
+            "name": "Get Trades based on a order id",
+            "description": {
+              "content": "Get the trades from an order.\n\n**Attention:** Due to performance concerns, this endpoint now uses cursor-based pagination. The pagination object currently included in the response is now a placeholder and will be entirely removed as of 2026-06-01. The parameter current_page is also a placeholder and will be removed at the same time. Please update your integration accordingly and refer to the documentation for the correct pagination handling.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "orders",
+                "trades"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "order_id",
+                  "value": "<string>",
+                  "description": "(Required) Order id from a valid order"
+                },
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "200"
+                },
+                {
+                  "disabled": false,
+                  "key": "c",
+                  "value": "<string>",
+                  "description": "The `c` parameter is the cursor you should use to fetch the next page of results"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "dac8f661-15c8-45f5-aee2-5bd310d44f86",
+              "name": "Ok",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders",
+                    "trades"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "order_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "100"
+                    },
+                    {
+                      "key": "c",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"trades\": [\n      {\n        \"amount\": 9334.200811566876,\n        \"id\": \"string\",\n        \"price\": 3101.073487344311,\n        \"timestamp\": 1675708481219,\n        \"total_value\": 3929.894609882042,\n        \"date\": \"string\",\n        \"side\": \"string\",\n        \"type\": \"string\",\n        \"fee\": 9537.975372895475,\n        \"fee_currency\": \"BTC\",\n        \"pair_code\": \"BTC_BRL\",\n        \"taker_or_maker\": \"maker\",\n        \"maker_order_id\": \"string\",\n        \"taker_order_id\": \"string\"\n      },\n      {\n        \"amount\": 5235.622515529196,\n        \"id\": \"string\",\n        \"price\": 670.2394939881395,\n        \"timestamp\": 1675708481219,\n        \"total_value\": 7348.347424406266,\n        \"date\": \"string\",\n        \"side\": \"string\",\n        \"type\": \"string\",\n        \"fee\": 8481.716964783078,\n        \"fee_currency\": \"BTC\",\n        \"pair_code\": \"BTC_BRL\",\n        \"taker_or_maker\": \"maker\",\n        \"maker_order_id\": \"string\",\n        \"taker_order_id\": \"string\"\n      }\n    ],\n    \"pagination\": {\n      \"current_page\": 1,\n      \"registers_count\": 21,\n      \"total_pages\": 1,\n      \"page_size\": 100\n    },\n    \"nc\": \"string\",\n    \"pc\": \"string\"\n  },\n  \"error_code\": null,\n  \"message\": null\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7f2e70a8-9ea7-4775-8f0f-f6194911e504",
+          "name": "User Order by Id",
+          "request": {
+            "name": "User Order by Id",
+            "description": {
+              "content": "Returns the details of an order belonging to the user (by id).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "orders",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "bae81e94-45b5-4c9d-9c4a-3d724e60e0f9",
+              "name": "Ok",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"string\",\n    \"create_date\": \"string\",\n    \"executed_amount\": 1671.645619671599,\n    \"pair\": \"BTC_BRL\",\n    \"remaining_amount\": 5844.510633415827,\n    \"remaining_value\": 8743.599863200649,\n    \"requested_amount\": 2421.938877489199,\n    \"status\": \"string\",\n    \"type\": \"string\",\n    \"total_value\": 504.94817520762683,\n    \"side\": \"string\",\n    \"price\": 3347.7279974104144,\n    \"update_date\": \"string\",\n    \"fee\": 3333.7952577530127,\n    \"fill_or_kill\": false,\n    \"transactions\": [\n      {\n        \"amount\": 7267.592087886098,\n        \"create_date\": \"1965-01-23T10:36:30.662Z\",\n        \"fee\": 6779.53129046124,\n        \"fee_currency\": \"string\",\n        \"total_value\": 488.9038523213929,\n        \"price\": 9386.487527277553\n      },\n      {\n        \"amount\": 6158.72663037416,\n        \"create_date\": \"2013-06-10T20:42:51.429Z\",\n        \"fee\": 8872.687834995995,\n        \"fee_currency\": \"string\",\n        \"total_value\": 5159.700909759837,\n        \"price\": 2337.0549569659893\n      }\n    ],\n    \"external_id\": \"string\",\n    \"requested_value\": 5864.220846564815,\n    \"average_execution_price\": 9503.64912579058\n  },\n  \"error_code\": null,\n  \"message\": null\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2e4cc58a-9876-448b-b177-c0412978d606",
+          "name": "User Order by External Id",
+          "request": {
+            "name": "User Order by External Id",
+            "description": {
+              "content": "Returns the details of a order belonging to the user (by external id).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "orders",
+                "by-external-id",
+                ":external_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "external_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "fc9b103b-2183-4904-a97a-567b7887d280",
+              "name": "Ok",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders",
+                    "by-external-id",
+                    ":external_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "external_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"string\",\n    \"create_date\": \"string\",\n    \"executed_amount\": 7702.079233780856,\n    \"pair\": \"BTC_BRL\",\n    \"remaining_amount\": 1181.2251676906426,\n    \"remaining_value\": 1634.0063971074537,\n    \"requested_amount\": 9439.002019609281,\n    \"status\": \"string\",\n    \"type\": \"string\",\n    \"total_value\": 2369.440549724435,\n    \"side\": \"string\",\n    \"price\": 3669.3199544083086,\n    \"update_date\": \"string\",\n    \"fee\": 8103.236982745411,\n    \"fill_or_kill\": false,\n    \"transactions\": [\n      {\n        \"amount\": 7799.122192091975,\n        \"create_date\": \"1998-11-02T15:42:12.000Z\",\n        \"fee\": 5670.384415260287,\n        \"fee_currency\": \"string\",\n        \"total_value\": 5975.062630052967,\n        \"price\": 8500.786677317348\n      },\n      {\n        \"amount\": 9607.214828895929,\n        \"create_date\": \"1962-11-10T06:52:31.746Z\",\n        \"fee\": 7369.672441885081,\n        \"fee_currency\": \"string\",\n        \"total_value\": 1994.700149038785,\n        \"price\": 6667.9100810238515\n      }\n    ],\n    \"external_id\": \"string\",\n    \"requested_value\": 4806.674336285146,\n    \"average_execution_price\": 7807.137672642218\n  },\n  \"error_code\": null,\n  \"message\": null\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3eb2a403-fdda-4f5c-94f3-1b64ddb02069",
+          "name": "Cancel Order",
+          "request": {
+            "name": "Cancel Order",
+            "description": {
+              "content": "Cancels an active order by its `id` using POST.\n\nPublishes updates in the following websocket topics: [`orderbook`](#operation/orderbook), [`balance`](#operation/balance) and [`order_status`](#operation/order_status).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "orders",
+                "cancel"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "caac891f-1227-443a-b96b-649727375cf2",
+              "name": "Ok",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"7155ED34-9EC4-4733-8B32-1E4319CB662F\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"string\",\n    \"create_date\": \"string\",\n    \"executed_amount\": 3247.149046207507,\n    \"remaining_amount\": 6204.663387306223,\n    \"remaining_value\": 1740.7029632670967,\n    \"requested_amount\": 6119.406442898574,\n    \"status\": \"string\",\n    \"total_value\": 1751.6751345831506,\n    \"price\": 3544.6834209908316,\n    \"update_date\": \"string\",\n    \"pair\": \"BTC_BRL\",\n    \"side\": \"string\",\n    \"type\": \"string\",\n    \"external_id\": \"BEAB10B1-45B0-4999-9B2F-D2ED048D6C42\"\n  },\n  \"error_code\": null,\n  \"message\": null\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a68c3a45-b1f7-487a-88ad-7979b9b137d2",
+          "name": "Cancel Order By External Id",
+          "request": {
+            "name": "Cancel Order By External Id",
+            "description": {
+              "content": "Cancels an active order by its `external_id`.\n\nPublishes updates in the following websocket topics: [`orderbook`](#operation/orderbook), [`balance`](#operation/balance) and [`order_status`](#operation/order_status).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "orders",
+                "by-external-id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"external_id\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "35bf3fda-4d62-4e2f-bcb7-0b12aff89899",
+              "name": "Ok",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders",
+                    "by-external-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"external_id\": \"0F4A8504-21FB-4BE6-9771-25DCF5F68F87\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"string\",\n    \"create_date\": \"string\",\n    \"executed_amount\": 3247.149046207507,\n    \"remaining_amount\": 6204.663387306223,\n    \"remaining_value\": 1740.7029632670967,\n    \"requested_amount\": 6119.406442898574,\n    \"status\": \"string\",\n    \"total_value\": 1751.6751345831506,\n    \"price\": 3544.6834209908316,\n    \"update_date\": \"string\",\n    \"pair\": \"BTC_BRL\",\n    \"side\": \"string\",\n    \"type\": \"string\",\n    \"external_id\": \"BEAB10B1-45B0-4999-9B2F-D2ED048D6C42\"\n  },\n  \"error_code\": null,\n  \"message\": null\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8c13f33c-350d-4656-b019-9dc496c72fc3",
+          "name": "Cancel Order By External Id",
+          "request": {
+            "name": "Cancel Order By External Id",
+            "description": {
+              "content": "Cancels an active order by its `external_id` using POST.\n\nPublishes updates in the following websocket topics: [`orderbook`](#operation/orderbook), [`balance`](#operation/balance) and [`order_status`](#operation/order_status).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "orders",
+                "cancel-by-external-id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"external_id\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "050a8edd-d3a9-48da-aeea-a34dec039068",
+              "name": "Ok",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders",
+                    "cancel-by-external-id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"external_id\": \"0F4A8504-21FB-4BE6-9771-25DCF5F68F87\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"string\",\n    \"create_date\": \"string\",\n    \"executed_amount\": 3247.149046207507,\n    \"remaining_amount\": 6204.663387306223,\n    \"remaining_value\": 1740.7029632670967,\n    \"requested_amount\": 6119.406442898574,\n    \"status\": \"string\",\n    \"total_value\": 1751.6751345831506,\n    \"price\": 3544.6834209908316,\n    \"update_date\": \"string\",\n    \"pair\": \"BTC_BRL\",\n    \"side\": \"string\",\n    \"type\": \"string\",\n    \"external_id\": \"BEAB10B1-45B0-4999-9B2F-D2ED048D6C42\"\n  },\n  \"error_code\": null,\n  \"message\": null\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "195c6601-685a-49af-9bc7-c9af4e0ebd47",
+          "name": "Cancel All Orders",
+          "request": {
+            "name": "Cancel All Orders",
+            "description": {
+              "content": "Cancels all the user's active orders.\n\nPublishes updates in the following websocket topics: [`orderbook`](#operation/orderbook), [`balance`](#operation/balance) and [`order_status`](#operation/order_status).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "orders",
+                "all"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"pair\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e0ec3baf-1cd2-434f-94da-78cb32fa41f1",
+              "name": "Ok",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders",
+                    "all"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"pair\": \"BTC_BRL\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"order_id\": \"F6D2661E-4D6F-4770-BBE6-CC063CBA3770\",\n      \"pair_code\": \"BTC_BRL\",\n      \"success\": true\n    },\n    {\n      \"order_id\": \"7155ED34-9EC4-4733-8B32-1E4319CB662F\",\n      \"pair_code\": \"BTC_BRL\",\n      \"success\": false\n    }\n  ],\n  \"error_code\": null,\n  \"message\": null\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "23836205-53a5-4ede-a811-6285e14140a4",
+          "name": "Estimate Price",
+          "request": {
+            "name": "Estimate Price",
+            "description": {
+              "content": "Estimates the market unit price for a specific amount of a given currency pair.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "orders",
+                "estimate-price",
+                ":pair"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "amount",
+                  "value": "<double>",
+                  "description": "(Required) Amount to be used in the estimative."
+                },
+                {
+                  "disabled": false,
+                  "key": "side",
+                  "value": "<string>",
+                  "description": "(Required) "
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "pair",
+                  "description": "(Required) Currency pair code"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "9884991d-18ca-4589-a7b7-9b91890dea1c",
+              "name": "Ok",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders",
+                    "estimate-price",
+                    ":pair"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "amount",
+                      "value": "<double>"
+                    },
+                    {
+                      "key": "side",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "pair",
+                      "description": "(Required) Currency pair code"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"price\": 54049.12\n  },\n  \"error_code\": null,\n  \"message\": null\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.ripiotrade.co/v4/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "0a102962-7052-4891-9a96-2aca51553ec7",
+    "name": "Ripio Trade - API Documentation Book Orders API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Welcome to the Ripio Trade API documentation.\n\n### Version\nThis API is currently in the version 4.\n\nIf there is need for any big change, a new version will be launched and this version will be maintained for at least 3 months.\n\nIf you're still using the version 3, [access the old documentation](../v3) and check the [migration guide](#tag/V3-Endpoint-Migrations).\n\n### Important\nUse the `Market` endpoints for all trading operations. The `Public` endpoints have a delay (cache) of up to 30 seconds.\n\nAll successful requests will result in a 200 HTTP Status.\n\nAll requests returns data in JSON format (application/json) and have a default body:\n\n\n### Success\n```\n{\n  \"error_code\": null,\n  \"message\": null,\n  \"data\": { }\n}\n```\n\n### Error\n```\n{\n  \"error_code\": [Error code],\n  \"message\": \"Error description\",\n  \"data\": null\n}\n```\n\n\nEndpoints that have a date filter will return data for the last 6 months if no value is sent in the `start_date` parameter.\n\n### URL structure\nThe endpoints URL follow this pattern:\n\n`https://api.ripiotrade.co/{version}/{method}[/{parameter}][?parameter=value...]`\n\n `https://api.ripiotrade.co/v4/tickers/BTC_BRL`\n\n### Limits\n\nThe request limits are based on the user's operational limits.\n\nThere are two types of limit, one of requests per second and another of daily requests. Both of them should be taken in consideration and the requests should be balanced so the daily limit isn't reached.\n\nUsers **without approved documentation** have 1 request per second or 86.400 daily requests.\n\nUsers **with approved documentation** have 3.5 requests per second or 302.400 daily requests.\n\nThese limits can be increased, and the support team should be contacted for that.\n\nWhen the requests per second limit is reached, the response HTTP Status returned is 429 and the response body is:\n```\n{\n  \"message\": \"Too many requests\"\n}\n```\n\nWhen the daily requests limit is reached, the response HTTP Status returned is 429 and the response body is:\n```\n{\n  \"message\": \"Limit Exceeded\"\n}\n```\n\nContact Support:\n Name: Jorn Filho",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Ripio Trade - API Documentation Book Ticker API",
+    "version": "v4.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Ticker",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Tickers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ripiotrade.co/v4/ticker"
+          },
+          "docs": "Returns a 24 hour window statistics for all pairs."
+        },
+        {
+          "info": {
+            "name": "Ticker By Pair",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ripiotrade.co/v4/ticker/:pair",
+            "params": [
+              {
+                "name": "pair",
+                "value": "BTC_BRL",
+                "type": "path",
+                "description": "Currency pair code"
+              }
+            ]
+          },
+          "docs": "Returns a 24 hour window statistics for a given pair."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

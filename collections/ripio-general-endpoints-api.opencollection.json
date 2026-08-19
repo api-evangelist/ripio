@@ -1,0 +1,106 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Ripio Trade - API Documentation Book General endpoints API",
+    "version": "v4.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "General endpoints",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Pairs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ripiotrade.co/v4/pairs",
+            "params": [
+              {
+                "name": "pair",
+                "value": "BTC_BRL",
+                "type": "query",
+                "description": "Currency pair code"
+              },
+              {
+                "name": "countries",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Lists the active currency pairs available in the platform."
+        },
+        {
+          "info": {
+            "name": "Trades",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ripiotrade.co/v4/trades",
+            "params": [
+              {
+                "name": "pair",
+                "value": "BTC_BRL",
+                "type": "query",
+                "description": "Currency pair code"
+              },
+              {
+                "name": "start_time",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "end_time",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "c",
+                "value": "",
+                "type": "query",
+                "description": "The `c` parameter is the cursor you should use to fetch the next page of results"
+              }
+            ]
+          },
+          "docs": "Lists the trades history based on the filtering criteria."
+        },
+        {
+          "info": {
+            "name": "Currencies",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ripiotrade.co/v4/currencies",
+            "params": [
+              {
+                "name": "currency_code",
+                "value": "",
+                "type": "query",
+                "description": "Currency code"
+              },
+              {
+                "name": "countries",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Lists the active currencies available in the platform."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,211 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Ripio Trade - API Documentation Book Public API",
+    "version": "v4.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Public",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Tickers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ripiotrade.co/v4/public/tickers"
+          },
+          "docs": "Returns a 24 hour window statistics for all pairs."
+        },
+        {
+          "info": {
+            "name": "Ticker By Pair",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ripiotrade.co/v4/public/tickers/:pair",
+            "params": [
+              {
+                "name": "pair",
+                "value": "BTC_BRL",
+                "type": "path",
+                "description": "Currency pair code"
+              }
+            ]
+          },
+          "docs": "Returns a 24 hour window statistics for a given pair."
+        },
+        {
+          "info": {
+            "name": "Orderbook Level 3",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ripiotrade.co/v4/public/orders/level-3",
+            "params": [
+              {
+                "name": "pair",
+                "value": "BTC_BRL",
+                "type": "query",
+                "description": "Currency pair code"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns the level 3 orderbook."
+        },
+        {
+          "info": {
+            "name": "Orderbook Level 2",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ripiotrade.co/v4/public/orders/level-2",
+            "params": [
+              {
+                "name": "pair",
+                "value": "BTC_BRL",
+                "type": "query",
+                "description": "Currency pair code"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns the level 2 orderbook."
+        },
+        {
+          "info": {
+            "name": "Trades",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ripiotrade.co/v4/public/trades",
+            "params": [
+              {
+                "name": "pair",
+                "value": "BTC_BRL",
+                "type": "query",
+                "description": "Currency pair code"
+              },
+              {
+                "name": "start_time",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "end_time",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "current_page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "c",
+                "value": "",
+                "type": "query",
+                "description": "The `c` parameter is the cursor you should use to fetch the next page of results"
+              }
+            ]
+          },
+          "docs": "Lists the trades history based on the filtering criteria.\n\n**Attention:** Due to performance concerns, this endpoint now uses cursor-based pagination. The pagination object currently included in the response is now a placeholder and will be entirely removed as of 2026-06-01. The parameter current_page is also a placeholder and will be removed at the same time. Please update your integration accordingly and refer to the documentation for the correct pagination handling."
+        },
+        {
+          "info": {
+            "name": "Currencies",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ripiotrade.co/v4/public/currencies",
+            "params": [
+              {
+                "name": "currency_code",
+                "value": "",
+                "type": "query",
+                "description": "Currency code"
+              },
+              {
+                "name": "countries",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Lists the active currencies available in the platform."
+        },
+        {
+          "info": {
+            "name": "Pairs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ripiotrade.co/v4/public/pairs",
+            "params": [
+              {
+                "name": "pair",
+                "value": "BTC_BRL",
+                "type": "query",
+                "description": "Currency pair code"
+              },
+              {
+                "name": "countries",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Lists the active currency pairs available in the platform."
+        },
+        {
+          "info": {
+            "name": "Countries",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ripiotrade.co/v4/public/countries"
+          },
+          "docs": "Lists the active countries available in the platform."
+        },
+        {
+          "info": {
+            "name": "Server Time",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ripiotrade.co/v4/public/server-time"
+          },
+          "docs": "Returns the server time in miliseconds."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
