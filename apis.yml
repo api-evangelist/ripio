@@ -217,6 +217,26 @@ apis:
     url: https://apidocs.ripiotrade.co/
   - type: APIReference
     url: https://apidocs.ripiotrade.co/
+- aid: ripio:ripio-websocket-api-api
+  name: Ripio WebSocket API
+  description: The WebSocket API API from Ripio — 0 operation(s) for websocket api.
+  humanURL: https://apidocs.ripiotrade.co/
+  baseURL: https://api.ripiotrade.co/v4/
+  tags:
+  - WebSocket API
+  properties:
+  - type: OpenAPI
+    url: openapi/ripio-websocket-api-api-openapi.yml
+- aid: ripio:ripio-websocket-stream-api
+  name: Ripio WebSocket Stream API
+  description: The WebSocket Stream API from Ripio — 0 operation(s) for websocket stream.
+  humanURL: https://apidocs.ripiotrade.co/
+  baseURL: https://api.ripiotrade.co/v4/
+  tags:
+  - WebSocket Stream
+  properties:
+  - type: OpenAPI
+    url: openapi/ripio-websocket-stream-api-openapi.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
