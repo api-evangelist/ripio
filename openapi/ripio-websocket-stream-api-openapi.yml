@@ -1,0 +1,810 @@
+openapi: 3.2.0
+info:
+  title: Ripio WebSocket Stream API
+  version: v4.0
+  contact:
+    name: Jorn Filho
+  x-logo:
+    url: https://trade-images.ripio.com/general_images/logo-ripio.png
+    href: '#'
+  description: 'Operations tagged WebSocket Stream across 11 of this provider''s published API definitions: ripio-book-api-openapi.yml, ripio-cryptocurrency-deposits-api-openapi.yml, ripio-cryptocurrency-withdrawals-api-openapi.yml, ripio-general-endpoints-api-openapi.yml, ripio-orders-api-openapi.yml, ripio-public-api-openapi.yml, ripio-ticker-api-openapi.yml, ripio-ticket-api-openapi.yml, ripio-transactions-api-openapi.yml, ripio-user-api-openapi.yml, ripio-wallets-api-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.ripiotrade.co/v4/
+tags:
+- name: WebSocket Stream
+paths: {}
+webhooks:
+  trade:
+    post:
+      summary: trade@BASE_QUOTE
+      description: This topic listens for trades of a given pair (BASE_QUOTE), so it will be notified every time a trade happens.
+      operationId: trade
+      tags:
+      - WebSocket Stream
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IRequest'
+            example:
+              method: subscribe
+              topics:
+              - trade@ETH_BRL
+      responses:
+        '200':
+          description: Trade
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IResponse_ISocketTrade_'
+              example:
+                id: 1
+                topic: trade@ETH_BRL
+                timestamp: 1672856503549
+                body:
+                  amount: 0.2404764
+                  date: '2019-01-03T02:27:33.947Z'
+                  id: 2B222F22-5235-45FA-97FC-E9DBFA2575EE
+                  maker_order_id: F49F5BD8-3F5B-4364-BCEE-F36F62DB966A
+                  maker_side: buy
+                  maker_type: limit
+                  pair: ETH_BRL
+                  price: 15160
+                  taker_order_id: FEAB5CEC-7F9E-4F95-B67D-9E8D5C739BE3
+                  taker_side: sell
+                  taker_type: market
+                  timestamp: 1675780847920
+                  total_value: 3638.4
+    servers:
+    - url: https://api.ripiotrade.co/v4/
+  orderbook/level_3:
+    post:
+      summary: orderbook/level_3@BASE_QUOTE
+      description: This topic will notify whenever an order is opened, canceled or a trade happens for the given pair (BASE_QUOTE). By default, the system notifies the topic every 30 seconds, even if a transaction has not taken place. Each side will contain up to 100 orders.
+      operationId: orderbook/level_3
+      tags:
+      - WebSocket Stream
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IRequest'
+            example:
+              method: subscribe
+              topics:
+              - orderbook/level_3@ETH_BRL
+      responses:
+        '200':
+          description: Level 3 orderbook
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IResponse_IOrderBookLevel3_'
+              example:
+                id: 2
+                topic: orderbook/level_3@ETH_BRL
+                timestamp: 1672857013503
+                body:
+                  asks:
+                  - amount: 184.9
+                    id: 43758DB1-3257-4C98-A20F-7F246E460A50
+                    price: 20
+                  - amount: 10
+                    id: 4B86ACC5-76B2-4003-AF20-F398CE9EDC92
+                    price: 20
+                  bids:
+                  - amount: 400
+                    id: B075FDF9-9B68-4299-87E0-5FC8B40B3ABD
+                    price: 5
+                  - amount: 20
+                    id: 606763A5-4B95-4216-9F07-69C6B51D64F0
+                    price: 5
+                  pair: ETH_BRL
+                  hash: '2254383345'
+    servers:
+    - url: https://api.ripiotrade.co/v4/
+  orderbook/level_2:
+    post:
+      summary: orderbook/level_2@BASE_QUOTE
+      description: This topic will notify whenever an order is opened, canceled or a trade happens for the given pair (BASE_QUOTE). Since it is a level 2 orderbook, the orders are going to be grouped by price. By default, the system notifies the topic every 30 seconds, even if a transaction has not taken place. Each side will contain up to 100 price levels.
+      operationId: orderbook/level_2
+      tags:
+      - WebSocket Stream
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IRequest'
+            example:
+              method: subscribe
+              topics:
+              - orderbook/level_2@ETH_BRL
+      responses:
+        '200':
+          description: Level 2 orderbook
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IResponse_IOrderBookLevel2WithoutUsers_'
+              example:
+                id: 3
+                topic: orderbook/level_2@ETH_BRL
+                timestamp: 1672856653428
+                body:
+                  asks:
+                  - amount: 184.9
+                    price: 20
+                  - amount: 10
+                    price: 25
+                  bids:
+                  - amount: 400
+                    price: 5
+                  - amount: 20
+                    price: 4
+                  pair: ETH_BRL
+                  hash: '2254383345'
+    servers:
+    - url: https://api.ripiotrade.co/v4/
+  orderbook/level_2_delta:
+    post:
+      summary: orderbook/level_2_delta@BASE_QUOTE
+      description: 'This topic will always notify a change at a price level of the order book when an order is opened, canceled or a trade takes place for a given pair (BASE_QUOTE). In other words, it is the variation in the amount of assets available for buy or sell at a given price level. In each topic event the `amount` is the absolute quantity for a price level, and if the `amount` is 0, you should remove the price level from the order book.
+
+
+        **Important!** In addition to the delta messages, the first message sent upon connection will be a snapshot of the level 2 order book.'
+      operationId: orderbook/level_2_delta
+      tags:
+      - WebSocket Stream
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IRequest'
+            example:
+              method: subscribe
+              topics:
+              - orderbook/level_2_delta@ETH_BRL
+      responses:
+        '200':
+          description: Level 2 delta orderbook
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IResponse_IOrderBookLevel2WithoutUsers_'
+              example:
+                id: 4
+                topic: orderbook/level_2_delta@ETH_BRL
+                timestamp: 1672856653428
+                body:
+                  asks:
+                  - amount: 0
+                    price: 25
+                  bids:
+                  - amount: 20
+                    price: 25
+                  pair: ETH_BRL
+                  hash: '2254383345'
+    servers:
+    - url: https://api.ripiotrade.co/v4/
+  orderbook/level_2_with_users:
+    post:
+      summary: orderbook/level_2_with_users@BASE_QUOTE
+      description: This topic will notify whenever an order is opened, canceled or a trade happens for the given pair (BASE_QUOTE). Since it is a level 2 orderbook, the orders are going to be grouped by price, and this also includes an array with users ids that have an order at that level. By default, the system notifies the topic every 30 seconds, even if a transaction has not taken place. Each side will contain up to 100 price levels.
+      operationId: orderbook/level_2_with_users
+      tags:
+      - WebSocket Stream
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IRequest'
+            example:
+              method: subscribe
+              topics:
+              - orderbook/level_2_with_users@ETH_BRL
+      responses:
+        '200':
+          description: Level 2 orderbook with users
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IResponse_IOrderBookLevel2_'
+              example:
+                id: 5
+                topic: orderbook/level_2_with_users@ETH_BRL
+                timestamp: 1672856653428
+                body:
+                  asks:
+                  - amount: 184.9
+                    price: 20
+                    users:
+                    - 5EF6B2C9-28C9-4C50-99EA-7F3A38958F0A
+                  - amount: 10
+                    price: 25
+                    users:
+                    - 5EF6B2C9-28C9-4C50-99EA-7F3A38958F0A
+                  bids:
+                  - amount: 400
+                    price: 5
+                    users:
+                    - 5EF6B2C9-28C9-4C50-99EA-7F3A38958F0A
+                  - amount: 20
+                    price: 4
+                    users:
+                    - 5EF6B2C9-28C9-4C50-99EA-7F3A38958F0A
+                  pair: ETH_BRL
+                  hash: '2254383345'
+    servers:
+    - url: https://api.ripiotrade.co/v4/
+  ticker:
+    post:
+      summary: ticker@BASE_QUOTE
+      description: This topic delivers notifications for 24 hour window statistics for a pair (BASE_QUOTE), and this will happen whenever an order is opened, canceled or a trade happens for the given pair. By default, the system notifies the topic every 30 seconds, even if a transaction has not taken place.
+      operationId: ticker
+      tags:
+      - WebSocket Stream
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IRequest'
+            example:
+              method: subscribe
+              topics:
+              - ticker@ETH_BRL
+      responses:
+        '200':
+          description: Ticker
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IResponse_ITickerV4_'
+              example:
+                id: 6
+                topic: ticker@ETH_BRL
+                timestamp: 1672856683447
+                body:
+                  ask: 4.01
+                  base_code: ETH
+                  base_id: 27698137-8178-4395-9841-C1B1505C9352
+                  conversions:
+                  - currency_code: BRL
+                    volume: 0
+                  - currency_code: BTC
+                    volume: 0
+                  - currency_code: ETH
+                    volume: 0
+                  - currency_code: USD
+                    volume: 0
+                  - currency_code: USDC
+                    volume: 0
+                  - currency_code: UXD
+                    volume: 0
+                  - currency_code: ARS
+                    volume: 0
+                  - currency_code: MXN
+                    volume: 0
+                  bid: 5
+                  date: '2022-09-28T19:13:40.887Z'
+                  high: 20
+                  low: 20
+                  pair: ETH_BRL
+                  price_change_percent_24h: '-16.66'
+                  quote_code: BRL
+                  quote_id: 48898138-8623-4555-9468-B1A1505A9352
+                  quote_volume: 600
+                  trades_quantity: 10
+                  volume: 124
+                  first: 10
+                  last: 20
+    servers:
+    - url: https://api.ripiotrade.co/v4/
+  order_status:
+    post:
+      summary: order_status
+      description: This topic is responsible for notifing the user every time one of its orders is updated (created, executed, canceled).
+      operationId: order_status
+      tags:
+      - WebSocket Stream
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IRequestWithTicket'
+            example:
+              method: subscribe
+              topics:
+              - order_status
+              ticket: 97794B95-AFE7-454F-81B0-9109112548C2
+      responses:
+        '200':
+          description: Order status
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IResponse_IOrderStatus_'
+              example:
+                id: 7
+                topic: order_status
+                timestamp: 1672856713677
+                body:
+                  amount: 4
+                  average_execution_price: 6
+                  id: F55E4E01-C39B-4AA7-848B-1C6A362C386E
+                  created_at: '2023-01-24T17:28:32.247Z'
+                  executed_amount: 4
+                  external_id: null
+                  pair: ETH_BRL
+                  price: 6
+                  remaining_amount: 0
+                  side: buy
+                  status: executed_completely
+                  type: limit
+                  updated_at: '2023-01-24T17:28:33.993Z'
+                  user_id: 30B8CDBB-BDBD-4B60-A90F-860AB46B76F7
+    servers:
+    - url: https://api.ripiotrade.co/v4/
+  balance:
+    post:
+      summary: balance
+      description: Every time there is a change in the user's balance, this topic will be notified. Actions like create / cancel order, deposit / withdraw currency or a trade being executed, are gonna change the use''s balance.
+      operationId: balance
+      tags:
+      - WebSocket Stream
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IRequestWithTicket'
+            example:
+              method: subscribe
+              topics:
+              - balance
+              ticket: 97794B95-AFE7-454F-81B0-9109112548C2
+      responses:
+        '200':
+          description: Balance
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IResponse_SocketBalance_'
+              example:
+                id: 8
+                topic: balance
+                timestamp: 1672856833684
+                body:
+                  user_id: 299E7131-CE8C-422F-A1CF-497BFA116F89
+                  balances:
+                  - available_amount: 1
+                    currency_code: BTC
+                    locked_amount: 0.5
+                    conversions:
+                    - available_amount: 50003247
+                      currency_code: UXD
+                      locked_amount: 0
+                    - available_amount: 10000649.4
+                      currency_code: BRL
+                      locked_amount: 0
+                    - available_amount: 1
+                      currency_code: BTC
+                      locked_amount: 0.5
+                    - available_amount: 20001.2988
+                      currency_code: ETH
+                      locked_amount: 0
+                    - available_amount: 20001298.8
+                      currency_code: USD
+                      locked_amount: 0
+                    - available_amount: 20001298.8
+                      currency_code: USDC
+                      locked_amount: 0
+                  - available_amount: 3
+                    currency_code: ETH
+                    locked_amount: 1
+                    conversions:
+                    - available_amount: 4119989.31998
+                      currency_code: UXD
+                      locked_amount: 860.002145
+                    - available_amount: 823997.86
+                      currency_code: BRL
+                      locked_amount: 172
+                    - available_amount: 46.03340022
+                      currency_code: BTC
+                      locked_amount: 0.00960896
+                    - available_amount: 3
+                      currency_code: ETH
+                      locked_amount: 1
+                    - available_amount: 4119989.31
+                      currency_code: USD
+                      locked_amount: 860
+                    - available_amount: 4119989.31998
+                      currency_code: USDC
+                      locked_amount: 860.002145
+    servers:
+    - url: https://api.ripiotrade.co/v4/
+  user_trades:
+    post:
+      summary: user_trades
+      description: When orders match, this topic notifies the users involved in the match process. Buyer and seller will get notified about what orders were executed.
+      operationId: user_trades
+      tags:
+      - WebSocket Stream
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IRequestWithTicket'
+            example:
+              method: subscribe
+              topics:
+              - user_trades
+              ticket: 97794B95-AFE7-454F-81B0-9109112548C2
+      responses:
+        '200':
+          description: User Trades
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IResponse_UserTrades_'
+              example:
+                id: 9
+                topic: user_trades
+                timestamp: 1673271591764
+                body:
+                  trade:
+                    amount: 1
+                    date: '2023-01-09T13:39:24.057Z'
+                    fee: 0
+                    fee_currency: BCH
+                    id: 08799ECC-F6B1-498E-B89C-2A05E6A181B9
+                    maker_order_id: AF1C3AD2-D5A2-41CC-9A4C-646B600F9E01
+                    pair_code: BCH_BRL
+                    price: 49
+                    side: buy
+                    taker_or_maker: taker
+                    taker_order_id: 52B46D87-86A1-4978-B141-4E18E3E47514
+                    timestamp: 1675780847920
+                    total_value: 49
+                    type: limit
+                  user_id: 30B8CDBB-BDBD-4B60-A90F-860AB46B76F7
+    servers:
+    - url: https://api.ripiotrade.co/v4/
+  deposit:
+    post:
+      summary: deposit
+      description: This topic is responsible for notifing the user when a fiat / cryptocurrency deposit occurs.
+      operationId: deposit
+      tags:
+      - WebSocket Stream
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IRequestWithTicket'
+            example:
+              method: subscribe
+              topics:
+              - deposit
+              ticket: 97794B95-AFE7-454F-81B0-9109112548C2
+      responses:
+        '200':
+          description: Deposit
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IResponse_SendCashInToSocketUseCaseParams_'
+              example:
+                id: 10
+                topic: deposit
+                timestamp: 1673271591764
+                body:
+                  id: 08799ECC-F6B1-498E-B89C-2A05E6A181B9
+                  amount: 1
+                  hash: '0x79704c92b31061b8f51e26486d6454aff3e3c58aa0d51f0f803d6fd063be8100'
+                  currency_code: ETH
+                  is_internal: false
+                  status: confirmed
+                  create_date: '2023-01-09T13:39:24.057Z'
+                  update_date: '2023-01-09T13:39:25.001Z'
+                  user_id: 5B6A43AE-8012-402D-966F-87CF64689535
+                  confirmation_date: '2023-01-09T13:39:25.001Z'
+                  address: 3PQhyXH1EZs1bZ23ZafqQDyeViqxn5KdXN
+                  network: bitcoincash
+    servers:
+    - url: https://api.ripiotrade.co/v4/
+  withdrawal:
+    post:
+      summary: withdrawal
+      description: This topic is responsible for notifing the user when a fiat / cryptocurrency withdrawal occurs.
+      operationId: withdrawal
+      tags:
+      - WebSocket Stream
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IRequestWithTicket'
+            example:
+              method: subscribe
+              topics:
+              - withdrawal
+              ticket: 97794B95-AFE7-454F-81B0-9109112548C2
+      responses:
+        '200':
+          description: Withdrawal
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IResponse_SendCashOutToSocketUseCaseParams_'
+              example:
+                id: 11
+                topic: withdrawal
+                timestamp: 1673271591764
+                body:
+                  id: 2B222F22-5235-45FA-97FC-E9DBFA2575EE
+                  amount: 100
+                  currency_code: ETH
+                  status: confirmed
+                  miner_fee: null
+                  fee: null
+                  external_id: 08799ECC-F6B1-498E-B89C-2A05E6A181B9
+                  create_date: '2023-01-09T13:39:24.057Z'
+                  destination_address: mpe8FKtvDktBN1FGToFpYN2pdktySxD8wg
+                  update_date: '2023-01-09T13:39:24.057Z'
+                  hash: '0x79704c92b31061b8f51e26486d6454aff3e3c58aa0d51f0f803d6fd063be8100'
+                  is_internal: false
+                  network: bitcoin
+                  user_id: 5B6A43AE-8012-402D-966F-87CF64689535
+    servers:
+    - url: https://api.ripiotrade.co/v4/
+components:
+  securitySchemes:
+    API_Credentials:
+      type: apiToken
+      in: header
+      name: Authorization
+      description: "You can create API Credentials on: <https://trade.ripio.com/market/api/token>.\n\n After creating the **API Credentials**, you'll need to save in a safe place two pieces of information, an **API Token** and a **Secret Key**. The credentials are required respectively to **Authenticate** and **Sign** all Private REST Requests.\n\n **Attention**: The Secret Key can only be viewed once and cannot be retrieved later. **If you lose the Secret Key, delete the set of credentials and create a new one**. \n\n Each endpoint requires a type of access, which can be `Read`, `Buy/Sell`, `Cryptocurrency withdrawals`, or can contain all of these, each one for its own function. It is possible for the token to be `Read` only, or it may have several types, if it has any other type of access such as: `Buy/Sell` or `Cryptocurrency withdrawals`, it will also be `Read` by default.\n\n\n## Headers\n\n\nFor all private routes, these Headers are required:\n\n| Header       | Description   |\n|--------------|---------------|\n| **Authorization**     | The API Token as a string.    |\n| **Timestamp**     | A timestamp in milliseconds. See the Timestamp Security section for more details.    |\n| **Timestamp-tolerance**     | An additional, non-required parameter, that you can send to specify the number of milliseconds after the timestamp for the request to be valid. See the Timestamp Security section for more details.   |\n| **Signature**     | See the Generating Signature section for more details.   |\n\n## Timestamp Security\n\n Timestamp Security is a security method to guarantee the validation of the acceptable time window, in addition to guaranteeing the uniqueness of the request **Signature**.\n\n* **All Private Requests** also require a **Header** parameter, **Timestamp**, which must be the timestamp in milliseconds of when the request was created and sent. Can be generated with `Date.now()` if you're using JavaScript, for example.\n\n* An additional parameter, **Timestamp-tolerance**, non-required, may be sent to specify the max number of milliseconds after the timestamp, that the request is valid. If Timestamp-tolerance is not sent, it defaults to **5000 (5 seconds)**.\n\n*  **It is recommended to use a small Timestamp-tolerance of 5000 (5 seconds) or less. The maximum value is 60,000 (60 seconds)**. \n\n## Generating Signature\n\nTo create a signature for all Private Requests, you must **encrypt** the hash-based message using **sha256 HMAC** and encode it in **Base64**. \n\n The **message** must contain:\n\n```\nTimestamp + HTTP Method + Path + JSON Payload\n```\n * Not including the **'+'** sign, just concatenate the content into a string.\n\n* The **Timestamp** is the same as the one sent in the Header.\n\n* For **GET** Requests, it is necessary to consider the **PATH** without **Query Params**. For example, this route: `/withdrawals/estimate-rate/ADA?network=cardano_testnet`. Just `/withdrawals/estimate-fee` is considered. Additionally, the **BODY** is considered an empty **String**.\n\n* **JSON Payload** must be a string and must be the same as the one sent in the request **Body**.\n\n**IMPORTANT:** To prevent an invalid signature, avoid using unnecessary decimal places in the request body properties. For instance, use `1` instead of `1.0`. Alternatively, you can also send numbers as strings in the request body, ensuring they are in the same format but as strings. For example:\n\n```json\n{\n  'amount': '0.01',\n  'pair': 'BTC_BRL',\n  'price': '300000', \n  'side': 'buy', \n  'type': 'limit'\n}\n\n```\n\n### Examples \n\nWe provide functional examples of how to authenticate with this API, written in various programming languages. You can find these examples in our GitHub repository: https://github.com/ripio/api."
+      scopes:
+        Read: Endpoints / token with read access.
+        Buy/Sell: Endpoints / token with Buy and Sell orders access.
+        Crypto Withdrawals: Endpoints / token with Crypto Withdrawals access.
+        Fiat Withdrawals: Endpoints / token with Fiat Withdrawals access.
+x-refined-from:
+- ripio-book-api-openapi.yml
+- ripio-cryptocurrency-deposits-api-openapi.yml
+- ripio-cryptocurrency-withdrawals-api-openapi.yml
+- ripio-general-endpoints-api-openapi.yml
+- ripio-orders-api-openapi.yml
+- ripio-public-api-openapi.yml
+- ripio-ticker-api-openapi.yml
+- ripio-ticket-api-openapi.yml
+- ripio-transactions-api-openapi.yml
+- ripio-user-api-openapi.yml
+- ripio-wallets-api-openapi.yml
+x-websocket-api:
+  description: "# WebSocket API\n\nThe WebSocket API allows you to perform trading operations (create, cancel, and update orders) via WebSocket connection. This is separate from the WebSocket Stream service which provides real-time market data.\n\n## General API Information\n\n- **Base endpoint**: `wss://ws-api.ripio.com`\n- Connections remain active as long as there is activity; idle connections are disconnected after **60 seconds** of inactivity\n- The WebSocket server will automatically send ping frames to maintain connection health\n- If the WebSocket server does not receive a pong frame back from the connection within **60 seconds**, the connection will be disconnected\n- When you receive a ping, you must send a pong with a copy of ping's payload as soon as possible\n- Unsolicited pong frames are allowed, but will not prevent disconnection\n- Authentication is done using **API Token, Secret, and Timestamp** (same as REST API)\n- All timestamps are in **milliseconds** in UTC\n- All field names and values are **case-sensitive**\n- APIs have a timeout of **10 seconds** when processing a request\n\n## Authentication\n\nThe WebSocket API uses the same authentication mechanism as the REST API, including API Token, Secret, and Timestamp-based signature generation.\n\nFor complete authentication details, including signature generation, please refer to the **Authorization** section.\n\n### Key Points for WebSocket API:\n\n- Use the same **API Token** and **Secret** from your REST API credentials\n- Include `apiToken`, `timestamp`, and `signature` in the `params` object of each request\n- The signature is generated using: **Timestamp + JSON Body (business parameters only)**\n\n### Signature Generation for WebSocket API\n\nUnlike the REST API, the WebSocket signature is simpler because there's no HTTP method or path:\n\n**Message to sign:** `Timestamp + JSON Body`\n\n**Where:**\n- `Timestamp`: The same timestamp sent in the `params.timestamp` field (in milliseconds)\n- `JSON Body`: **ONLY the business parameters** (pair, side, type, amount, price, etc.). **DO NOT include** `apiToken`, `timestamp`, or `signature` in the body to sign.\n\n**Important:** Do NOT include `+` signs - just concatenate the values directly.\n\n### Signature Example\n\n**Request to send:**\n```json\n{\n  \"id\": \"req-001\",\n  \"method\": \"order.create\",\n  \"params\": {\n    \"pair\": \"BTC_BRL\",\n    \"side\": \"buy\",\n    \"type\": \"limit\",\n    \"amount\": 0.001,\n    \"price\": 100000,\n    \"apiToken\": \"your-api-token\",\n    \"timestamp\": 1634567890000,\n    \"signature\": \"calculated-signature\"\n  }\n}\n```\n\n**Body to sign (only business params):**\n```json\n{\n  \"pair\": \"BTC_BRL\",\n  \"side\": \"buy\",\n  \"type\": \"limit\",\n  \"amount\": 0.001,\n  \"price\": 100000\n}\n```\n\n**Message to sign:**\n```\n1634567890000{\"pair\":\"BTC_BRL\",\"side\":\"buy\",\"type\":\"limit\",\"amount\":0.001,\"price\":100000}\n```\n\n**Then generate HMAC SHA256 signature:**\n```javascript\nconst crypto = require('crypto');\nconst message = timestamp.toString() + JSON.stringify(bodyParams);\nconst signature = crypto.createHmac('sha256', secretKey).update(message).digest('base64');\n```\n\n## Request Format\n\nAll WebSocket API requests must follow this format:\n\n```json\n{\n  \"id\": \"unique-request-id\",\n  \"method\": \"order.create\",\n  \"params\": {\n    ...body parameters...,\n    \"apiToken\": \"your-api-token\",\n    \"timestamp\": 1634567890000,\n    \"signature\": \"calculated-signature\"\n  }\n}\n```\n\n## Response Format\n\n### Success Response\n\n```json\n{\n  \"id\": \"unique-request-id\",\n  \"status\": 200,\n  \"result\": {\n    \"id\": \"7155ED34-9EC4-4733-8B32-1E4319CB662F\",\n    \"create_date\": \"2024-03-27T13:27:19.853Z\",\n    \"executed_amount\": 0,\n    \"external_id\": \"BEAB10B1-45B0-4999-9B2F-D2ED048D6C42\",\n    \"pair\": \"BTC_BRL\",\n    \"remaining_amount\": 10,\n    \"remaining_value\": 1000,\n    \"requested_amount\": 10,\n    \"requested_value\": 1000,\n    \"side\": \"buy\",\n    \"status\": \"open\"\n  }\n}\n```\n\n### Error Response\n\n```json\n{\n  \"id\": \"unique-request-id\",\n  \"status\": 400,\n  \"result\": null,\n  \"error\": {\n    \"error_code\": 40011,\n    \"message\": \"Insufficient funds.\"\n  }\n}\n```"
+  methods:
+    order.create:
+      summary: Create Order via WebSocket
+      description: Creates a new trading order via WebSocket API. Supports all order types available in the REST API including limit, market, stop-limit, trailing, ceiling, and iceberg orders.
+      requestSchema:
+        $ref: '#/components/schemas/WebSocketCreateRequest'
+      responseSchema:
+        $ref: '#/components/schemas/WebSocketResponse'
+      errorSchema:
+        $ref: '#/components/schemas/WebSocketErrorResponse'
+      examples:
+        limitBuyOrder:
+          summary: Create Limit Buy Order
+          value:
+            id: req-001
+            method: order.create
+            params:
+              apiToken: your-api-token
+              timestamp: 1634567890000
+              signature: calculated-signature
+              pair: BTC_BRL
+              side: buy
+              type: limit
+              amount: 0.001
+              price: 100000
+              external_id: my-order-123
+        marketSellOrder:
+          summary: Create Market Sell Order
+          value:
+            id: req-002
+            method: order.create
+            params:
+              apiToken: your-api-token
+              timestamp: 1634567890000
+              signature: calculated-signature
+              pair: ETH_BRL
+              side: sell
+              type: market
+              amount: 0.1
+              value: 1000
+      successResponse:
+        id: req-001
+        status: 200
+        result:
+          id: 7155ED34-9EC4-4733-8B32-1E4319CB662F
+          status: open
+          create_date: '2024-03-27T13:27:19.853Z'
+          external_id: my-order-123
+          pair: BTC_BRL
+          side: buy
+          executed_amount: 0
+          remaining_amount: 0.001
+          remaining_value: 100
+          requested_amount: 0.001
+          requested_value: 100
+    order.cancel:
+      summary: Cancel Order via WebSocket
+      description: Cancels an active trading order via WebSocket API. You can cancel by order ID or external ID.
+      requestSchema:
+        type: object
+        properties:
+          id:
+            type: string
+            description: Unique request identifier for correlation
+          method:
+            type: string
+            enum:
+            - order.cancel
+            description: WebSocket API method
+          params:
+            type: object
+            properties:
+              apiToken:
+                type: string
+                description: API Token for authentication
+              timestamp:
+                type: integer
+                format: int64
+                description: Timestamp in milliseconds
+              signature:
+                type: string
+                description: HMAC SHA256 signature
+              id:
+                type: string
+                description: Order ID (use either id or external_id, not both)
+              external_id:
+                type: string
+                description: External Order ID (use either id or external_id, not both)
+            required:
+            - apiToken
+            - timestamp
+            - signature
+        required:
+        - id
+        - method
+        - params
+      responseSchema:
+        $ref: '#/components/schemas/WebSocketCancelResponse'
+      errorSchema:
+        $ref: '#/components/schemas/WebSocketErrorResponse'
+      examples:
+        cancelById:
+          summary: Cancel Order by ID
+          value:
+            id: req-003
+            method: order.cancel
+            params:
+              apiToken: your-api-token
+              timestamp: 1634567890000
+              signature: calculated-signature
+              id: 7155ED34-9EC4-4733-8B32-1E4319CB662F
+        cancelByExternalId:
+          summary: Cancel Order by External ID
+          value:
+            id: req-004
+            method: order.cancel
+            params:
+              apiToken: your-api-token
+              timestamp: 1634567890000
+              signature: calculated-signature
+              external_id: my-order-123
+      successResponse:
+        id: req-003
+        status: 200
+        result:
+          id: 7155ED34-9EC4-4733-8B32-1E4319CB662F
+          create_date: '2024-03-27T13:27:19.853Z'
+          executed_amount: 0
+          remaining_amount: 0.001
+          remaining_value: 100
+          requested_amount: 0.001
+          status: canceled
+          total_value: 100
+          type: limit
+          price: 100000
+          update_date: '2024-03-27T13:30:45.123Z'
+          pair: BTC_BRL
+          external_id: my-order-123
+    order.update:
+      summary: Update Order via WebSocket
+      description: Updates the price and/or amount of an existing active order via WebSocket API. It is not possible to change a canceled or fully executed order.
+      requestSchema:
+        type: object
+        properties:
+          id:
+            type: string
+            description: Unique request identifier for correlation
+          method:
+            type: string
+            enum:
+            - order.update
+            description: WebSocket API method
+          params:
+            type: object
+            properties:
+              apiToken:
+                type: string
+                description: API Token for authentication
+              timestamp:
+                type: integer
+                format: int64
+                description: Timestamp in milliseconds
+              signature:
+                type: string
+                description: HMAC SHA256 signature
+              order_id:
+                type: string
+                description: Order ID to update
+              price:
+                type: number
+                description: New unit price (optional, but at least one of price or amount must be provided)
+              amount:
+                type: number
+                description: New order amount (optional, but at least one of price or amount must be provided)
+            required:
+            - apiToken
+            - timestamp
+            - signature
+            - order_id
+        required:
+        - id
+        - method
+        - params
+      responseSchema:
+        $ref: '#/components/schemas/WebSocketUpdateResponse'
+      errorSchema:
+        $ref: '#/components/schemas/WebSocketErrorResponse'
+      examples:
+        updatePriceAndAmount:
+          summary: Update Order Price and Amount
+          value:
+            id: req-005
+            method: order.update
+            params:
+              apiToken: your-api-token
+              timestamp: 1634567890000
+              signature: calculated-signature
+              order_id: 7155ED34-9EC4-4733-8B32-1E4319CB662F
+              price: 105000
+              amount: 0.002
+        updatePriceOnly:
+          summary: Update Order Price Only
+          value:
+            id: req-006
+            method: order.update
+            params:
+              apiToken: your-api-token
+              timestamp: 1634567890000
+              signature: calculated-signature
+              order_id: 7155ED34-9EC4-4733-8B32-1E4319CB662F
+              price: 110000
+        updateAmountOnly:
+          summary: Update Order Amount Only
+          value:
+            id: req-007
+            method: order.update
+            params:
+              apiToken: your-api-token
+              timestamp: 1634567890000
+              signature: calculated-signature
+              order_id: 7155ED34-9EC4-4733-8B32-1E4319CB662F
+              amount: 0.003
+      successResponse:
+        id: req-005
+        status: 200
+        result: null
