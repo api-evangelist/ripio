@@ -115,6 +115,8 @@ apis:
   humanURL: https://apidocs.ripiotrade.co/
   baseURL: https://api.ripiotrade.co/v4/
   tags:
+  - General Endpoints
+  tags_raw:
   - General endpoints
   properties:
   - type: OpenAPI
