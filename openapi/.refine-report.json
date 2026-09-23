@@ -1,17 +1,9 @@
 {
   "provider": "ripio",
   "sources": [
-    "ripio-book-api-openapi.yml",
-    "ripio-cryptocurrency-deposits-api-openapi.yml",
-    "ripio-cryptocurrency-withdrawals-api-openapi.yml",
-    "ripio-general-endpoints-api-openapi.yml",
-    "ripio-orders-api-openapi.yml",
-    "ripio-public-api-openapi.yml",
-    "ripio-ticker-api-openapi.yml",
-    "ripio-ticket-api-openapi.yml",
-    "ripio-transactions-api-openapi.yml",
-    "ripio-user-api-openapi.yml",
-    "ripio-wallets-api-openapi.yml"
+    "_original/ripio-trade-openapi.yml",
+    "ripio-websocket-api-api-openapi.yml",
+    "ripio-websocket-stream-api-openapi.yml"
   ],
   "outputs": [
     "ripio-book-api-openapi.yml",
@@ -24,11 +16,34 @@
     "ripio-ticket-api-openapi.yml",
     "ripio-transactions-api-openapi.yml",
     "ripio-user-api-openapi.yml",
-    "ripio-wallets-api-openapi.yml"
+    "ripio-wallets-api-openapi.yml",
+    "ripio-websocket-api-api-openapi.yml",
+    "ripio-websocket-stream-api-openapi.yml"
   ],
   "archived": [],
   "errors": [],
-  "warnings": [],
-  "notes": [],
-  "skipped": []
+  "warnings": [
+    "ripio-websocket-api-api-openapi.yml: previously refined output kept for 3 operation(s) no archived document covers (e.g. webhook:order.cancel delete, webhook:order.create post, webhook:order.update put); its other 0 operation(s) came from the archive and were dropped from it. The archive is incomplete for this provider \u2014 re-harvest to restore _original/ as the full source of truth.",
+    "ripio-websocket-stream-api-openapi.yml: previously refined output kept for 11 operation(s) no archived document covers (e.g. webhook:balance post, webhook:deposit post, webhook:order_status post); its other 0 operation(s) came from the archive and were dropped from it. The archive is incomplete for this provider \u2014 re-harvest to restore _original/ as the full source of truth."
+  ],
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "ripio-trade-openapi.yml: upgraded openapi 3.0.0 -> OpenAPI 3.2.0; renamed 1 component key(s) illegal in 3.x (e.g. API Credentials); promoted x-webhooks (14) to the standard `webhooks` key",
+    "tag 'WebSocket API' spans 2 source specs (ripio-trade-openapi.yml, ripio-websocket-api-api-openapi.yml): per-path servers applied",
+    "tag 'WebSocket Stream' spans 2 source specs (ripio-trade-openapi.yml, ripio-websocket-stream-api-openapi.yml): per-path servers applied",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "ripio-book-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "ripio-cryptocurrency-deposits-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "ripio-cryptocurrency-withdrawals-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "ripio-general-endpoints-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "ripio-orders-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "ripio-public-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "ripio-ticker-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "ripio-ticket-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "ripio-transactions-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "ripio-user-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "ripio-wallets-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
