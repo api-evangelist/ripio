@@ -285,55 +285,10 @@ paths:
           - To retrieve trades by order ID or external ID for reconciliation'
 components:
   schemas:
-    StartDateParamV4:
-      type: string
-      default: '[10 days ago]'
-      format: date
-      description: Initial date filter in ISO-8601 format (shouldn't be before 2017-10-01)
-    UserPairFeeData:
-      properties:
-        taker:
-          type: number
-          format: double
-        maker:
-          type: number
-          format: double
-        side:
-          type: string
-      required:
-      - taker
-      - maker
-      - side
-      type: object
-    BalanceOnDateResponseDataV4:
-      properties:
-        currency_code:
-          type: string
-          description: Currency code
-          example: BTC
-        available_amount:
-          type: number
-          format: float
-          description: Available amount for trading or withdrawing
-        last_update:
-          type: string
-          description: Datetime of the last update
-          format: datetime
-      required:
-      - currency_code
-      - available_amount
-      - last_update
-      type: object
-      additionalProperties: false
-    EndDateNoMinParamV4:
-      type: string
-      default: '[Current date]'
-      format: date
-      description: Final date filter in ISO-8601 format
-    UserStatementResponse:
+    UserTradesResponseV4:
       properties:
         data:
-          $ref: '#/components/schemas/UserStatementData'
+          $ref: '#/components/schemas/UserTradesDataV4'
         error_code:
           type:
           - number
@@ -352,28 +307,28 @@ components:
       - message
       type: object
       additionalProperties: false
-    UserStatementData:
+    BalanceResponseV4:
       properties:
-        statement:
+        data:
           items:
-            $ref: '#/components/schemas/UserStatementItem'
+            $ref: '#/components/schemas/BalanceResponseDataV4'
           type: array
-          example:
-          - amount: -4.76e-06
-            after_balance: 8605.31353851
-            currency: BTC
-            date: '2022-01-27T18:16:10.557Z'
-            operation: Tax over buy, executed
-          - amount: 0.00119048
-            after_balance: 8605.31354327
-            currency: BTC
-            date: '2022-01-27T18:16:10.557Z'
-            operation: Buy
-        pagination:
-          $ref: '#/components/schemas/PaginationV4'
+        error_code:
+          type:
+          - number
+          - 'null'
+          enum:
+          - null
+          example: null
+        message:
+          type:
+          - string
+          - 'null'
+          example: null
       required:
-      - statement
-      - pagination
+      - data
+      - error_code
+      - message
       type: object
       additionalProperties: false
     UserPairFeeResponse:
@@ -407,128 +362,20 @@ components:
       - message
       type: object
       additionalProperties: false
-    UserStatementItem:
-      properties:
-        amount:
-          type: number
-          format: float
-          description: Transaction amount
-        after_balance:
-          type: number
-          format: float
-          description: Account balance after the operation
-        currency:
-          type: string
-          description: Currency code
-          example: BTC
-        date:
-          type: string
-          description: Timestamp of the operation
-        operation:
-          type: string
-          description: Description of the operation (e.g., "Buy", "Sell", "Tax over buy, ...")
-      required:
-      - amount
-      - after_balance
-      - currency
-      - date
-      - operation
-      type: object
-      additionalProperties: false
-    PageSizeParamV4:
-      type: number
-      format: int32
-      default: 200
-      example: 100
-      description: Number of records per page
-      maximum: 1000
-      minimum: 1
-    EndDateTimeParamV4:
+    EndDateNoMinParamV4:
       type: string
-      default: '[Current datetime]'
-      example: '2020-01-02T23:59:59-03:00'
-      format: datetime
-      description: Final datetime filter in ISO-8601 format (the interval between the initial and final datetime shouldn't be greater than 6 months)
-    UserTradesDataV4:
-      properties:
-        trades:
-          items:
-            $ref: '#/components/schemas/UserPreparedTradeV4'
-          type: array
-          example:
-          - amount: 0.00270754
-            date: '2019-04-02T11:22:22.403Z'
-            fee: 0.25
-            fee_currency: USDC
-            id: 488F9395-47ED-4924-98AB-C860E1733A03
-            maker_order_id: 1FD30735-E055-4200-AD3D-007B02A5BA92
-            pair_code: BTC_USDC
-            taker_or_maker: maker
-            price: 18550
-            side: sell
-            taker_order_id: DBC6D4AF-D454-46DF-80EC-E19528A0FB25
-            timestamp: 1675708481219
-            type: market
-            total_value: 50.22
-          - amount: 0.0026938
-            date: '2019-04-02T11:25:41.512Z'
-            fee: 1.347e-05
-            fee_currency: BTC
-            id: C79ED37D-DC21-4D54-8AFC-4262347E3F8D
-            maker_order_id: F49F5BD8-3F5B-4364-BCEE-F36F62DB966A
-            pair_code: BTC_USDC
-            taker_or_maker: taker
-            price: 18550
-            side: buy
-            taker_order_id: FEAB5CEC-7F9E-4F95-B67D-9E8D5C739BE3
-            timestamp: 1675708481220
-            type: market
-            total_value: 49.96
-        pagination:
-          $ref: '#/components/schemas/PaginationV4'
-        nc:
-          type:
-          - string
-          - 'null'
-          description: This is the next cursor, use its value with the `c` parameter to retrieve the next page
-        pc:
-          type:
-          - string
-          - 'null'
-          description: This is the previous cursor, use its value with the `c` parameter to retrieve the previous page
-      required:
-      - trades
-      - pagination
-      type: object
-      additionalProperties: false
-    BalanceOnDateResponseV4:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/BalanceOnDateResponseDataV4'
-          type: array
-          example:
-          - available_amount: 5.23423423
-            currency_code: BTC
-            last_update: '2020-10-20T18:39:45.198Z'
-        error_code:
-          type:
-          - number
-          - 'null'
-          enum:
-          - null
-          example: null
-        message:
-          type:
-          - string
-          - 'null'
-          example: null
-      required:
-      - data
-      - error_code
-      - message
-      type: object
-      additionalProperties: false
+      default: '[Current date]'
+      format: date
+      description: Final date filter in ISO-8601 format
+    StartDateParamV4:
+      type: string
+      default: '[10 days ago]'
+      format: date
+      description: Initial date filter in ISO-8601 format (shouldn't be before 2017-10-01)
+    DateParamV4:
+      type: string
+      format: date
+      description: Date filter in ISO-8601 format
     PaginationV4:
       properties:
         current_page:
@@ -559,74 +406,16 @@ components:
         registers_count: 21
         total_pages: 1
         page_size: 100
-    StartDateTimeNoMinParamV4:
-      type: string
-      default: '[6 months ago]'
-      example: '2020-01-01T00:00:00-03:00'
-      format: datetime
-      description: Initial datetime filter in ISO-8601 format
-    DateParamV4:
-      type: string
-      format: date
-      description: Date filter in ISO-8601 format
-    BalanceResponseDataV4:
-      properties:
-        currency_code:
-          type: string
-          description: Currency code
-          example: BTC
-        available_amount:
-          type: number
-          format: float
-          description: Available amount for trading or withdrawing
-        last_update:
-          type: string
-          description: Datetime of the last update
-          format: datetime
-        locked_amount:
-          type: number
-          format: float
-          description: Amount in use
-      required:
-      - currency_code
-      - available_amount
-      - last_update
-      - locked_amount
-      type: object
-      additionalProperties: false
-      example:
-      - available_amount: 5.23423423
-        currency_code: BTC
-        last_update: '2020-10-20T18:39:45.198Z'
-        locked_amount: 0
-    BalanceResponseV4:
+    BalanceOnDateResponseV4:
       properties:
         data:
           items:
-            $ref: '#/components/schemas/BalanceResponseDataV4'
+            $ref: '#/components/schemas/BalanceOnDateResponseDataV4'
           type: array
-        error_code:
-          type:
-          - number
-          - 'null'
-          enum:
-          - null
-          example: null
-        message:
-          type:
-          - string
-          - 'null'
-          example: null
-      required:
-      - data
-      - error_code
-      - message
-      type: object
-      additionalProperties: false
-    UserTradesResponseV4:
-      properties:
-        data:
-          $ref: '#/components/schemas/UserTradesDataV4'
+          example:
+          - available_amount: 5.23423423
+            currency_code: BTC
+            last_update: '2020-10-20T18:39:45.198Z'
         error_code:
           type:
           - number
@@ -718,12 +507,6 @@ components:
       - taker_order_id
       type: object
       additionalProperties: false
-    EndDateTimeNoMinParamV4:
-      type: string
-      default: '[Current datetime]'
-      example: '2020-01-02T23:59:59-03:00'
-      format: datetime
-      description: Final datetime filter in ISO-8601 format
     StartDateTimeParamV4:
       type: string
       default: '[6 months ago]'
@@ -736,6 +519,223 @@ components:
       default: 1
       example: 3
       description: Page number for pagination
+    BalanceOnDateResponseDataV4:
+      properties:
+        currency_code:
+          type: string
+          description: Currency code
+          example: BTC
+        available_amount:
+          type: number
+          format: float
+          description: Available amount for trading or withdrawing
+        last_update:
+          type: string
+          description: Datetime of the last update
+          format: datetime
+      required:
+      - currency_code
+      - available_amount
+      - last_update
+      type: object
+      additionalProperties: false
+    EndDateTimeNoMinParamV4:
+      type: string
+      default: '[Current datetime]'
+      example: '2020-01-02T23:59:59-03:00'
+      format: datetime
+      description: Final datetime filter in ISO-8601 format
+    UserStatementResponse:
+      properties:
+        data:
+          $ref: '#/components/schemas/UserStatementData'
+        error_code:
+          type:
+          - number
+          - 'null'
+          enum:
+          - null
+          example: null
+        message:
+          type:
+          - string
+          - 'null'
+          example: null
+      required:
+      - data
+      - error_code
+      - message
+      type: object
+      additionalProperties: false
+    UserTradesDataV4:
+      properties:
+        trades:
+          items:
+            $ref: '#/components/schemas/UserPreparedTradeV4'
+          type: array
+          example:
+          - amount: 0.00270754
+            date: '2019-04-02T11:22:22.403Z'
+            fee: 0.25
+            fee_currency: USDC
+            id: 488F9395-47ED-4924-98AB-C860E1733A03
+            maker_order_id: 1FD30735-E055-4200-AD3D-007B02A5BA92
+            pair_code: BTC_USDC
+            taker_or_maker: maker
+            price: 18550
+            side: sell
+            taker_order_id: DBC6D4AF-D454-46DF-80EC-E19528A0FB25
+            timestamp: 1675708481219
+            type: market
+            total_value: 50.22
+          - amount: 0.0026938
+            date: '2019-04-02T11:25:41.512Z'
+            fee: 1.347e-05
+            fee_currency: BTC
+            id: C79ED37D-DC21-4D54-8AFC-4262347E3F8D
+            maker_order_id: F49F5BD8-3F5B-4364-BCEE-F36F62DB966A
+            pair_code: BTC_USDC
+            taker_or_maker: taker
+            price: 18550
+            side: buy
+            taker_order_id: FEAB5CEC-7F9E-4F95-B67D-9E8D5C739BE3
+            timestamp: 1675708481220
+            type: market
+            total_value: 49.96
+        pagination:
+          $ref: '#/components/schemas/PaginationV4'
+        nc:
+          type:
+          - string
+          - 'null'
+          description: This is the next cursor, use its value with the `c` parameter to retrieve the next page
+        pc:
+          type:
+          - string
+          - 'null'
+          description: This is the previous cursor, use its value with the `c` parameter to retrieve the previous page
+      required:
+      - trades
+      - pagination
+      type: object
+      additionalProperties: false
+    UserStatementData:
+      properties:
+        statement:
+          items:
+            $ref: '#/components/schemas/UserStatementItem'
+          type: array
+          example:
+          - amount: -4.76e-06
+            after_balance: 8605.31353851
+            currency: BTC
+            date: '2022-01-27T18:16:10.557Z'
+            operation: Tax over buy, executed
+          - amount: 0.00119048
+            after_balance: 8605.31354327
+            currency: BTC
+            date: '2022-01-27T18:16:10.557Z'
+            operation: Buy
+        pagination:
+          $ref: '#/components/schemas/PaginationV4'
+      required:
+      - statement
+      - pagination
+      type: object
+      additionalProperties: false
+    BalanceResponseDataV4:
+      properties:
+        currency_code:
+          type: string
+          description: Currency code
+          example: BTC
+        available_amount:
+          type: number
+          format: float
+          description: Available amount for trading or withdrawing
+        last_update:
+          type: string
+          description: Datetime of the last update
+          format: datetime
+        locked_amount:
+          type: number
+          format: float
+          description: Amount in use
+      required:
+      - currency_code
+      - available_amount
+      - last_update
+      - locked_amount
+      type: object
+      additionalProperties: false
+      example:
+      - available_amount: 5.23423423
+        currency_code: BTC
+        last_update: '2020-10-20T18:39:45.198Z'
+        locked_amount: 0
+    UserPairFeeData:
+      properties:
+        taker:
+          type: number
+          format: double
+        maker:
+          type: number
+          format: double
+        side:
+          type: string
+      required:
+      - taker
+      - maker
+      - side
+      type: object
+    UserStatementItem:
+      properties:
+        amount:
+          type: number
+          format: float
+          description: Transaction amount
+        after_balance:
+          type: number
+          format: float
+          description: Account balance after the operation
+        currency:
+          type: string
+          description: Currency code
+          example: BTC
+        date:
+          type: string
+          description: Timestamp of the operation
+        operation:
+          type: string
+          description: Description of the operation (e.g., "Buy", "Sell", "Tax over buy, ...")
+      required:
+      - amount
+      - after_balance
+      - currency
+      - date
+      - operation
+      type: object
+      additionalProperties: false
+    PageSizeParamV4:
+      type: number
+      format: int32
+      default: 200
+      example: 100
+      description: Number of records per page
+      maximum: 1000
+      minimum: 1
+    EndDateTimeParamV4:
+      type: string
+      default: '[Current datetime]'
+      example: '2020-01-02T23:59:59-03:00'
+      format: datetime
+      description: Final datetime filter in ISO-8601 format (the interval between the initial and final datetime shouldn't be greater than 6 months)
+    StartDateTimeNoMinParamV4:
+      type: string
+      default: '[6 months ago]'
+      example: '2020-01-01T00:00:00-03:00'
+      format: datetime
+      description: Initial datetime filter in ISO-8601 format
   securitySchemes:
     API_Credentials:
       type: apiToken

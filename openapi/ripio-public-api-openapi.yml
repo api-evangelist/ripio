@@ -325,6 +325,26 @@ paths:
           - To ensure accurate timing for time-sensitive operations'
 components:
   schemas:
+    ActiveOrderLevel3:
+      properties:
+        amount:
+          type: number
+          format: float
+          description: Currency amount
+        id:
+          type: string
+          description: Order id
+          format: string
+        price:
+          type: number
+          format: float
+          description: Price
+      required:
+      - amount
+      - id
+      - price
+      type: object
+      additionalProperties: false
     TradesResponseData:
       properties:
         trades:
@@ -387,193 +407,25 @@ components:
       - trades
       type: object
       additionalProperties: false
-    CurrentPageParamV4:
-      type: number
-      format: int32
-      default: 1
-      example: 3
-      description: Page number for pagination
-    PublicMemo:
+    PublicTag:
       properties:
         deposit:
           type: boolean
-          description: Flag that indicates if the network has memo for deposit
+          description: Flag that indicates if the network has tag for deposit
           format: boolean
         withdrawal:
           type: boolean
-          description: Flag that indicates if the network has memo for withdrawal
+          description: Flag that indicates if the network has tag for withdrawal
           format: boolean
       required:
       - deposit
       - withdrawal
       type: object
       additionalProperties: false
-    ActiveOrderLevel3:
-      properties:
-        amount:
-          type: number
-          format: float
-          description: Currency amount
-        id:
-          type: string
-          description: Order id
-          format: string
-        price:
-          type: number
-          format: float
-          description: Price
-      required:
-      - amount
-      - id
-      - price
-      type: object
-      additionalProperties: false
-    ActiveOrderLevel2:
-      properties:
-        amount:
-          type: number
-          format: float
-          description: Amount
-        price:
-          type: number
-          format: float
-          description: Price
-      required:
-      - amount
-      - price
-      type: object
-      additionalProperties: false
-    PublicCurrencyV4:
-      properties:
-        active:
-          type: boolean
-          description: Whether the currency is currently active for trading
-          format: boolean
-        can_deposit:
-          type: boolean
-          description: Whether deposits are enabled for this currency
-          format: boolean
-        can_withdraw:
-          type: boolean
-          description: Whether withdrawals are enabled for this currency
-          format: boolean
-        code:
-          type: string
-          description: Currency code
-          example: BTC
-        id:
-          type: string
-          description: Currency id
-          format: string
-        min_withdraw_amount:
-          type: number
-          format: float
-          description: Minimum withdrawal amount
-        name:
-          type: string
-          description: Currency name
-          format: string
-        needs_block_id_for_tx_sync:
-          type: boolean
-          description: Whether the currency requires a block ID for transaction synchronization
-          format: boolean
-        networks:
-          items:
-            $ref: '#/components/schemas/PublicNetwork'
-          type: array
-          description: Supported networks for the currency (undefined for fiduciary currency)
-          format: PublicNetwork[]
-        precision:
-          type: number
-          format: int32
-          description: Currency decimal places
-        logo:
-          $ref: '#/components/schemas/PublicCurrencyLogo'
-          description: Currency logo
-          format: PublicCurrencyLogo
-        countries:
-          items:
-            type: string
-          type: array
-          description: Available countries
-      required:
-      - active
-      - can_deposit
-      - can_withdraw
-      - code
-      - id
-      - min_withdraw_amount
-      - name
-      - needs_block_id_for_tx_sync
-      - precision
-      - logo
-      - countries
-      type: object
-      additionalProperties: false
-      example:
-        active: true
-        can_deposit: true
-        can_withdraw: true
-        code: BTC
-        id: e7a079d8-828d-42c8-bf48-8ee3ac1862d1
-        min_withdraw_amount: 0.001
-        name: Bitcoin
-        needs_block_id_for_tx_sync: true
-        networks:
-        - code: bitcoin
-          memo:
-            deposit: false
-            withdrawal: false
-          tag:
-            deposit: false
-            withdrawal: false
-        precision: 8
-        countries:
-        - BR
-        - AR
-        logo:
-          svg: https://cryptocurrency-logos.ripio.com/svg/btc.svg
-    AllTickersResponse:
+    PublicOrdersLevel2Response:
       properties:
         data:
-          items:
-            $ref: '#/components/schemas/TickersResponseData'
-          type: array
-          example:
-          - ask: 250000.15
-            base_code: BTC
-            base_id: 9A5E2EF4-9547-418A-8EC6-C6EADBB8B32F
-            bid: 240000.15
-            date: '2017-10-20T00:00:00Z'
-            first: 245000.15
-            high: 250000.15
-            is_frozen: false
-            last: 245000.15
-            low: 200000.15
-            pair: BTC_BRL
-            price_change_percent_24h: '-12'
-            quote_code: BRL
-            quote_id: 48898138-8623-4555-9468-B1A1505A9352
-            quote_volume: 150.1
-            trades_quantity: 123
-            volume: 123.12345678
-          - ask: 15600.12
-            base_code: ETH
-            base_id: 13A4B83B-E74F-425C-BC0A-03A9C0F29FAD
-            bid: 15400.12
-            date: '2017-10-20T00:00:00Z'
-            first: 15999.15
-            high: 15999.12
-            is_frozen: false
-            last: 15500.12
-            low: 15000.12
-            pair: ETH_BRL
-            price_change_percent_24h: '-12'
-            quote_id: 48898138-8623-4555-9468-B1A1505A9352
-            quote_code: BRL
-            quote_volume: 180.1
-            trades_quantity: 123
-            volume: 123.12345678
+          $ref: '#/components/schemas/PublicOrdersLevel2ResponseData'
         error_code:
           type:
           - number
@@ -592,6 +444,81 @@ components:
       - message
       type: object
       additionalProperties: false
+    ActiveOrderLevel2:
+      properties:
+        amount:
+          type: number
+          format: float
+          description: Amount
+        price:
+          type: number
+          format: float
+          description: Price
+      required:
+      - amount
+      - price
+      type: object
+      additionalProperties: false
+    PaginationV4:
+      properties:
+        current_page:
+          type: number
+          format: double
+          description: Current page
+        page_size:
+          type: number
+          format: double
+          description: Page size
+        registers_count:
+          type: number
+          format: double
+          description: Total number of registers
+        total_pages:
+          type: number
+          format: double
+          description: Total number of pages
+      required:
+      - current_page
+      - page_size
+      - registers_count
+      - total_pages
+      type: object
+      additionalProperties: false
+      example:
+        current_page: 1
+        registers_count: 21
+        total_pages: 1
+        page_size: 100
+    LimitParamV4:
+      type: number
+      format: int32
+      default: 100
+      example: 25
+      description: Maximum number of records to return per request
+      maximum: 250
+      minimum: 1
+    ServerTime:
+      properties:
+        message:
+          type:
+          - string
+          - 'null'
+        data:
+          properties:
+            timestamp:
+              type: number
+              format: double
+          required:
+          - timestamp
+          type: object
+      required:
+      - message
+      - data
+      type: object
+      example:
+        data:
+          timestamp: 1670004661380
+        message: null
     TickersResponseDataV4:
       properties:
         high:
@@ -688,163 +615,118 @@ components:
         quote_volume: 150.1
         trades_quantity: 1199
         volume: 27.26776846
-    PublicOrdersLevel3Response:
+    PublicCurrencyV4:
       properties:
-        data:
-          $ref: '#/components/schemas/PublicOrdersLevel3ResponseData'
-        error_code:
-          type:
-          - number
-          - 'null'
-          enum:
-          - null
-          example: null
-        message:
-          type:
-          - string
-          - 'null'
-          example: null
-      required:
-      - data
-      - error_code
-      - message
-      type: object
-      additionalProperties: false
-    TickersResponseV4:
-      properties:
-        data:
-          $ref: '#/components/schemas/TickersResponseDataV4'
-        error_code:
-          type:
-          - number
-          - 'null'
-          enum:
-          - null
-          example: null
-        message:
-          type:
-          - string
-          - 'null'
-          example: null
-      required:
-      - data
-      - error_code
-      - message
-      type: object
-      additionalProperties: false
-    PublicCurrencyLogo:
-      properties:
-        svg:
+        active:
+          type: boolean
+          description: Whether the currency is currently active for trading
+          format: boolean
+        can_deposit:
+          type: boolean
+          description: Whether deposits are enabled for this currency
+          format: boolean
+        can_withdraw:
+          type: boolean
+          description: Whether withdrawals are enabled for this currency
+          format: boolean
+        code:
           type: string
-          description: Currency svg logo
-          format: string
-      required:
-      - svg
-      type: object
-      additionalProperties: false
-    Trade:
-      properties:
-        amount:
-          type: number
-          format: double
-          description: Amount
-        date:
-          type: string
-          description: Trade date (UTC format)
+          description: Currency code
+          example: BTC
         id:
           type: string
-          description: Trade id
-        maker_order_id:
-          type: string
-          description: Maker order id
-        maker_side:
-          type: string
-          description: Maker order side (sell / buy)
-        maker_type:
-          type: string
-          description: Maker order type (market / limit)
-        price:
-          type: number
-          format: double
-          description: Price
-        pair:
-          type: string
-          description: Currency pair code
-          example: BTC_BRL
-        taker_order_id:
-          type: string
-          description: Taker order id
-        taker_side:
-          type: string
-          description: Taker order side (sell / buy)
-        taker_type:
-          type: string
-          description: Taker order type (market / limit)
-        timestamp:
-          type: number
-          format: double
-          description: Current timestamp
-          example: 1675708481219
-        total_value:
+          description: Currency id
+          format: string
+        min_withdraw_amount:
           type: number
           format: float
-          description: Total value
+          description: Minimum withdrawal amount
+        name:
+          type: string
+          description: Currency name
+          format: string
+        needs_block_id_for_tx_sync:
+          type: boolean
+          description: Whether the currency requires a block ID for transaction synchronization
+          format: boolean
+        networks:
+          items:
+            $ref: '#/components/schemas/PublicNetwork'
+          type: array
+          description: Supported networks for the currency (undefined for fiduciary currency)
+          format: PublicNetwork[]
+        precision:
+          type: number
+          format: int32
+          description: Currency decimal places
+        logo:
+          $ref: '#/components/schemas/PublicCurrencyLogo'
+          description: Currency logo
+          format: PublicCurrencyLogo
+        countries:
+          items:
+            type: string
+          type: array
+          description: Available countries
       required:
-      - amount
-      - date
+      - active
+      - can_deposit
+      - can_withdraw
+      - code
       - id
-      - maker_order_id
-      - maker_side
-      - maker_type
-      - price
-      - pair
-      - taker_order_id
-      - taker_side
-      - taker_type
-      - timestamp
-      - total_value
+      - min_withdraw_amount
+      - name
+      - needs_block_id_for_tx_sync
+      - precision
+      - logo
+      - countries
       type: object
       additionalProperties: false
-    ServerTime:
+      example:
+        active: true
+        can_deposit: true
+        can_withdraw: true
+        code: BTC
+        id: e7a079d8-828d-42c8-bf48-8ee3ac1862d1
+        min_withdraw_amount: 0.001
+        name: Bitcoin
+        needs_block_id_for_tx_sync: true
+        networks:
+        - code: bitcoin
+          memo:
+            deposit: false
+            withdrawal: false
+          tag:
+            deposit: false
+            withdrawal: false
+        precision: 8
+        countries:
+        - BR
+        - AR
+        logo:
+          svg: https://cryptocurrency-logos.ripio.com/svg/btc.svg
+    CountriesResponse:
       properties:
+        data:
+          items:
+            $ref: '#/components/schemas/CountriesData'
+          type: array
+        error_code:
+          type:
+          - number
+          - 'null'
+          enum:
+          - null
+          example: null
         message:
           type:
           - string
           - 'null'
-        data:
-          properties:
-            timestamp:
-              type: number
-              format: double
-          required:
-          - timestamp
-          type: object
+          example: null
       required:
-      - message
       - data
-      type: object
-      example:
-        data:
-          timestamp: 1670004661380
-        message: null
-    CountriesParamV4:
-      type: string
-      example: BR,AR
-      format: string
-      description: Countries (One or many, use "," to separate)
-    PublicTag:
-      properties:
-        deposit:
-          type: boolean
-          description: Flag that indicates if the network has tag for deposit
-          format: boolean
-        withdrawal:
-          type: boolean
-          description: Flag that indicates if the network has tag for withdrawal
-          format: boolean
-      required:
-      - deposit
-      - withdrawal
+      - error_code
+      - message
       type: object
       additionalProperties: false
     PublicOrdersLevel2ResponseData:
@@ -885,108 +767,26 @@ components:
       - hash
       type: object
       additionalProperties: false
-    LimitParamV4:
+    CurrentPageParamV4:
       type: number
       format: int32
-      default: 100
-      example: 25
-      description: Maximum number of records to return per request
-      maximum: 250
-      minimum: 1
-    PageSizeParamV4:
-      type: number
-      format: int32
-      default: 200
-      example: 100
-      description: Number of records per page
-      maximum: 1000
-      minimum: 1
-    CurrenciesResponseV4:
+      default: 1
+      example: 3
+      description: Page number for pagination
+    PublicCurrencyLogo:
       properties:
-        data:
-          items:
-            $ref: '#/components/schemas/PublicCurrencyV4'
-          type: array
-        error_code:
-          type:
-          - number
-          - 'null'
-          enum:
-          - null
-          example: null
-        message:
-          type:
-          - string
-          - 'null'
-          example: null
-      required:
-      - data
-      - error_code
-      - message
-      type: object
-      additionalProperties: false
-    PublicNetwork:
-      properties:
-        code:
+        svg:
           type: string
-          description: Network code
+          description: Currency svg logo
           format: string
-        memo:
-          $ref: '#/components/schemas/PublicMemo'
-          description: Memo information
-          format: PublicTag
-        tag:
-          $ref: '#/components/schemas/PublicTag'
-          description: Tag information
-          format: PublicTag
       required:
-      - code
-      - memo
-      - tag
+      - svg
       type: object
       additionalProperties: false
-    PaginationV4:
-      properties:
-        current_page:
-          type: number
-          format: double
-          description: Current page
-        page_size:
-          type: number
-          format: double
-          description: Page size
-        registers_count:
-          type: number
-          format: double
-          description: Total number of registers
-        total_pages:
-          type: number
-          format: double
-          description: Total number of pages
-      required:
-      - current_page
-      - page_size
-      - registers_count
-      - total_pages
-      type: object
-      additionalProperties: false
-      example:
-        current_page: 1
-        registers_count: 21
-        total_pages: 1
-        page_size: 100
-    StartDateTimeNoMinParamV4:
-      type: string
-      default: '[6 months ago]'
-      example: '2020-01-01T00:00:00-03:00'
-      format: datetime
-      description: Initial datetime filter in ISO-8601 format
-    PairsResponseV4:
+    PublicOrdersLevel3Response:
       properties:
         data:
-          items:
-            $ref: '#/components/schemas/PublicPairV4'
-          type: array
+          $ref: '#/components/schemas/PublicOrdersLevel3ResponseData'
         error_code:
           type:
           - number
@@ -1003,97 +803,6 @@ components:
       - data
       - error_code
       - message
-      type: object
-      additionalProperties: false
-    PublicOrdersLevel2Response:
-      properties:
-        data:
-          $ref: '#/components/schemas/PublicOrdersLevel2ResponseData'
-        error_code:
-          type:
-          - number
-          - 'null'
-          enum:
-          - null
-          example: null
-        message:
-          type:
-          - string
-          - 'null'
-          example: null
-      required:
-      - data
-      - error_code
-      - message
-      type: object
-      additionalProperties: false
-    LimitNewParamV4:
-      type: string
-      default: 100
-      format: string
-      description: Maximum number of records to return per request. Can specify 'max' to use the service maximum.
-    TradesResponse:
-      properties:
-        data:
-          $ref: '#/components/schemas/TradesResponseData'
-        error_code:
-          type:
-          - number
-          - 'null'
-          enum:
-          - null
-          example: null
-        message:
-          type:
-          - string
-          - 'null'
-          example: null
-      required:
-      - data
-      - error_code
-      - message
-      type: object
-      additionalProperties: false
-    PublicOrdersLevel3ResponseData:
-      properties:
-        timestamp:
-          type: number
-          format: double
-          description: Current timestamp
-          example: 1675708481219
-        asks:
-          items:
-            $ref: '#/components/schemas/ActiveOrderLevel3'
-          type: array
-          description: Sell orders
-          example:
-          - amount: 0.01187517
-            id: 554F2D70-04B9-4E26-9548-9C35B025A018
-            price: 14704.45
-          - amount: 1
-            id: C1C5DA8E-A069-4E20-87D1-12B19426A013
-            price: 1873.48
-        bids:
-          items:
-            $ref: '#/components/schemas/ActiveOrderLevel3'
-          type: array
-          description: Buy orders
-          example:
-          - amount: 0.46097295
-            id: E6D05F51-D79B-47CF-84C5-B157120EBC25
-            price: 14650.25
-          - amount: 1
-            id: CE743407-66BE-4F4C-AD0E-AB376468C5F6
-            price: 1610.15
-        hash:
-          type: string
-          description: Hash of asks and bids
-          example: '16757084812196786445'
-      required:
-      - timestamp
-      - asks
-      - bids
-      - hash
       type: object
       additionalProperties: false
     EndDateTimeNoMinParamV4:
@@ -1120,11 +829,187 @@ components:
       example:
         name: Brazil
         code: BR
-    CountriesResponse:
+    LimitNewParamV4:
+      type: string
+      default: 100
+      format: string
+      description: Maximum number of records to return per request. Can specify 'max' to use the service maximum.
+    CountriesParamV4:
+      type: string
+      example: BR,AR
+      format: string
+      description: Countries (One or many, use "," to separate)
+    PublicMemo:
+      properties:
+        deposit:
+          type: boolean
+          description: Flag that indicates if the network has memo for deposit
+          format: boolean
+        withdrawal:
+          type: boolean
+          description: Flag that indicates if the network has memo for withdrawal
+          format: boolean
+      required:
+      - deposit
+      - withdrawal
+      type: object
+      additionalProperties: false
+    CurrenciesResponseV4:
       properties:
         data:
           items:
-            $ref: '#/components/schemas/CountriesData'
+            $ref: '#/components/schemas/PublicCurrencyV4'
+          type: array
+        error_code:
+          type:
+          - number
+          - 'null'
+          enum:
+          - null
+          example: null
+        message:
+          type:
+          - string
+          - 'null'
+          example: null
+      required:
+      - data
+      - error_code
+      - message
+      type: object
+      additionalProperties: false
+    TickersResponseData:
+      properties:
+        pair:
+          type: string
+          description: Currency pair code
+          example: BTC_BRL
+        price_change_percent_24h:
+          type: string
+          description: 24-hr % price change of market pair
+        high:
+          type: number
+          format: float
+          description: Highest price in the last 24 hours
+        low:
+          type: number
+          format: float
+          description: Lowest price in the last 24 hours
+        volume:
+          type: number
+          format: float
+          description: Volume in the last 24 hours
+        trades_quantity:
+          type: number
+          format: int32
+          description: Trades quantity in the last 24 hours
+        last:
+          type: number
+          format: float
+          description: Price of the last trade
+        bid:
+          type: number
+          format: float
+          description: Price of the current best buy order in the orderbook
+        ask:
+          type: number
+          format: float
+          description: Price of the current best sell order in the orderbook
+        date:
+          type: string
+          description: Timestamp of the last update (UTC)
+        first:
+          type: number
+          format: float
+          description: Price of the first trade in the last 24 hours window
+        is_frozen:
+          type: boolean
+          description: Whether the market is currently frozen (disabled)
+        base_code:
+          type: string
+          description: Base currency code
+        base_id:
+          type: string
+          description: Base currency ID
+        quote_id:
+          type: string
+          description: Quote currency ID
+        quote_code:
+          type: string
+          description: Quote currency code
+        quote_volume:
+          type: number
+          format: double
+          description: Quote currency volume
+      required:
+      - pair
+      - price_change_percent_24h
+      - high
+      - low
+      - volume
+      - trades_quantity
+      - last
+      - bid
+      - ask
+      - date
+      - first
+      - is_frozen
+      - base_code
+      - base_id
+      - quote_id
+      - quote_code
+      - quote_volume
+      type: object
+      additionalProperties: false
+    TradesResponse:
+      properties:
+        data:
+          $ref: '#/components/schemas/TradesResponseData'
+        error_code:
+          type:
+          - number
+          - 'null'
+          enum:
+          - null
+          example: null
+        message:
+          type:
+          - string
+          - 'null'
+          example: null
+      required:
+      - data
+      - error_code
+      - message
+      type: object
+      additionalProperties: false
+    TickersResponseV4:
+      properties:
+        data:
+          $ref: '#/components/schemas/TickersResponseDataV4'
+        error_code:
+          type:
+          - number
+          - 'null'
+          enum:
+          - null
+          example: null
+        message:
+          type:
+          - string
+          - 'null'
+          example: null
+      required:
+      - data
+      - error_code
+      - message
+      type: object
+      additionalProperties: false
+    PairsResponseV4:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/PublicPairV4'
           type: array
         error_code:
           type:
@@ -1223,87 +1108,202 @@ components:
         countries:
         - BR
         max_price_variation: 10
-    TickersResponseData:
+    PageSizeParamV4:
+      type: number
+      format: int32
+      default: 200
+      example: 100
+      description: Number of records per page
+      maximum: 1000
+      minimum: 1
+    PublicNetwork:
       properties:
+        code:
+          type: string
+          description: Network code
+          format: string
+        memo:
+          $ref: '#/components/schemas/PublicMemo'
+          description: Memo information
+          format: PublicTag
+        tag:
+          $ref: '#/components/schemas/PublicTag'
+          description: Tag information
+          format: PublicTag
+      required:
+      - code
+      - memo
+      - tag
+      type: object
+      additionalProperties: false
+    StartDateTimeNoMinParamV4:
+      type: string
+      default: '[6 months ago]'
+      example: '2020-01-01T00:00:00-03:00'
+      format: datetime
+      description: Initial datetime filter in ISO-8601 format
+    AllTickersResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/TickersResponseData'
+          type: array
+          example:
+          - ask: 250000.15
+            base_code: BTC
+            base_id: 9A5E2EF4-9547-418A-8EC6-C6EADBB8B32F
+            bid: 240000.15
+            date: '2017-10-20T00:00:00Z'
+            first: 245000.15
+            high: 250000.15
+            is_frozen: false
+            last: 245000.15
+            low: 200000.15
+            pair: BTC_BRL
+            price_change_percent_24h: '-12'
+            quote_code: BRL
+            quote_id: 48898138-8623-4555-9468-B1A1505A9352
+            quote_volume: 150.1
+            trades_quantity: 123
+            volume: 123.12345678
+          - ask: 15600.12
+            base_code: ETH
+            base_id: 13A4B83B-E74F-425C-BC0A-03A9C0F29FAD
+            bid: 15400.12
+            date: '2017-10-20T00:00:00Z'
+            first: 15999.15
+            high: 15999.12
+            is_frozen: false
+            last: 15500.12
+            low: 15000.12
+            pair: ETH_BRL
+            price_change_percent_24h: '-12'
+            quote_id: 48898138-8623-4555-9468-B1A1505A9352
+            quote_code: BRL
+            quote_volume: 180.1
+            trades_quantity: 123
+            volume: 123.12345678
+        error_code:
+          type:
+          - number
+          - 'null'
+          enum:
+          - null
+          example: null
+        message:
+          type:
+          - string
+          - 'null'
+          example: null
+      required:
+      - data
+      - error_code
+      - message
+      type: object
+      additionalProperties: false
+    Trade:
+      properties:
+        amount:
+          type: number
+          format: double
+          description: Amount
+        date:
+          type: string
+          description: Trade date (UTC format)
+        id:
+          type: string
+          description: Trade id
+        maker_order_id:
+          type: string
+          description: Maker order id
+        maker_side:
+          type: string
+          description: Maker order side (sell / buy)
+        maker_type:
+          type: string
+          description: Maker order type (market / limit)
+        price:
+          type: number
+          format: double
+          description: Price
         pair:
           type: string
           description: Currency pair code
           example: BTC_BRL
-        price_change_percent_24h:
+        taker_order_id:
           type: string
-          description: 24-hr % price change of market pair
-        high:
-          type: number
-          format: float
-          description: Highest price in the last 24 hours
-        low:
-          type: number
-          format: float
-          description: Lowest price in the last 24 hours
-        volume:
-          type: number
-          format: float
-          description: Volume in the last 24 hours
-        trades_quantity:
-          type: number
-          format: int32
-          description: Trades quantity in the last 24 hours
-        last:
-          type: number
-          format: float
-          description: Price of the last trade
-        bid:
-          type: number
-          format: float
-          description: Price of the current best buy order in the orderbook
-        ask:
-          type: number
-          format: float
-          description: Price of the current best sell order in the orderbook
-        date:
+          description: Taker order id
+        taker_side:
           type: string
-          description: Timestamp of the last update (UTC)
-        first:
-          type: number
-          format: float
-          description: Price of the first trade in the last 24 hours window
-        is_frozen:
-          type: boolean
-          description: Whether the market is currently frozen (disabled)
-        base_code:
+          description: Taker order side (sell / buy)
+        taker_type:
           type: string
-          description: Base currency code
-        base_id:
-          type: string
-          description: Base currency ID
-        quote_id:
-          type: string
-          description: Quote currency ID
-        quote_code:
-          type: string
-          description: Quote currency code
-        quote_volume:
+          description: Taker order type (market / limit)
+        timestamp:
           type: number
           format: double
-          description: Quote currency volume
+          description: Current timestamp
+          example: 1675708481219
+        total_value:
+          type: number
+          format: float
+          description: Total value
       required:
-      - pair
-      - price_change_percent_24h
-      - high
-      - low
-      - volume
-      - trades_quantity
-      - last
-      - bid
-      - ask
+      - amount
       - date
-      - first
-      - is_frozen
-      - base_code
-      - base_id
-      - quote_id
-      - quote_code
-      - quote_volume
+      - id
+      - maker_order_id
+      - maker_side
+      - maker_type
+      - price
+      - pair
+      - taker_order_id
+      - taker_side
+      - taker_type
+      - timestamp
+      - total_value
+      type: object
+      additionalProperties: false
+    PublicOrdersLevel3ResponseData:
+      properties:
+        timestamp:
+          type: number
+          format: double
+          description: Current timestamp
+          example: 1675708481219
+        asks:
+          items:
+            $ref: '#/components/schemas/ActiveOrderLevel3'
+          type: array
+          description: Sell orders
+          example:
+          - amount: 0.01187517
+            id: 554F2D70-04B9-4E26-9548-9C35B025A018
+            price: 14704.45
+          - amount: 1
+            id: C1C5DA8E-A069-4E20-87D1-12B19426A013
+            price: 1873.48
+        bids:
+          items:
+            $ref: '#/components/schemas/ActiveOrderLevel3'
+          type: array
+          description: Buy orders
+          example:
+          - amount: 0.46097295
+            id: E6D05F51-D79B-47CF-84C5-B157120EBC25
+            price: 14650.25
+          - amount: 1
+            id: CE743407-66BE-4F4C-AD0E-AB376468C5F6
+            price: 1610.15
+        hash:
+          type: string
+          description: Hash of asks and bids
+          example: '16757084812196786445'
+      required:
+      - timestamp
+      - asks
+      - bids
+      - hash
       type: object
       additionalProperties: false
   securitySchemes:

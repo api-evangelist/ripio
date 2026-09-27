@@ -74,6 +74,65 @@ paths:
           - To retrieve detailed market data for authorized cryptocurrency pairs'
 components:
   schemas:
+    AllTickersResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/TickersResponseData'
+          type: array
+          example:
+          - ask: 250000.15
+            base_code: BTC
+            base_id: 9A5E2EF4-9547-418A-8EC6-C6EADBB8B32F
+            bid: 240000.15
+            date: '2017-10-20T00:00:00Z'
+            first: 245000.15
+            high: 250000.15
+            is_frozen: false
+            last: 245000.15
+            low: 200000.15
+            pair: BTC_BRL
+            price_change_percent_24h: '-12'
+            quote_code: BRL
+            quote_id: 48898138-8623-4555-9468-B1A1505A9352
+            quote_volume: 150.1
+            trades_quantity: 123
+            volume: 123.12345678
+          - ask: 15600.12
+            base_code: ETH
+            base_id: 13A4B83B-E74F-425C-BC0A-03A9C0F29FAD
+            bid: 15400.12
+            date: '2017-10-20T00:00:00Z'
+            first: 15999.15
+            high: 15999.12
+            is_frozen: false
+            last: 15500.12
+            low: 15000.12
+            pair: ETH_BRL
+            price_change_percent_24h: '-12'
+            quote_id: 48898138-8623-4555-9468-B1A1505A9352
+            quote_code: BRL
+            quote_volume: 180.1
+            trades_quantity: 123
+            volume: 123.12345678
+        error_code:
+          type:
+          - number
+          - 'null'
+          enum:
+          - null
+          example: null
+        message:
+          type:
+          - string
+          - 'null'
+          example: null
+      required:
+      - data
+      - error_code
+      - message
+      type: object
+      additionalProperties: false
     TickersResponseData:
       properties:
         pair:
@@ -257,65 +316,6 @@ components:
       properties:
         data:
           $ref: '#/components/schemas/TickersResponseDataV4'
-        error_code:
-          type:
-          - number
-          - 'null'
-          enum:
-          - null
-          example: null
-        message:
-          type:
-          - string
-          - 'null'
-          example: null
-      required:
-      - data
-      - error_code
-      - message
-      type: object
-      additionalProperties: false
-    AllTickersResponse:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/TickersResponseData'
-          type: array
-          example:
-          - ask: 250000.15
-            base_code: BTC
-            base_id: 9A5E2EF4-9547-418A-8EC6-C6EADBB8B32F
-            bid: 240000.15
-            date: '2017-10-20T00:00:00Z'
-            first: 245000.15
-            high: 250000.15
-            is_frozen: false
-            last: 245000.15
-            low: 200000.15
-            pair: BTC_BRL
-            price_change_percent_24h: '-12'
-            quote_code: BRL
-            quote_id: 48898138-8623-4555-9468-B1A1505A9352
-            quote_volume: 150.1
-            trades_quantity: 123
-            volume: 123.12345678
-          - ask: 15600.12
-            base_code: ETH
-            base_id: 13A4B83B-E74F-425C-BC0A-03A9C0F29FAD
-            bid: 15400.12
-            date: '2017-10-20T00:00:00Z'
-            first: 15999.15
-            high: 15999.12
-            is_frozen: false
-            last: 15500.12
-            low: 15000.12
-            pair: ETH_BRL
-            price_change_percent_24h: '-12'
-            quote_id: 48898138-8623-4555-9468-B1A1505A9352
-            quote_code: BRL
-            quote_volume: 180.1
-            trades_quantity: 123
-            volume: 123.12345678
         error_code:
           type:
           - number
