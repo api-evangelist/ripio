@@ -47,30 +47,6 @@ paths:
           - To resolve deposit issues by forcing blockchain synchronization'
 components:
   schemas:
-    SyncTransactionRequest:
-      properties:
-        hash:
-          type: string
-          description: Transaction hash
-        currency_code:
-          type: string
-          description: Currency code
-        block_id:
-          type: number
-          format: double
-          description: 'Transaction block id
-
-
-            ⚠️ Check the information about this currency in the public currencies endpoint to check if this currency demands block number for transaction sync'
-      required:
-      - hash
-      - currency_code
-      type: object
-      example:
-        block_id: 123456
-        currency_code: BTC
-        hash: 7b6155e3d010b530f484e0cd05429328a514dd0158dc31c23cdd3ebb59f335ae
-      description: Transaction parameters request
     VoidResponse:
       properties:
         data:
@@ -97,6 +73,30 @@ components:
       - message
       type: object
       additionalProperties: false
+    SyncTransactionRequest:
+      properties:
+        hash:
+          type: string
+          description: Transaction hash
+        currency_code:
+          type: string
+          description: Currency code
+        block_id:
+          type: number
+          format: double
+          description: 'Transaction block id
+
+
+            ⚠️ Check the information about this currency in the public currencies endpoint to check if this currency demands block number for transaction sync'
+      required:
+      - hash
+      - currency_code
+      type: object
+      example:
+        block_id: 123456
+        currency_code: BTC
+        hash: 7b6155e3d010b530f484e0cd05429328a514dd0158dc31c23cdd3ebb59f335ae
+      description: Transaction parameters request
   securitySchemes:
     API_Credentials:
       type: apiToken

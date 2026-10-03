@@ -646,6 +646,132 @@ paths:
           - To preview order impact on market prices'
 components:
   schemas:
+    EstimatedPriceResponseV4:
+      properties:
+        data:
+          $ref: '#/components/schemas/EstimatedPriceResponseDataV4'
+        error_code:
+          type:
+          - number
+          - 'null'
+          enum:
+          - null
+          example: null
+        message:
+          type:
+          - string
+          - 'null'
+          example: null
+      required:
+      - data
+      - error_code
+      - message
+      type: object
+      additionalProperties: false
+    TrailingSellOrderBody:
+      properties:
+        external_id:
+          $ref: '#/components/schemas/OrderExternalIdParamV4'
+        pair:
+          type: string
+          description: Currency pair code
+        side:
+          type: string
+          enum:
+          - sell
+          description: Order's side (sell)
+        type:
+          type: string
+          enum:
+          - trailing
+          description: Order's type (trailing)
+        amount:
+          type: number
+          format: double
+          description: Order amount in base currency
+        price:
+          type: number
+          format: double
+          description: Limit price
+        distance:
+          type: number
+          format: double
+          description: Price distance
+      required:
+      - pair
+      - side
+      - type
+      - amount
+      - price
+      - distance
+      type: object
+      additionalProperties: false
+      example:
+        pair: BTC_BRL
+        side: sell
+        type: trailing
+        amount: 1
+        distance: 1
+    MarketBuyOrderBody:
+      properties:
+        external_id:
+          $ref: '#/components/schemas/OrderExternalIdParamV4'
+        pair:
+          type: string
+          description: Currency pair code
+        side:
+          type: string
+          enum:
+          - buy
+          description: Order's side (buy)
+        type:
+          type: string
+          enum:
+          - market
+          description: Order's type (market)
+        amount:
+          type: number
+          format: double
+          description: Order amount in base currency
+        value:
+          type: number
+          format: double
+          description: Order value in quote currency
+        fill_or_kill:
+          type: boolean
+          description: If set to `true`, the order will either be completely filled or canceled
+      required:
+      - pair
+      - side
+      - type
+      - amount
+      - value
+      type: object
+      additionalProperties: false
+      example:
+        pair: BTC_BRL
+        side: buy
+        type: market
+        amount: 0.1
+        fill_or_kill: false
+      title: Buy Market
+    OrderSideParamV4:
+      type: string
+      enum:
+      - buy
+      - sell
+      description: Order side (buy or sell)
+    StartDateTimeNoMinParamV4:
+      type: string
+      default: '[6 months ago]'
+      example: '2020-01-01T00:00:00-03:00'
+      format: datetime
+      description: Initial datetime filter in ISO-8601 format
+    EndDateParamV4:
+      type: string
+      default: '[Current date]'
+      format: date
+      description: Final date filter in ISO-8601 format (the interval between the initial and final date shouldn't be greater than 6 months)
     UserTradesResponseV4:
       properties:
         data:
@@ -668,6 +794,284 @@ components:
       - message
       type: object
       additionalProperties: false
+    UserPreparedOrder:
+      properties:
+        id:
+          type: string
+          description: Order identifier
+        create_date:
+          type: string
+          description: Creation datetime
+        executed_amount:
+          type: number
+          format: float
+          description: Executed amount
+        external_id:
+          type: string
+          description: External id (this is sent by the user when creating an order, and it's optional)
+        pair:
+          type: string
+          description: Currency pair code
+          example: BTC_BRL
+        remaining_amount:
+          type: number
+          format: float
+          description: Remaining amount
+        remaining_value:
+          type: number
+          format: float
+          description: Remaining value
+        requested_amount:
+          type: number
+          format: float
+          description: Requested amount
+        requested_value:
+          type: number
+          format: float
+          description: Requested value
+        status:
+          type: string
+          description: Order status (executed_completely / executed_partially / open / canceled)
+        type:
+          type: string
+          description: Order type (limit / market)
+        total_value:
+          type: number
+          format: float
+          description: Total value
+        side:
+          type: string
+          description: Order side (buy or sell)
+        price:
+          type: number
+          format: float
+          description: Price
+        update_date:
+          type: string
+          description: Datetime of the last update
+        fee:
+          type: number
+          format: float
+          description: Fee from the transaction
+        fill_or_kill:
+          type: boolean
+          description: Exclusive for StopLimit orders, it is used in stop-loss or stop-buy scenarios to initiate selling or buying when the market price reaches the specified stop price
+      required:
+      - id
+      - create_date
+      - executed_amount
+      - pair
+      - remaining_amount
+      - remaining_value
+      - requested_amount
+      - status
+      - type
+      - total_value
+      - side
+      - price
+      - update_date
+      - fee
+      - fill_or_kill
+      type: object
+      additionalProperties: false
+    CursorTradesResponse:
+      properties:
+        data:
+          $ref: '#/components/schemas/CursorTradesResponseData'
+        error_code:
+          type:
+          - number
+          - 'null'
+          enum:
+          - null
+          example: null
+        message:
+          type:
+          - string
+          - 'null'
+          example: null
+      required:
+      - data
+      - error_code
+      - message
+      type: object
+      additionalProperties: false
+    IcebergBuyOrderBody:
+      properties:
+        external_id:
+          $ref: '#/components/schemas/OrderExternalIdParamV4'
+        pair:
+          type: string
+          description: Currency pair code
+        side:
+          type: string
+          enum:
+          - buy
+          description: Order's side (buy)
+        type:
+          type: string
+          enum:
+          - iceberg
+          description: Order's type (iceberg)
+        amount:
+          type: number
+          format: double
+          description: Order amount in base currency
+        step_amount:
+          type: number
+          format: double
+          description: Step amount (the ratio of amount to step_amount must be less than or equal to 10)
+        price:
+          type: number
+          format: double
+          description: Limit price
+      required:
+      - pair
+      - side
+      - type
+      - amount
+      - step_amount
+      - price
+      type: object
+      additionalProperties: false
+      example:
+        amount: 10
+        step_amount: 1
+        pair: BTC_BRL
+        price: 700000
+        side: buy
+        type: iceberg
+    OrderStatusParamV4:
+      type: string
+      enum:
+      - executed_completely
+      - executed_partially
+      - open
+      - canceled
+      default: executed_partially
+      description: Order status (string or string list separated by commas)
+    UserOrderTransactions:
+      properties:
+        amount:
+          type: number
+          format: double
+          description: Execution amount in cryptocurrency
+        create_date:
+          type: string
+          format: date-time
+          description: Timestamp of the execution
+        fee:
+          type: number
+          format: double
+          description: Fee charged for this execution
+        fee_currency:
+          type: string
+          description: Currency code in which the fee was charged
+        total_value:
+          type: number
+          format: double
+          description: Total execution value
+        price:
+          type: number
+          format: float
+          description: Execution price
+      required:
+      - amount
+      - create_date
+      - fee
+      - fee_currency
+      - total_value
+      - price
+      type: object
+      additionalProperties: false
+    MarketSellOrderBody:
+      properties:
+        external_id:
+          $ref: '#/components/schemas/OrderExternalIdParamV4'
+        pair:
+          type: string
+          description: Currency pair code
+        side:
+          type: string
+          enum:
+          - sell
+          description: Order's side (sell)
+        type:
+          type: string
+          enum:
+          - market
+          description: Order's type (market)
+        amount:
+          type: number
+          format: double
+          description: Order amount in base currency
+        value:
+          type: number
+          format: double
+          description: Order value in quote currency
+        fill_or_kill:
+          type: boolean
+          description: If set to `true`, the order will either be completely filled or canceled
+      required:
+      - pair
+      - side
+      - type
+      - amount
+      - value
+      type: object
+      additionalProperties: false
+      example:
+        pair: BTC_BRL
+        side: sell
+        type: market
+        amount: 1
+        fill_or_kill: false
+      title: Sell Market
+    CurrentPageParamV4:
+      type: number
+      format: int32
+      default: 1
+      example: 3
+      description: Page number for pagination
+    OrderExternalIdParamV4:
+      type: string
+      example: 0f4a8504-21fb-4be6-9771-25dcf5f68f87
+      description: Order external identifier (maximum of 36 chars)
+    CancelAllOrdersResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/CancelAllOrdersData'
+          type: array
+          example:
+          - order_id: F6D2661E-4D6F-4770-BBE6-CC063CBA3770
+            pair_code: BTC_BRL
+            success: true
+          - order_id: 7155ED34-9EC4-4733-8B32-1E4319CB662F
+            pair_code: BTC_BRL
+            success: false
+        error_code:
+          type:
+          - number
+          - 'null'
+          enum:
+          - null
+          example: null
+        message:
+          type:
+          - string
+          - 'null'
+          example: null
+      required:
+      - data
+      - error_code
+      - message
+      type: object
+      additionalProperties: false
+    OrderIdsParamV4:
+      type: string
+      example: a6f7f8b3-e531-4522-810c-4f726f796b10,1594d0af-9239-466b-805b-a4f5df5f16d9
+      description: Identifiers list separated by commas (maximum of 10 identifiers)
     LimitBuyOrderBody:
       properties:
         external_id:
@@ -725,7 +1129,7 @@ components:
         immediate_or_cancel: false
         fill_or_kill: false
       title: Buy Limit
-    LimitSellOrderBody:
+    CeilingSellOrderBody:
       properties:
         external_id:
           $ref: '#/components/schemas/OrderExternalIdParamV4'
@@ -737,69 +1141,6 @@ components:
           enum:
           - sell
           description: Order's side (sell)
-        type:
-          type: string
-          enum:
-          - limit
-          description: Order's type (limit)
-        amount:
-          type: number
-          format: double
-          description: Order amount in base currency
-        price:
-          type: number
-          format: double
-          description: Limit price
-        post_only:
-          type: boolean
-          description: If set to `true`, the order will be added directly to the order book without an initial match, provided the request is valid
-        expiration:
-          type: number
-          format: double
-          description: If a valid timestamp is provided, the order will be created with an expiration date and time
-        immediate_or_cancel:
-          type: boolean
-          description: If set to `true`, the order will not be added to the order book after the initial match, any remaining unfilled amount will result in the order being canceled
-        fill_or_kill:
-          type: boolean
-          description: If set to `true`, the order will either be completely filled or canceled
-      required:
-      - pair
-      - side
-      - type
-      - amount
-      - price
-      type: object
-      additionalProperties: false
-      example:
-        pair: BTC_BRL
-        side: sell
-        type: limit
-        amount: 1
-        price: 700000
-        post_only: false
-        expiration: 1723073682
-        immediate_or_cancel: false
-        fill_or_kill: false
-      title: Sell Limit
-    OrderSideParamV4:
-      type: string
-      enum:
-      - buy
-      - sell
-      description: Order side (buy or sell)
-    CeilingBuyOrderBody:
-      properties:
-        external_id:
-          $ref: '#/components/schemas/OrderExternalIdParamV4'
-        pair:
-          type: string
-          description: Currency pair code
-        side:
-          type: string
-          enum:
-          - buy
-          description: Order's side (buy)
         type:
           type: string
           enum:
@@ -821,37 +1162,40 @@ components:
       additionalProperties: false
       example:
         pair: BTC_BRL
-        side: buy
-        type: market
-        amount: 0.1
+        side: sell
+        type: ceiling
+        amount: 1
         fill_or_kill: false
-    VoidResponse:
+    CancelAllOrdersData:
       properties:
-        data:
-          type:
-          - number
-          - 'null'
-          enum:
-          - null
-        error_code:
-          type:
-          - number
-          - 'null'
-          enum:
-          - null
-          example: null
-        message:
-          type:
-          - string
-          - 'null'
-          example: null
+        pair_code:
+          type: string
+          description: Pair code
+          example: BTC_BRL
+        order_id:
+          type: string
+          description: Order identifier
+        success:
+          type: boolean
+          description: Success flag
       required:
-      - data
-      - error_code
-      - message
+      - pair_code
+      - order_id
+      - success
       type: object
       additionalProperties: false
-    MarketBuyOrderBody:
+    EstimatedPriceResponseDataV4:
+      properties:
+        price:
+          type: number
+          format: double
+          description: Estimated price
+          example: 54049.12
+      required:
+      - price
+      type: object
+      additionalProperties: false
+    TrailingBuyOrderBody:
       properties:
         external_id:
           $ref: '#/components/schemas/OrderExternalIdParamV4'
@@ -866,237 +1210,35 @@ components:
         type:
           type: string
           enum:
-          - market
-          description: Order's type (market)
+          - trailing
+          description: Order's type (trailing)
         amount:
           type: number
           format: double
           description: Order amount in base currency
-        value:
-          type: number
-          format: double
-          description: Order value in quote currency
-        fill_or_kill:
-          type: boolean
-          description: If set to `true`, the order will either be completely filled or canceled
-      required:
-      - pair
-      - side
-      - type
-      - amount
-      - value
-      type: object
-      additionalProperties: false
-      example:
-        pair: BTC_BRL
-        side: buy
-        type: market
-        amount: 0.1
-        fill_or_kill: false
-      title: Buy Market
-    EndDateParamV4:
-      type: string
-      default: '[Current date]'
-      format: date
-      description: Final date filter in ISO-8601 format (the interval between the initial and final date shouldn't be greater than 6 months)
-    CancelResponseData:
-      properties:
-        id:
-          type: string
-          description: Order identifier
-        create_date:
-          type: string
-          description: Datetime of the order creation
-        executed_amount:
-          type: number
-          format: float
-          description: Executed amount
-        remaining_amount:
-          type: number
-          format: float
-          description: Remaining amount
-        remaining_value:
-          type: number
-          format: float
-          description: Remaining value
-        requested_amount:
-          type: number
-          format: float
-          description: Requested amount
-        side:
-          type: string
-          description: Order side (sell / buy)
-        status:
-          type: string
-          description: Order status (executed_completely / executed_partially / open / canceled)
-        total_value:
-          type: number
-          format: float
-          description: Total value
-        type:
-          type: string
-          description: Order type (limit / market)
-        price:
-          type: number
-          format: float
-          description: Price
-        update_date:
-          type: string
-          description: Datetime of the last update
-        pair:
-          type: string
-          description: Currency pair code
-          example: BTC_BRL
-        external_id:
-          type: string
-          description: External id (this is sent by the user when creating an order, and it's optional)
-          example: BEAB10B1-45B0-4999-9B2F-D2ED048D6C42
-      required:
-      - id
-      - create_date
-      - executed_amount
-      - remaining_amount
-      - remaining_value
-      - requested_amount
-      - status
-      - total_value
-      - price
-      - update_date
-      - pair
-      type: object
-      additionalProperties: false
-      example:
-        create_date: '2017-12-08T23:42:54.960Z'
-        executed_amount: 0.02347418
-        external_id: B4A9F7F4-9C79-4921-9330-224C17260BDF
-        id: 7155ED34-9EC4-4733-8B32-1E4319CB662F
-        pair: BTC_BRL
-        price: 42600
-        remaining_amount: 0.1
-        remaining_value: 0.6
-        requested_amount: 0.02347418
-        requested_value: 1000
-        side: buy
-        status: canceled
-        total_value: 1000
-        type: limit
-        update_date: '2017-12-13T21:48:48.817Z'
-    UserOrderOutput:
-      properties:
-        id:
-          type: string
-          description: Order identifier
-        status:
-          type: string
-          description: Order status (executed_completely / executed_partially / open / canceled)
-        create_date:
-          type: string
-          description: Datetime of the order creation
-        external_id:
-          type: string
-          description: External id (this is sent by the user when creating an order, and it's optional)
-          example: BEAB10B1-45B0-4999-9B2F-D2ED048D6C42
-        pair:
-          type: string
-          description: Currency pair code
-          example: BTC_BRL
-        side:
-          type: string
-          description: Order side (sell / buy)
-        executed_amount:
-          type: number
-          format: float
-          description: Executed amount
-        remaining_amount:
-          type: number
-          format: float
-          description: Remaining amount
-        remaining_value:
-          type: number
-          format: float
-          description: Remaining value
-        requested_amount:
-          type: number
-          format: float
-          description: Requested amount
-        requested_value:
-          type: number
-          format: float
-          description: Requested value
-      required:
-      - id
-      - status
-      - create_date
-      - pair
-      - side
-      - executed_amount
-      - remaining_amount
-      - remaining_value
-      - requested_amount
-      type: object
-      additionalProperties: false
-      example:
-        id: 7155ED34-9EC4-4733-8B32-1E4319CB662F
-        create_date: '2024-03-27T13:27:19.853Z'
-        executed_amount: 0
-        external_id: BEAB10B1-45B0-4999-9B2F-D2ED048D6C42
-        pair: BTC_BRL
-        remaining_amount: 10
-        remaining_value: 1000
-        requested_amount: 10
-        requested_value: 1000
-        side: buy
-        status: open
-    StartDateParamV4:
-      type: string
-      default: '[10 days ago]'
-      format: date
-      description: Initial date filter in ISO-8601 format (shouldn't be before 2017-10-01)
-    IcebergSellOrderBody:
-      properties:
-        external_id:
-          $ref: '#/components/schemas/OrderExternalIdParamV4'
-        pair:
-          type: string
-          description: Currency pair code
-        side:
-          type: string
-          enum:
-          - sell
-          description: Order's side (sell)
-        type:
-          type: string
-          enum:
-          - iceberg
-          description: Order's type (iceberg)
-        amount:
-          type: number
-          format: double
-          description: Order amount in base currency
-        step_amount:
-          type: number
-          format: double
-          description: Step amount (the ratio of amount to step_amount must be less than or equal to 10)
         price:
           type: number
           format: double
           description: Limit price
+        distance:
+          type: number
+          format: double
+          description: Price distance
       required:
       - pair
       - side
       - type
       - amount
-      - step_amount
       - price
+      - distance
       type: object
       additionalProperties: false
       example:
-        amount: 10
-        step_amount: 1
         pair: BTC_BRL
-        price: 700000
-        side: sell
-        type: iceberg
+        side: buy
+        type: trailing
+        amount: 1
+        distance: 1
     UserPreparedOrderWithExecutions:
       properties:
         id:
@@ -1218,58 +1360,136 @@ components:
           fee_currency: BTC
           price: 5000
           total_value: 1000
-    PaginationV4:
+    CursorTradesResponseData:
       properties:
-        current_page:
-          type: number
-          format: double
-          description: Current page
-        page_size:
-          type: number
-          format: double
-          description: Page size
-        registers_count:
-          type: number
-          format: double
-          description: Total number of registers
-        total_pages:
-          type: number
-          format: double
-          description: Total number of pages
-      required:
-      - current_page
-      - page_size
-      - registers_count
-      - total_pages
-      type: object
-      additionalProperties: false
-      example:
-        current_page: 1
-        registers_count: 21
-        total_pages: 1
-        page_size: 100
-    UserOpenOrdersResponseV4:
-      properties:
-        data:
-          $ref: '#/components/schemas/UserOpenOrdersDataV4'
-        error_code:
-          type:
-          - number
-          - 'null'
-          enum:
-          - null
-          example: null
-        message:
+        trades:
+          items:
+            $ref: '#/components/schemas/Trade'
+          type: array
+          example:
+          - amount: 0.2404764
+            date: '2019-01-03T02:27:33.947Z'
+            id: 2B222F22-5235-45FA-97FC-E9DBFA2575EE
+            maker_order_id: F49F5BD8-3F5B-4364-BCEE-F36F62DB966A
+            maker_side: buy
+            maker_type: limit
+            pair: BTC_BRL
+            price: 15160
+            taker_order_id: FEAB5CEC-7F9E-4F95-B67D-9E8D5C739BE3
+            taker_side: sell
+            taker_type: market
+            timestamp: 1675708481219
+            total_value: 3638.4
+          - amount: 0.00563617
+            date: '2019-01-03T02:27:33.943Z'
+            id: CDC492A5-B1BF-4353-BE7A-43F51C371388
+            maker_order_id: 53BF30D2-901C-43D5-B0D1-62CD05DFD02A
+            maker_side: buy
+            maker_type: limit
+            pair: BTC_BRL
+            price: 15163
+            taker_order_id: E4B1B38D-C871-4476-9314-3DC23292F45E
+            taker_side: sell
+            taker_type: limit
+            timestamp: 1675708481220
+            total_value: 84.91
+          - amount: 0.00680154
+            date: '2019-01-03T02:27:33.940Z'
+            id: 910AA20F-211F-4755-90A7-94227DB407D8
+            maker_order_id: 1FD30735-E055-4200-AD3D-007B02A5BA92
+            maker_side: buy
+            maker_type: limit
+            pair: BTC_BRL
+            price: 15163.03
+            taker_order_id: DBC6D4AF-D454-46DF-80EC-E19528A0FB25
+            taker_side: sell
+            taker_type: limit
+            timestamp: 1675708481221
+            total_value: 104.1
+        nc:
           type:
           - string
           - 'null'
-          example: null
+          description: This is the next cursor, use its value with the `c` parameter to retrieve the next page
+        pc:
+          type:
+          - string
+          - 'null'
+          description: This is the previous cursor, use its value with the `c` parameter to retrieve the previous page
       required:
-      - data
-      - error_code
-      - message
+      - trades
       type: object
       additionalProperties: false
+    UserOrderOutput:
+      properties:
+        id:
+          type: string
+          description: Order identifier
+        status:
+          type: string
+          description: Order status (executed_completely / executed_partially / open / canceled)
+        create_date:
+          type: string
+          description: Datetime of the order creation
+        external_id:
+          type: string
+          description: External id (this is sent by the user when creating an order, and it's optional)
+          example: BEAB10B1-45B0-4999-9B2F-D2ED048D6C42
+        pair:
+          type: string
+          description: Currency pair code
+          example: BTC_BRL
+        side:
+          type: string
+          description: Order side (sell / buy)
+        executed_amount:
+          type: number
+          format: float
+          description: Executed amount
+        remaining_amount:
+          type: number
+          format: float
+          description: Remaining amount
+        remaining_value:
+          type: number
+          format: float
+          description: Remaining value
+        requested_amount:
+          type: number
+          format: float
+          description: Requested amount
+        requested_value:
+          type: number
+          format: float
+          description: Requested value
+      required:
+      - id
+      - status
+      - create_date
+      - pair
+      - side
+      - executed_amount
+      - remaining_amount
+      - remaining_value
+      - requested_amount
+      type: object
+      additionalProperties: false
+      example:
+        id: 7155ED34-9EC4-4733-8B32-1E4319CB662F
+        create_date: '2024-03-27T13:27:19.853Z'
+        executed_amount: 0
+        external_id: BEAB10B1-45B0-4999-9B2F-D2ED048D6C42
+        pair: BTC_BRL
+        remaining_amount: 10
+        remaining_value: 1000
+        requested_amount: 10
+        requested_value: 1000
+        side: buy
+        status: open
+    OrderIdParamV4:
+      type: string
+      example: 1594d0af-9239-466b-805b-a4f5df5f16d9
+      description: Order identifier
     CreateOrderResponse:
       properties:
         data:
@@ -1314,6 +1534,598 @@ components:
       - message
       type: object
       additionalProperties: false
+    UserOrderResponse:
+      properties:
+        data:
+          $ref: '#/components/schemas/UserPreparedOrderWithExecutions'
+        error_code:
+          type:
+          - number
+          - 'null'
+          enum:
+          - null
+          example: null
+        message:
+          type:
+          - string
+          - 'null'
+          example: null
+      required:
+      - data
+      - error_code
+      - message
+      type: object
+      additionalProperties: false
+    StartDateParamV4:
+      type: string
+      default: '[10 days ago]'
+      format: date
+      description: Initial date filter in ISO-8601 format (shouldn't be before 2017-10-01)
+    PaginationV4:
+      properties:
+        current_page:
+          type: number
+          format: double
+          description: Current page
+        page_size:
+          type: number
+          format: double
+          description: Page size
+        registers_count:
+          type: number
+          format: double
+          description: Total number of registers
+        total_pages:
+          type: number
+          format: double
+          description: Total number of pages
+      required:
+      - current_page
+      - page_size
+      - registers_count
+      - total_pages
+      type: object
+      additionalProperties: false
+      example:
+        current_page: 1
+        registers_count: 21
+        total_pages: 1
+        page_size: 100
+    UserOrdersResponseV4:
+      properties:
+        data:
+          $ref: '#/components/schemas/UserOrdersDataV4'
+        error_code:
+          type:
+          - number
+          - 'null'
+          enum:
+          - null
+          example: null
+        message:
+          type:
+          - string
+          - 'null'
+          example: null
+      required:
+      - data
+      - error_code
+      - message
+      type: object
+      additionalProperties: false
+    Trade:
+      properties:
+        amount:
+          type: number
+          format: double
+          description: Amount
+        date:
+          type: string
+          description: Trade date (UTC format)
+        id:
+          type: string
+          description: Trade id
+        maker_order_id:
+          type: string
+          description: Maker order id
+        maker_side:
+          type: string
+          description: Maker order side (sell / buy)
+        maker_type:
+          type: string
+          description: Maker order type (market / limit)
+        price:
+          type: number
+          format: double
+          description: Price
+        pair:
+          type: string
+          description: Currency pair code
+          example: BTC_BRL
+        taker_order_id:
+          type: string
+          description: Taker order id
+        taker_side:
+          type: string
+          description: Taker order side (sell / buy)
+        taker_type:
+          type: string
+          description: Taker order type (market / limit)
+        timestamp:
+          type: number
+          format: double
+          description: Current timestamp
+          example: 1675708481219
+        total_value:
+          type: number
+          format: float
+          description: Total value
+      required:
+      - amount
+      - date
+      - id
+      - maker_order_id
+      - maker_side
+      - maker_type
+      - price
+      - pair
+      - taker_order_id
+      - taker_side
+      - taker_type
+      - timestamp
+      - total_value
+      type: object
+      additionalProperties: false
+    CeilingBuyOrderBody:
+      properties:
+        external_id:
+          $ref: '#/components/schemas/OrderExternalIdParamV4'
+        pair:
+          type: string
+          description: Currency pair code
+        side:
+          type: string
+          enum:
+          - buy
+          description: Order's side (buy)
+        type:
+          type: string
+          enum:
+          - ceiling
+          description: Order's type (ceiling)
+        value:
+          type: number
+          format: double
+          description: Order value in quote currency
+        fill_or_kill:
+          type: boolean
+          description: If set to `true`, the order will either be completely filled or canceled
+      required:
+      - pair
+      - side
+      - type
+      - value
+      type: object
+      additionalProperties: false
+      example:
+        pair: BTC_BRL
+        side: buy
+        type: market
+        amount: 0.1
+        fill_or_kill: false
+    CancelResponseData:
+      properties:
+        id:
+          type: string
+          description: Order identifier
+        create_date:
+          type: string
+          description: Datetime of the order creation
+        executed_amount:
+          type: number
+          format: float
+          description: Executed amount
+        remaining_amount:
+          type: number
+          format: float
+          description: Remaining amount
+        remaining_value:
+          type: number
+          format: float
+          description: Remaining value
+        requested_amount:
+          type: number
+          format: float
+          description: Requested amount
+        side:
+          type: string
+          description: Order side (sell / buy)
+        status:
+          type: string
+          description: Order status (executed_completely / executed_partially / open / canceled)
+        total_value:
+          type: number
+          format: float
+          description: Total value
+        type:
+          type: string
+          description: Order type (limit / market)
+        price:
+          type: number
+          format: float
+          description: Price
+        update_date:
+          type: string
+          description: Datetime of the last update
+        pair:
+          type: string
+          description: Currency pair code
+          example: BTC_BRL
+        external_id:
+          type: string
+          description: External id (this is sent by the user when creating an order, and it's optional)
+          example: BEAB10B1-45B0-4999-9B2F-D2ED048D6C42
+      required:
+      - id
+      - create_date
+      - executed_amount
+      - remaining_amount
+      - remaining_value
+      - requested_amount
+      - status
+      - total_value
+      - price
+      - update_date
+      - pair
+      type: object
+      additionalProperties: false
+      example:
+        create_date: '2017-12-08T23:42:54.960Z'
+        executed_amount: 0.02347418
+        external_id: B4A9F7F4-9C79-4921-9330-224C17260BDF
+        id: 7155ED34-9EC4-4733-8B32-1E4319CB662F
+        pair: BTC_BRL
+        price: 42600
+        remaining_amount: 0.1
+        remaining_value: 0.6
+        requested_amount: 0.02347418
+        requested_value: 1000
+        side: buy
+        status: canceled
+        total_value: 1000
+        type: limit
+        update_date: '2017-12-13T21:48:48.817Z'
+    UserOrdersDataV4:
+      properties:
+        orders:
+          items:
+            $ref: '#/components/schemas/UserPreparedOrder'
+          type: array
+          example:
+          - create_date: '2017-12-08T23:42:54.960Z'
+            executed_amount: 0.02347418
+            external_id: B4A9F7F4-9C79-4921-9330-224C17260BDF
+            id: 857C0A3B-D70F-4256-9051-1C62FADBA8FA
+            pair: BTC_BRL
+            price: 42600
+            remaining_amount: 0
+            remaining_value: 0
+            requested_amount: 0.02347418
+            requested_value: 1000
+            side: buy
+            status: executed_completely
+            total_value: 1000
+            type: limit
+            update_date: '2017-12-13T21:48:48.817Z'
+            fee: 1
+          - create_date: '2017-10-20T00:26:40.403Z'
+            executed_amount: 0.00033518
+            external_id: 13080055-7357-4110-81B1-981E6699FA57
+            id: 3ECBE371-DE24-42E8-841C-4281B3164CCE
+            pair: BTC_BRL
+            price: 16352.12
+            remaining_amount: 0
+            remaining_value: 0
+            requested_amount: 0.00033518
+            requested_value: 5.48090358
+            side: buy
+            status: executed_completely
+            total_value: 5.48090358
+            type: limit
+            update_date: '2017-10-20T00:26:40.467Z'
+            fee: 1
+        pagination:
+          $ref: '#/components/schemas/PaginationV4'
+        nc:
+          type:
+          - string
+          - 'null'
+          description: Next cursor for pagination
+        pc:
+          type:
+          - string
+          - 'null'
+          description: Previous cursor for pagination
+      required:
+      - orders
+      - pagination
+      type: object
+      additionalProperties: false
+    EndDateTimeNoMinParamV4:
+      type: string
+      default: '[Current datetime]'
+      example: '2020-01-02T23:59:59-03:00'
+      format: datetime
+      description: Final datetime filter in ISO-8601 format
+    UserOpenOrdersResponseV4:
+      properties:
+        data:
+          $ref: '#/components/schemas/UserOpenOrdersDataV4'
+        error_code:
+          type:
+          - number
+          - 'null'
+          enum:
+          - null
+          example: null
+        message:
+          type:
+          - string
+          - 'null'
+          example: null
+      required:
+      - data
+      - error_code
+      - message
+      type: object
+      additionalProperties: false
+    VoidResponse:
+      properties:
+        data:
+          type:
+          - number
+          - 'null'
+          enum:
+          - null
+        error_code:
+          type:
+          - number
+          - 'null'
+          enum:
+          - null
+          example: null
+        message:
+          type:
+          - string
+          - 'null'
+          example: null
+      required:
+      - data
+      - error_code
+      - message
+      type: object
+      additionalProperties: false
+    PageSizeParamV4:
+      type: number
+      format: int32
+      default: 200
+      example: 100
+      description: Number of records per page
+      maximum: 1000
+      minimum: 1
+    IcebergSellOrderBody:
+      properties:
+        external_id:
+          $ref: '#/components/schemas/OrderExternalIdParamV4'
+        pair:
+          type: string
+          description: Currency pair code
+        side:
+          type: string
+          enum:
+          - sell
+          description: Order's side (sell)
+        type:
+          type: string
+          enum:
+          - iceberg
+          description: Order's type (iceberg)
+        amount:
+          type: number
+          format: double
+          description: Order amount in base currency
+        step_amount:
+          type: number
+          format: double
+          description: Step amount (the ratio of amount to step_amount must be less than or equal to 10)
+        price:
+          type: number
+          format: double
+          description: Limit price
+      required:
+      - pair
+      - side
+      - type
+      - amount
+      - step_amount
+      - price
+      type: object
+      additionalProperties: false
+      example:
+        amount: 10
+        step_amount: 1
+        pair: BTC_BRL
+        price: 700000
+        side: sell
+        type: iceberg
+    OrderTypeParamV4:
+      type: string
+      enum:
+      - limit
+      - market
+      - stop_limit
+      - trailing
+      - ceiling
+      - iceberg
+      description: Order type (limit, market, stop_limit, trailing, ceiling or iceberg)
+    StopLimitSellOrderBody:
+      properties:
+        external_id:
+          $ref: '#/components/schemas/OrderExternalIdParamV4'
+        pair:
+          type: string
+          description: Currency pair code
+        side:
+          type: string
+          enum:
+          - sell
+          description: Order's side (sell)
+        type:
+          type: string
+          enum:
+          - stop_limit
+          description: Order's type (stop_limit)
+        amount:
+          type: number
+          format: double
+          description: Order amount in base currency
+        price:
+          type: number
+          format: double
+          description: Limit price
+        stop_price:
+          type: number
+          format: double
+          description: Stop price
+      required:
+      - pair
+      - side
+      - type
+      - amount
+      - price
+      - stop_price
+      type: object
+      additionalProperties: false
+      example:
+        amount: 1
+        pair: BTC_BRL
+        price: 700000
+        side: sell
+        stop_price: 1
+        type: stop_limit
+    UserOpenOrdersDataV4:
+      properties:
+        orders:
+          items:
+            $ref: '#/components/schemas/UserPreparedOrder'
+          type: array
+          example:
+          - create_date: '2017-12-08T23:42:54.960Z'
+            executed_amount: 0.02347418
+            external_id: B4A9F7F4-9C79-4921-9330-224C17260BDF
+            id: 857C0A3B-D70F-4256-9051-1C62FADBA8FA
+            pair: BTC_BRL
+            price: 42600
+            remaining_amount: 0
+            remaining_value: 0
+            requested_amount: 0.02347418
+            requested_value: 1000
+            side: buy
+            status: executed_completely
+            fee: 0.004
+            total_value: 1000
+            type: limit
+            update_date: '2017-12-13T21:48:48.817Z'
+          - create_date: '2017-10-20T00:26:40.403Z'
+            executed_amount: 0.00033518
+            external_id: 13080055-7357-4110-81B1-981E6699FA57
+            id: 3ECBE371-DE24-42E8-841C-4281B3164CCE
+            pair: BTC_BRL
+            price: 16352.12
+            remaining_amount: 0
+            remaining_value: 0
+            requested_amount: 0.00033518
+            requested_value: 5.48090358
+            side: buy
+            status: executed_completely
+            fee: 0.004
+            total_value: 5.48090358
+            type: limit
+            update_date: '2017-10-20T00:26:40.467Z'
+        pagination:
+          $ref: '#/components/schemas/PaginationV4'
+        nc:
+          type:
+          - string
+          - 'null'
+          description: Next cursor for pagination
+        pc:
+          type:
+          - string
+          - 'null'
+          description: Previous cursor for pagination
+      required:
+      - orders
+      - pagination
+      type: object
+      additionalProperties: false
+    LimitSellOrderBody:
+      properties:
+        external_id:
+          $ref: '#/components/schemas/OrderExternalIdParamV4'
+        pair:
+          type: string
+          description: Currency pair code
+        side:
+          type: string
+          enum:
+          - sell
+          description: Order's side (sell)
+        type:
+          type: string
+          enum:
+          - limit
+          description: Order's type (limit)
+        amount:
+          type: number
+          format: double
+          description: Order amount in base currency
+        price:
+          type: number
+          format: double
+          description: Limit price
+        post_only:
+          type: boolean
+          description: If set to `true`, the order will be added directly to the order book without an initial match, provided the request is valid
+        expiration:
+          type: number
+          format: double
+          description: If a valid timestamp is provided, the order will be created with an expiration date and time
+        immediate_or_cancel:
+          type: boolean
+          description: If set to `true`, the order will not be added to the order book after the initial match, any remaining unfilled amount will result in the order being canceled
+        fill_or_kill:
+          type: boolean
+          description: If set to `true`, the order will either be completely filled or canceled
+      required:
+      - pair
+      - side
+      - type
+      - amount
+      - price
+      type: object
+      additionalProperties: false
+      example:
+        pair: BTC_BRL
+        side: sell
+        type: limit
+        amount: 1
+        price: 700000
+        post_only: false
+        expiration: 1723073682
+        immediate_or_cancel: false
+        fill_or_kill: false
+      title: Sell Limit
     UserPreparedTradeV4:
       properties:
         amount:
@@ -1387,110 +2199,24 @@ components:
       - taker_order_id
       type: object
       additionalProperties: false
-    TrailingSellOrderBody:
+    OrderUpdatePriceAmountOrderOnMarketBody:
       properties:
-        external_id:
-          $ref: '#/components/schemas/OrderExternalIdParamV4'
-        pair:
+        unit_price:
           type: string
-          description: Currency pair code
-        side:
-          type: string
-          enum:
-          - sell
-          description: Order's side (sell)
-        type:
-          type: string
-          enum:
-          - trailing
-          description: Order's type (trailing)
+          description: New order price. Cannot be changed if it would immediately execute against existing orders
+          example: '10'
         amount:
-          type: number
-          format: double
-          description: Order amount in base currency
-        price:
-          type: number
-          format: double
-          description: Limit price
-        distance:
-          type: number
-          format: double
-          description: Price distance
+          type: string
+          description: New order amount in base currency
+          example: '100'
+        order_id:
+          type: string
+          description: Unique identifier of the order to update
+          example: 00CE34E9-0168-4050-9D58-10C705A1AC81
       required:
-      - pair
-      - side
-      - type
-      - amount
-      - price
-      - distance
+      - order_id
       type: object
       additionalProperties: false
-      example:
-        pair: BTC_BRL
-        side: sell
-        type: trailing
-        amount: 1
-        distance: 1
-    CurrentPageParamV4:
-      type: number
-      format: int32
-      default: 1
-      example: 3
-      description: Page number for pagination
-    OrderExternalIdParamV4:
-      type: string
-      example: 0f4a8504-21fb-4be6-9771-25dcf5f68f87
-      description: Order external identifier (maximum of 36 chars)
-    OrderTypeParamV4:
-      type: string
-      enum:
-      - limit
-      - market
-      - stop_limit
-      - trailing
-      - ceiling
-      - iceberg
-      description: Order type (limit, market, stop_limit, trailing, ceiling or iceberg)
-    UserOrderTransactions:
-      properties:
-        amount:
-          type: number
-          format: double
-          description: Execution amount in cryptocurrency
-        create_date:
-          type: string
-          format: date-time
-          description: Timestamp of the execution
-        fee:
-          type: number
-          format: double
-          description: Fee charged for this execution
-        fee_currency:
-          type: string
-          description: Currency code in which the fee was charged
-        total_value:
-          type: number
-          format: double
-          description: Total execution value
-        price:
-          type: number
-          format: float
-          description: Execution price
-      required:
-      - amount
-      - create_date
-      - fee
-      - fee_currency
-      - total_value
-      - price
-      type: object
-      additionalProperties: false
-    EndDateTimeNoMinParamV4:
-      type: string
-      default: '[Current datetime]'
-      example: '2020-01-02T23:59:59-03:00'
-      format: datetime
-      description: Final datetime filter in ISO-8601 format
     UserTradesDataV4:
       properties:
         trades:
@@ -1543,242 +2269,6 @@ components:
       - pagination
       type: object
       additionalProperties: false
-    OrderUpdatePriceAmountOrderOnMarketBody:
-      properties:
-        unit_price:
-          type: string
-          description: New order price. Cannot be changed if it would immediately execute against existing orders
-          example: '10'
-        amount:
-          type: string
-          description: New order amount in base currency
-          example: '100'
-        order_id:
-          type: string
-          description: Unique identifier of the order to update
-          example: 00CE34E9-0168-4050-9D58-10C705A1AC81
-      required:
-      - order_id
-      type: object
-      additionalProperties: false
-    IcebergBuyOrderBody:
-      properties:
-        external_id:
-          $ref: '#/components/schemas/OrderExternalIdParamV4'
-        pair:
-          type: string
-          description: Currency pair code
-        side:
-          type: string
-          enum:
-          - buy
-          description: Order's side (buy)
-        type:
-          type: string
-          enum:
-          - iceberg
-          description: Order's type (iceberg)
-        amount:
-          type: number
-          format: double
-          description: Order amount in base currency
-        step_amount:
-          type: number
-          format: double
-          description: Step amount (the ratio of amount to step_amount must be less than or equal to 10)
-        price:
-          type: number
-          format: double
-          description: Limit price
-      required:
-      - pair
-      - side
-      - type
-      - amount
-      - step_amount
-      - price
-      type: object
-      additionalProperties: false
-      example:
-        amount: 10
-        step_amount: 1
-        pair: BTC_BRL
-        price: 700000
-        side: buy
-        type: iceberg
-    OrderIdParamV4:
-      type: string
-      example: 1594d0af-9239-466b-805b-a4f5df5f16d9
-      description: Order identifier
-    TrailingBuyOrderBody:
-      properties:
-        external_id:
-          $ref: '#/components/schemas/OrderExternalIdParamV4'
-        pair:
-          type: string
-          description: Currency pair code
-        side:
-          type: string
-          enum:
-          - buy
-          description: Order's side (buy)
-        type:
-          type: string
-          enum:
-          - trailing
-          description: Order's type (trailing)
-        amount:
-          type: number
-          format: double
-          description: Order amount in base currency
-        price:
-          type: number
-          format: double
-          description: Limit price
-        distance:
-          type: number
-          format: double
-          description: Price distance
-      required:
-      - pair
-      - side
-      - type
-      - amount
-      - price
-      - distance
-      type: object
-      additionalProperties: false
-      example:
-        pair: BTC_BRL
-        side: buy
-        type: trailing
-        amount: 1
-        distance: 1
-    EstimatedPriceResponseV4:
-      properties:
-        data:
-          $ref: '#/components/schemas/EstimatedPriceResponseDataV4'
-        error_code:
-          type:
-          - number
-          - 'null'
-          enum:
-          - null
-          example: null
-        message:
-          type:
-          - string
-          - 'null'
-          example: null
-      required:
-      - data
-      - error_code
-      - message
-      type: object
-      additionalProperties: false
-    StopLimitSellOrderBody:
-      properties:
-        external_id:
-          $ref: '#/components/schemas/OrderExternalIdParamV4'
-        pair:
-          type: string
-          description: Currency pair code
-        side:
-          type: string
-          enum:
-          - sell
-          description: Order's side (sell)
-        type:
-          type: string
-          enum:
-          - stop_limit
-          description: Order's type (stop_limit)
-        amount:
-          type: number
-          format: double
-          description: Order amount in base currency
-        price:
-          type: number
-          format: double
-          description: Limit price
-        stop_price:
-          type: number
-          format: double
-          description: Stop price
-      required:
-      - pair
-      - side
-      - type
-      - amount
-      - price
-      - stop_price
-      type: object
-      additionalProperties: false
-      example:
-        amount: 1
-        pair: BTC_BRL
-        price: 700000
-        side: sell
-        stop_price: 1
-        type: stop_limit
-    OrderIdsParamV4:
-      type: string
-      example: a6f7f8b3-e531-4522-810c-4f726f796b10,1594d0af-9239-466b-805b-a4f5df5f16d9
-      description: Identifiers list separated by commas (maximum of 10 identifiers)
-    MarketSellOrderBody:
-      properties:
-        external_id:
-          $ref: '#/components/schemas/OrderExternalIdParamV4'
-        pair:
-          type: string
-          description: Currency pair code
-        side:
-          type: string
-          enum:
-          - sell
-          description: Order's side (sell)
-        type:
-          type: string
-          enum:
-          - market
-          description: Order's type (market)
-        amount:
-          type: number
-          format: double
-          description: Order amount in base currency
-        value:
-          type: number
-          format: double
-          description: Order value in quote currency
-        fill_or_kill:
-          type: boolean
-          description: If set to `true`, the order will either be completely filled or canceled
-      required:
-      - pair
-      - side
-      - type
-      - amount
-      - value
-      type: object
-      additionalProperties: false
-      example:
-        pair: BTC_BRL
-        side: sell
-        type: market
-        amount: 1
-        fill_or_kill: false
-      title: Sell Market
-    EstimatedPriceResponseDataV4:
-      properties:
-        price:
-          type: number
-          format: double
-          description: Estimated price
-          example: 54049.12
-      required:
-      - price
-      type: object
-      additionalProperties: false
     StopLimitBuyOrderBody:
       properties:
         external_id:
@@ -1824,496 +2314,6 @@ components:
         side: buy
         stop_price: 1
         type: stop_limit
-    OrderStatusParamV4:
-      type: string
-      enum:
-      - executed_completely
-      - executed_partially
-      - open
-      - canceled
-      default: executed_partially
-      description: Order status (string or string list separated by commas)
-    CursorTradesResponse:
-      properties:
-        data:
-          $ref: '#/components/schemas/CursorTradesResponseData'
-        error_code:
-          type:
-          - number
-          - 'null'
-          enum:
-          - null
-          example: null
-        message:
-          type:
-          - string
-          - 'null'
-          example: null
-      required:
-      - data
-      - error_code
-      - message
-      type: object
-      additionalProperties: false
-    UserOpenOrdersDataV4:
-      properties:
-        orders:
-          items:
-            $ref: '#/components/schemas/UserPreparedOrder'
-          type: array
-          example:
-          - create_date: '2017-12-08T23:42:54.960Z'
-            executed_amount: 0.02347418
-            external_id: B4A9F7F4-9C79-4921-9330-224C17260BDF
-            id: 857C0A3B-D70F-4256-9051-1C62FADBA8FA
-            pair: BTC_BRL
-            price: 42600
-            remaining_amount: 0
-            remaining_value: 0
-            requested_amount: 0.02347418
-            requested_value: 1000
-            side: buy
-            status: executed_completely
-            fee: 0.004
-            total_value: 1000
-            type: limit
-            update_date: '2017-12-13T21:48:48.817Z'
-          - create_date: '2017-10-20T00:26:40.403Z'
-            executed_amount: 0.00033518
-            external_id: 13080055-7357-4110-81B1-981E6699FA57
-            id: 3ECBE371-DE24-42E8-841C-4281B3164CCE
-            pair: BTC_BRL
-            price: 16352.12
-            remaining_amount: 0
-            remaining_value: 0
-            requested_amount: 0.00033518
-            requested_value: 5.48090358
-            side: buy
-            status: executed_completely
-            fee: 0.004
-            total_value: 5.48090358
-            type: limit
-            update_date: '2017-10-20T00:26:40.467Z'
-        pagination:
-          $ref: '#/components/schemas/PaginationV4'
-        nc:
-          type:
-          - string
-          - 'null'
-          description: Next cursor for pagination
-        pc:
-          type:
-          - string
-          - 'null'
-          description: Previous cursor for pagination
-      required:
-      - orders
-      - pagination
-      type: object
-      additionalProperties: false
-    CursorTradesResponseData:
-      properties:
-        trades:
-          items:
-            $ref: '#/components/schemas/Trade'
-          type: array
-          example:
-          - amount: 0.2404764
-            date: '2019-01-03T02:27:33.947Z'
-            id: 2B222F22-5235-45FA-97FC-E9DBFA2575EE
-            maker_order_id: F49F5BD8-3F5B-4364-BCEE-F36F62DB966A
-            maker_side: buy
-            maker_type: limit
-            pair: BTC_BRL
-            price: 15160
-            taker_order_id: FEAB5CEC-7F9E-4F95-B67D-9E8D5C739BE3
-            taker_side: sell
-            taker_type: market
-            timestamp: 1675708481219
-            total_value: 3638.4
-          - amount: 0.00563617
-            date: '2019-01-03T02:27:33.943Z'
-            id: CDC492A5-B1BF-4353-BE7A-43F51C371388
-            maker_order_id: 53BF30D2-901C-43D5-B0D1-62CD05DFD02A
-            maker_side: buy
-            maker_type: limit
-            pair: BTC_BRL
-            price: 15163
-            taker_order_id: E4B1B38D-C871-4476-9314-3DC23292F45E
-            taker_side: sell
-            taker_type: limit
-            timestamp: 1675708481220
-            total_value: 84.91
-          - amount: 0.00680154
-            date: '2019-01-03T02:27:33.940Z'
-            id: 910AA20F-211F-4755-90A7-94227DB407D8
-            maker_order_id: 1FD30735-E055-4200-AD3D-007B02A5BA92
-            maker_side: buy
-            maker_type: limit
-            pair: BTC_BRL
-            price: 15163.03
-            taker_order_id: DBC6D4AF-D454-46DF-80EC-E19528A0FB25
-            taker_side: sell
-            taker_type: limit
-            timestamp: 1675708481221
-            total_value: 104.1
-        nc:
-          type:
-          - string
-          - 'null'
-          description: This is the next cursor, use its value with the `c` parameter to retrieve the next page
-        pc:
-          type:
-          - string
-          - 'null'
-          description: This is the previous cursor, use its value with the `c` parameter to retrieve the previous page
-      required:
-      - trades
-      type: object
-      additionalProperties: false
-    CancelAllOrdersResponse:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/CancelAllOrdersData'
-          type: array
-          example:
-          - order_id: F6D2661E-4D6F-4770-BBE6-CC063CBA3770
-            pair_code: BTC_BRL
-            success: true
-          - order_id: 7155ED34-9EC4-4733-8B32-1E4319CB662F
-            pair_code: BTC_BRL
-            success: false
-        error_code:
-          type:
-          - number
-          - 'null'
-          enum:
-          - null
-          example: null
-        message:
-          type:
-          - string
-          - 'null'
-          example: null
-      required:
-      - data
-      - error_code
-      - message
-      type: object
-      additionalProperties: false
-    UserOrdersDataV4:
-      properties:
-        orders:
-          items:
-            $ref: '#/components/schemas/UserPreparedOrder'
-          type: array
-          example:
-          - create_date: '2017-12-08T23:42:54.960Z'
-            executed_amount: 0.02347418
-            external_id: B4A9F7F4-9C79-4921-9330-224C17260BDF
-            id: 857C0A3B-D70F-4256-9051-1C62FADBA8FA
-            pair: BTC_BRL
-            price: 42600
-            remaining_amount: 0
-            remaining_value: 0
-            requested_amount: 0.02347418
-            requested_value: 1000
-            side: buy
-            status: executed_completely
-            total_value: 1000
-            type: limit
-            update_date: '2017-12-13T21:48:48.817Z'
-            fee: 1
-          - create_date: '2017-10-20T00:26:40.403Z'
-            executed_amount: 0.00033518
-            external_id: 13080055-7357-4110-81B1-981E6699FA57
-            id: 3ECBE371-DE24-42E8-841C-4281B3164CCE
-            pair: BTC_BRL
-            price: 16352.12
-            remaining_amount: 0
-            remaining_value: 0
-            requested_amount: 0.00033518
-            requested_value: 5.48090358
-            side: buy
-            status: executed_completely
-            total_value: 5.48090358
-            type: limit
-            update_date: '2017-10-20T00:26:40.467Z'
-            fee: 1
-        pagination:
-          $ref: '#/components/schemas/PaginationV4'
-        nc:
-          type:
-          - string
-          - 'null'
-          description: Next cursor for pagination
-        pc:
-          type:
-          - string
-          - 'null'
-          description: Previous cursor for pagination
-      required:
-      - orders
-      - pagination
-      type: object
-      additionalProperties: false
-    UserOrderResponse:
-      properties:
-        data:
-          $ref: '#/components/schemas/UserPreparedOrderWithExecutions'
-        error_code:
-          type:
-          - number
-          - 'null'
-          enum:
-          - null
-          example: null
-        message:
-          type:
-          - string
-          - 'null'
-          example: null
-      required:
-      - data
-      - error_code
-      - message
-      type: object
-      additionalProperties: false
-    PageSizeParamV4:
-      type: number
-      format: int32
-      default: 200
-      example: 100
-      description: Number of records per page
-      maximum: 1000
-      minimum: 1
-    UserOrdersResponseV4:
-      properties:
-        data:
-          $ref: '#/components/schemas/UserOrdersDataV4'
-        error_code:
-          type:
-          - number
-          - 'null'
-          enum:
-          - null
-          example: null
-        message:
-          type:
-          - string
-          - 'null'
-          example: null
-      required:
-      - data
-      - error_code
-      - message
-      type: object
-      additionalProperties: false
-    StartDateTimeNoMinParamV4:
-      type: string
-      default: '[6 months ago]'
-      example: '2020-01-01T00:00:00-03:00'
-      format: datetime
-      description: Initial datetime filter in ISO-8601 format
-    UserPreparedOrder:
-      properties:
-        id:
-          type: string
-          description: Order identifier
-        create_date:
-          type: string
-          description: Creation datetime
-        executed_amount:
-          type: number
-          format: float
-          description: Executed amount
-        external_id:
-          type: string
-          description: External id (this is sent by the user when creating an order, and it's optional)
-        pair:
-          type: string
-          description: Currency pair code
-          example: BTC_BRL
-        remaining_amount:
-          type: number
-          format: float
-          description: Remaining amount
-        remaining_value:
-          type: number
-          format: float
-          description: Remaining value
-        requested_amount:
-          type: number
-          format: float
-          description: Requested amount
-        requested_value:
-          type: number
-          format: float
-          description: Requested value
-        status:
-          type: string
-          description: Order status (executed_completely / executed_partially / open / canceled)
-        type:
-          type: string
-          description: Order type (limit / market)
-        total_value:
-          type: number
-          format: float
-          description: Total value
-        side:
-          type: string
-          description: Order side (buy or sell)
-        price:
-          type: number
-          format: float
-          description: Price
-        update_date:
-          type: string
-          description: Datetime of the last update
-        fee:
-          type: number
-          format: float
-          description: Fee from the transaction
-        fill_or_kill:
-          type: boolean
-          description: Exclusive for StopLimit orders, it is used in stop-loss or stop-buy scenarios to initiate selling or buying when the market price reaches the specified stop price
-      required:
-      - id
-      - create_date
-      - executed_amount
-      - pair
-      - remaining_amount
-      - remaining_value
-      - requested_amount
-      - status
-      - type
-      - total_value
-      - side
-      - price
-      - update_date
-      - fee
-      - fill_or_kill
-      type: object
-      additionalProperties: false
-    CancelAllOrdersData:
-      properties:
-        pair_code:
-          type: string
-          description: Pair code
-          example: BTC_BRL
-        order_id:
-          type: string
-          description: Order identifier
-        success:
-          type: boolean
-          description: Success flag
-      required:
-      - pair_code
-      - order_id
-      - success
-      type: object
-      additionalProperties: false
-    CeilingSellOrderBody:
-      properties:
-        external_id:
-          $ref: '#/components/schemas/OrderExternalIdParamV4'
-        pair:
-          type: string
-          description: Currency pair code
-        side:
-          type: string
-          enum:
-          - sell
-          description: Order's side (sell)
-        type:
-          type: string
-          enum:
-          - ceiling
-          description: Order's type (ceiling)
-        value:
-          type: number
-          format: double
-          description: Order value in quote currency
-        fill_or_kill:
-          type: boolean
-          description: If set to `true`, the order will either be completely filled or canceled
-      required:
-      - pair
-      - side
-      - type
-      - value
-      type: object
-      additionalProperties: false
-      example:
-        pair: BTC_BRL
-        side: sell
-        type: ceiling
-        amount: 1
-        fill_or_kill: false
-    Trade:
-      properties:
-        amount:
-          type: number
-          format: double
-          description: Amount
-        date:
-          type: string
-          description: Trade date (UTC format)
-        id:
-          type: string
-          description: Trade id
-        maker_order_id:
-          type: string
-          description: Maker order id
-        maker_side:
-          type: string
-          description: Maker order side (sell / buy)
-        maker_type:
-          type: string
-          description: Maker order type (market / limit)
-        price:
-          type: number
-          format: double
-          description: Price
-        pair:
-          type: string
-          description: Currency pair code
-          example: BTC_BRL
-        taker_order_id:
-          type: string
-          description: Taker order id
-        taker_side:
-          type: string
-          description: Taker order side (sell / buy)
-        taker_type:
-          type: string
-          description: Taker order type (market / limit)
-        timestamp:
-          type: number
-          format: double
-          description: Current timestamp
-          example: 1675708481219
-        total_value:
-          type: number
-          format: float
-          description: Total value
-      required:
-      - amount
-      - date
-      - id
-      - maker_order_id
-      - maker_side
-      - maker_type
-      - price
-      - pair
-      - taker_order_id
-      - taker_side
-      - taker_type
-      - timestamp
-      - total_value
-      type: object
-      additionalProperties: false
   securitySchemes:
     API_Credentials:
       type: apiToken

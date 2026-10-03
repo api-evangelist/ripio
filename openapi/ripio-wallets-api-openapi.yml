@@ -102,30 +102,6 @@ paths:
         enabled: false
 components:
   schemas:
-    WalletResponseV4:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/WalletResponseDataV4'
-          type: array
-        error_code:
-          type:
-          - number
-          - 'null'
-          enum:
-          - null
-          example: null
-        message:
-          type:
-          - string
-          - 'null'
-          example: null
-      required:
-      - data
-      - error_code
-      - message
-      type: object
-      additionalProperties: false
     GetUserWalletAndCreateIfNotExistsV4:
       properties:
         address:
@@ -156,14 +132,76 @@ components:
       - network
       type: object
       additionalProperties: false
-    AddressParamV4:
-      type: string
-      example: 2MsPTuASaY8QjQmKFWDyHzYxzpASzKpv7YF
-      description: Wallet address
+    IsInternalV4:
+      properties:
+        is_internal:
+          type: boolean
+          description: Flag that indicates if it's an internal wallet
+          format: boolean
+      required:
+      - is_internal
+      type: object
+      additionalProperties: false
+    GetUserWalletAndCreateIfNotExistsResponseV4:
+      properties:
+        data:
+          $ref: '#/components/schemas/GetUserWalletAndCreateIfNotExistsV4'
+          example:
+            address: 3JentmkNdL97VQDtgRMehxPOMS4AveUZJ1
+            currency_code: BTC
+            tag: null
+            memo: null
+            network: bitcoin
+        error_code:
+          type:
+          - number
+          - 'null'
+          enum:
+          - null
+          example: null
+        message:
+          type:
+          - string
+          - 'null'
+          example: null
+      required:
+      - data
+      - error_code
+      - message
+      type: object
+      additionalProperties: false
     IsInternalWalletResponseV4:
       properties:
         data:
           $ref: '#/components/schemas/IsInternalV4'
+        error_code:
+          type:
+          - number
+          - 'null'
+          enum:
+          - null
+          example: null
+        message:
+          type:
+          - string
+          - 'null'
+          example: null
+      required:
+      - data
+      - error_code
+      - message
+      type: object
+      additionalProperties: false
+    AddressParamV4:
+      type: string
+      example: 2MsPTuASaY8QjQmKFWDyHzYxzpASzKpv7YF
+      description: Wallet address
+    WalletResponseV4:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/WalletResponseDataV4'
+          type: array
         error_code:
           type:
           - number
@@ -212,44 +250,6 @@ components:
         memo: null
         network: bitcoin
         tag: null
-    IsInternalV4:
-      properties:
-        is_internal:
-          type: boolean
-          description: Flag that indicates if it's an internal wallet
-          format: boolean
-      required:
-      - is_internal
-      type: object
-      additionalProperties: false
-    GetUserWalletAndCreateIfNotExistsResponseV4:
-      properties:
-        data:
-          $ref: '#/components/schemas/GetUserWalletAndCreateIfNotExistsV4'
-          example:
-            address: 3JentmkNdL97VQDtgRMehxPOMS4AveUZJ1
-            currency_code: BTC
-            tag: null
-            memo: null
-            network: bitcoin
-        error_code:
-          type:
-          - number
-          - 'null'
-          enum:
-          - null
-          example: null
-        message:
-          type:
-          - string
-          - 'null'
-          example: null
-      required:
-      - data
-      - error_code
-      - message
-      type: object
-      additionalProperties: false
   securitySchemes:
     API_Credentials:
       type: apiToken

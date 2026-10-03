@@ -130,6 +130,28 @@ paths:
           - To get comprehensive deposit data including network and confirmation details'
 components:
   schemas:
+    DepositsResponseV4:
+      properties:
+        data:
+          $ref: '#/components/schemas/DepositsDataV4'
+        error_code:
+          type:
+          - number
+          - 'null'
+          enum:
+          - null
+          example: null
+        message:
+          type:
+          - string
+          - 'null'
+          example: null
+      required:
+      - data
+      - error_code
+      - message
+      type: object
+      additionalProperties: false
     PageSizeParamV4:
       type: number
       format: int32
@@ -138,12 +160,18 @@ components:
       description: Number of records per page
       maximum: 1000
       minimum: 1
-    CurrentPageParamV4:
-      type: number
-      format: int32
-      default: 1
-      example: 3
-      description: Page number for pagination
+    DepositStatusParamV4:
+      type: string
+      enum:
+      - confirmation_pending
+      - confirmed
+      - canceled
+      description: Deposit status
+    StartDateNoMinParamV4:
+      type: string
+      default: '[6 months ago]'
+      format: date
+      description: Initial date filter in ISO-8601 format
     DepositV4:
       properties:
         id:
@@ -201,87 +229,6 @@ components:
         hash: 4f87d009d88524e627b60c6fbe4ebe671a99lk9ad72aab17e0963c5fbef118e2
         network: bitcoin
         status: confirmed
-    StartDateNoMinParamV4:
-      type: string
-      default: '[6 months ago]'
-      format: date
-      description: Initial date filter in ISO-8601 format
-    EndDateNoMinParamV4:
-      type: string
-      default: '[Current date]'
-      format: date
-      description: Final date filter in ISO-8601 format
-    DepositsDataV4:
-      properties:
-        deposits:
-          items:
-            $ref: '#/components/schemas/DepositV4'
-          type: array
-          example:
-          - amount: 2.29999999
-            confirmation_date: '2017-10-12T22:40:08.273Z'
-            create_date: '2017-10-12T22:40:08.273Z'
-            currency_code: BTC
-            id: 3D41EEF3-A709-4EE5-BDEE-B6435CAA84C8
-            is_internal: false
-            hash: 4f87d009d88524e627b60c6fbe4ebe671a99lk9ad72aab17e0963c5fbef118e2
-            network: bitcoin
-            status: confirmed
-          - amount: 2.29999999
-            confirmation_date: '2017-10-12T20:06:52.983Z'
-            create_date: '2017-10-12T20:06:52.983Z'
-            currency_code: BTC
-            id: 3011675E-A549-46F3-A70B-0F0B0A01A2D6
-            is_internal: false
-            hash: 181378774394ec47b9861d9facfcd4d4ea11a447tr82532c654d5ee1306b4857
-            network: bitcoin
-            status: confirmed
-        pagination:
-          $ref: '#/components/schemas/PaginationV4'
-        nc:
-          type:
-          - string
-          - 'null'
-          description: This is the next cursor, use its value with the `c` parameter to retrieve the next page
-        pc:
-          type:
-          - string
-          - 'null'
-          description: This is the previous cursor, use its value with the `c` parameter to retrieve the previous page
-      required:
-      - deposits
-      - pagination
-      type: object
-      additionalProperties: false
-    DepositsResponseV4:
-      properties:
-        data:
-          $ref: '#/components/schemas/DepositsDataV4'
-        error_code:
-          type:
-          - number
-          - 'null'
-          enum:
-          - null
-          example: null
-        message:
-          type:
-          - string
-          - 'null'
-          example: null
-      required:
-      - data
-      - error_code
-      - message
-      type: object
-      additionalProperties: false
-    DepositStatusParamV4:
-      type: string
-      enum:
-      - confirmation_pending
-      - confirmed
-      - canceled
-      description: Deposit status
     DepositResponseV4:
       properties:
         data:
@@ -344,6 +291,59 @@ components:
         registers_count: 21
         total_pages: 1
         page_size: 100
+    DepositsDataV4:
+      properties:
+        deposits:
+          items:
+            $ref: '#/components/schemas/DepositV4'
+          type: array
+          example:
+          - amount: 2.29999999
+            confirmation_date: '2017-10-12T22:40:08.273Z'
+            create_date: '2017-10-12T22:40:08.273Z'
+            currency_code: BTC
+            id: 3D41EEF3-A709-4EE5-BDEE-B6435CAA84C8
+            is_internal: false
+            hash: 4f87d009d88524e627b60c6fbe4ebe671a99lk9ad72aab17e0963c5fbef118e2
+            network: bitcoin
+            status: confirmed
+          - amount: 2.29999999
+            confirmation_date: '2017-10-12T20:06:52.983Z'
+            create_date: '2017-10-12T20:06:52.983Z'
+            currency_code: BTC
+            id: 3011675E-A549-46F3-A70B-0F0B0A01A2D6
+            is_internal: false
+            hash: 181378774394ec47b9861d9facfcd4d4ea11a447tr82532c654d5ee1306b4857
+            network: bitcoin
+            status: confirmed
+        pagination:
+          $ref: '#/components/schemas/PaginationV4'
+        nc:
+          type:
+          - string
+          - 'null'
+          description: This is the next cursor, use its value with the `c` parameter to retrieve the next page
+        pc:
+          type:
+          - string
+          - 'null'
+          description: This is the previous cursor, use its value with the `c` parameter to retrieve the previous page
+      required:
+      - deposits
+      - pagination
+      type: object
+      additionalProperties: false
+    EndDateNoMinParamV4:
+      type: string
+      default: '[Current date]'
+      format: date
+      description: Final date filter in ISO-8601 format
+    CurrentPageParamV4:
+      type: number
+      format: int32
+      default: 1
+      example: 3
+      description: Page number for pagination
   securitySchemes:
     API_Credentials:
       type: apiToken

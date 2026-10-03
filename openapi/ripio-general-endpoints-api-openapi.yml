@@ -144,35 +144,116 @@ paths:
           - For building trading interfaces with user context and restrictions'
 components:
   schemas:
-    CurrenciesResponseV4:
+    StartDateTimeNoMinParamV4:
+      type: string
+      default: '[6 months ago]'
+      example: '2020-01-01T00:00:00-03:00'
+      format: datetime
+      description: Initial datetime filter in ISO-8601 format
+    PublicCurrencyLogo:
       properties:
-        data:
-          items:
-            $ref: '#/components/schemas/PublicCurrencyV4'
-          type: array
-        error_code:
-          type:
-          - number
-          - 'null'
-          enum:
-          - null
-          example: null
-        message:
-          type:
-          - string
-          - 'null'
-          example: null
+        svg:
+          type: string
+          description: Currency svg logo
+          format: string
       required:
-      - data
-      - error_code
-      - message
+      - svg
       type: object
       additionalProperties: false
-    CountriesParamV4:
-      type: string
-      example: BR,AR
-      format: string
-      description: Countries (One or many, use "," to separate)
+    PublicPairV4:
+      properties:
+        amount_tick:
+          type: number
+          format: float
+          description: Smallest amount increment allowed
+        base:
+          type: string
+          description: Base currency code
+          format: string
+        base_name:
+          type: string
+          description: Base currency full name
+          format: string
+        quote:
+          type: string
+          description: Quote currency code
+          format: string
+        quote_name:
+          type: string
+          description: Quote currency full name
+          format: string
+        symbol:
+          type: string
+          description: 'Currency pair code (format: BASE_QUOTE)'
+          format: string
+        enabled:
+          type: boolean
+          description: Whether the pair is currently available for trading
+          format: boolean
+        min_amount:
+          type: number
+          format: float
+          description: Minimum order amount in base currency
+        price_tick:
+          type: number
+          format: float
+          description: Smallest price increment allowed
+        min_value:
+          type: number
+          format: float
+          description: Minimum order value in quote currency
+        countries:
+          items:
+            type: string
+          type: array
+          description: Available countries
+        max_price_variation:
+          type: number
+          format: int32
+          description: Maximum price variation (in percentage), applicable either upward or downward, relative to the best price in the order book (e.g., `10` means `10%`)
+      required:
+      - amount_tick
+      - base
+      - base_name
+      - quote
+      - quote_name
+      - symbol
+      - enabled
+      - min_amount
+      - price_tick
+      - min_value
+      - countries
+      type: object
+      additionalProperties: false
+      example:
+        amount_tick: 0.0001
+        base: BTC
+        base_name: Bitcoin
+        enabled: true
+        min_amount: 0.0005
+        min_value: 10
+        price_tick: 1
+        quote: BRL
+        quote_name: Brazilian real
+        symbol: BTC_BRL
+        countries:
+        - BR
+        max_price_variation: 10
+    PublicMemo:
+      properties:
+        deposit:
+          type: boolean
+          description: Flag that indicates if the network has memo for deposit
+          format: boolean
+        withdrawal:
+          type: boolean
+          description: Flag that indicates if the network has memo for withdrawal
+          format: boolean
+      required:
+      - deposit
+      - withdrawal
+      type: object
+      additionalProperties: false
     PublicCurrencyV4:
       properties:
         active:
@@ -263,6 +344,30 @@ components:
         - AR
         logo:
           svg: https://cryptocurrency-logos.ripio.com/svg/btc.svg
+    PairsResponseV4:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/PublicPairV4'
+          type: array
+        error_code:
+          type:
+          - number
+          - 'null'
+          enum:
+          - null
+          example: null
+        message:
+          type:
+          - string
+          - 'null'
+          example: null
+      required:
+      - data
+      - error_code
+      - message
+      type: object
+      additionalProperties: false
     PageSizeParamV4:
       type: number
       format: int32
@@ -271,83 +376,11 @@ components:
       description: Number of records per page
       maximum: 1000
       minimum: 1
-    PublicCurrencyLogo:
-      properties:
-        svg:
-          type: string
-          description: Currency svg logo
-          format: string
-      required:
-      - svg
-      type: object
-      additionalProperties: false
-    EndDateTimeNoMinParamV4:
-      type: string
-      default: '[Current datetime]'
-      example: '2020-01-02T23:59:59-03:00'
-      format: datetime
-      description: Final datetime filter in ISO-8601 format
-    PublicNetwork:
-      properties:
-        code:
-          type: string
-          description: Network code
-          format: string
-        memo:
-          $ref: '#/components/schemas/PublicMemo'
-          description: Memo information
-          format: PublicTag
-        tag:
-          $ref: '#/components/schemas/PublicTag'
-          description: Tag information
-          format: PublicTag
-      required:
-      - code
-      - memo
-      - tag
-      type: object
-      additionalProperties: false
-    PublicTag:
-      properties:
-        deposit:
-          type: boolean
-          description: Flag that indicates if the network has tag for deposit
-          format: boolean
-        withdrawal:
-          type: boolean
-          description: Flag that indicates if the network has tag for withdrawal
-          format: boolean
-      required:
-      - deposit
-      - withdrawal
-      type: object
-      additionalProperties: false
-    StartDateTimeNoMinParamV4:
-      type: string
-      default: '[6 months ago]'
-      example: '2020-01-01T00:00:00-03:00'
-      format: datetime
-      description: Initial datetime filter in ISO-8601 format
-    PublicMemo:
-      properties:
-        deposit:
-          type: boolean
-          description: Flag that indicates if the network has memo for deposit
-          format: boolean
-        withdrawal:
-          type: boolean
-          description: Flag that indicates if the network has memo for withdrawal
-          format: boolean
-      required:
-      - deposit
-      - withdrawal
-      type: object
-      additionalProperties: false
-    PairsResponseV4:
+    CurrenciesResponseV4:
       properties:
         data:
           items:
-            $ref: '#/components/schemas/PublicPairV4'
+            $ref: '#/components/schemas/PublicCurrencyV4'
           type: array
         error_code:
           type:
@@ -512,85 +545,52 @@ components:
       - trades
       type: object
       additionalProperties: false
-    PublicPairV4:
+    PublicNetwork:
       properties:
-        amount_tick:
-          type: number
-          format: float
-          description: Smallest amount increment allowed
-        base:
+        code:
           type: string
-          description: Base currency code
+          description: Network code
           format: string
-        base_name:
-          type: string
-          description: Base currency full name
-          format: string
-        quote:
-          type: string
-          description: Quote currency code
-          format: string
-        quote_name:
-          type: string
-          description: Quote currency full name
-          format: string
-        symbol:
-          type: string
-          description: 'Currency pair code (format: BASE_QUOTE)'
-          format: string
-        enabled:
-          type: boolean
-          description: Whether the pair is currently available for trading
-          format: boolean
-        min_amount:
-          type: number
-          format: float
-          description: Minimum order amount in base currency
-        price_tick:
-          type: number
-          format: float
-          description: Smallest price increment allowed
-        min_value:
-          type: number
-          format: float
-          description: Minimum order value in quote currency
-        countries:
-          items:
-            type: string
-          type: array
-          description: Available countries
-        max_price_variation:
-          type: number
-          format: int32
-          description: Maximum price variation (in percentage), applicable either upward or downward, relative to the best price in the order book (e.g., `10` means `10%`)
+        memo:
+          $ref: '#/components/schemas/PublicMemo'
+          description: Memo information
+          format: PublicTag
+        tag:
+          $ref: '#/components/schemas/PublicTag'
+          description: Tag information
+          format: PublicTag
       required:
-      - amount_tick
-      - base
-      - base_name
-      - quote
-      - quote_name
-      - symbol
-      - enabled
-      - min_amount
-      - price_tick
-      - min_value
-      - countries
+      - code
+      - memo
+      - tag
       type: object
       additionalProperties: false
-      example:
-        amount_tick: 0.0001
-        base: BTC
-        base_name: Bitcoin
-        enabled: true
-        min_amount: 0.0005
-        min_value: 10
-        price_tick: 1
-        quote: BRL
-        quote_name: Brazilian real
-        symbol: BTC_BRL
-        countries:
-        - BR
-        max_price_variation: 10
+    EndDateTimeNoMinParamV4:
+      type: string
+      default: '[Current datetime]'
+      example: '2020-01-02T23:59:59-03:00'
+      format: datetime
+      description: Final datetime filter in ISO-8601 format
+    PublicTag:
+      properties:
+        deposit:
+          type: boolean
+          description: Flag that indicates if the network has tag for deposit
+          format: boolean
+        withdrawal:
+          type: boolean
+          description: Flag that indicates if the network has tag for withdrawal
+          format: boolean
+      required:
+      - deposit
+      - withdrawal
+      type: object
+      additionalProperties: false
+    CountriesParamV4:
+      type: string
+      example: BR,AR
+      format: string
+      description: Countries (One or many, use "," to separate)
   securitySchemes:
     API_Credentials:
       type: apiToken
