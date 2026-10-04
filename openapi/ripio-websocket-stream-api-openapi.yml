@@ -559,141 +559,6 @@ webhooks:
     - url: https://api.ripiotrade.co/v4/
 components:
   schemas:
-    SocketBalance:
-      properties:
-        user_id:
-          type: string
-          description: User identifier
-        balances:
-          items:
-            properties:
-              locked_amount:
-                type: number
-                format: double
-                description: Amount in use
-              currency_code:
-                type: string
-                description: Currency code
-                example: BTC
-              available_amount:
-                type: number
-                format: double
-                description: Available amount
-            required:
-            - locked_amount
-            - currency_code
-            - available_amount
-            type: object
-          type: array
-      required:
-      - user_id
-      - balances
-      type: object
-      additionalProperties: false
-      example:
-        user_id: 299E7131-CE8C-422F-A1CF-497BFA116F89
-        balances:
-        - available_amount: 1
-          currency_code: BTC
-          locked_amount: 0.5
-        - available_amount: 3
-          currency_code: ETH
-          locked_amount: 1
-    IResponse_ISocketTrade_:
-      properties:
-        body:
-          $ref: '#/components/schemas/ISocketTrade'
-        id:
-          type: number
-          format: double
-          description: Each WebSocket message includes a sequential numeric id. Each topic has its own unique sequence, and for private topics, the sequence is unique to each topic and user. It's important to note that some topics will send a "welcome message", which will have an id value of `-1`. Additionally, this sequence may be reset between connections, so be sure to update this value locally whenever you reconnect.
-          example: 1308
-        timestamp:
-          type: number
-          format: double
-          description: Timestamp in milliseconds
-          example: 1709300794000
-        topic:
-          $ref: '#/components/schemas/TopicEnum'
-          description: Topic related to the message
-          example: trade@BTC_USDC
-      required:
-      - body
-      - id
-      - timestamp
-      - topic
-      type: object
-      additionalProperties: false
-    IOrderSocket:
-      properties:
-        amount:
-          type: number
-          format: float
-          description: Amount
-        id:
-          type: string
-          description: Order id
-          format: string
-        price:
-          type: number
-          format: int32
-          description: Price
-      required:
-      - amount
-      - id
-      - price
-      type: object
-      additionalProperties: false
-    IResponse_SendCashInToSocketUseCaseParams_:
-      properties:
-        body:
-          $ref: '#/components/schemas/SendCashInToSocketUseCaseParams'
-        id:
-          type: number
-          format: double
-          description: Each WebSocket message includes a sequential numeric id. Each topic has its own unique sequence, and for private topics, the sequence is unique to each topic and user. It's important to note that some topics will send a "welcome message", which will have an id value of `-1`. Additionally, this sequence may be reset between connections, so be sure to update this value locally whenever you reconnect.
-          example: 1308
-        timestamp:
-          type: number
-          format: double
-          description: Timestamp in milliseconds
-          example: 1709300794000
-        topic:
-          $ref: '#/components/schemas/TopicEnum'
-          description: Topic related to the message
-          example: trade@BTC_USDC
-      required:
-      - body
-      - id
-      - timestamp
-      - topic
-      type: object
-      additionalProperties: false
-    IResponse_SocketBalance_:
-      properties:
-        body:
-          $ref: '#/components/schemas/SocketBalance'
-        id:
-          type: number
-          format: double
-          description: Each WebSocket message includes a sequential numeric id. Each topic has its own unique sequence, and for private topics, the sequence is unique to each topic and user. It's important to note that some topics will send a "welcome message", which will have an id value of `-1`. Additionally, this sequence may be reset between connections, so be sure to update this value locally whenever you reconnect.
-          example: 1308
-        timestamp:
-          type: number
-          format: double
-          description: Timestamp in milliseconds
-          example: 1709300794000
-        topic:
-          $ref: '#/components/schemas/TopicEnum'
-          description: Topic related to the message
-          example: trade@BTC_USDC
-      required:
-      - body
-      - id
-      - timestamp
-      - topic
-      type: object
-      additionalProperties: false
     IOrderBookLevel2WithoutUsers:
       properties:
         asks:
@@ -734,82 +599,6 @@ components:
           price: 4
         pair: ETH_BRL
         hash: '2254383345'
-    ISocketTrade:
-      properties:
-        amount:
-          type: number
-          format: float
-          description: Amount
-        date:
-          type: string
-          description: Trade datetime
-          format: datetime
-        id:
-          type: string
-          description: Order id
-          format: string
-        maker_order_id:
-          type: string
-          description: Maker order id
-          format: string
-        maker_side:
-          type: string
-          description: Maker order side (sell / buy)
-          format: string
-        maker_type:
-          type: string
-          description: Maker order type (market / limit)
-          format: string
-        pair:
-          type: string
-          description: Currency pair code
-          example: BTC_BRL
-        price:
-          type: number
-          format: float
-          description: Price
-        taker_order_id:
-          type: string
-          description: Taker order id
-          format: string
-        taker_side:
-          type: string
-          description: Taker order side (buy or sell)
-          format: string
-        taker_type:
-          type: string
-          description: Taker order type (market / limit)
-          format: string
-        timestamp:
-          type: number
-          format: double
-          description: Current timestamp
-          example: 1675708481219
-        total_value:
-          type: number
-          format: float
-          description: Total value
-      required:
-      - amount
-      - date
-      - id
-      - maker_order_id
-      - maker_side
-      - maker_type
-      - price
-      - taker_order_id
-      - taker_side
-      - taker_type
-      - timestamp
-      - total_value
-      type: object
-      additionalProperties: false
-      example:
-        amount: 1
-        date: '2022-09-28T18:43:48.110Z'
-        pair: ETH_BRL
-        price: 20
-        side: buy
     SendFiatCashOutToSocketUseCaseParams:
       properties:
         id:
@@ -854,71 +643,20 @@ components:
       - details
       type: object
       additionalProperties: false
-    MethodEnum:
-      description: Method to be executed
+    TopicEnum:
       enum:
-      - subscribe
-      - unsubscribe
-      - ping
+      - trade
+      - orderbook/level_3
+      - orderbook/level_2
+      - orderbook/level_2_with_users
+      - orderbook/level_2_delta
+      - ticker
+      - order_status
+      - balance
+      - user_trades
+      - deposit
+      - withdrawal
       type: string
-    ITickerConversion:
-      properties:
-        volume:
-          type: number
-          format: double
-        currency_code:
-          type: string
-      required:
-      - volume
-      - currency_code
-      type: object
-      additionalProperties: false
-    SendCryptoCashInToSocketUseCaseParams:
-      properties:
-        id:
-          type: string
-          description: Deposit identifier
-        amount:
-          type: number
-          format: double
-          description: Amount
-        currency_code:
-          type: string
-          description: Currency code
-        status:
-          type: string
-          description: Cash in status (`confirmation_pending` | `confirmed` | `canceled` for cryptocurrency / `awaiting_processing` | `processing` | `confirmed` | `canceled` | `rejected` | `pending_cancelation` | `pending_approval` | `pending_processing` | `awaiting_bank_interval` for fiat)
-        create_date:
-          type: string
-          description: Datetime of the creation
-        update_date:
-          type: string
-          description: Datetime of the last update
-        user_id:
-          type: string
-          description: User id
-        hash:
-          type: string
-          description: Transaction hash
-        confirmation_date:
-          type: string
-          description: Datetime of the confirmation
-        network:
-          type: string
-          description: Network
-        is_internal:
-          type: boolean
-          description: If true, indicates that the deposit was sent internally by another exchange user
-      required:
-      - id
-      - amount
-      - currency_code
-      - status
-      - create_date
-      - update_date
-      - user_id
-      type: object
-      additionalProperties: false
     IRequestWithTicket:
       properties:
         method:
@@ -938,307 +676,10 @@ components:
       - ticket
       type: object
       additionalProperties: false
-    SendCryptoCashOutToSocketUseCaseParams:
-      properties:
-        id:
-          type: string
-          description: Cash out identifier
-        amount:
-          type: number
-          format: double
-          description: Amount
-        currency_code:
-          type: string
-          description: Currency code
-        status:
-          type: string
-          description: Origin address (valid only for cryptocurrency)
-        external_id:
-          type: string
-          description: External id
-        create_date:
-          type: string
-          description: Datetime of the creation
-        update_date:
-          type: string
-          description: Datetime of the last update
-        user_id:
-          type: string
-          description: User id
-        miner_fee:
-          type:
-          - number
-          - 'null'
-          format: double
-          description: Miner fee
-        fee:
-          type:
-          - number
-          - 'null'
-          format: double
-          description: Fee charged by the exchange
-        hash:
-          type: string
-          description: Withdrawal hash
-        destination_address:
-          type: string
-          description: Destination Address
-        is_internal:
-          type: boolean
-          description: If true, indicates that the withdrawal was sent to another exchange user
-        link:
-          type:
-          - string
-          - 'null'
-          description: Link to explorer
-        memo:
-          type: string
-          description: Destination memo
-        tag:
-          type: string
-          description: Destination tag
-        network:
-          type: string
-          description: Currency network
-      required:
-      - id
-      - amount
-      - currency_code
-      - status
-      - create_date
-      - update_date
-      - user_id
-      - miner_fee
-      - fee
-      - hash
-      - destination_address
-      - is_internal
-      - link
-      - network
-      type: object
-      additionalProperties: false
-    SendFiatCashInToSocketUseCaseParams:
-      properties:
-        id:
-          type: string
-          description: Cash in identifier
-        amount:
-          type: number
-          format: double
-          description: Amount
-        currency_code:
-          type:
-          - string
-          - 'null'
-          description: Currency code
-        fee:
-          type: number
-          format: double
-          description: Fee charged by the exchange
-        status:
-          type: string
-          description: Cash in status (`confirmation_pending` | `confirmed` | `canceled` for cryptocurrency / `awaiting_processing` | `processing` | `confirmed` | `canceled` | `rejected` | `pending_cancelation` | `pending_approval` | `pending_processing` | `awaiting_bank_interval` for fiat)
-        create_date:
-          type: string
-          description: Datetime of the creation
-        update_date:
-          type: string
-          description: Datetime of the last update
-        user_id:
-          type: string
-          description: User id
-      required:
-      - id
-      - amount
-      - currency_code
-      - fee
-      - status
-      - create_date
-      - update_date
-      - user_id
-      type: object
-      additionalProperties: false
-    IResponse_ITickerV4_:
-      properties:
-        body:
-          $ref: '#/components/schemas/ITickerV4'
-        id:
-          type: number
-          format: double
-          description: Each WebSocket message includes a sequential numeric id. Each topic has its own unique sequence, and for private topics, the sequence is unique to each topic and user. It's important to note that some topics will send a "welcome message", which will have an id value of `-1`. Additionally, this sequence may be reset between connections, so be sure to update this value locally whenever you reconnect.
-          example: 1308
-        timestamp:
-          type: number
-          format: double
-          description: Timestamp in milliseconds
-          example: 1709300794000
-        topic:
-          $ref: '#/components/schemas/TopicEnum'
-          description: Topic related to the message
-          example: trade@BTC_USDC
-      required:
-      - body
-      - id
-      - timestamp
-      - topic
-      type: object
-      additionalProperties: false
-    IResponse_IOrderBookLevel2_:
-      properties:
-        body:
-          $ref: '#/components/schemas/IOrderBookLevel2'
-        id:
-          type: number
-          format: double
-          description: Each WebSocket message includes a sequential numeric id. Each topic has its own unique sequence, and for private topics, the sequence is unique to each topic and user. It's important to note that some topics will send a "welcome message", which will have an id value of `-1`. Additionally, this sequence may be reset between connections, so be sure to update this value locally whenever you reconnect.
-          example: 1308
-        timestamp:
-          type: number
-          format: double
-          description: Timestamp in milliseconds
-          example: 1709300794000
-        topic:
-          $ref: '#/components/schemas/TopicEnum'
-          description: Topic related to the message
-          example: trade@BTC_USDC
-      required:
-      - body
-      - id
-      - timestamp
-      - topic
-      type: object
-      additionalProperties: false
-    IResponse_IOrderBookLevel2WithoutUsers_:
-      properties:
-        body:
-          $ref: '#/components/schemas/IOrderBookLevel2WithoutUsers'
-        id:
-          type: number
-          format: double
-          description: Each WebSocket message includes a sequential numeric id. Each topic has its own unique sequence, and for private topics, the sequence is unique to each topic and user. It's important to note that some topics will send a "welcome message", which will have an id value of `-1`. Additionally, this sequence may be reset between connections, so be sure to update this value locally whenever you reconnect.
-          example: 1308
-        timestamp:
-          type: number
-          format: double
-          description: Timestamp in milliseconds
-          example: 1709300794000
-        topic:
-          $ref: '#/components/schemas/TopicEnum'
-          description: Topic related to the message
-          example: trade@BTC_USDC
-      required:
-      - body
-      - id
-      - timestamp
-      - topic
-      type: object
-      additionalProperties: false
-    IOrderBookLevel3:
-      properties:
-        asks:
-          items:
-            $ref: '#/components/schemas/IOrderSocket'
-          type: array
-          description: Sell orders
-        bids:
-          items:
-            $ref: '#/components/schemas/IOrderSocket'
-          type: array
-          description: Buy orders
-        pair:
-          type: string
-          description: Currency pair code
-          example: BTC_BRL
-        hash:
-          type: string
-          description: 'The checksum hash for the current order book is a CRC32 value derived from the top 10 bids and top 10 asks. This checksum allows client applications to verify that the local order book data is accurate and can serve as an indicator to refresh the order book if the data is outdated. For guidance on generating checksums for order book messages, please refer to the following sample: https://github.com/ripio/api/tree/main/websocket-checksum-hash.'
-          example: '2254383345'
-      required:
-      - asks
-      - bids
-      - pair
-      - hash
-      type: object
-      additionalProperties: false
-      example:
-        asks:
-        - amount: 184.9
-          id: B075FDF9-9B68-4299-87E0-5FC8B40B3ABD
-          price: 20
-        - amount: 10
-          id: 606763A5-4B95-4216-9F07-69C6B51D64F3
-          price: 20
-        bids:
-        - amount: 400
-          id: 4B86ACC5-76B2-4003-AF20-F398CE9EDC92
-          price: 5
-        - amount: 20
-          id: 43758DB1-3257-4C98-A20F-7F246E460A50
-          price: 5
-        pair: ETH_BRL
-        hash: '2254383345'
-    SendCashOutToSocketUseCaseParams:
-      anyOf:
-      - $ref: '#/components/schemas/SendFiatCashOutToSocketUseCaseParams'
-      - $ref: '#/components/schemas/SendCryptoCashOutToSocketUseCaseParams'
-    IRequest:
-      properties:
-        method:
-          $ref: '#/components/schemas/MethodEnum'
-          description: Method to be executed
-        topics:
-          items:
-            $ref: '#/components/schemas/TopicEnum'
-          type: array
-          description: Topics to subscribe to
-      required:
-      - method
-      - topics
-      type: object
-      additionalProperties: false
-    TopicEnum:
-      enum:
-      - trade
-      - orderbook/level_3
-      - orderbook/level_2
-      - orderbook/level_2_with_users
-      - orderbook/level_2_delta
-      - ticker
-      - order_status
-      - balance
-      - user_trades
-      - deposit
-      - withdrawal
-      type: string
     SendCashInToSocketUseCaseParams:
       anyOf:
       - $ref: '#/components/schemas/SendFiatCashInToSocketUseCaseParams'
       - $ref: '#/components/schemas/SendCryptoCashInToSocketUseCaseParams'
-    IResponse_IOrderBookLevel3_:
-      properties:
-        body:
-          $ref: '#/components/schemas/IOrderBookLevel3'
-        id:
-          type: number
-          format: double
-          description: Each WebSocket message includes a sequential numeric id. Each topic has its own unique sequence, and for private topics, the sequence is unique to each topic and user. It's important to note that some topics will send a "welcome message", which will have an id value of `-1`. Additionally, this sequence may be reset between connections, so be sure to update this value locally whenever you reconnect.
-          example: 1308
-        timestamp:
-          type: number
-          format: double
-          description: Timestamp in milliseconds
-          example: 1709300794000
-        topic:
-          $ref: '#/components/schemas/TopicEnum'
-          description: Topic related to the message
-          example: trade@BTC_USDC
-      required:
-      - body
-      - id
-      - timestamp
-      - topic
-      type: object
-      additionalProperties: false
     IBookExecutionLevel2:
       properties:
         users:
@@ -1260,10 +701,10 @@ components:
       - price
       - amount
       type: object
-    IResponse_SendCashOutToSocketUseCaseParams_:
+    IResponse_ISocketTrade_:
       properties:
         body:
-          $ref: '#/components/schemas/SendCashOutToSocketUseCaseParams'
+          $ref: '#/components/schemas/ISocketTrade'
         id:
           type: number
           format: double
@@ -1285,171 +726,6 @@ components:
       - topic
       type: object
       additionalProperties: false
-    DetailType:
-      properties:
-        pix_key:
-          type: string
-        agency:
-          type: string
-        user_bank_account:
-          type: string
-        destination_key:
-          type: string
-      type: object
-    UserTrades:
-      properties:
-        user_id:
-          type: string
-          description: User identifier
-        trade:
-          $ref: '#/components/schemas/UserPreparedTradeV4'
-      required:
-      - user_id
-      - trade
-      type: object
-      additionalProperties: false
-    IOrderBookLevel2:
-      properties:
-        asks:
-          items:
-            $ref: '#/components/schemas/IBookExecutionLevel2'
-          type: array
-          description: Sell orders
-        bids:
-          items:
-            $ref: '#/components/schemas/IBookExecutionLevel2'
-          type: array
-          description: Buy orders
-        pair:
-          type: string
-          description: Currency pair code
-          example: BTC_BRL
-        hash:
-          type: string
-          description: 'The checksum hash for the current order book is a CRC32 value derived from the top 10 bids and top 10 asks. This checksum allows client applications to verify that the local order book data is accurate and can serve as an indicator to refresh the order book if the data is outdated. For guidance on generating checksums for order book messages, please refer to the following sample: https://github.com/ripio/api/tree/main/websocket-checksum-hash.'
-          example: '2254383345'
-      required:
-      - asks
-      - bids
-      - pair
-      - hash
-      type: object
-      additionalProperties: false
-      example:
-        asks:
-        - amount: 184.9
-          price: 20
-        - amount: 10
-          price: 20
-        bids:
-        - amount: 400
-          price: 5
-        - amount: 20
-          price: 4
-        pair: ETH_BRL
-        hash: '2254383345'
-    IOrderStatus:
-      properties:
-        amount:
-          type: number
-          format: float
-          description: Amount
-        id:
-          type: string
-          description: Order identifier
-        created_at:
-          type: string
-          description: Datetime of the creation
-          format: datetime
-        pair:
-          type: string
-          description: Currency pair code
-          example: BTC_BRL
-        price:
-          type: number
-          format: float
-          description: Price
-        side:
-          type: string
-          description: Order side (buy or sell)
-          format: string
-        status:
-          type: string
-          description: Order status (executed_completely / executed_partially / open / canceled)
-        type:
-          type: string
-          description: Order type (limit / market)
-        updated_at:
-          type: string
-          description: Datetime of the last update
-        user_id:
-          type: string
-          description: User identifier
-        executed_amount:
-          type: number
-          format: float
-          description: Executed amount
-        remaining_amount:
-          type: number
-          format: float
-          description: Remaining amount
-        average_execution_price:
-          type: number
-          format: float
-          description: Average execution price
-        external_id:
-          type: string
-          description: Order external identifier (maximum of 36 chars)
-          example: 0f4a8504-21fb-4be6-9771-25dcf5f68f87
-        stop_price:
-          type: number
-          format: float
-          description: Stop price
-        distance:
-          type: number
-          format: int
-          description: Price distance
-      required:
-      - amount
-      - id
-      - created_at
-      - pair
-      - price
-      - side
-      - status
-      - type
-      - updated_at
-      - user_id
-      - executed_amount
-      - remaining_amount
-      - average_execution_price
-      type: object
-      additionalProperties: false
-      example:
-        amount: 0
-        created_at: '2022-09-28T20:13:13.870Z'
-        id: b03ac890-f8cf-4bd6-87a2-d2e102df8c96
-        pair: ETH_BRL
-        price: 20
-        side: buy
-        status: executed_completely
-        type: limit
-        user_id: 299e7131-ce8c-422f-a1cf-497bfa116f89
-        updated_at: '2022-09-28T20:13:14.430Z'
-    IBookExecutionLevel2WithoutUsers:
-      properties:
-        price:
-          type: number
-          format: float
-          description: Price
-        amount:
-          type: number
-          format: float
-          description: Amount
-      required:
-      - price
-      - amount
-      type: object
     UserPreparedTradeV4:
       properties:
         amount:
@@ -1523,10 +799,110 @@ components:
       - taker_order_id
       type: object
       additionalProperties: false
-    IResponse_UserTrades_:
+    SendCryptoCashInToSocketUseCaseParams:
+      properties:
+        id:
+          type: string
+          description: Deposit identifier
+        amount:
+          type: number
+          format: double
+          description: Amount
+        currency_code:
+          type: string
+          description: Currency code
+        status:
+          type: string
+          description: Cash in status (`confirmation_pending` | `confirmed` | `canceled` for cryptocurrency / `awaiting_processing` | `processing` | `confirmed` | `canceled` | `rejected` | `pending_cancelation` | `pending_approval` | `pending_processing` | `awaiting_bank_interval` for fiat)
+        create_date:
+          type: string
+          description: Datetime of the creation
+        update_date:
+          type: string
+          description: Datetime of the last update
+        user_id:
+          type: string
+          description: User id
+        hash:
+          type: string
+          description: Transaction hash
+        confirmation_date:
+          type: string
+          description: Datetime of the confirmation
+        network:
+          type: string
+          description: Network
+        is_internal:
+          type: boolean
+          description: If true, indicates that the deposit was sent internally by another exchange user
+      required:
+      - id
+      - amount
+      - currency_code
+      - status
+      - create_date
+      - update_date
+      - user_id
+      type: object
+      additionalProperties: false
+    SendCashOutToSocketUseCaseParams:
+      anyOf:
+      - $ref: '#/components/schemas/SendFiatCashOutToSocketUseCaseParams'
+      - $ref: '#/components/schemas/SendCryptoCashOutToSocketUseCaseParams'
+    IResponse_SendCashInToSocketUseCaseParams_:
       properties:
         body:
-          $ref: '#/components/schemas/UserTrades'
+          $ref: '#/components/schemas/SendCashInToSocketUseCaseParams'
+        id:
+          type: number
+          format: double
+          description: Each WebSocket message includes a sequential numeric id. Each topic has its own unique sequence, and for private topics, the sequence is unique to each topic and user. It's important to note that some topics will send a "welcome message", which will have an id value of `-1`. Additionally, this sequence may be reset between connections, so be sure to update this value locally whenever you reconnect.
+          example: 1308
+        timestamp:
+          type: number
+          format: double
+          description: Timestamp in milliseconds
+          example: 1709300794000
+        topic:
+          $ref: '#/components/schemas/TopicEnum'
+          description: Topic related to the message
+          example: trade@BTC_USDC
+      required:
+      - body
+      - id
+      - timestamp
+      - topic
+      type: object
+      additionalProperties: false
+    IResponse_IOrderBookLevel2WithoutUsers_:
+      properties:
+        body:
+          $ref: '#/components/schemas/IOrderBookLevel2WithoutUsers'
+        id:
+          type: number
+          format: double
+          description: Each WebSocket message includes a sequential numeric id. Each topic has its own unique sequence, and for private topics, the sequence is unique to each topic and user. It's important to note that some topics will send a "welcome message", which will have an id value of `-1`. Additionally, this sequence may be reset between connections, so be sure to update this value locally whenever you reconnect.
+          example: 1308
+        timestamp:
+          type: number
+          format: double
+          description: Timestamp in milliseconds
+          example: 1709300794000
+        topic:
+          $ref: '#/components/schemas/TopicEnum'
+          description: Topic related to the message
+          example: trade@BTC_USDC
+      required:
+      - body
+      - id
+      - timestamp
+      - topic
+      type: object
+      additionalProperties: false
+    IResponse_SendCashOutToSocketUseCaseParams_:
+      properties:
+        body:
+          $ref: '#/components/schemas/SendCashOutToSocketUseCaseParams'
         id:
           type: number
           format: double
@@ -1552,6 +928,42 @@ components:
       properties:
         body:
           $ref: '#/components/schemas/IOrderStatus'
+        id:
+          type: number
+          format: double
+          description: Each WebSocket message includes a sequential numeric id. Each topic has its own unique sequence, and for private topics, the sequence is unique to each topic and user. It's important to note that some topics will send a "welcome message", which will have an id value of `-1`. Additionally, this sequence may be reset between connections, so be sure to update this value locally whenever you reconnect.
+          example: 1308
+        timestamp:
+          type: number
+          format: double
+          description: Timestamp in milliseconds
+          example: 1709300794000
+        topic:
+          $ref: '#/components/schemas/TopicEnum'
+          description: Topic related to the message
+          example: trade@BTC_USDC
+      required:
+      - body
+      - id
+      - timestamp
+      - topic
+      type: object
+      additionalProperties: false
+    DetailType:
+      properties:
+        pix_key:
+          type: string
+        agency:
+          type: string
+        user_bank_account:
+          type: string
+        destination_key:
+          type: string
+      type: object
+    IResponse_ITickerV4_:
+      properties:
+        body:
+          $ref: '#/components/schemas/ITickerV4'
         id:
           type: number
           format: double
@@ -1660,6 +1072,594 @@ components:
       - is_frozen
       type: object
       additionalProperties: false
+    IOrderBookLevel3:
+      properties:
+        asks:
+          items:
+            $ref: '#/components/schemas/IOrderSocket'
+          type: array
+          description: Sell orders
+        bids:
+          items:
+            $ref: '#/components/schemas/IOrderSocket'
+          type: array
+          description: Buy orders
+        pair:
+          type: string
+          description: Currency pair code
+          example: BTC_BRL
+        hash:
+          type: string
+          description: 'The checksum hash for the current order book is a CRC32 value derived from the top 10 bids and top 10 asks. This checksum allows client applications to verify that the local order book data is accurate and can serve as an indicator to refresh the order book if the data is outdated. For guidance on generating checksums for order book messages, please refer to the following sample: https://github.com/ripio/api/tree/main/websocket-checksum-hash.'
+          example: '2254383345'
+      required:
+      - asks
+      - bids
+      - pair
+      - hash
+      type: object
+      additionalProperties: false
+      example:
+        asks:
+        - amount: 184.9
+          id: B075FDF9-9B68-4299-87E0-5FC8B40B3ABD
+          price: 20
+        - amount: 10
+          id: 606763A5-4B95-4216-9F07-69C6B51D64F3
+          price: 20
+        bids:
+        - amount: 400
+          id: 4B86ACC5-76B2-4003-AF20-F398CE9EDC92
+          price: 5
+        - amount: 20
+          id: 43758DB1-3257-4C98-A20F-7F246E460A50
+          price: 5
+        pair: ETH_BRL
+        hash: '2254383345'
+    IOrderBookLevel2:
+      properties:
+        asks:
+          items:
+            $ref: '#/components/schemas/IBookExecutionLevel2'
+          type: array
+          description: Sell orders
+        bids:
+          items:
+            $ref: '#/components/schemas/IBookExecutionLevel2'
+          type: array
+          description: Buy orders
+        pair:
+          type: string
+          description: Currency pair code
+          example: BTC_BRL
+        hash:
+          type: string
+          description: 'The checksum hash for the current order book is a CRC32 value derived from the top 10 bids and top 10 asks. This checksum allows client applications to verify that the local order book data is accurate and can serve as an indicator to refresh the order book if the data is outdated. For guidance on generating checksums for order book messages, please refer to the following sample: https://github.com/ripio/api/tree/main/websocket-checksum-hash.'
+          example: '2254383345'
+      required:
+      - asks
+      - bids
+      - pair
+      - hash
+      type: object
+      additionalProperties: false
+      example:
+        asks:
+        - amount: 184.9
+          price: 20
+        - amount: 10
+          price: 20
+        bids:
+        - amount: 400
+          price: 5
+        - amount: 20
+          price: 4
+        pair: ETH_BRL
+        hash: '2254383345'
+    IResponse_IOrderBookLevel3_:
+      properties:
+        body:
+          $ref: '#/components/schemas/IOrderBookLevel3'
+        id:
+          type: number
+          format: double
+          description: Each WebSocket message includes a sequential numeric id. Each topic has its own unique sequence, and for private topics, the sequence is unique to each topic and user. It's important to note that some topics will send a "welcome message", which will have an id value of `-1`. Additionally, this sequence may be reset between connections, so be sure to update this value locally whenever you reconnect.
+          example: 1308
+        timestamp:
+          type: number
+          format: double
+          description: Timestamp in milliseconds
+          example: 1709300794000
+        topic:
+          $ref: '#/components/schemas/TopicEnum'
+          description: Topic related to the message
+          example: trade@BTC_USDC
+      required:
+      - body
+      - id
+      - timestamp
+      - topic
+      type: object
+      additionalProperties: false
+    ITickerConversion:
+      properties:
+        volume:
+          type: number
+          format: double
+        currency_code:
+          type: string
+      required:
+      - volume
+      - currency_code
+      type: object
+      additionalProperties: false
+    IRequest:
+      properties:
+        method:
+          $ref: '#/components/schemas/MethodEnum'
+          description: Method to be executed
+        topics:
+          items:
+            $ref: '#/components/schemas/TopicEnum'
+          type: array
+          description: Topics to subscribe to
+      required:
+      - method
+      - topics
+      type: object
+      additionalProperties: false
+    UserTrades:
+      properties:
+        user_id:
+          type: string
+          description: User identifier
+        trade:
+          $ref: '#/components/schemas/UserPreparedTradeV4'
+      required:
+      - user_id
+      - trade
+      type: object
+      additionalProperties: false
+    IResponse_SocketBalance_:
+      properties:
+        body:
+          $ref: '#/components/schemas/SocketBalance'
+        id:
+          type: number
+          format: double
+          description: Each WebSocket message includes a sequential numeric id. Each topic has its own unique sequence, and for private topics, the sequence is unique to each topic and user. It's important to note that some topics will send a "welcome message", which will have an id value of `-1`. Additionally, this sequence may be reset between connections, so be sure to update this value locally whenever you reconnect.
+          example: 1308
+        timestamp:
+          type: number
+          format: double
+          description: Timestamp in milliseconds
+          example: 1709300794000
+        topic:
+          $ref: '#/components/schemas/TopicEnum'
+          description: Topic related to the message
+          example: trade@BTC_USDC
+      required:
+      - body
+      - id
+      - timestamp
+      - topic
+      type: object
+      additionalProperties: false
+    SendCryptoCashOutToSocketUseCaseParams:
+      properties:
+        id:
+          type: string
+          description: Cash out identifier
+        amount:
+          type: number
+          format: double
+          description: Amount
+        currency_code:
+          type: string
+          description: Currency code
+        status:
+          type: string
+          description: Origin address (valid only for cryptocurrency)
+        external_id:
+          type: string
+          description: External id
+        create_date:
+          type: string
+          description: Datetime of the creation
+        update_date:
+          type: string
+          description: Datetime of the last update
+        user_id:
+          type: string
+          description: User id
+        miner_fee:
+          type:
+          - number
+          - 'null'
+          format: double
+          description: Miner fee
+        fee:
+          type:
+          - number
+          - 'null'
+          format: double
+          description: Fee charged by the exchange
+        hash:
+          type: string
+          description: Withdrawal hash
+        destination_address:
+          type: string
+          description: Destination Address
+        is_internal:
+          type: boolean
+          description: If true, indicates that the withdrawal was sent to another exchange user
+        link:
+          type:
+          - string
+          - 'null'
+          description: Link to explorer
+        memo:
+          type: string
+          description: Destination memo
+        tag:
+          type: string
+          description: Destination tag
+        network:
+          type: string
+          description: Currency network
+      required:
+      - id
+      - amount
+      - currency_code
+      - status
+      - create_date
+      - update_date
+      - user_id
+      - miner_fee
+      - fee
+      - hash
+      - destination_address
+      - is_internal
+      - link
+      - network
+      type: object
+      additionalProperties: false
+    SocketBalance:
+      properties:
+        user_id:
+          type: string
+          description: User identifier
+        balances:
+          items:
+            properties:
+              locked_amount:
+                type: number
+                format: double
+                description: Amount in use
+              currency_code:
+                type: string
+                description: Currency code
+                example: BTC
+              available_amount:
+                type: number
+                format: double
+                description: Available amount
+            required:
+            - locked_amount
+            - currency_code
+            - available_amount
+            type: object
+          type: array
+      required:
+      - user_id
+      - balances
+      type: object
+      additionalProperties: false
+      example:
+        user_id: 299E7131-CE8C-422F-A1CF-497BFA116F89
+        balances:
+        - available_amount: 1
+          currency_code: BTC
+          locked_amount: 0.5
+        - available_amount: 3
+          currency_code: ETH
+          locked_amount: 1
+    ISocketTrade:
+      properties:
+        amount:
+          type: number
+          format: float
+          description: Amount
+        date:
+          type: string
+          description: Trade datetime
+          format: datetime
+        id:
+          type: string
+          description: Order id
+          format: string
+        maker_order_id:
+          type: string
+          description: Maker order id
+          format: string
+        maker_side:
+          type: string
+          description: Maker order side (sell / buy)
+          format: string
+        maker_type:
+          type: string
+          description: Maker order type (market / limit)
+          format: string
+        pair:
+          type: string
+          description: Currency pair code
+          example: BTC_BRL
+        price:
+          type: number
+          format: float
+          description: Price
+        taker_order_id:
+          type: string
+          description: Taker order id
+          format: string
+        taker_side:
+          type: string
+          description: Taker order side (buy or sell)
+          format: string
+        taker_type:
+          type: string
+          description: Taker order type (market / limit)
+          format: string
+        timestamp:
+          type: number
+          format: double
+          description: Current timestamp
+          example: 1675708481219
+        total_value:
+          type: number
+          format: float
+          description: Total value
+      required:
+      - amount
+      - date
+      - id
+      - maker_order_id
+      - maker_side
+      - maker_type
+      - price
+      - taker_order_id
+      - taker_side
+      - taker_type
+      - timestamp
+      - total_value
+      type: object
+      additionalProperties: false
+      example:
+        amount: 1
+        date: '2022-09-28T18:43:48.110Z'
+        pair: ETH_BRL
+        price: 20
+        side: buy
+    IResponse_IOrderBookLevel2_:
+      properties:
+        body:
+          $ref: '#/components/schemas/IOrderBookLevel2'
+        id:
+          type: number
+          format: double
+          description: Each WebSocket message includes a sequential numeric id. Each topic has its own unique sequence, and for private topics, the sequence is unique to each topic and user. It's important to note that some topics will send a "welcome message", which will have an id value of `-1`. Additionally, this sequence may be reset between connections, so be sure to update this value locally whenever you reconnect.
+          example: 1308
+        timestamp:
+          type: number
+          format: double
+          description: Timestamp in milliseconds
+          example: 1709300794000
+        topic:
+          $ref: '#/components/schemas/TopicEnum'
+          description: Topic related to the message
+          example: trade@BTC_USDC
+      required:
+      - body
+      - id
+      - timestamp
+      - topic
+      type: object
+      additionalProperties: false
+    IOrderSocket:
+      properties:
+        amount:
+          type: number
+          format: float
+          description: Amount
+        id:
+          type: string
+          description: Order id
+          format: string
+        price:
+          type: number
+          format: int32
+          description: Price
+      required:
+      - amount
+      - id
+      - price
+      type: object
+      additionalProperties: false
+    MethodEnum:
+      description: Method to be executed
+      enum:
+      - subscribe
+      - unsubscribe
+      - ping
+      type: string
+    IResponse_UserTrades_:
+      properties:
+        body:
+          $ref: '#/components/schemas/UserTrades'
+        id:
+          type: number
+          format: double
+          description: Each WebSocket message includes a sequential numeric id. Each topic has its own unique sequence, and for private topics, the sequence is unique to each topic and user. It's important to note that some topics will send a "welcome message", which will have an id value of `-1`. Additionally, this sequence may be reset between connections, so be sure to update this value locally whenever you reconnect.
+          example: 1308
+        timestamp:
+          type: number
+          format: double
+          description: Timestamp in milliseconds
+          example: 1709300794000
+        topic:
+          $ref: '#/components/schemas/TopicEnum'
+          description: Topic related to the message
+          example: trade@BTC_USDC
+      required:
+      - body
+      - id
+      - timestamp
+      - topic
+      type: object
+      additionalProperties: false
+    SendFiatCashInToSocketUseCaseParams:
+      properties:
+        id:
+          type: string
+          description: Cash in identifier
+        amount:
+          type: number
+          format: double
+          description: Amount
+        currency_code:
+          type:
+          - string
+          - 'null'
+          description: Currency code
+        fee:
+          type: number
+          format: double
+          description: Fee charged by the exchange
+        status:
+          type: string
+          description: Cash in status (`confirmation_pending` | `confirmed` | `canceled` for cryptocurrency / `awaiting_processing` | `processing` | `confirmed` | `canceled` | `rejected` | `pending_cancelation` | `pending_approval` | `pending_processing` | `awaiting_bank_interval` for fiat)
+        create_date:
+          type: string
+          description: Datetime of the creation
+        update_date:
+          type: string
+          description: Datetime of the last update
+        user_id:
+          type: string
+          description: User id
+      required:
+      - id
+      - amount
+      - currency_code
+      - fee
+      - status
+      - create_date
+      - update_date
+      - user_id
+      type: object
+      additionalProperties: false
+    IOrderStatus:
+      properties:
+        amount:
+          type: number
+          format: float
+          description: Amount
+        id:
+          type: string
+          description: Order identifier
+        created_at:
+          type: string
+          description: Datetime of the creation
+          format: datetime
+        pair:
+          type: string
+          description: Currency pair code
+          example: BTC_BRL
+        price:
+          type: number
+          format: float
+          description: Price
+        side:
+          type: string
+          description: Order side (buy or sell)
+          format: string
+        status:
+          type: string
+          description: Order status (executed_completely / executed_partially / open / canceled)
+        type:
+          type: string
+          description: Order type (limit / market)
+        updated_at:
+          type: string
+          description: Datetime of the last update
+        user_id:
+          type: string
+          description: User identifier
+        executed_amount:
+          type: number
+          format: float
+          description: Executed amount
+        remaining_amount:
+          type: number
+          format: float
+          description: Remaining amount
+        average_execution_price:
+          type: number
+          format: float
+          description: Average execution price
+        external_id:
+          type: string
+          description: Order external identifier (maximum of 36 chars)
+          example: 0f4a8504-21fb-4be6-9771-25dcf5f68f87
+        stop_price:
+          type: number
+          format: float
+          description: Stop price
+        distance:
+          type: number
+          format: int
+          description: Price distance
+      required:
+      - amount
+      - id
+      - created_at
+      - pair
+      - price
+      - side
+      - status
+      - type
+      - updated_at
+      - user_id
+      - executed_amount
+      - remaining_amount
+      - average_execution_price
+      type: object
+      additionalProperties: false
+      example:
+        amount: 0
+        created_at: '2022-09-28T20:13:13.870Z'
+        id: b03ac890-f8cf-4bd6-87a2-d2e102df8c96
+        pair: ETH_BRL
+        price: 20
+        side: buy
+        status: executed_completely
+        type: limit
+        user_id: 299e7131-ce8c-422f-a1cf-497bfa116f89
+        updated_at: '2022-09-28T20:13:14.430Z'
+    IBookExecutionLevel2WithoutUsers:
+      properties:
+        price:
+          type: number
+          format: float
+          description: Price
+        amount:
+          type: number
+          format: float
+          description: Amount
+      required:
+      - price
+      - amount
+      type: object
   securitySchemes:
     API_Credentials:
       type: apiToken

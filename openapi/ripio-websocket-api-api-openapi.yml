@@ -484,279 +484,6 @@ webhooks:
     - url: https://api.ripiotrade.co/v4/
 components:
   schemas:
-    TrailingSellOrderBody:
-      properties:
-        external_id:
-          $ref: '#/components/schemas/OrderExternalIdParamV4'
-        pair:
-          type: string
-          description: Currency pair code
-        side:
-          type: string
-          enum:
-          - sell
-          description: Order's side (sell)
-        type:
-          type: string
-          enum:
-          - trailing
-          description: Order's type (trailing)
-        amount:
-          type: number
-          format: double
-          description: Order amount in base currency
-        price:
-          type: number
-          format: double
-          description: Limit price
-        distance:
-          type: number
-          format: double
-          description: Price distance
-      required:
-      - pair
-      - side
-      - type
-      - amount
-      - price
-      - distance
-      type: object
-      additionalProperties: false
-      example:
-        pair: BTC_BRL
-        side: sell
-        type: trailing
-        amount: 1
-        distance: 1
-    MarketBuyOrderBody:
-      properties:
-        external_id:
-          $ref: '#/components/schemas/OrderExternalIdParamV4'
-        pair:
-          type: string
-          description: Currency pair code
-        side:
-          type: string
-          enum:
-          - buy
-          description: Order's side (buy)
-        type:
-          type: string
-          enum:
-          - market
-          description: Order's type (market)
-        amount:
-          type: number
-          format: double
-          description: Order amount in base currency
-        value:
-          type: number
-          format: double
-          description: Order value in quote currency
-        fill_or_kill:
-          type: boolean
-          description: If set to `true`, the order will either be completely filled or canceled
-      required:
-      - pair
-      - side
-      - type
-      - amount
-      - value
-      type: object
-      additionalProperties: false
-      example:
-        pair: BTC_BRL
-        side: buy
-        type: market
-        amount: 0.1
-        fill_or_kill: false
-      title: Buy Market
-    IcebergBuyOrderBody:
-      properties:
-        external_id:
-          $ref: '#/components/schemas/OrderExternalIdParamV4'
-        pair:
-          type: string
-          description: Currency pair code
-        side:
-          type: string
-          enum:
-          - buy
-          description: Order's side (buy)
-        type:
-          type: string
-          enum:
-          - iceberg
-          description: Order's type (iceberg)
-        amount:
-          type: number
-          format: double
-          description: Order amount in base currency
-        step_amount:
-          type: number
-          format: double
-          description: Step amount (the ratio of amount to step_amount must be less than or equal to 10)
-        price:
-          type: number
-          format: double
-          description: Limit price
-      required:
-      - pair
-      - side
-      - type
-      - amount
-      - step_amount
-      - price
-      type: object
-      additionalProperties: false
-      example:
-        amount: 10
-        step_amount: 1
-        pair: BTC_BRL
-        price: 700000
-        side: buy
-        type: iceberg
-    MarketSellOrderBody:
-      properties:
-        external_id:
-          $ref: '#/components/schemas/OrderExternalIdParamV4'
-        pair:
-          type: string
-          description: Currency pair code
-        side:
-          type: string
-          enum:
-          - sell
-          description: Order's side (sell)
-        type:
-          type: string
-          enum:
-          - market
-          description: Order's type (market)
-        amount:
-          type: number
-          format: double
-          description: Order amount in base currency
-        value:
-          type: number
-          format: double
-          description: Order value in quote currency
-        fill_or_kill:
-          type: boolean
-          description: If set to `true`, the order will either be completely filled or canceled
-      required:
-      - pair
-      - side
-      - type
-      - amount
-      - value
-      type: object
-      additionalProperties: false
-      example:
-        pair: BTC_BRL
-        side: sell
-        type: market
-        amount: 1
-        fill_or_kill: false
-      title: Sell Market
-    OrderExternalIdParamV4:
-      type: string
-      example: 0f4a8504-21fb-4be6-9771-25dcf5f68f87
-      description: Order external identifier (maximum of 36 chars)
-    LimitBuyOrderBody:
-      properties:
-        external_id:
-          $ref: '#/components/schemas/OrderExternalIdParamV4'
-        pair:
-          type: string
-          description: Currency pair code
-        side:
-          type: string
-          enum:
-          - buy
-          description: Order's side (buy)
-        type:
-          type: string
-          enum:
-          - limit
-          description: Order's type (limit)
-        amount:
-          type: number
-          format: double
-          description: Order amount in base currency
-        price:
-          type: number
-          format: double
-          description: Limit price
-        post_only:
-          type: boolean
-          description: If set to `true`, the order will be added directly to the order book without an initial match, provided the request is valid
-        expiration:
-          type: number
-          format: double
-          description: If a valid timestamp is provided, the order will be created with an expiration date and time
-        immediate_or_cancel:
-          type: boolean
-          description: If set to `true`, the order will not be added to the order book after the initial match, any remaining unfilled amount will result in the order being canceled
-        fill_or_kill:
-          type: boolean
-          description: If set to `true`, the order will either be completely filled or canceled
-      required:
-      - pair
-      - side
-      - type
-      - amount
-      - price
-      type: object
-      additionalProperties: false
-      example:
-        amount: 0.1
-        pair: BTC_BRL
-        price: 700000
-        side: buy
-        type: limit
-        post_only: false
-        expiration: 1723073682
-        immediate_or_cancel: false
-        fill_or_kill: false
-      title: Buy Limit
-    CeilingSellOrderBody:
-      properties:
-        external_id:
-          $ref: '#/components/schemas/OrderExternalIdParamV4'
-        pair:
-          type: string
-          description: Currency pair code
-        side:
-          type: string
-          enum:
-          - sell
-          description: Order's side (sell)
-        type:
-          type: string
-          enum:
-          - ceiling
-          description: Order's type (ceiling)
-        value:
-          type: number
-          format: double
-          description: Order value in quote currency
-        fill_or_kill:
-          type: boolean
-          description: If set to `true`, the order will either be completely filled or canceled
-      required:
-      - pair
-      - side
-      - type
-      - value
-      type: object
-      additionalProperties: false
-      example:
-        pair: BTC_BRL
-        side: sell
-        type: ceiling
-        amount: 1
-        fill_or_kill: false
     WebSocketResponse:
       type: object
       properties:
@@ -832,6 +559,125 @@ components:
         type: trailing
         amount: 1
         distance: 1
+    CeilingBuyOrderBody:
+      properties:
+        external_id:
+          $ref: '#/components/schemas/OrderExternalIdParamV4'
+        pair:
+          type: string
+          description: Currency pair code
+        side:
+          type: string
+          enum:
+          - buy
+          description: Order's side (buy)
+        type:
+          type: string
+          enum:
+          - ceiling
+          description: Order's type (ceiling)
+        value:
+          type: number
+          format: double
+          description: Order value in quote currency
+        fill_or_kill:
+          type: boolean
+          description: If set to `true`, the order will either be completely filled or canceled
+      required:
+      - pair
+      - side
+      - type
+      - value
+      type: object
+      additionalProperties: false
+      example:
+        pair: BTC_BRL
+        side: buy
+        type: market
+        amount: 0.1
+        fill_or_kill: false
+    WebSocketAuthParams:
+      type: object
+      properties:
+        apiToken:
+          type: string
+          description: API Token for authentication
+        timestamp:
+          type: integer
+          format: int64
+          description: Timestamp in milliseconds
+        signature:
+          type: string
+          description: HMAC SHA256 signature
+      required:
+      - apiToken
+      - timestamp
+      - signature
+      example:
+        apiToken: your-api-token
+        timestamp: 1634567890000
+        signature: calculated-signature
+    LimitSellOrderBody:
+      properties:
+        external_id:
+          $ref: '#/components/schemas/OrderExternalIdParamV4'
+        pair:
+          type: string
+          description: Currency pair code
+        side:
+          type: string
+          enum:
+          - sell
+          description: Order's side (sell)
+        type:
+          type: string
+          enum:
+          - limit
+          description: Order's type (limit)
+        amount:
+          type: number
+          format: double
+          description: Order amount in base currency
+        price:
+          type: number
+          format: double
+          description: Limit price
+        post_only:
+          type: boolean
+          description: If set to `true`, the order will be added directly to the order book without an initial match, provided the request is valid
+        expiration:
+          type: number
+          format: double
+          description: If a valid timestamp is provided, the order will be created with an expiration date and time
+        immediate_or_cancel:
+          type: boolean
+          description: If set to `true`, the order will not be added to the order book after the initial match, any remaining unfilled amount will result in the order being canceled
+        fill_or_kill:
+          type: boolean
+          description: If set to `true`, the order will either be completely filled or canceled
+      required:
+      - pair
+      - side
+      - type
+      - amount
+      - price
+      type: object
+      additionalProperties: false
+      example:
+        pair: BTC_BRL
+        side: sell
+        type: limit
+        amount: 1
+        price: 700000
+        post_only: false
+        expiration: 1723073682
+        immediate_or_cancel: false
+        fill_or_kill: false
+      title: Sell Limit
+    OrderExternalIdParamV4:
+      type: string
+      example: 0f4a8504-21fb-4be6-9771-25dcf5f68f87
+      description: Order external identifier (maximum of 36 chars)
     UserOrderOutput:
       properties:
         id:
@@ -898,6 +744,446 @@ components:
         requested_value: 1000
         side: buy
         status: open
+    MarketSellOrderBody:
+      properties:
+        external_id:
+          $ref: '#/components/schemas/OrderExternalIdParamV4'
+        pair:
+          type: string
+          description: Currency pair code
+        side:
+          type: string
+          enum:
+          - sell
+          description: Order's side (sell)
+        type:
+          type: string
+          enum:
+          - market
+          description: Order's type (market)
+        amount:
+          type: number
+          format: double
+          description: Order amount in base currency
+        value:
+          type: number
+          format: double
+          description: Order value in quote currency
+        fill_or_kill:
+          type: boolean
+          description: If set to `true`, the order will either be completely filled or canceled
+      required:
+      - pair
+      - side
+      - type
+      - amount
+      - value
+      type: object
+      additionalProperties: false
+      example:
+        pair: BTC_BRL
+        side: sell
+        type: market
+        amount: 1
+        fill_or_kill: false
+      title: Sell Market
+    StopLimitBuyOrderBody:
+      properties:
+        external_id:
+          $ref: '#/components/schemas/OrderExternalIdParamV4'
+        pair:
+          type: string
+          description: Currency pair code
+        side:
+          type: string
+          enum:
+          - buy
+          description: Order's side (buy)
+        type:
+          type: string
+          enum:
+          - stop_limit
+          description: Order's type (stop_limit)
+        amount:
+          type: number
+          format: double
+          description: Order amount in base currency
+        price:
+          type: number
+          format: double
+          description: Limit price
+        stop_price:
+          type: number
+          format: double
+          description: Stop price
+      required:
+      - pair
+      - side
+      - type
+      - amount
+      - price
+      - stop_price
+      type: object
+      additionalProperties: false
+      example:
+        amount: 1
+        pair: BTC_BRL
+        price: 700000
+        side: buy
+        stop_price: 1
+        type: stop_limit
+    IcebergSellOrderBody:
+      properties:
+        external_id:
+          $ref: '#/components/schemas/OrderExternalIdParamV4'
+        pair:
+          type: string
+          description: Currency pair code
+        side:
+          type: string
+          enum:
+          - sell
+          description: Order's side (sell)
+        type:
+          type: string
+          enum:
+          - iceberg
+          description: Order's type (iceberg)
+        amount:
+          type: number
+          format: double
+          description: Order amount in base currency
+        step_amount:
+          type: number
+          format: double
+          description: Step amount (the ratio of amount to step_amount must be less than or equal to 10)
+        price:
+          type: number
+          format: double
+          description: Limit price
+      required:
+      - pair
+      - side
+      - type
+      - amount
+      - step_amount
+      - price
+      type: object
+      additionalProperties: false
+      example:
+        amount: 10
+        step_amount: 1
+        pair: BTC_BRL
+        price: 700000
+        side: sell
+        type: iceberg
+    CeilingSellOrderBody:
+      properties:
+        external_id:
+          $ref: '#/components/schemas/OrderExternalIdParamV4'
+        pair:
+          type: string
+          description: Currency pair code
+        side:
+          type: string
+          enum:
+          - sell
+          description: Order's side (sell)
+        type:
+          type: string
+          enum:
+          - ceiling
+          description: Order's type (ceiling)
+        value:
+          type: number
+          format: double
+          description: Order value in quote currency
+        fill_or_kill:
+          type: boolean
+          description: If set to `true`, the order will either be completely filled or canceled
+      required:
+      - pair
+      - side
+      - type
+      - value
+      type: object
+      additionalProperties: false
+      example:
+        pair: BTC_BRL
+        side: sell
+        type: ceiling
+        amount: 1
+        fill_or_kill: false
+    TrailingSellOrderBody:
+      properties:
+        external_id:
+          $ref: '#/components/schemas/OrderExternalIdParamV4'
+        pair:
+          type: string
+          description: Currency pair code
+        side:
+          type: string
+          enum:
+          - sell
+          description: Order's side (sell)
+        type:
+          type: string
+          enum:
+          - trailing
+          description: Order's type (trailing)
+        amount:
+          type: number
+          format: double
+          description: Order amount in base currency
+        price:
+          type: number
+          format: double
+          description: Limit price
+        distance:
+          type: number
+          format: double
+          description: Price distance
+      required:
+      - pair
+      - side
+      - type
+      - amount
+      - price
+      - distance
+      type: object
+      additionalProperties: false
+      example:
+        pair: BTC_BRL
+        side: sell
+        type: trailing
+        amount: 1
+        distance: 1
+    IcebergBuyOrderBody:
+      properties:
+        external_id:
+          $ref: '#/components/schemas/OrderExternalIdParamV4'
+        pair:
+          type: string
+          description: Currency pair code
+        side:
+          type: string
+          enum:
+          - buy
+          description: Order's side (buy)
+        type:
+          type: string
+          enum:
+          - iceberg
+          description: Order's type (iceberg)
+        amount:
+          type: number
+          format: double
+          description: Order amount in base currency
+        step_amount:
+          type: number
+          format: double
+          description: Step amount (the ratio of amount to step_amount must be less than or equal to 10)
+        price:
+          type: number
+          format: double
+          description: Limit price
+      required:
+      - pair
+      - side
+      - type
+      - amount
+      - step_amount
+      - price
+      type: object
+      additionalProperties: false
+      example:
+        amount: 10
+        step_amount: 1
+        pair: BTC_BRL
+        price: 700000
+        side: buy
+        type: iceberg
+    StopLimitSellOrderBody:
+      properties:
+        external_id:
+          $ref: '#/components/schemas/OrderExternalIdParamV4'
+        pair:
+          type: string
+          description: Currency pair code
+        side:
+          type: string
+          enum:
+          - sell
+          description: Order's side (sell)
+        type:
+          type: string
+          enum:
+          - stop_limit
+          description: Order's type (stop_limit)
+        amount:
+          type: number
+          format: double
+          description: Order amount in base currency
+        price:
+          type: number
+          format: double
+          description: Limit price
+        stop_price:
+          type: number
+          format: double
+          description: Stop price
+      required:
+      - pair
+      - side
+      - type
+      - amount
+      - price
+      - stop_price
+      type: object
+      additionalProperties: false
+      example:
+        amount: 1
+        pair: BTC_BRL
+        price: 700000
+        side: sell
+        stop_price: 1
+        type: stop_limit
+    WebSocketErrorResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Request identifier for correlation
+        status:
+          type: integer
+          description: HTTP error status code
+        result:
+          type: 'null'
+          description: Always null for error responses
+        error:
+          type: object
+          properties:
+            error_code:
+              type: integer
+              description: Error code
+            message:
+              type: string
+              description: Error message
+          required:
+          - error_code
+          - message
+      required:
+      - id
+      - status
+      - result
+      - error
+      example:
+        id: req-123
+        status: 400
+        result: null
+        error:
+          error_code: 40011
+          message: Insufficient funds.
+    WebSocketCreateRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique request identifier for correlation
+        method:
+          type: string
+          enum:
+          - order.create
+          description: WebSocket API method
+        params:
+          allOf:
+          - $ref: '#/components/schemas/WebSocketAuthParams'
+          - anyOf:
+            - $ref: '#/components/schemas/LimitBuyOrderBody'
+            - $ref: '#/components/schemas/LimitSellOrderBody'
+            - $ref: '#/components/schemas/MarketBuyOrderBody'
+            - $ref: '#/components/schemas/MarketSellOrderBody'
+            - $ref: '#/components/schemas/StopLimitBuyOrderBody'
+            - $ref: '#/components/schemas/StopLimitSellOrderBody'
+            - $ref: '#/components/schemas/TrailingBuyOrderBody'
+            - $ref: '#/components/schemas/TrailingSellOrderBody'
+            - $ref: '#/components/schemas/CeilingBuyOrderBody'
+            - $ref: '#/components/schemas/CeilingSellOrderBody'
+            - $ref: '#/components/schemas/IcebergBuyOrderBody'
+            - $ref: '#/components/schemas/IcebergSellOrderBody'
+      required:
+      - id
+      - method
+      - params
+      example:
+        id: req-123
+        method: order.create
+        params:
+          apiToken: your-api-token
+          timestamp: 1634567890000
+          signature: calculated-signature
+          pair: BTC_BRL
+          side: buy
+          type: limit
+          amount: 0.001
+          price: 100000
+    LimitBuyOrderBody:
+      properties:
+        external_id:
+          $ref: '#/components/schemas/OrderExternalIdParamV4'
+        pair:
+          type: string
+          description: Currency pair code
+        side:
+          type: string
+          enum:
+          - buy
+          description: Order's side (buy)
+        type:
+          type: string
+          enum:
+          - limit
+          description: Order's type (limit)
+        amount:
+          type: number
+          format: double
+          description: Order amount in base currency
+        price:
+          type: number
+          format: double
+          description: Limit price
+        post_only:
+          type: boolean
+          description: If set to `true`, the order will be added directly to the order book without an initial match, provided the request is valid
+        expiration:
+          type: number
+          format: double
+          description: If a valid timestamp is provided, the order will be created with an expiration date and time
+        immediate_or_cancel:
+          type: boolean
+          description: If set to `true`, the order will not be added to the order book after the initial match, any remaining unfilled amount will result in the order being canceled
+        fill_or_kill:
+          type: boolean
+          description: If set to `true`, the order will either be completely filled or canceled
+      required:
+      - pair
+      - side
+      - type
+      - amount
+      - price
+      type: object
+      additionalProperties: false
+      example:
+        amount: 0.1
+        pair: BTC_BRL
+        price: 700000
+        side: buy
+        type: limit
+        post_only: false
+        expiration: 1723073682
+        immediate_or_cancel: false
+        fill_or_kill: false
+      title: Buy Limit
     WebSocketCancelResponse:
       type: object
       properties:
@@ -961,335 +1247,6 @@ components:
           total_value: 100
           type: limit
           update_date: '2024-03-27T13:30:45.123Z'
-    StopLimitBuyOrderBody:
-      properties:
-        external_id:
-          $ref: '#/components/schemas/OrderExternalIdParamV4'
-        pair:
-          type: string
-          description: Currency pair code
-        side:
-          type: string
-          enum:
-          - buy
-          description: Order's side (buy)
-        type:
-          type: string
-          enum:
-          - stop_limit
-          description: Order's type (stop_limit)
-        amount:
-          type: number
-          format: double
-          description: Order amount in base currency
-        price:
-          type: number
-          format: double
-          description: Limit price
-        stop_price:
-          type: number
-          format: double
-          description: Stop price
-      required:
-      - pair
-      - side
-      - type
-      - amount
-      - price
-      - stop_price
-      type: object
-      additionalProperties: false
-      example:
-        amount: 1
-        pair: BTC_BRL
-        price: 700000
-        side: buy
-        stop_price: 1
-        type: stop_limit
-    CeilingBuyOrderBody:
-      properties:
-        external_id:
-          $ref: '#/components/schemas/OrderExternalIdParamV4'
-        pair:
-          type: string
-          description: Currency pair code
-        side:
-          type: string
-          enum:
-          - buy
-          description: Order's side (buy)
-        type:
-          type: string
-          enum:
-          - ceiling
-          description: Order's type (ceiling)
-        value:
-          type: number
-          format: double
-          description: Order value in quote currency
-        fill_or_kill:
-          type: boolean
-          description: If set to `true`, the order will either be completely filled or canceled
-      required:
-      - pair
-      - side
-      - type
-      - value
-      type: object
-      additionalProperties: false
-      example:
-        pair: BTC_BRL
-        side: buy
-        type: market
-        amount: 0.1
-        fill_or_kill: false
-    WebSocketAuthParams:
-      type: object
-      properties:
-        apiToken:
-          type: string
-          description: API Token for authentication
-        timestamp:
-          type: integer
-          format: int64
-          description: Timestamp in milliseconds
-        signature:
-          type: string
-          description: HMAC SHA256 signature
-      required:
-      - apiToken
-      - timestamp
-      - signature
-      example:
-        apiToken: your-api-token
-        timestamp: 1634567890000
-        signature: calculated-signature
-    WebSocketErrorResponse:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Request identifier for correlation
-        status:
-          type: integer
-          description: HTTP error status code
-        result:
-          type: 'null'
-          description: Always null for error responses
-        error:
-          type: object
-          properties:
-            error_code:
-              type: integer
-              description: Error code
-            message:
-              type: string
-              description: Error message
-          required:
-          - error_code
-          - message
-      required:
-      - id
-      - status
-      - result
-      - error
-      example:
-        id: req-123
-        status: 400
-        result: null
-        error:
-          error_code: 40011
-          message: Insufficient funds.
-    IcebergSellOrderBody:
-      properties:
-        external_id:
-          $ref: '#/components/schemas/OrderExternalIdParamV4'
-        pair:
-          type: string
-          description: Currency pair code
-        side:
-          type: string
-          enum:
-          - sell
-          description: Order's side (sell)
-        type:
-          type: string
-          enum:
-          - iceberg
-          description: Order's type (iceberg)
-        amount:
-          type: number
-          format: double
-          description: Order amount in base currency
-        step_amount:
-          type: number
-          format: double
-          description: Step amount (the ratio of amount to step_amount must be less than or equal to 10)
-        price:
-          type: number
-          format: double
-          description: Limit price
-      required:
-      - pair
-      - side
-      - type
-      - amount
-      - step_amount
-      - price
-      type: object
-      additionalProperties: false
-      example:
-        amount: 10
-        step_amount: 1
-        pair: BTC_BRL
-        price: 700000
-        side: sell
-        type: iceberg
-    StopLimitSellOrderBody:
-      properties:
-        external_id:
-          $ref: '#/components/schemas/OrderExternalIdParamV4'
-        pair:
-          type: string
-          description: Currency pair code
-        side:
-          type: string
-          enum:
-          - sell
-          description: Order's side (sell)
-        type:
-          type: string
-          enum:
-          - stop_limit
-          description: Order's type (stop_limit)
-        amount:
-          type: number
-          format: double
-          description: Order amount in base currency
-        price:
-          type: number
-          format: double
-          description: Limit price
-        stop_price:
-          type: number
-          format: double
-          description: Stop price
-      required:
-      - pair
-      - side
-      - type
-      - amount
-      - price
-      - stop_price
-      type: object
-      additionalProperties: false
-      example:
-        amount: 1
-        pair: BTC_BRL
-        price: 700000
-        side: sell
-        stop_price: 1
-        type: stop_limit
-    WebSocketCreateRequest:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Unique request identifier for correlation
-        method:
-          type: string
-          enum:
-          - order.create
-          description: WebSocket API method
-        params:
-          allOf:
-          - $ref: '#/components/schemas/WebSocketAuthParams'
-          - anyOf:
-            - $ref: '#/components/schemas/LimitBuyOrderBody'
-            - $ref: '#/components/schemas/LimitSellOrderBody'
-            - $ref: '#/components/schemas/MarketBuyOrderBody'
-            - $ref: '#/components/schemas/MarketSellOrderBody'
-            - $ref: '#/components/schemas/StopLimitBuyOrderBody'
-            - $ref: '#/components/schemas/StopLimitSellOrderBody'
-            - $ref: '#/components/schemas/TrailingBuyOrderBody'
-            - $ref: '#/components/schemas/TrailingSellOrderBody'
-            - $ref: '#/components/schemas/CeilingBuyOrderBody'
-            - $ref: '#/components/schemas/CeilingSellOrderBody'
-            - $ref: '#/components/schemas/IcebergBuyOrderBody'
-            - $ref: '#/components/schemas/IcebergSellOrderBody'
-      required:
-      - id
-      - method
-      - params
-      example:
-        id: req-123
-        method: order.create
-        params:
-          apiToken: your-api-token
-          timestamp: 1634567890000
-          signature: calculated-signature
-          pair: BTC_BRL
-          side: buy
-          type: limit
-          amount: 0.001
-          price: 100000
-    LimitSellOrderBody:
-      properties:
-        external_id:
-          $ref: '#/components/schemas/OrderExternalIdParamV4'
-        pair:
-          type: string
-          description: Currency pair code
-        side:
-          type: string
-          enum:
-          - sell
-          description: Order's side (sell)
-        type:
-          type: string
-          enum:
-          - limit
-          description: Order's type (limit)
-        amount:
-          type: number
-          format: double
-          description: Order amount in base currency
-        price:
-          type: number
-          format: double
-          description: Limit price
-        post_only:
-          type: boolean
-          description: If set to `true`, the order will be added directly to the order book without an initial match, provided the request is valid
-        expiration:
-          type: number
-          format: double
-          description: If a valid timestamp is provided, the order will be created with an expiration date and time
-        immediate_or_cancel:
-          type: boolean
-          description: If set to `true`, the order will not be added to the order book after the initial match, any remaining unfilled amount will result in the order being canceled
-        fill_or_kill:
-          type: boolean
-          description: If set to `true`, the order will either be completely filled or canceled
-      required:
-      - pair
-      - side
-      - type
-      - amount
-      - price
-      type: object
-      additionalProperties: false
-      example:
-        pair: BTC_BRL
-        side: sell
-        type: limit
-        amount: 1
-        price: 700000
-        post_only: false
-        expiration: 1723073682
-        immediate_or_cancel: false
-        fill_or_kill: false
-      title: Sell Limit
     WebSocketUpdateResponse:
       type: object
       properties:
@@ -1310,6 +1267,49 @@ components:
         id: req-005
         status: 200
         result: null
+    MarketBuyOrderBody:
+      properties:
+        external_id:
+          $ref: '#/components/schemas/OrderExternalIdParamV4'
+        pair:
+          type: string
+          description: Currency pair code
+        side:
+          type: string
+          enum:
+          - buy
+          description: Order's side (buy)
+        type:
+          type: string
+          enum:
+          - market
+          description: Order's type (market)
+        amount:
+          type: number
+          format: double
+          description: Order amount in base currency
+        value:
+          type: number
+          format: double
+          description: Order value in quote currency
+        fill_or_kill:
+          type: boolean
+          description: If set to `true`, the order will either be completely filled or canceled
+      required:
+      - pair
+      - side
+      - type
+      - amount
+      - value
+      type: object
+      additionalProperties: false
+      example:
+        pair: BTC_BRL
+        side: buy
+        type: market
+        amount: 0.1
+        fill_or_kill: false
+      title: Buy Market
   securitySchemes:
     API_Credentials:
       type: apiToken

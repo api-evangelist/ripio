@@ -102,46 +102,6 @@ paths:
         enabled: false
 components:
   schemas:
-    GetUserWalletAndCreateIfNotExistsV4:
-      properties:
-        address:
-          type: string
-          description: Address
-        currency_code:
-          type: string
-          description: Currency code
-          example: BTC
-        tag:
-          type:
-          - string
-          - 'null'
-          description: Address tag - Check the information about this currency in the public currencies endpoint to check if this currency / network needs tag for deposits
-        memo:
-          type:
-          - string
-          - 'null'
-          description: Address memo - Check the information about this currency in the public currencies endpoint to check if this currency / network needs memo for deposits
-        network:
-          type: string
-          description: Network
-      required:
-      - address
-      - currency_code
-      - tag
-      - memo
-      - network
-      type: object
-      additionalProperties: false
-    IsInternalV4:
-      properties:
-        is_internal:
-          type: boolean
-          description: Flag that indicates if it's an internal wallet
-          format: boolean
-      required:
-      - is_internal
-      type: object
-      additionalProperties: false
     GetUserWalletAndCreateIfNotExistsResponseV4:
       properties:
         data:
@@ -170,6 +130,16 @@ components:
       - message
       type: object
       additionalProperties: false
+    IsInternalV4:
+      properties:
+        is_internal:
+          type: boolean
+          description: Flag that indicates if it's an internal wallet
+          format: boolean
+      required:
+      - is_internal
+      type: object
+      additionalProperties: false
     IsInternalWalletResponseV4:
       properties:
         data:
@@ -192,10 +162,6 @@ components:
       - message
       type: object
       additionalProperties: false
-    AddressParamV4:
-      type: string
-      example: 2MsPTuASaY8QjQmKFWDyHzYxzpASzKpv7YF
-      description: Wallet address
     WalletResponseV4:
       properties:
         data:
@@ -250,6 +216,40 @@ components:
         memo: null
         network: bitcoin
         tag: null
+    AddressParamV4:
+      type: string
+      example: 2MsPTuASaY8QjQmKFWDyHzYxzpASzKpv7YF
+      description: Wallet address
+    GetUserWalletAndCreateIfNotExistsV4:
+      properties:
+        address:
+          type: string
+          description: Address
+        currency_code:
+          type: string
+          description: Currency code
+          example: BTC
+        tag:
+          type:
+          - string
+          - 'null'
+          description: Address tag - Check the information about this currency in the public currencies endpoint to check if this currency / network needs tag for deposits
+        memo:
+          type:
+          - string
+          - 'null'
+          description: Address memo - Check the information about this currency in the public currencies endpoint to check if this currency / network needs memo for deposits
+        network:
+          type: string
+          description: Network
+      required:
+      - address
+      - currency_code
+      - tag
+      - memo
+      - network
+      type: object
+      additionalProperties: false
   securitySchemes:
     API_Credentials:
       type: apiToken

@@ -74,6 +74,111 @@ paths:
           - To retrieve detailed market data for authorized cryptocurrency pairs'
 components:
   schemas:
+    TickersResponseV4:
+      properties:
+        data:
+          $ref: '#/components/schemas/TickersResponseDataV4'
+        error_code:
+          type:
+          - number
+          - 'null'
+          enum:
+          - null
+          example: null
+        message:
+          type:
+          - string
+          - 'null'
+          example: null
+      required:
+      - data
+      - error_code
+      - message
+      type: object
+      additionalProperties: false
+    TickersResponseData:
+      properties:
+        pair:
+          type: string
+          description: Currency pair code
+          example: BTC_BRL
+        price_change_percent_24h:
+          type: string
+          description: 24-hr % price change of market pair
+        high:
+          type: number
+          format: float
+          description: Highest price in the last 24 hours
+        low:
+          type: number
+          format: float
+          description: Lowest price in the last 24 hours
+        volume:
+          type: number
+          format: float
+          description: Volume in the last 24 hours
+        trades_quantity:
+          type: number
+          format: int32
+          description: Trades quantity in the last 24 hours
+        last:
+          type: number
+          format: float
+          description: Price of the last trade
+        bid:
+          type: number
+          format: float
+          description: Price of the current best buy order in the orderbook
+        ask:
+          type: number
+          format: float
+          description: Price of the current best sell order in the orderbook
+        date:
+          type: string
+          description: Timestamp of the last update (UTC)
+        first:
+          type: number
+          format: float
+          description: Price of the first trade in the last 24 hours window
+        is_frozen:
+          type: boolean
+          description: Whether the market is currently frozen (disabled)
+        base_code:
+          type: string
+          description: Base currency code
+        base_id:
+          type: string
+          description: Base currency ID
+        quote_id:
+          type: string
+          description: Quote currency ID
+        quote_code:
+          type: string
+          description: Quote currency code
+        quote_volume:
+          type: number
+          format: double
+          description: Quote currency volume
+      required:
+      - pair
+      - price_change_percent_24h
+      - high
+      - low
+      - volume
+      - trades_quantity
+      - last
+      - bid
+      - ask
+      - date
+      - first
+      - is_frozen
+      - base_code
+      - base_id
+      - quote_id
+      - quote_code
+      - quote_volume
+      type: object
+      additionalProperties: false
     AllTickersResponse:
       properties:
         data:
@@ -229,111 +334,6 @@ components:
         quote_volume: 150.1
         trades_quantity: 1199
         volume: 27.26776846
-    TickersResponseData:
-      properties:
-        pair:
-          type: string
-          description: Currency pair code
-          example: BTC_BRL
-        price_change_percent_24h:
-          type: string
-          description: 24-hr % price change of market pair
-        high:
-          type: number
-          format: float
-          description: Highest price in the last 24 hours
-        low:
-          type: number
-          format: float
-          description: Lowest price in the last 24 hours
-        volume:
-          type: number
-          format: float
-          description: Volume in the last 24 hours
-        trades_quantity:
-          type: number
-          format: int32
-          description: Trades quantity in the last 24 hours
-        last:
-          type: number
-          format: float
-          description: Price of the last trade
-        bid:
-          type: number
-          format: float
-          description: Price of the current best buy order in the orderbook
-        ask:
-          type: number
-          format: float
-          description: Price of the current best sell order in the orderbook
-        date:
-          type: string
-          description: Timestamp of the last update (UTC)
-        first:
-          type: number
-          format: float
-          description: Price of the first trade in the last 24 hours window
-        is_frozen:
-          type: boolean
-          description: Whether the market is currently frozen (disabled)
-        base_code:
-          type: string
-          description: Base currency code
-        base_id:
-          type: string
-          description: Base currency ID
-        quote_id:
-          type: string
-          description: Quote currency ID
-        quote_code:
-          type: string
-          description: Quote currency code
-        quote_volume:
-          type: number
-          format: double
-          description: Quote currency volume
-      required:
-      - pair
-      - price_change_percent_24h
-      - high
-      - low
-      - volume
-      - trades_quantity
-      - last
-      - bid
-      - ask
-      - date
-      - first
-      - is_frozen
-      - base_code
-      - base_id
-      - quote_id
-      - quote_code
-      - quote_volume
-      type: object
-      additionalProperties: false
-    TickersResponseV4:
-      properties:
-        data:
-          $ref: '#/components/schemas/TickersResponseDataV4'
-        error_code:
-          type:
-          - number
-          - 'null'
-          enum:
-          - null
-          example: null
-        message:
-          type:
-          - string
-          - 'null'
-          example: null
-      required:
-      - data
-      - error_code
-      - message
-      type: object
-      additionalProperties: false
   securitySchemes:
     API_Credentials:
       type: apiToken

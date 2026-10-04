@@ -144,12 +144,69 @@ paths:
           - For building trading interfaces with user context and restrictions'
 components:
   schemas:
-    StartDateTimeNoMinParamV4:
-      type: string
-      default: '[6 months ago]'
-      example: '2020-01-01T00:00:00-03:00'
-      format: datetime
-      description: Initial datetime filter in ISO-8601 format
+    Trade:
+      properties:
+        amount:
+          type: number
+          format: double
+          description: Amount
+        date:
+          type: string
+          description: Trade date (UTC format)
+        id:
+          type: string
+          description: Trade id
+        maker_order_id:
+          type: string
+          description: Maker order id
+        maker_side:
+          type: string
+          description: Maker order side (sell / buy)
+        maker_type:
+          type: string
+          description: Maker order type (market / limit)
+        price:
+          type: number
+          format: double
+          description: Price
+        pair:
+          type: string
+          description: Currency pair code
+          example: BTC_BRL
+        taker_order_id:
+          type: string
+          description: Taker order id
+        taker_side:
+          type: string
+          description: Taker order side (sell / buy)
+        taker_type:
+          type: string
+          description: Taker order type (market / limit)
+        timestamp:
+          type: number
+          format: double
+          description: Current timestamp
+          example: 1675708481219
+        total_value:
+          type: number
+          format: float
+          description: Total value
+      required:
+      - amount
+      - date
+      - id
+      - maker_order_id
+      - maker_side
+      - maker_type
+      - price
+      - pair
+      - taker_order_id
+      - taker_side
+      - taker_type
+      - timestamp
+      - total_value
+      type: object
+      additionalProperties: false
     PublicCurrencyLogo:
       properties:
         svg:
@@ -160,6 +217,55 @@ components:
       - svg
       type: object
       additionalProperties: false
+    PublicNetwork:
+      properties:
+        code:
+          type: string
+          description: Network code
+          format: string
+        memo:
+          $ref: '#/components/schemas/PublicMemo'
+          description: Memo information
+          format: PublicTag
+        tag:
+          $ref: '#/components/schemas/PublicTag'
+          description: Tag information
+          format: PublicTag
+      required:
+      - code
+      - memo
+      - tag
+      type: object
+      additionalProperties: false
+    PublicMemo:
+      properties:
+        deposit:
+          type: boolean
+          description: Flag that indicates if the network has memo for deposit
+          format: boolean
+        withdrawal:
+          type: boolean
+          description: Flag that indicates if the network has memo for withdrawal
+          format: boolean
+      required:
+      - deposit
+      - withdrawal
+      type: object
+      additionalProperties: false
+    StartDateTimeNoMinParamV4:
+      type: string
+      default: '[6 months ago]'
+      example: '2020-01-01T00:00:00-03:00'
+      format: datetime
+      description: Initial datetime filter in ISO-8601 format
+    PageSizeParamV4:
+      type: number
+      format: int32
+      default: 200
+      example: 100
+      description: Number of records per page
+      maximum: 1000
+      minimum: 1
     PublicPairV4:
       properties:
         amount_tick:
@@ -239,19 +345,64 @@ components:
         countries:
         - BR
         max_price_variation: 10
-    PublicMemo:
+    CursorTradesResponseData:
       properties:
-        deposit:
-          type: boolean
-          description: Flag that indicates if the network has memo for deposit
-          format: boolean
-        withdrawal:
-          type: boolean
-          description: Flag that indicates if the network has memo for withdrawal
-          format: boolean
+        trades:
+          items:
+            $ref: '#/components/schemas/Trade'
+          type: array
+          example:
+          - amount: 0.2404764
+            date: '2019-01-03T02:27:33.947Z'
+            id: 2B222F22-5235-45FA-97FC-E9DBFA2575EE
+            maker_order_id: F49F5BD8-3F5B-4364-BCEE-F36F62DB966A
+            maker_side: buy
+            maker_type: limit
+            pair: BTC_BRL
+            price: 15160
+            taker_order_id: FEAB5CEC-7F9E-4F95-B67D-9E8D5C739BE3
+            taker_side: sell
+            taker_type: market
+            timestamp: 1675708481219
+            total_value: 3638.4
+          - amount: 0.00563617
+            date: '2019-01-03T02:27:33.943Z'
+            id: CDC492A5-B1BF-4353-BE7A-43F51C371388
+            maker_order_id: 53BF30D2-901C-43D5-B0D1-62CD05DFD02A
+            maker_side: buy
+            maker_type: limit
+            pair: BTC_BRL
+            price: 15163
+            taker_order_id: E4B1B38D-C871-4476-9314-3DC23292F45E
+            taker_side: sell
+            taker_type: limit
+            timestamp: 1675708481220
+            total_value: 84.91
+          - amount: 0.00680154
+            date: '2019-01-03T02:27:33.940Z'
+            id: 910AA20F-211F-4755-90A7-94227DB407D8
+            maker_order_id: 1FD30735-E055-4200-AD3D-007B02A5BA92
+            maker_side: buy
+            maker_type: limit
+            pair: BTC_BRL
+            price: 15163.03
+            taker_order_id: DBC6D4AF-D454-46DF-80EC-E19528A0FB25
+            taker_side: sell
+            taker_type: limit
+            timestamp: 1675708481221
+            total_value: 104.1
+        nc:
+          type:
+          - string
+          - 'null'
+          description: This is the next cursor, use its value with the `c` parameter to retrieve the next page
+        pc:
+          type:
+          - string
+          - 'null'
+          description: This is the previous cursor, use its value with the `c` parameter to retrieve the previous page
       required:
-      - deposit
-      - withdrawal
+      - trades
       type: object
       additionalProperties: false
     PublicCurrencyV4:
@@ -344,38 +495,6 @@ components:
         - AR
         logo:
           svg: https://cryptocurrency-logos.ripio.com/svg/btc.svg
-    PairsResponseV4:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/PublicPairV4'
-          type: array
-        error_code:
-          type:
-          - number
-          - 'null'
-          enum:
-          - null
-          example: null
-        message:
-          type:
-          - string
-          - 'null'
-          example: null
-      required:
-      - data
-      - error_code
-      - message
-      type: object
-      additionalProperties: false
-    PageSizeParamV4:
-      type: number
-      format: int32
-      default: 200
-      example: 100
-      description: Number of records per page
-      maximum: 1000
-      minimum: 1
     CurrenciesResponseV4:
       properties:
         data:
@@ -422,155 +541,11 @@ components:
       - message
       type: object
       additionalProperties: false
-    Trade:
-      properties:
-        amount:
-          type: number
-          format: double
-          description: Amount
-        date:
-          type: string
-          description: Trade date (UTC format)
-        id:
-          type: string
-          description: Trade id
-        maker_order_id:
-          type: string
-          description: Maker order id
-        maker_side:
-          type: string
-          description: Maker order side (sell / buy)
-        maker_type:
-          type: string
-          description: Maker order type (market / limit)
-        price:
-          type: number
-          format: double
-          description: Price
-        pair:
-          type: string
-          description: Currency pair code
-          example: BTC_BRL
-        taker_order_id:
-          type: string
-          description: Taker order id
-        taker_side:
-          type: string
-          description: Taker order side (sell / buy)
-        taker_type:
-          type: string
-          description: Taker order type (market / limit)
-        timestamp:
-          type: number
-          format: double
-          description: Current timestamp
-          example: 1675708481219
-        total_value:
-          type: number
-          format: float
-          description: Total value
-      required:
-      - amount
-      - date
-      - id
-      - maker_order_id
-      - maker_side
-      - maker_type
-      - price
-      - pair
-      - taker_order_id
-      - taker_side
-      - taker_type
-      - timestamp
-      - total_value
-      type: object
-      additionalProperties: false
-    CursorTradesResponseData:
-      properties:
-        trades:
-          items:
-            $ref: '#/components/schemas/Trade'
-          type: array
-          example:
-          - amount: 0.2404764
-            date: '2019-01-03T02:27:33.947Z'
-            id: 2B222F22-5235-45FA-97FC-E9DBFA2575EE
-            maker_order_id: F49F5BD8-3F5B-4364-BCEE-F36F62DB966A
-            maker_side: buy
-            maker_type: limit
-            pair: BTC_BRL
-            price: 15160
-            taker_order_id: FEAB5CEC-7F9E-4F95-B67D-9E8D5C739BE3
-            taker_side: sell
-            taker_type: market
-            timestamp: 1675708481219
-            total_value: 3638.4
-          - amount: 0.00563617
-            date: '2019-01-03T02:27:33.943Z'
-            id: CDC492A5-B1BF-4353-BE7A-43F51C371388
-            maker_order_id: 53BF30D2-901C-43D5-B0D1-62CD05DFD02A
-            maker_side: buy
-            maker_type: limit
-            pair: BTC_BRL
-            price: 15163
-            taker_order_id: E4B1B38D-C871-4476-9314-3DC23292F45E
-            taker_side: sell
-            taker_type: limit
-            timestamp: 1675708481220
-            total_value: 84.91
-          - amount: 0.00680154
-            date: '2019-01-03T02:27:33.940Z'
-            id: 910AA20F-211F-4755-90A7-94227DB407D8
-            maker_order_id: 1FD30735-E055-4200-AD3D-007B02A5BA92
-            maker_side: buy
-            maker_type: limit
-            pair: BTC_BRL
-            price: 15163.03
-            taker_order_id: DBC6D4AF-D454-46DF-80EC-E19528A0FB25
-            taker_side: sell
-            taker_type: limit
-            timestamp: 1675708481221
-            total_value: 104.1
-        nc:
-          type:
-          - string
-          - 'null'
-          description: This is the next cursor, use its value with the `c` parameter to retrieve the next page
-        pc:
-          type:
-          - string
-          - 'null'
-          description: This is the previous cursor, use its value with the `c` parameter to retrieve the previous page
-      required:
-      - trades
-      type: object
-      additionalProperties: false
-    PublicNetwork:
-      properties:
-        code:
-          type: string
-          description: Network code
-          format: string
-        memo:
-          $ref: '#/components/schemas/PublicMemo'
-          description: Memo information
-          format: PublicTag
-        tag:
-          $ref: '#/components/schemas/PublicTag'
-          description: Tag information
-          format: PublicTag
-      required:
-      - code
-      - memo
-      - tag
-      type: object
-      additionalProperties: false
-    EndDateTimeNoMinParamV4:
+    CountriesParamV4:
       type: string
-      default: '[Current datetime]'
-      example: '2020-01-02T23:59:59-03:00'
-      format: datetime
-      description: Final datetime filter in ISO-8601 format
+      example: BR,AR
+      format: string
+      description: Countries (One or many, use "," to separate)
     PublicTag:
       properties:
         deposit:
@@ -586,11 +561,36 @@ components:
       - withdrawal
       type: object
       additionalProperties: false
-    CountriesParamV4:
+    EndDateTimeNoMinParamV4:
       type: string
-      example: BR,AR
-      format: string
-      description: Countries (One or many, use "," to separate)
+      default: '[Current datetime]'
+      example: '2020-01-02T23:59:59-03:00'
+      format: datetime
+      description: Final datetime filter in ISO-8601 format
+    PairsResponseV4:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/PublicPairV4'
+          type: array
+        error_code:
+          type:
+          - number
+          - 'null'
+          enum:
+          - null
+          example: null
+        message:
+          type:
+          - string
+          - 'null'
+          example: null
+      required:
+      - data
+      - error_code
+      - message
+      type: object
+      additionalProperties: false
   securitySchemes:
     API_Credentials:
       type: apiToken

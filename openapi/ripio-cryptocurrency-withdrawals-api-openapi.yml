@@ -253,10 +253,21 @@ paths:
           - To get comprehensive withdrawal data including fees and transaction details'
 components:
   schemas:
-    WithdrawalsResponseV4:
+    StartDateNoMinParamV4:
+      type: string
+      default: '[6 months ago]'
+      format: date
+      description: Initial date filter in ISO-8601 format
+    Omit_WithdrawalV4.miner_fee_type-or-is_internal_:
+      $ref: '#/components/schemas/Pick_WithdrawalV4.Exclude_keyofWithdrawalV4.miner_fee_type-or-is_internal__'
+      description: Construct a type with the properties of T except for those in type K.
+    WithdrawalFeeResponseV4:
       properties:
         data:
-          $ref: '#/components/schemas/WithdrawalsDataV4'
+          $ref: '#/components/schemas/WithdrawalFeeDataV4'
+          example:
+            amount: 1.2e-05
+            network: bitcoin
         error_code:
           type:
           - number
@@ -275,88 +286,6 @@ components:
       - message
       type: object
       additionalProperties: false
-    Pick_WithdrawalV4.Exclude_keyofWithdrawalV4.miner_fee_type-or-is_internal__:
-      properties:
-        id:
-          type: string
-          description: Withdrawal identifier
-          example: A1DCD3B6-1CBD-4F17-ADA0-230ADEC04173
-        amount:
-          type: number
-          format: double
-          description: Amount
-          example: 0.1
-        create_date:
-          type: string
-          description: Datetime of the creation
-          example: '2019-01-25T16:37:15.443Z'
-        currency_code:
-          type: string
-          description: Currency code
-          example: BTC
-        destination_address:
-          type: string
-          description: Destination address
-          example: rw9nf3WgsagJiZnkAeZzXZuqeCQ6LHm2h1
-        external_id:
-          type: string
-          description: External id (this is sent by the user when creating a withdrawal, and it's optional)
-          example: rtd-9012-lkju-908
-        link:
-          type: string
-          description: Withdrawal link
-          example: null
-        miner_fee:
-          type: number
-          format: double
-          description: Miner fee
-          example: 0
-        network:
-          type: string
-          description: Network
-          example: bitcoin
-        status:
-          $ref: '#/components/schemas/WithdrawalStatusParamV4'
-          description: Status
-          example: pending
-        transaction_id:
-          type: string
-          description: Transaction id
-          example: null
-        update_date:
-          type: string
-          description: Datetime of the last update
-          example: '2019-01-25T16:37:15.443Z'
-        fee:
-          type: number
-          format: double
-          description: Fee charged by the exchange
-          example: 0
-        hash:
-          type: string
-          description: Transaction hash
-          example: null
-        memo:
-          type: string
-          description: Destination address memo - Check the information about this currency in the public currencies endpoint to check if this currency / network offers memo for withdrawals
-        tag:
-          type: string
-          description: Destination address tag - Check the information about this currency in the public currencies endpoint to check if this currency / network offers tag for withdrawals
-      required:
-      - id
-      - amount
-      - create_date
-      - currency_code
-      - destination_address
-      - link
-      - miner_fee
-      - status
-      - transaction_id
-      - update_date
-      - fee
-      - hash
-      type: object
-      description: From T, pick a set of properties whose keys are in the union K
     PageSizeParamV4:
       type: number
       format: int32
@@ -425,138 +354,12 @@ components:
       - pagination
       type: object
       additionalProperties: false
-    StartDateNoMinParamV4:
-      type: string
-      default: '[6 months ago]'
-      format: date
-      description: Initial date filter in ISO-8601 format
-    CreateWithdrawalResponseV4:
-      properties:
-        data:
-          $ref: '#/components/schemas/Omit_WithdrawalV4.miner_fee_type-or-is_internal_'
-        error_code:
-          type:
-          - number
-          - 'null'
-          enum:
-          - null
-          example: null
-        message:
-          type:
-          - string
-          - 'null'
-          example: null
-      required:
-      - data
-      - error_code
-      - message
-      type: object
-      additionalProperties: false
-    PaginationV4:
-      properties:
-        current_page:
-          type: number
-          format: double
-          description: Current page
-        page_size:
-          type: number
-          format: double
-          description: Page size
-        registers_count:
-          type: number
-          format: double
-          description: Total number of registers
-        total_pages:
-          type: number
-          format: double
-          description: Total number of pages
-      required:
-      - current_page
-      - page_size
-      - registers_count
-      - total_pages
-      type: object
-      additionalProperties: false
-      example:
-        current_page: 1
-        registers_count: 21
-        total_pages: 1
-        page_size: 100
-    WithdrawResponseV4:
-      properties:
-        data:
-          $ref: '#/components/schemas/WithdrawalV4'
-          example:
-            amount: 0.1
-            create_date: '2019-01-25T16:37:15.443Z'
-            currency_code: BTC
-            destination_address: rw9nf3WgsagJiZnkAeZzXZuqeCQ6LHm2h1
-            external_id: rtd-9012-lkju-908
-            is_internal: true
-            link: null
-            miner_fee: 1.2e-05
-            miner_fee_type: regular
-            network: bitcoin
-            status: pending
-            transaction_id: 5890ASHIUHC089189YSHBNJKHAG978891
-            update_date: '2019-01-25T16:37:15.017Z'
-            id: A1DCD3B6-1CBD-4F17-ADA0-230ADEC04173
-            fee: 0
-            hash: null
-            memo: '656899'
-            tag: '0100000020'
-        error_code:
-          type:
-          - number
-          - 'null'
-          enum:
-          - null
-          example: null
-        message:
-          type:
-          - string
-          - 'null'
-          example: null
-      required:
-      - data
-      - error_code
-      - message
-      type: object
-      additionalProperties: false
     CurrentPageParamV4:
       type: number
       format: int32
       default: 1
       example: 3
       description: Page number for pagination
-    WithdrawalStatusParamV4:
-      type: string
-      enum:
-      - pending
-      - confirmed
-      - canceled
-      description: Withdrawal status
-    Omit_WithdrawalV4.miner_fee_type-or-is_internal_:
-      $ref: '#/components/schemas/Pick_WithdrawalV4.Exclude_keyofWithdrawalV4.miner_fee_type-or-is_internal__'
-      description: Construct a type with the properties of T except for those in type K.
-    EndDateNoMinParamV4:
-      type: string
-      default: '[Current date]'
-      format: date
-      description: Final date filter in ISO-8601 format
-    WithdrawalFeeDataV4:
-      properties:
-        amount:
-          type: number
-          format: double
-          description: Amount
-        network:
-          type: string
-          description: Network
-      required:
-      - amount
-      type: object
-      additionalProperties: false
     WithdrawalV4:
       properties:
         amount:
@@ -655,13 +458,210 @@ components:
       - hash
       type: object
       additionalProperties: false
-    WithdrawalFeeResponseV4:
+    CreateWithdrawalResponseV4:
       properties:
         data:
-          $ref: '#/components/schemas/WithdrawalFeeDataV4'
+          $ref: '#/components/schemas/Omit_WithdrawalV4.miner_fee_type-or-is_internal_'
+        error_code:
+          type:
+          - number
+          - 'null'
+          enum:
+          - null
+          example: null
+        message:
+          type:
+          - string
+          - 'null'
+          example: null
+      required:
+      - data
+      - error_code
+      - message
+      type: object
+      additionalProperties: false
+    WithdrawalsResponseV4:
+      properties:
+        data:
+          $ref: '#/components/schemas/WithdrawalsDataV4'
+        error_code:
+          type:
+          - number
+          - 'null'
+          enum:
+          - null
+          example: null
+        message:
+          type:
+          - string
+          - 'null'
+          example: null
+      required:
+      - data
+      - error_code
+      - message
+      type: object
+      additionalProperties: false
+    WithdrawalStatusParamV4:
+      type: string
+      enum:
+      - pending
+      - confirmed
+      - canceled
+      description: Withdrawal status
+    Pick_WithdrawalV4.Exclude_keyofWithdrawalV4.miner_fee_type-or-is_internal__:
+      properties:
+        id:
+          type: string
+          description: Withdrawal identifier
+          example: A1DCD3B6-1CBD-4F17-ADA0-230ADEC04173
+        amount:
+          type: number
+          format: double
+          description: Amount
+          example: 0.1
+        create_date:
+          type: string
+          description: Datetime of the creation
+          example: '2019-01-25T16:37:15.443Z'
+        currency_code:
+          type: string
+          description: Currency code
+          example: BTC
+        destination_address:
+          type: string
+          description: Destination address
+          example: rw9nf3WgsagJiZnkAeZzXZuqeCQ6LHm2h1
+        external_id:
+          type: string
+          description: External id (this is sent by the user when creating a withdrawal, and it's optional)
+          example: rtd-9012-lkju-908
+        link:
+          type: string
+          description: Withdrawal link
+          example: null
+        miner_fee:
+          type: number
+          format: double
+          description: Miner fee
+          example: 0
+        network:
+          type: string
+          description: Network
+          example: bitcoin
+        status:
+          $ref: '#/components/schemas/WithdrawalStatusParamV4'
+          description: Status
+          example: pending
+        transaction_id:
+          type: string
+          description: Transaction id
+          example: null
+        update_date:
+          type: string
+          description: Datetime of the last update
+          example: '2019-01-25T16:37:15.443Z'
+        fee:
+          type: number
+          format: double
+          description: Fee charged by the exchange
+          example: 0
+        hash:
+          type: string
+          description: Transaction hash
+          example: null
+        memo:
+          type: string
+          description: Destination address memo - Check the information about this currency in the public currencies endpoint to check if this currency / network offers memo for withdrawals
+        tag:
+          type: string
+          description: Destination address tag - Check the information about this currency in the public currencies endpoint to check if this currency / network offers tag for withdrawals
+      required:
+      - id
+      - amount
+      - create_date
+      - currency_code
+      - destination_address
+      - link
+      - miner_fee
+      - status
+      - transaction_id
+      - update_date
+      - fee
+      - hash
+      type: object
+      description: From T, pick a set of properties whose keys are in the union K
+    WithdrawalFeeDataV4:
+      properties:
+        amount:
+          type: number
+          format: double
+          description: Amount
+        network:
+          type: string
+          description: Network
+      required:
+      - amount
+      type: object
+      additionalProperties: false
+    PaginationV4:
+      properties:
+        current_page:
+          type: number
+          format: double
+          description: Current page
+        page_size:
+          type: number
+          format: double
+          description: Page size
+        registers_count:
+          type: number
+          format: double
+          description: Total number of registers
+        total_pages:
+          type: number
+          format: double
+          description: Total number of pages
+      required:
+      - current_page
+      - page_size
+      - registers_count
+      - total_pages
+      type: object
+      additionalProperties: false
+      example:
+        current_page: 1
+        registers_count: 21
+        total_pages: 1
+        page_size: 100
+    EndDateNoMinParamV4:
+      type: string
+      default: '[Current date]'
+      format: date
+      description: Final date filter in ISO-8601 format
+    WithdrawResponseV4:
+      properties:
+        data:
+          $ref: '#/components/schemas/WithdrawalV4'
           example:
-            amount: 1.2e-05
+            amount: 0.1
+            create_date: '2019-01-25T16:37:15.443Z'
+            currency_code: BTC
+            destination_address: rw9nf3WgsagJiZnkAeZzXZuqeCQ6LHm2h1
+            external_id: rtd-9012-lkju-908
+            is_internal: true
+            link: null
+            miner_fee: 1.2e-05
+            miner_fee_type: regular
             network: bitcoin
+            status: pending
+            transaction_id: 5890ASHIUHC089189YSHBNJKHAG978891
+            update_date: '2019-01-25T16:37:15.017Z'
+            id: A1DCD3B6-1CBD-4F17-ADA0-230ADEC04173
+            fee: 0
+            hash: null
+            memo: '656899'
+            tag: '0100000020'
         error_code:
           type:
           - number
