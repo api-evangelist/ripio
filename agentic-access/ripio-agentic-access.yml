@@ -1,107 +1,125 @@
-generated: '2026-07-21'
+generated: '2026-09-23'
 method: generated
-source: openapi/ripio-trade-openapi.yml
+source: openapi/ripio-book-api-openapi.yml, openapi/ripio-cryptocurrency-deposits-api-openapi.yml,
+  openapi/ripio-cryptocurrency-withdrawals-api-openapi.yml, openapi/ripio-general-endpoints-api-openapi.yml,
+  openapi/ripio-orders-api-openapi.yml, openapi/ripio-public-api-openapi.yml, openapi/ripio-ticker-api-openapi.yml,
+  openapi/ripio-ticket-api-openapi.yml, openapi/ripio-transactions-api-openapi.yml, openapi/ripio-user-api-openapi.yml,
+  openapi/ripio-wallets-api-openapi.yml
 description: Recommended x-agentic-access execution contracts, classified heuristically from
   the OpenAPI. A governance starting point for exposing this API to AI agents — review and bind
   audience per deployment. See research/curity/agentic-governance/.
 summary:
-  operations: 46
+  operations: 47
   by_action_class:
-    connected: 36
-    acting: 10
+    connected: 38
+    acting: 9
   by_consequence:
-    read: 36
+    read: 38
     physical: 8
-    write: 2
+    write: 1
   human_in_the_loop_required: 0
 operations:
-- path: /public/tickers
+- path: /book/orders/level-3
   method: get
-  operationId: GetTicker
+  operationId: GetBookOrdersLevel3
   x-agentic-access:
     action-class: connected
     consequence: read
     subject: optional
+    scope:
+    - Read
     token:
       max-ttl: 3600
     audit: none
-- path: /public/tickers/{pair}
+- path: /book/orders/level-2
   method: get
-  operationId: GetTickerByPair
+  operationId: GetBookOrdersLevel2
   x-agentic-access:
     action-class: connected
     consequence: read
     subject: optional
+    scope:
+    - Read
     token:
       max-ttl: 3600
     audit: none
-- path: /public/orders/level-3
+- path: /deposits
   method: get
-  operationId: GetPublicOrdersLevel3
+  operationId: GetUserDeposits
   x-agentic-access:
     action-class: connected
     consequence: read
     subject: optional
+    scope:
+    - Read
     token:
       max-ttl: 3600
     audit: none
-- path: /public/orders/level-2
+- path: /deposits/deposit
   method: get
-  operationId: GetPublicOrdersLevel2
+  operationId: GetUserDeposit
   x-agentic-access:
     action-class: connected
     consequence: read
     subject: optional
+    scope:
+    - Read
     token:
       max-ttl: 3600
     audit: none
-- path: /public/trades
+- path: /withdrawals
   method: get
-  operationId: GetTrades
+  operationId: GetUserWithdrawals
   x-agentic-access:
     action-class: connected
     consequence: read
     subject: optional
+    scope:
+    - Read
     token:
       max-ttl: 3600
     audit: none
-- path: /public/currencies
+- path: /withdrawals
+  method: post
+  operationId: CreateWithdrawal
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    scope:
+    - Crypto Withdrawals
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /withdrawals/estimate-fee/{currency_code}
   method: get
-  operationId: GetCurrencies
+  operationId: GetWithdrawalFee
   x-agentic-access:
     action-class: connected
     consequence: read
     subject: optional
+    scope:
+    - Read
     token:
       max-ttl: 3600
     audit: none
-- path: /public/pairs
+- path: /withdrawals/withdrawal
   method: get
-  operationId: GetPairs
+  operationId: GetUserCryptocurrencyWithdraw
   x-agentic-access:
     action-class: connected
     consequence: read
     subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /public/countries
-  method: get
-  operationId: GetCountries
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /public/server-time
-  method: get
-  operationId: GetServerTime
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
+    scope:
+    - Read
     token:
       max-ttl: 3600
     audit: none
@@ -141,45 +159,9 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /ticker
+- path: /trades
   method: get
-  operationId: GetTicker
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - Read
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /ticker/{pair}
-  method: get
-  operationId: GetTickerByPair
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - Read
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /book/orders/level-3
-  method: get
-  operationId: GetBookOrdersLevel3
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - Read
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /book/orders/level-2
-  method: get
-  operationId: GetBookOrdersLevel2
+  operationId: GetTrades
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -401,9 +383,99 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /deposits
+- path: /public/tickers
   method: get
-  operationId: GetUserDeposits
+  operationId: GetTicker
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /public/tickers/{pair}
+  method: get
+  operationId: GetTickerByPair
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /public/orders/level-3
+  method: get
+  operationId: GetPublicOrdersLevel3
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /public/orders/level-2
+  method: get
+  operationId: GetPublicOrdersLevel2
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /public/trades
+  method: get
+  operationId: GetTrades
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /public/currencies
+  method: get
+  operationId: GetCurrencies
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /public/pairs
+  method: get
+  operationId: GetPairs
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /public/countries
+  method: get
+  operationId: GetCountries
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /public/server-time
+  method: get
+  operationId: GetServerTime
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /ticker
+  method: get
+  operationId: GetTicker
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -413,65 +485,9 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /deposits/deposit
+- path: /ticker/{pair}
   method: get
-  operationId: GetUserDeposit
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - Read
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /withdrawals
-  method: get
-  operationId: GetUserWithdrawals
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - Read
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /withdrawals
-  method: post
-  operationId: CreateWithdrawal
-  x-agentic-access:
-    action-class: acting
-    consequence: physical
-    subject: required
-    scope:
-    - Crypto Withdrawals
-    audience: null
-    token:
-      max-ttl: 300
-      exchange: true
-      purpose-required: true
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /withdrawals/estimate-fee/{currency_code}
-  method: get
-  operationId: GetWithdrawalFee
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    scope:
-    - Read
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /withdrawals/withdrawal
-  method: get
-  operationId: GetUserCryptocurrencyWithdraw
+  operationId: GetTickerByPair
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -484,6 +500,18 @@ operations:
 - path: /ticket
   method: post
   operationId: GetWebSocketTicket
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - Read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /transactions/sync
+  method: post
+  operationId: SyncTransaction
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -571,24 +599,6 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /transactions/sync
-  method: post
-  operationId: SyncTransaction
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    scope:
-    - Read
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
 - path: /wallets/is-internal
   method: get
   operationId: IsInternalWallet
